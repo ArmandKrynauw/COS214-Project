@@ -13,8 +13,8 @@ Armand Krynauw - u04868286 - (Armand Krynauw)
 
 Jake Mileham - u21692492 - (SharkmanZA)
 
-Karel Olwage - uXXXXXXXX - ()
+Karel Olwage - uXXXXXXXX - (Klairgo)
 
-Carlie VW - uXXXXXXXX - ()
+Carlie VW - uXXXXXXXX - (CarlieVanWyk)
 
-Carl ?? - uXXXXXXXX - ()
+Carl ?? - uXXXXXXXX - (CarlDeWitt)

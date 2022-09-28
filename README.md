@@ -15,6 +15,6 @@ Jake Mileham - u21692492 - (SharkmanZA)
 
 Karel Olwage - uXXXXXXXX - (Klairgo)
 
-Carlie VW - u21672823 - (CarlieVanWyk)
+Carlie Van Wyk - u21672823 - (CarlieVanWyk)
 
-Carl ?? - u21444928 - (CarlDeWitt)
+Carl de Witt - u21444928 - (CarlDeWitt)

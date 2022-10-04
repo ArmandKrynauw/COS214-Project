@@ -16,6 +16,11 @@ while (war in progress) {
 }
 
 makeDecisions() {
+	// Diplomacy Phase
+	displayDiplomacy();
+	// Influence changes between countries and alliances
+	influence();
+
 	// Income Phase
 	displayIncomeAndResources();
 
@@ -38,14 +43,15 @@ battle() {
 # Components of War
 
 ### 5.2.1 - Theatres
-Regions where the war between countries or alliances will take place. The region
-states are binary. Either a country or alliance has control of a region or they
-don't. If a country or alliance have captured all the regions then the war ends.
-At start of game/simulation majority of theatres will be uncontrolled. Each
-country or alliance of countries will have a *home* region.
+Regions where the war between countries or alliances will take place. Regions
+will either be contested or under direct control by a faction. The factions will
+fight over individual regions for resources. don't. If a faction have captured
+all the regions then the war ends. At start of game/simulation majority of
+theatres will be uncontrolled. Each country or alliance of countries will have a
+*home* region.
 
 ### 5.2.2 - Transportation
-Countries will be able to transport units, troops, services from their base/home
+Countries will be able to transport units, troops, logistics from their base/home
 region to specific regions in which warfare has to take place in. Transport can
 also occur between regions. Transport can be sabotaged or attacked while in
 progress. This can be modelled by reducing the amount of units, troops
@@ -58,33 +64,40 @@ the war. Entities can have different states. For example, in transport,
 stationed, fighting, injured and dead. Countries or groups of countries can have
 and army of battalions and each battalion is made up of units and troops.
 
-Specification also mentions medics, refugees, citizens and there different
-states like unlisted, fighting, or returned, etc. It has not really been
-discussed how this can be modelled.
+
+Specification also mentions medics, refugees, and citizens. These can be added
+as specializations to existing units.
 
 ### 5.2.4 - Phases of War
 - War Phases
+When a country enters a war they will have limited mobilization. As the war
+progresses or the war becomes more dire countries may either decide to increase
+mobilization. if a country's mobilization increases it has a direct affect on
+the amount of production available to it.
+
 Implement some sort of escalation strategy. War state can be escalated as the
 war progresses. Early, middle, and late stages of war. Can adjust economies of
 countries involved accordingly. Can also implement more specific states such as
 a seize fire between countries.
+
 - Turn Phases
-Income, production and battle phase, cycle through these phases every round.
-Income phase handles the income and resources after a turn has taken place and
-before the next turn starts. Production phase handles the acquisition of units
-and troops to send to various regions or battle fields. Lastly, Battle phase
-handles the actual battles taking place between countries in a region. The
-Battle phase has multiple strategies which a country can pick from. For example,
-plan, attack, and counter.
+Diplomacy, income, production and battle phase, cycle through these phases every
+round. Diplomacy encapsulates exerting diplomatic influence to convince
+countries to join certain alliances. Income phase handles the income and
+resources after a turn has taken place and before the next turn starts.
+Production phase handles the acquisition of units and troops to send to various
+regions or battle fields. Lastly, Battle phase handles the actual battles taking
+place between countries in a region. The Battle phase has multiple strategies
+which a country can pick from. For example, plan, attack, and counter.
 
 ### 5.2.5 - Changes to War Engine
 Countries will be able to join or leave alliances as the war progresses.
-Countries will also be change sides or retreat from the war completely.
-Countries or group of countries will be able build and develop a small tech tree
-of sorts. This will enable countries to spend a portion of their income in order
-to research various skills. These skills will add additional strength to
-countries as war progresses.
-
+Countries will also be change sides or retreat from the war completely. This
+will partially be implemented in the diplomacy phase. Countries or group of
+countries will be able build and develop a small tech tree of sorts. This will
+enable countries to spend a portion of their income in order to research various
+skills. These skills will add additional strength to countries as war
+progresses. This will partially be implemented in the income phase. 
 # 5.3 - War Simulations
 Current plan is to model the war as a turned base *game*. Snapshots can be taken
 of the various turns in a war. If needed snapshots can also be taken of the

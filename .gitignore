@@ -73,3 +73,5 @@ Temporary Items
 
 # ---- Planning ----
 .html
+*.lck
+*.bak_006d

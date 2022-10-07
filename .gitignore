@@ -75,3 +75,7 @@ Temporary Items
 .html
 *.lck
 *.bak_006d
+
+
+
+.vscode

@@ -1,0 +1,79 @@
+# Thanks to Job Vranish (https://spin.atomicobject.com/2016/08/26/makefile-c-projects/)
+TARGET_EXEC := main
+CXX := g++ -std=c++17
+BUILD_DIR := ./build
+SRC_DIRS := ./client ./country
+
+# Find all the C and C++ files we want to compile
+# Note the single quotes around the * expressions. Make will incorrectly expand these otherwise.
+SRCS := $(shell find $(SRC_DIRS) -name '*.cpp' -or -name '*.c' -or -name '*.s')
+
+# String substitution for every C/C++ file.
+# As an example, hello.cpp turns into ./build/hello.cpp.o
+OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+
+# String substitution (suffix version without %).
+# As an example, ./build/hello.cpp.o turns into ./build/hello.cpp.d
+DEPS := $(OBJS:.o=.d)
+
+# Every folder in ./src will need to be passed to GCC so that it can find header files
+INC_DIRS := $(shell find $(SRC_DIRS) -type d)
+# Add a prefix to INC_DIRS. So moduleA would become -ImoduleA. GCC understands this -I flag
+INC_FLAGS := $(addprefix -I,$(INC_DIRS))
+
+# The -MMD and -MP flags together generate Makefiles for us!
+# These files will have .d instead of .o as the output.
+CPPFLAGS := $(INC_FLAGS) -MMD -MP
+
+# The final build step.
+$(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
+	$(CXX) $(OBJS) -o $@ $(LDFLAGS)
+
+
+# Build step for C++ source
+$(BUILD_DIR)/%.cpp.o: %.cpp
+	mkdir -p $(dir $@)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+
+
+.PHONY: clean
+clean:
+	rm -r $(BUILD_DIR)
+
+run:
+	$(BUILD_DIR)/$(TARGET_EXEC) 
+
+# Include the .d makefiles. The - at the front suppresses the errors of missing
+# Makefiles. Initially, all the .d files will be missing, and we don't want those
+# errors to show up.
+-include $(DEPS)
+
+
+# Compiler
+# CC   = g++
+# OPTS = -std=c++11
+
+# # Project name		
+# PROJECT = foo_example_program
+
+# # Libraries
+# LIBS = -lpthread
+# INCS = -I./src/include
+
+# SRCS = $(shell find src -name '*.cpp')
+# DIRS = $(shell find src -type d | sed 's/src/./g' ) 
+# OBJS = $(patsubst src/%.cpp,out/%.o,$(SRCS))
+
+# # Targets
+# $(PROJECT): buildrepo $(OBJS)
+#     $(CC) $(OPTS) $(OBJS) $(LIBS) $(INCS) -o $@
+
+# out/%.o: src/%.cpp
+#     $(CC) $(OPTS) -c $< $(INCS) -o $@
+
+# clean:
+#     rm $(PROJECT) out -Rf
+
+# buildrepo:
+#     mkdir -p out
+#     for dir in $(DIRS); do mkdir -p out/$$dir; done

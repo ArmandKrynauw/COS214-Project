@@ -10,6 +10,8 @@ class Composite : public Entity{
         Composite(/* args */);
         ~Composite();
         void add(Entity* entity);
+        void Delete(int a);
+        std::string print() override;
         int getDamage() override;
         void update();
 };

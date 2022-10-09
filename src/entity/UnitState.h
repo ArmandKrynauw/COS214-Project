@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-class Unit;
+#include "../unit-factory/Product/LandUnit.h"
 
 class UnitState {
     public:

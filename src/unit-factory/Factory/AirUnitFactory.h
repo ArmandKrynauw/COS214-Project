@@ -7,11 +7,11 @@
 class AirUnitFactory : public UnitFactory{
     private:
     public:
-        AirUnitFactory(string name);
-        Unit *createLightUnit();
-        Unit *createMediumUnit();
-        Unit *createHeavyUnit();
-        ~AirUnitFactory();
+        AirUnitFactory();
+        Unit *createLightUnit(std::string name);
+        Unit *createMediumUnit(std::string name);
+        Unit *createHeavyUnit(std::string name);
+        virtual ~AirUnitFactory();
 };
 
 #endif // AIRUNITFACTORY_H

@@ -3,14 +3,14 @@
 
 #include "UnitFactory.h"
 
-class LandUnitFactory : public UnitFactory{
+class LandUnitFactory : public UnitFactory {
     private:
     public:
         LandUnitFactory();
-        Unit *createLightUnit();
-        Unit *createMediumUnit();
-        Unit *createHeavyUnit();
-        ~LandUnitFactory();
+        Unit *createLightUnit(std::string name);
+        Unit *createMediumUnit(std::string name);
+        Unit *createHeavyUnit(std::string name);
+        virtual ~LandUnitFactory();
 };
 
 #endif // LANDUNITFACTORY_H

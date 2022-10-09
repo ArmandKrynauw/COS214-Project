@@ -1,4 +1,5 @@
-#pragma once
+#ifndef COMPOSITE_H
+#define COMPOSITE_H
 
 #include "entity.h"
 #include "vector"
@@ -16,3 +17,5 @@ class Composite : public Entity{
         void update();
 };
 
+
+#endif // COMPOSITE_H

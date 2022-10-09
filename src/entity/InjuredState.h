@@ -1,4 +1,6 @@
-#pragma once
+#ifndef INJUREDSTATE_H
+#define INJUREDSTATE_H
+
 #include "UnitState.h"
 
 class InjuredState : public UnitState {
@@ -6,3 +8,4 @@ class InjuredState : public UnitState {
         virtual void handleChange(Unit* u);
         virtual std::string getState();
 };
+#endif // INJUREDSTATE_H

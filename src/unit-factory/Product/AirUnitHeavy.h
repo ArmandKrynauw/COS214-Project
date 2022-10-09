@@ -1,14 +1,16 @@
-#pragma once
+#ifndef AIRUNITHEAVY_H
+#define AIRUNITHEAVY_H
 
 #include "AirUnit.h"
 
-class AirUnitHeavy : public AirUnit
-{
-private:
-    int HP = 100;
-    int damage = 20;
+class AirUnitHeavy : public AirUnit{
+    private:
+        int HP = 100;
+        int damage = 20;
 
-public:
-    AirUnitHeavy();
-    ~AirUnitHeavy();
+    public:
+        AirUnitHeavy();
+        ~AirUnitHeavy();
 };
+
+#endif // AIRUNITHEAVY_H

@@ -1,4 +1,7 @@
-#pragma once
+#ifndef ENTITY_H
+#define ENTITY_H
+
+#include <iostream>
 
 class Entity {
     private:
@@ -14,3 +17,4 @@ class Entity {
         virtual std::string print();
         ~Entity();
 };
+#endif // ENTITY_H

@@ -1,0 +1,60 @@
+@startuml
+skinparam ParticipantPadding 10
+hide circle
+
+actor embed
+participant Client
+participant WarEngine
+participant Theatre
+participant Faction 
+
+activate embed #add8e6
+create Client
+embed --> Client : Client()
+embed -> Client : Run() : void
+activate Client #add8e6
+create WarEngine
+Client --> WarEngine : WarEngine()
+
+Client -> WarEngine : startSimulation() : void
+activate WarEngine #add8e6
+create Theatre
+WarEngine --> Theatre : Theatre()
+create Faction
+WarEngine --> Faction : Faction()
+
+    loop warInProgress
+        WarEngine -> WarEngine : displayResources()
+		activate WarEngine #DarkSalmon
+        WarEngine -> Faction : getResourceCount()
+        activate Faction #add8e6
+        Faction --> WarEngine
+		deactivate WarEngine #DarkSalmon
+        deactivate Faction #add8e6
+
+        WarEngine -> WarEngine : buyUnits(country : Country*)
+		activate WarEngine #DarkSalmon
+		loop factions buying units
+			WarEngine -> Faction : addUnit(unit : Unit*)
+			activate Faction #add8e6
+			Faction --> WarEngine
+			deactivate WarEngine #DarkSalmon
+			deactivate Faction #add8e6
+		end
+        
+        WarEngine -> WarEngine : chooseStrategies()
+		activate WarEngine #DarkSalmon
+        loop factions choosing strategies
+			WarEngine -> Faction : chooseStrategy(theatre : Theatre*)
+			activate Faction #add8e6
+			deactivate Faction #add8e6
+			deactivate WarEngine #DarkSalmon
+        end
+
+        WarEngine -> WarEngine : commenceBattle() 
+		activate WarEngine #DarkSalmon
+		deactivate WarEngine #DarkSalmon
+    end
+
+deactivate Client #add8e6
+@enduml

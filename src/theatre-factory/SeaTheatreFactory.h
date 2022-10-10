@@ -2,7 +2,7 @@
 #define SEATHEATREFACTORY_H
 
 #include "TheatreFactory.h"
-#include "../product/SeaTheatre.h"
+#include "../theatre/SeaTheatre.h"
 
 class SeaTheatreFactory : public TheatreFactory {
     private:

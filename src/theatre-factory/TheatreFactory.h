@@ -3,7 +3,7 @@
 
 #include <iostream> //remove later (Testing purposes)
 
-#include "../product/Theatre.h"
+#include "../theatre/Theatre.h"
 
 class TheatreFactory
 { 

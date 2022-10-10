@@ -2,7 +2,7 @@
 #define AIRTHEATREFACTORY_H
 
 #include "TheatreFactory.h"
-#include "../product/AirTheatre.h"
+#include "../theatre/AirTheatre.h"
 
 class AirTheatreFactory : public TheatreFactory {
     private:

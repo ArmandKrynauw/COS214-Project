@@ -3,10 +3,12 @@
 
 #include <iostream>
 
+
 class Entity {
     private:
         int hp;
         int damage;
+        std::string name;
 
     public:
         Entity();
@@ -14,6 +16,8 @@ class Entity {
         void setHP(int a);
         virtual int getDamage();
         void setDamage(int a);
+        std::string getName();
+        void setName(std::string name);
         virtual std::string print();
         ~Entity();
 };

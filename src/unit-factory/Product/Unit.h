@@ -15,9 +15,7 @@ class Unit{
         int setDamage(int damage);
         void setHP(int HP);
         void setHP();
-        virtual void primitiveAttack() = 0;
         virtual void attack(Unit *unit) = 0;
-        virtual void primitiveDefend() = 0;
         virtual void defend(Unit *unit) = 0;
         virtual Unit *clone() = 0;
         virtual ~Unit();

@@ -5,21 +5,22 @@
 #include "Faction.h"
 
 class Alliance : public Faction {
-  private:
+   private:
     std::vector<Faction*> members;
 
-  public:
+   public:
     Alliance(std::string name);
     void addCountry(Country* country);
     void removeCountry(Country* country);
+    virtual void generateResources() override;
     virtual int getResourceCount() override;
     virtual void setResourceCount(int baseResourceCount) override;
     virtual Alliance* getAlliance() override;
 
-    virtual void
-    makeDecision() override; // For each member in alliance call makeDecision()
-    virtual void chooseStrategy()
-        override; // For each member in alliance call chooseStrategy()
+    virtual void makeDecision() override;  // For each member in alliance call makeDecision()
+    virtual void chooseStrategy() override;  // For each member in alliance call chooseStrategy()
+
+    virtual int getAttackPower(Theatre* theatre) override;
 };
 
-#endif // ALLIANCE_H
+#endif  // ALLIANCE_H

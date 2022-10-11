@@ -8,8 +8,6 @@ class AirUnit : public Unit
 private:
 public:
     AirUnit(int HP, int damage);
-    void primitiveAttack();
-    void primitiveDefend();
     Unit *clone();
     ~AirUnit();
 };

@@ -8,8 +8,6 @@ class LandUnit : public Unit
 private:
 public:
     LandUnit(int HP, int damage);
-    void primitiveAttack();
-    void primitiveDefend();
     Unit *clone();
     ~LandUnit();
 };

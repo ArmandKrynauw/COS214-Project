@@ -3,11 +3,14 @@
 
 #include "Theatre.h"
 
-class SeaTheatre : public Theatre {
-   private:
-   public:
+class SeaTheatre : public Theatre
+{
+private:
+        std::string type = "Sea";
+
+public:
         SeaTheatre(std::string name);
         virtual ~SeaTheatre();
 };
 
-#endif  // SEATHEATRE_H
+#endif // SEATHEATRE_H

@@ -10,26 +10,27 @@
 
 class Strategy;
 
-class Theatre {
-   protected:
+class Theatre
+{
+protected:
     std::string name;
     std::string id;
     std::string type;
-    std::vector<Faction*> factions;
-    std::unordered_map<std::string, Strategy*> strategies;
+    std::vector<Faction *> factions;
+    std::unordered_map<std::string, Strategy *> strategies;
     // In Country
     // map<TheatreID, Army>
 
     // In Theatre
     // vector<FactionID> occupants
     //
-   public:
-    Theatre(std::string name);
-    void addFaction(Faction* faction);
-    void removeFaction(Faction* faction);
+public:
+    Theatre(std::string name, std::string type);
+    void addFaction(Faction *faction);
+    void removeFaction(Faction *faction);
     void battle();
-    void setFactionStrategy(Faction* faction, Strategy* strategy);
+    void setFactionStrategy(Faction *faction, Strategy *strategy);
     virtual ~Theatre();
 };
 
-#endif  // THEATRE_H
+#endif // THEATRE_H

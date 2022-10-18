@@ -1,7 +1,6 @@
 #ifndef AIRUNITFACTORY_H
 #define AIRUNITFACTORY_H
 
-
 #include "UnitFactory.h"
 
 class AirUnitFactory : public UnitFactory{

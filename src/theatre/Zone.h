@@ -30,7 +30,7 @@ public:
     void removeFaction(Faction *faction);
     void battle();
     void setFactionStrategy(Faction *faction, Strategy *strategy);
-    virtual ~Zone();
+    virtual ~Zone() = 0;
 };
 
-#endif // THEATRE_H
+#endif // ZONE_H

@@ -7,7 +7,7 @@ WarEngine::WarEngine() {
     unitFactories["land"] = new LandUnitFactory();
     unitFactories["sea"] = new SeaUnitFactory();
     unitFactories["air"] = new AirUnitFactory();
-    
+
 }
 
 void WarEngine::setFaction1UnitNames(std::vector<std::string> names) {
@@ -150,7 +150,7 @@ void WarEngine::displayUnitMenu(){
                 else if(counter == 7){
                     std::cout<<"Air:"<<std::endl;
                 }
-                cout <<"\t"<<counter<<". "<< it->second<<std::endl;
+                std::cout <<"\t"<<counter<<". "<< it->second<<std::endl;
                 counter++;
            }
     }
@@ -166,7 +166,7 @@ void WarEngine::displayUnitMenu(){
                 else if(counter == 7){
                     std::cout<<"Air:"<<std::endl;
                 }
-                cout <<"\t"<< counter<<". "<< it->second<<std::endl;
+                std::cout <<"\t"<< counter<<". "<< it->second<<std::endl;
                 counter++;
            }
     }

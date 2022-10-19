@@ -4,10 +4,10 @@
 #include "../faction/Country.h"
 #include "../faction/Faction.h"
 #include "../theatre/Theatre.h"
-#include "../unit-factory/Factory/AirUnitFactory.h"
-#include "../unit-factory/Factory/LandUnitFactory.h"
-#include "../unit-factory/Factory/SeaUnitFactory.h"
-#include "../unit-factory/Factory/UnitFactory.h"
+#include "../entity/factory/AirUnitFactory.h"
+#include "../entity/factory/LandUnitFactory.h"
+#include "../entity/factory/SeaUnitFactory.h"
+#include "../entity/factory/UnitFactory.h"
 
 #include <iostream>
 #include <iterator>

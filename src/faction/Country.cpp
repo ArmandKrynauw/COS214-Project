@@ -1,5 +1,5 @@
 #include "Country.h"
-#include "Unit.h"
+#include "../entity/product/Unit.h"
 Country::Country(std::string name) : Faction(name) {}
 
 void Country::generateResources() {

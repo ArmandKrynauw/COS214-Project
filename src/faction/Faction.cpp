@@ -1,5 +1,7 @@
 #include "Faction.h"
 
+
+
 Faction::Faction(std::string name) {
     this->name = name;
     this->id = uuid::generate();

@@ -15,7 +15,7 @@ public:
     int getHP();
     int getDamage();
     void setHP(int HP);
-    void setDamge(int damage);
+    void setDamage(int damage);
     std::string print();
     virtual Unit *clone() = 0;
     virtual ~Unit();

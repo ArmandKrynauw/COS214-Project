@@ -3,7 +3,7 @@
 #include "../Product/SeaUnitMedium.h"
 #include "../Product/SeaUnitHeavy.h"
 
-SeaUnitFactory::SeaUnitFactory() {
+SeaUnitFactory::SeaUnitFactory() : UnitFactory() {
     // typeOfUnit = "Sea";
 }
 

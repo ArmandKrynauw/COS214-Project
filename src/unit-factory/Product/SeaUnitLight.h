@@ -1,5 +1,5 @@
-#define SEAUNITLIGHT_H
 #ifndef SEAUNITLIGHT_H
+#define SEAUNITLIGHT_H
 
 #include "SeaUnit.h"
 

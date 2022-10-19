@@ -13,12 +13,12 @@ int Unit::getDamage(){
 void Unit::setHP(int HP){
     this->HP = HP;
 }
-void Unit::setHP(int damage){
+void Unit::setDamage(int damage){
     this->damage = damage;
 }
 std::string Unit::print(){
     cout << "Printing for testing purposes" << endl;
-    
+    return "string";
 }
 Unit::~Unit(){
     this->HP = 0;

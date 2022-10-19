@@ -3,3 +3,7 @@
 UnitFactory::UnitFactory() {
 
 }
+
+UnitFactory::~UnitFactory(){
+    
+}

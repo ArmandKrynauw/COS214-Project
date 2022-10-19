@@ -3,7 +3,7 @@
 #include "../Product/AirUnitMedium.h"
 #include "../Product/AirUnitHeavy.h"
 
-AirUnitFactory::AirUnitFactory() {
+AirUnitFactory::AirUnitFactory() : UnitFactory(){
     typeOfUnit = "Air";
 }
 

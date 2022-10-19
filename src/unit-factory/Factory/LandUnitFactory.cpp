@@ -4,7 +4,7 @@
 #include "../Product/LandUnitMedium.h"
 #include "../Product/LandUnitHeavy.h"
 
-LandUnitFactory::LandUnitFactory() {
+LandUnitFactory::LandUnitFactory() : UnitFactory() {
     // typeOfUnit = "Land";
 }
 

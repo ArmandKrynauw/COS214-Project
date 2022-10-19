@@ -1,7 +1,7 @@
 #ifndef UNITFACTORY_H
 #define UNITFACTORY_H
 
-#include "../Product/Unit.h";
+#include "../Product/Unit.h"
 #include <string>
 
 class UnitFactory {

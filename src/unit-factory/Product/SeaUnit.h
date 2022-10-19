@@ -3,12 +3,11 @@
 
 #include "Unit.h"
 
-class SeaUnit : public Unit
-{
-private:
-public:
-    SeaUnit(int HP, int damage);
-    Unit *clone();
-    ~SeaUnit();
+class SeaUnit : public Unit{
+    private:
+    public:
+        SeaUnit(int HP, int damage);
+        Unit *clone();
+        ~SeaUnit();
 };
 #endif

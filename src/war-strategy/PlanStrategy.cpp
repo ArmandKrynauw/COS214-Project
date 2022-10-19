@@ -1,13 +1,12 @@
 #include "PlanStrategy.h"
 
-PlanStrategy::PlanStrategy()
-{
+PlanStrategy::PlanStrategy(){
 }
 
-void PlanStrategy::planOfAction()
-{
+float PlanStrategy::executeStrategy(WarStrategy* strat){
+    setPlanned(true);
+    return 1.3;
 }
 
-PlanStrategy::~PlanStrategy()
-{
+PlanStrategy::~PlanStrategy(){
 }

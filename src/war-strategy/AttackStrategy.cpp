@@ -1,13 +1,11 @@
 #include "AttackStrategy.h"
 
-AttackStrategy::AttackStrategy()
-{
+AttackStrategy::AttackStrategy(){
 }
 
-void AttackStrategy::planOfAction()
-{
+float AttackStrategy::executeStrategy(WarStrategy* strat){
+    return 1.00;
 }
 
-AttackStrategy::~AttackStrategy()
-{
+AttackStrategy::~AttackStrategy(){
 }

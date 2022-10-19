@@ -1,9 +1,16 @@
 #include "WarStrategy.h"
 
-WarStrategy::WarStrategy()
-{
+WarStrategy::WarStrategy(){
+    this->planned = false;
 }
 
-WarStrategy::~WarStrategy()
-{
+void WarStrategy::setPlanned(bool b){
+    this->planned = b;
+}
+
+bool WarStrategy::getPlanned(){
+    return this->planned;
+}
+
+WarStrategy::~WarStrategy(){
 }

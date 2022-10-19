@@ -1,16 +1,16 @@
 #ifndef SEATHEATRE_H
 #define SEATHEATRE_H
 
-#include "Theatre.h"
+#include "Zone.h"
 
-class SeaTheatre : public Theatre
+class SeaZone : public Zone
 {
 private:
         std::string type = "Sea";
 
 public:
-        SeaTheatre(std::string name);
-        virtual ~SeaTheatre();
+        SeaZone(std::string name);
+        virtual ~SeaZone();
 };
 
 #endif // SEATHEATRE_H

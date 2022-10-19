@@ -10,7 +10,7 @@
 
 class Strategy;
 
-class Theatre
+class Zone
 {
 protected:
     std::string name;
@@ -25,8 +25,12 @@ protected:
     // vector<FactionID> occupants
     //
 public:
-    Theatre(std::string name, std::string type);
-    virtual ~Theatre();
+    Zone(std::string name, std::string type);
+    void addFaction(Faction *faction);
+    void removeFaction(Faction *faction);
+    void battle();
+    void setFactionStrategy(Faction *faction, Strategy *strategy);
+    virtual ~Zone();
 };
 
 #endif // THEATRE_H

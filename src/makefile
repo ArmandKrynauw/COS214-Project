@@ -3,7 +3,7 @@
 TARGET_EXEC := main
 CXX := g++ -std=c++17
 BUILD_DIR := ./build
-SRC_DIRS :=  ./embed  #./client ./utilities ./faction ./engine ./unit-factory
+SRC_DIRS :=  ./embed ./client ./utilities ./faction ./engine ./unit-factory
 
 # Find all the C and C++ files we want to compile
 # Note the single quotes around the * expressions. Make will incorrectly expand these otherwise.
@@ -31,13 +31,11 @@ $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
 	$(CXX) $(OBJS) -o $@ $(LDFLAGS)
 	@echo "\033[1;32mBuild Successful" "\033[0m"
 
-
-
 # Build step for C++ source
 $(BUILD_DIR)/%.cpp.o: %.cpp
-	@echo "\033[1;32mBuild Initialize" "\033[0m"	
 	mkdir -p $(dir $@)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+	@echo "\033[1;32mBuilt: " $@ "\033[0m"
 
 
 .PHONY: clean

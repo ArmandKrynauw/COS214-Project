@@ -35,7 +35,7 @@ int Alliance::getResourceCount() {
     return resourceCount;
 }
 
-void Alliance::setResourceCount(int baseResourceCount) {
+void Alliance::setBaseResourceCount(int baseResourceCount) {
     this->baseResourceCount = baseResourceCount;
 }
 

@@ -43,7 +43,7 @@ class Faction {
      * @return Sum of attack power
      */
     virtual int getAttackPower(Theatre* theatre) = 0;
-    virtual void setResourceCount(int baseResourceCount) = 0;
+    virtual void setBaseResourceCount(int baseResourceCount) = 0;
     /**
      * This method is used to determine wether a Faction is a Country or an
      * Alliance

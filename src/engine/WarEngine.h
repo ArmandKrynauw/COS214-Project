@@ -19,12 +19,12 @@
 class Theatre;
 class WarEngine {
    private:
-    Faction* player1;
-    Faction* player2;
+    Faction* faction1;
+    Faction* faction2;
     std::vector<std::vector<Theatre*>> theatres;
     std::map<std::string, std::string>::iterator it;
-    std::map<std::string, std::string> player1UnitNames;
-    std::map<std::string, std::string> player2UnitNames;
+    std::map<std::string, std::string> faction1UnitNames;
+    std::map<std::string, std::string> faction2UnitNames;
     int turnCounter;
     bool player1Turn;
 
@@ -41,11 +41,15 @@ class WarEngine {
     // Set Names of players countries that were input in client
     void setCountryNames(std::pair<std::string, std::string> names);
     // Set Generic Unit Names for each player - was input in client
-    void setPlayer1UnitNames(std::vector<std::string> names);
-    void setPlayer2UnitNames(std::vector<std::string> names);
+    void setFaction1UnitNames(std::vector<std::string> names);
+    void setFaction2UnitNames(std::vector<std::string> names);
+    // Set Starting Base Resource count
+    void setsFactionBaseResoures(int faction1BaseCount, int faction2BaseCount);
     void displayResources();
-    void buyUnits(Country* country);
+    void buyUnits();
+    void displayUnits();
     void displayUnitMenu();
+    void placeTroops();
     void chooseStrategies();
     void CommenceBattle();
     ~WarEngine();

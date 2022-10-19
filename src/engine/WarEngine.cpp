@@ -3,34 +3,42 @@
 #include "../faction/Country.h"
 
 WarEngine::WarEngine() {
-    // Jake's works :)
     addNames();
-
     unitFactories["land"] = new LandUnitFactory();
     unitFactories["sea"] = new SeaUnitFactory();
     unitFactories["air"] = new AirUnitFactory();
+    
 }
 
-void WarEngine::setPlayer1UnitNames(std::vector<std::string> names) {
+void WarEngine::setFaction1UnitNames(std::vector<std::string> names) {
     int counter = 0;
-    for (it = player1UnitNames.begin(); it != player1UnitNames.end(); ++it) {
-        it->second = names[0];
+    for (it = faction1UnitNames.begin(); it != faction1UnitNames.end(); ++it) {
+        it->second = names[counter];
         counter++;
     }
 }
 
-void WarEngine::setPlayer2UnitNames(std::vector<std::string> names) {
+void WarEngine::setFaction2UnitNames(std::vector<std::string> names) {
     int counter = 0;
-    for (it = player2UnitNames.begin(); it != player2UnitNames.end(); ++it) {
-        it->second = names[0];
+    for (it = faction2UnitNames.begin(); it != faction2UnitNames.end(); ++it) {
+        it->second = names[counter];
         counter++;
     }
 }
 
 void WarEngine::setCountryNames(std::pair<std::string, std::string> names) {
-    player1 = new Country(names.first);
-    player2 = new Country(names.second);
+    faction1 = new Country(names.first);
+    faction2 = new Country(names.second);
 }
+
+void WarEngine::setsFactionBaseResoures(int faction1BaseCount, int faction2BaseCount){
+    
+    faction1->setBaseResourceCount(faction1BaseCount);
+    faction1->generateResources();
+    faction2->setBaseResourceCount(faction2BaseCount);
+    faction2->generateResources();
+}
+
 
 // Think about output
 void WarEngine::startSimulation() {
@@ -43,16 +51,18 @@ void WarEngine::startSimulation() {
         // Phase 1
         for (int i = 0; i < 2; i++) {
             int player = player1Turn ? 1 : 2;
-            std::cout << "\033[1;" << 32 + player << "mPlayer: " << player
-                      << " Turn: " << turnCounter
-                      << " ====================" << std::endl;
+            std::cout << "\033[1;" << 32 + player << "mFaction: " << player <<std::endl
+                      << "Turn: " << turnCounter
+                      <<  std::endl;
             displayResources();
-            // buyUnits();
-            // PlaceTroops();
+            buyUnits();
+            displayUnits();
+            placeTroops();
             // std::cout<<"\033[1;32"<< 32 +
             // player<<"m======================================"<<std::endl;
             // std::cout<<std::endl;
             player1Turn = player1Turn ? false : true;
+            std::cout<<std::endl;
         }
 
         // Phase 2
@@ -73,26 +83,94 @@ void WarEngine::startSimulation() {
 
 void WarEngine::displayResources() {
     int resources =
-        player1Turn ? player1->getResourceCount() : player2->getResourceCount();
-    std::cout << "Your Resources: " << resources << std::endl;
+        player1Turn ? faction1->getResourceCount() : faction2->getResourceCount();
+    std::string factionName = player1Turn ? faction1->getName() : faction2->getName();
+    std::cout << factionName << " Resources: " << resources << std::endl;
+    //std::cout<<std::endl;
 }
 
-void WarEngine::buyUnits(Country* country) {
+void WarEngine::buyUnits() {
     
-    // List of Available Units
+    //displayUnitMenu();
+    if(player1Turn){
+        std::cout<<faction1->getName()<<" buying troops"<<std::endl;
+        ((Country *)faction1)->addUnit(unitFactories["land"]->createHeavyUnit(faction1UnitNames["HeavyLandUnit"]));
+        ((Country *)faction1)->addUnit(unitFactories["air"]->createHeavyUnit(faction1UnitNames["HeavyAirUnit"]));
+        ((Country *)faction1)->addUnit(unitFactories["sea"]->createHeavyUnit(faction1UnitNames["HeavySeaUnit"]));
+    }
+    else{
+        std::cout<<faction2->getName()<<" buying troops"<<std::endl;
+        ((Country *)faction2)->addUnit(unitFactories["land"]->createHeavyUnit(faction2UnitNames["HeavyLandUnit"]));
+        ((Country *)faction2)->addUnit(unitFactories["air"]->createHeavyUnit(faction2UnitNames["HeavyAirUnit"]));
+        ((Country *)faction2)->addUnit(unitFactories["sea"]->createHeavyUnit(faction2UnitNames["HeavySeaUnit"]));
+    }
+    //std::cout << "Enter Unit Type (Land, Sea, Air): ";
+    //std::cout<<std::endl;
+    
+  
+}
+
+void WarEngine::displayUnits(){
+    if(player1Turn){
+        ((Country *)faction1)->printUnits();
+    }
+    else{
+        ((Country *)faction2)->printUnits();
+    }
+}
+
+void WarEngine::placeTroops(){
+    if(player1Turn){
+        std::cout<<faction1->getName()<<" placing troops"<<std::endl;
+    }
+    else{
+        std::cout<<faction2->getName()<<" placing troops"<<std::endl;
+    }
+}
+
+
+// List of Available Units
     //      Land:
     //          1. Trooper
     //          2. Troop
     //      Sea:
     //      Air:
-    displayUnitMenu();
-
-    std::cout << "Enter Unit Type (Land, Sea, Air): ";
-
-    
-    
-
-    
+void WarEngine::displayUnitMenu(){
+    std::cout<<"List of Available Units"<<std::endl;
+    if(player1Turn)
+    {
+          int counter = 1;
+          for (it = faction1UnitNames.begin(); it != faction1UnitNames.end(); ++it) {
+                if(counter == 1){
+                    std::cout<<"Land:"<<std::endl;
+                }
+                else if(counter == 4){
+                    std::cout<<"Sea:"<<std::endl;
+                }
+                else if(counter == 7){
+                    std::cout<<"Air:"<<std::endl;
+                }
+                cout <<"\t"<<counter<<". "<< it->second<<std::endl;
+                counter++;
+           }
+    }
+    else{
+        int counter = 1;
+          for (it = faction2UnitNames.begin(); it != faction2UnitNames.end(); ++it) {
+                if(counter == 1){
+                    std::cout<<"Land:"<<std::endl;
+                }
+                else if(counter == 4){
+                    std::cout<<"Sea:"<<std::endl;
+                }
+                else if(counter == 7){
+                    std::cout<<"Air:"<<std::endl;
+                }
+                cout <<"\t"<< counter<<". "<< it->second<<std::endl;
+                counter++;
+           }
+    }
+    std::cout<<std::endl;
 }
 
 // bool slab() {
@@ -147,50 +225,15 @@ void WarEngine::buyUnits(Country* country) {
  *
  */
 
-void WarEngine::displayUnitMenu(){
-    std::cout<<"==MENU=="<<std::endl;
-    if(player1Turn)
-    {
-          int counter = 1;
-          for (it = player1UnitNames.begin(); it != player1UnitNames.end(); ++it) {
-                if(counter == 1){
-                    std::cout<<"==Land=="<<std::endl;
-                }
-                else if(counter == 4){
-                    std::cout<<"==Sea=="<<std::endl;
-                }
-                else if(counter == 7){
-                    std::cout<<"==Air"<<std::endl;
-                }
-                cout << counter<<". " << it->first <<": " << it->second<<std::endl;
-                counter++;
-           }
-    }
-    else{
-        int counter = 1;
-          for (it = player2UnitNames.begin(); it != player2UnitNames.end(); ++it) {
-                if(counter == 1){
-                    std::cout<<"==Land=="<<std::endl;
-                }
-                else if(counter == 4){
-                    std::cout<<"==Sea=="<<std::endl;
-                }
-                else if(counter == 7){
-                    std::cout<<"==Air"<<std::endl;
-                }
-                cout << counter<<". " << it->first <<": " << it->second<<std::endl;
-                counter++;
-           }
-    }
-}
+
 
 
 
 void WarEngine::chooseStrategies() {
     if (player1Turn) {
-        player1->chooseStrategy();
+        faction1->chooseStrategy();
     } else {
-        player2->chooseStrategy();
+        faction2->chooseStrategy();
     }
 }
 
@@ -203,46 +246,46 @@ WarEngine::~WarEngine() {}
 // ============================================================================
 
 void WarEngine::addNames() {
-    player1UnitNames.insert(
+    faction1UnitNames.insert(
         std::pair<std::string, std::string>("LightLandUnit", ""));
-    player1UnitNames.insert(
+    faction1UnitNames.insert(
         std::pair<std::string, std::string>("MediumLandUnit", ""));
-    player1UnitNames.insert(
+    faction1UnitNames.insert(
         std::pair<std::string, std::string>("HeavyLandUnit", ""));
 
-    player1UnitNames.insert(
+    faction1UnitNames.insert(
         std::pair<std::string, std::string>("LightSeaUnit", ""));
-    player1UnitNames.insert(
+    faction1UnitNames.insert(
         std::pair<std::string, std::string>("MediumSeaUnit", ""));
-    player1UnitNames.insert(
+    faction1UnitNames.insert(
         std::pair<std::string, std::string>("HeavySeaUnit", ""));
 
-    player1UnitNames.insert(
+    faction1UnitNames.insert(
         std::pair<std::string, std::string>("LightAirUnit", ""));
-    player1UnitNames.insert(
+    faction1UnitNames.insert(
         std::pair<std::string, std::string>("MediumAirUnit", ""));
-    player1UnitNames.insert(
+    faction1UnitNames.insert(
         std::pair<std::string, std::string>("HeavyAirUnit", ""));
 
-    player2UnitNames.insert(
+    faction2UnitNames.insert(
         std::pair<std::string, std::string>("LightLandUnit", ""));
-    player2UnitNames.insert(
+    faction2UnitNames.insert(
         std::pair<std::string, std::string>("MediumLandUnit", ""));
-    player2UnitNames.insert(
+    faction2UnitNames.insert(
         std::pair<std::string, std::string>("HeavyLandUnit", ""));
 
-    player2UnitNames.insert(
+    faction2UnitNames.insert(
         std::pair<std::string, std::string>("LightSeaUnit", ""));
-    player2UnitNames.insert(
+    faction2UnitNames.insert(
         std::pair<std::string, std::string>("MediumSeaUnit", ""));
-    player2UnitNames.insert(
+    faction2UnitNames.insert(
         std::pair<std::string, std::string>("HeavySeaUnit", ""));
 
-    player2UnitNames.insert(
+    faction2UnitNames.insert(
         std::pair<std::string, std::string>("LightAirUnit", ""));
-    player2UnitNames.insert(
+    faction2UnitNames.insert(
         std::pair<std::string, std::string>("MediumAirUnit", ""));
-    player2UnitNames.insert(
+    faction2UnitNames.insert(
         std::pair<std::string, std::string>("HeavyAirUnit", ""));
 }
 

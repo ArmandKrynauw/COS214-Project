@@ -12,7 +12,7 @@ class Country : public Faction {
     Country(std::string name);
     virtual void generateResources() override;
     virtual int getResourceCount() override;
-    virtual void setResourceCount(int baseResourceCount) override;
+    virtual void setBaseResourceCount(int baseResourceCount) override;
     virtual int getAttackPower(Theatre* theatre) override;
     virtual Alliance* getAlliance() override;
 
@@ -21,6 +21,8 @@ class Country : public Faction {
 
     virtual void makeDecision() override;
     virtual void chooseStrategy() override;
+
+    void printUnits();
 };
 
 #endif  // COUNTRY_H

@@ -8,6 +8,14 @@ WarEngine::WarEngine() {
     unitFactories["sea"] = new SeaUnitFactory();
     unitFactories["air"] = new AirUnitFactory();
 
+    theatreSize = 3;
+    theatres = new Theatre**[theatreSize];
+    for (int i = 0; i < theatreSize; i++) {
+        theatres[i] = new Theatre*[theatreSize];
+        for (int j = 0; j < theatreSize; j++) {
+            theatres[i][j] = new Theatre("Theatre-" + std::to_string(i+j+1), false);
+        }
+    } 
 }
 
 void WarEngine::setFaction1UnitNames(std::vector<std::string> names) {
@@ -239,7 +247,20 @@ void WarEngine::chooseStrategies() {
 
 void WarEngine::CommenceBattle() {}
 
-WarEngine::~WarEngine() {}
+WarEngine::~WarEngine() {
+    for (int i = 0; i < theatreSize; i++) {
+        for (int j = 0; j < theatreSize; j++) {
+            delete theatres[i][j];
+        }
+        delete [] theatres[i];
+    }
+    delete theatres;
+
+    std::unordered_map<std::string, UnitFactory*>::iterator it;
+    for (it = unitFactories.begin(); it != unitFactories.end(); it++) {
+        delete it->second;
+    }
+}
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -287,6 +308,10 @@ void WarEngine::addNames() {
         std::pair<std::string, std::string>("MediumAirUnit", ""));
     faction2UnitNames.insert(
         std::pair<std::string, std::string>("HeavyAirUnit", ""));
+}
+
+void WarEngine::printMap() {
+    
 }
 
 std::string WarEngine::toLower(std::string& str) const {

@@ -21,7 +21,8 @@ class WarEngine {
    private:
     Faction* faction1;
     Faction* faction2;
-    std::vector<std::vector<Theatre*>> theatres;
+    Theatre*** theatres;
+    int theatreSize;
     std::map<std::string, std::string>::iterator it;
     std::map<std::string, std::string> faction1UnitNames;
     std::map<std::string, std::string> faction2UnitNames;
@@ -32,6 +33,7 @@ class WarEngine {
 
     // =============== Utility Functions ===============
     void addNames();
+    void printMap();
     std::string toLower(std::string& str) const;
 
    public:

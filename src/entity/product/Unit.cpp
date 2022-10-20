@@ -1,9 +1,7 @@
 #include "Unit.h"
 
-Unit::Unit(std::string name, std::string type, int HP, int damage)
-    : Entity(name, type) {
-    this->HP = HP;
-    this->damage = damage;
+Unit::Unit(std::string name, std::string type, int HP, int damage, int value)
+    : Entity(name, type), HP(HP), damage(damage), value(value) {
 }
 
 int Unit::getHP() const {

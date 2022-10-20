@@ -8,10 +8,11 @@ class Unit : public Entity {
    protected:
     int HP;
     int damage;
+    int value;
     UnitState* state;
 
    public:
-    Unit(std::string name, std::string type, int HP, int damage);
+    Unit(std::string name, std::string type, int HP, int damage, int value);
     virtual int getHP() const override;
     virtual int getDamage() const override;
     void setHP(int HP);

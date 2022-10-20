@@ -9,15 +9,15 @@ AirUnitFactory::AirUnitFactory() {
 }
 
 Unit* AirUnitFactory::createLightUnit(std::string name) {
-    return new AirUnitLight(name, type, 50, 5);
+    return new AirUnitLight(name, type, 50, 5, 30);
 }
 
 Unit* AirUnitFactory::createMediumUnit(std::string name) {
-    return new AirUnitMedium(name, type, 75, 10);
+    return new AirUnitMedium(name, type, 75, 10, 40);
 }
 
 Unit* AirUnitFactory::createHeavyUnit(std::string name) {
-    return new AirUnitHeavy(name, type, 100, 20);
+    return new AirUnitHeavy(name, type, 100, 20, 50);
 }
 
 AirUnitFactory::~AirUnitFactory() {}

@@ -5,7 +5,7 @@
 
 class AirUnit : public Unit {
    public:
-    AirUnit(std::string name, std::string type, int HP, int damage);
+    AirUnit(std::string name, std::string type, int HP, int damage, int value);
     void primitiveAttack();
     void attack(Unit* unit);
     void primitiveDefend();

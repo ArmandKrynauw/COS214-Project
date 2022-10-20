@@ -6,7 +6,7 @@
 class SeaUnit : public Unit {
    private:
    public:
-    SeaUnit(std::string name, std::string type, int HP, int damage);
+    SeaUnit(std::string name, std::string type, int HP, int damage, int value);
     void primitiveAttack();
     void attack(Unit* unit);
     void primitiveDefend();

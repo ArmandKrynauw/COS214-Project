@@ -6,7 +6,7 @@
 class LandUnit : public Unit {
    private:
    public:
-    LandUnit(std::string name, std::string type, int HP, int damage);
+    LandUnit(std::string name, std::string type, int HP, int damage, int value);
     void primitiveAttack();
     void attack(Unit* unit);
     void primitiveDefend();

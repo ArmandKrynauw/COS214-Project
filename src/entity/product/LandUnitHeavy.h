@@ -6,7 +6,7 @@
 class LandUnitHeavy : public LandUnit {
    public:
     LandUnitHeavy();
-    LandUnitHeavy(std::string name, std::string type, int HP, int damage);
+    LandUnitHeavy(std::string name, std::string type, int HP, int damage, int value);
     virtual Entity* clone() override;
     ~LandUnitHeavy();
 };

@@ -1,8 +1,8 @@
 #include "LandUnitHeavy.h"
 
 LandUnitHeavy::LandUnitHeavy(std::string name, std::string type, int HP,
-                             int damage)
-    : LandUnit(name, type, HP, damage) {}
+                             int damage, int value)
+    : LandUnit(name, type, HP, damage, value) {}
 
 Entity* LandUnitHeavy::clone() {
     return new LandUnitHeavy(*this);

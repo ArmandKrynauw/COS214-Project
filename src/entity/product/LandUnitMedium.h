@@ -3,12 +3,12 @@
 
 #include "LandUnit.h"
 
-class LandUnitMedium : public LandUnit{
-    public:
-        LandUnitMedium();
-        LandUnitMedium(std::string name, std::string type, int HP, int damage);
-        virtual Entity* clone() override;
-        ~LandUnitMedium();
+class LandUnitMedium : public LandUnit {
+   public:
+    LandUnitMedium();
+    LandUnitMedium(std::string name, std::string type, int HP, int damage);
+    virtual Entity* clone() override;
+    ~LandUnitMedium();
 };
 
 #endif

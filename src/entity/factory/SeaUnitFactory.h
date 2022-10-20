@@ -4,12 +4,12 @@
 #include "UnitFactory.h"
 
 class SeaUnitFactory : public UnitFactory {
-    public:
-        SeaUnitFactory();
-        virtual Unit* createLightUnit(std::string name) override;
-        virtual Unit* createMediumUnit(std::string name) override;
-        virtual Unit* createHeavyUnit(std::string name) override;
-        virtual ~SeaUnitFactory();
+   public:
+    SeaUnitFactory();
+    virtual Unit* createLightUnit(std::string name) override;
+    virtual Unit* createMediumUnit(std::string name) override;
+    virtual Unit* createHeavyUnit(std::string name) override;
+    virtual ~SeaUnitFactory();
 };
 
-#endif // SEAUNITFACTORY_H
+#endif  // SEAUNITFACTORY_H

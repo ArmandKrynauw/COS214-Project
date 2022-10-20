@@ -1,6 +1,7 @@
 #include "Unit.h"
 
-Unit::Unit(std::string name, std::string type, int HP, int damage) : Entity(name, type) {
+Unit::Unit(std::string name, std::string type, int HP, int damage)
+    : Entity(name, type) {
     this->HP = HP;
     this->damage = damage;
 }
@@ -21,13 +22,10 @@ void Unit::setDamage(int damage) {
     this->damage = damage;
 }
 
-void Unit::takeDamage(int damage) {
-
-}
+void Unit::takeDamage(int damage) {}
 
 std::string Unit::print() {
     std::cout << "Printing for testing purposes" << std::endl;
-    
 }
 
-Unit::~Unit() { }
+Unit::~Unit() {}

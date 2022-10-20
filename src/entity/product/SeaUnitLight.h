@@ -3,11 +3,11 @@
 
 #include "SeaUnit.h"
 
-class SeaUnitLight : public SeaUnit{
-    public:
-        SeaUnitLight(std::string name, std::string type, int HP, int damage);
-        virtual Entity* clone() override;
-        ~SeaUnitLight();
+class SeaUnitLight : public SeaUnit {
+   public:
+    SeaUnitLight(std::string name, std::string type, int HP, int damage);
+    virtual Entity* clone() override;
+    ~SeaUnitLight();
 };
 
 #endif

@@ -3,11 +3,11 @@
 
 #include "SeaUnit.h"
 
-class SeaUnitHeavy : public SeaUnit{
-    public:
-        SeaUnitHeavy(std::string name, std::string type, int HP, int damage);
-        virtual Entity* clone() override;
-        ~SeaUnitHeavy();
+class SeaUnitHeavy : public SeaUnit {
+   public:
+    SeaUnitHeavy(std::string name, std::string type, int HP, int damage);
+    virtual Entity* clone() override;
+    ~SeaUnitHeavy();
 };
 
 #endif

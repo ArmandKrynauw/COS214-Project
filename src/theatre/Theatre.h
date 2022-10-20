@@ -30,11 +30,12 @@ protected:
     LandZoneFactory* landFactory;
     SeaZoneFactory* seaFactory;
 public:
-    Theatre(std::string name, std::string id,bool seaZone);
+    Theatre(std::string name, bool seaZone);
     void addFaction(std::string name);
     void removeFaction(std::string name);
     void addUnit(std::string faction,Unit* unit);
     Unit* removeUnit(std::string faction,int type,int index);
+    std::string getName() const;
     float changeStrategy(int num);
     void Battle(std::string attacker,std::string defender);
     virtual ~Theatre();

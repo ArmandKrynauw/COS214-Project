@@ -1,9 +1,9 @@
 #include "Theatre.h"
 
-Theatre::Theatre(std::string name, std::string id,bool seaZone)
+Theatre::Theatre(std::string name, bool seaZone)
 {
     this->name = name;
-    this->id = id;
+    this->id = uuid::generate();
     if(seaZone) this->limit = 3;
     else
     this->limit = 2;
@@ -37,6 +37,10 @@ void Theatre::removeFaction(std::string name)
     if(limit==3) army.at(index).at(2)->~Zone();
 
     army.erase(index);
+}
+
+std::string Theatre::getName() const {
+    return name;
 }
 
 void addUnit(std::string faction,Unit* unit)

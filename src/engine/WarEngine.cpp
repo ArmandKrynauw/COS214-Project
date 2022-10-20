@@ -86,6 +86,7 @@ void WarEngine::startSimulation() {
         player1Turn = player1Turn ? false : true;
         // To end while loop for testing
         warInProgress = false;
+        // SAVE STATE HERE
     }
 }
 

@@ -6,7 +6,9 @@ Entity::~Entity() {}
 
 int Entity::getDamage() const {}
 
-int Entity::getHP() const {}
+std::string Entity::getId() const {
+    return id;
+}
 
 void Entity::setName(std::string name) {
     this->name = name;

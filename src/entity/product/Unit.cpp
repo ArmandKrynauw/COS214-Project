@@ -12,6 +12,10 @@ int Unit::getDamage() const {
     return damage;
 }
 
+int Unit::getValue() const {
+    return value;
+}
+
 void Unit::setHP(int HP) {
     this->HP = HP;
 }

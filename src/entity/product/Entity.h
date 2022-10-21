@@ -12,10 +12,11 @@ class Entity {
 
    public:
     Entity(std::string name, std::string type);
-    virtual int getHP() const = 0;
     virtual int getDamage() const = 0;
     std::string getName() const;
     std::string getType() const;
+    std::string getId() const;
+    virtual int getValue() const = 0;
     void setName(std::string name);
     // virtual std::string print() = 0;
     virtual Entity* clone() = 0;

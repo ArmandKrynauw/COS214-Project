@@ -4,7 +4,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include "../exception/WarException.h"
+#include "../utilities/WarException.h"
 #include "../faction/Faction.h"
 #include "../utilities/uuid.h"
 #include "../war-strategy/PlanStrategy.h"
@@ -19,24 +19,27 @@
 
 class Theatre
 {
-protected:
+private:
     std::string name;
     std::string id;
     int limit;
-    std::vector<std::vector<Zone*>> armies;
-    std::map<std::string, int> factions;  //key -> name, value -> index
-    std::vector<WarStrategy*> strategies;
+    // std::vector<std::vector<Zone*>> armies;
+    std::unordered_map<std::string, std::vector<Zone*>> armies;
+    //std::map<std::string, int> factions;  //key -> name, value -> index
+    // std::vector<std::string>factions;
+    // std::vector<WarStrategy*> strategies;
+    std::unordered_map<std::string, WarStrategy*> strategies;
     AirZoneFactory* airFactory;
     LandZoneFactory* landFactory;
     SeaZoneFactory* seaFactory;
-public:
-    Theatre(std::string name, bool seaZone);
     void addFaction(std::string name);
     void removeFaction(std::string name);
-    void addUnit(std::string faction,Unit* unit);
-    Unit* removeUnit(std::string faction,int type,int index);
+public:
+    Theatre(std::string name, bool seaZone);
+    void addUnit(std::string faction ,Unit* unit);
+    Unit* removeUnit(std::string faction, std::string type, int index);
     std::string getName() const;
-    void changeStrategy(std::string faction,std::string strat);
+    void changeStrategy(std::string faction, WarStrategy* strategy);
     void Battle(std::string attacker,std::string defender);
     virtual ~Theatre();
 };

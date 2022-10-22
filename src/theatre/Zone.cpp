@@ -18,6 +18,10 @@ Unit* Zone::removeUnit(int index)
     return temp;
 }
 
+std::string Zone::getType() const {
+    return type; 
+}
+
 int Zone::sum()
 {
     int sum = 0;

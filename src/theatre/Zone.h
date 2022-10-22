@@ -7,29 +7,22 @@
 #include "../exception/WarException.h"
 #include "../faction/Faction.h"
 #include "../utilities/uuid.h"
+#include "../entity/product/Unit.h"
 
-class Strategy;
 
 class Zone
 {
 protected:
     std::string name;
     std::string id;
-    std::string type;
-    std::vector<Faction *> factions;
-    std::unordered_map<std::string, Strategy *> strategies;
-    // In Country
-    // map<ZoneID, Army>
-
-    // In Zone
-    // vector<FactionID> occupants
-    //
+    std::vector<Unit*> units;
 public:
-    Zone(std::string name, std::string type);
-    void addFaction(Faction *faction);
-    void removeFaction(Faction *faction);
-    void battle();
-    void setFactionStrategy(Faction *faction, Strategy *strategy);
+    Zone(std::string name);
+    int sum();
+    void addUnit(Unit* unit);
+    Unit* removeUnit(int index);
+    virtual void takeDamage(int damage)=0;
+    virtual std::string getType()=0;
     virtual ~Zone() = 0;
 };
 

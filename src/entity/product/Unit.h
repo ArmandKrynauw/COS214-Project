@@ -18,7 +18,7 @@ class Unit : public Entity {
     virtual int getValue() const override;
     void setHP(int HP);
     void setDamage(int damage);
-    virtual void takeDamage(int damage);
+    virtual bool takeDamage(int damage);
     std::string print();
     virtual Entity* clone() = 0;
     virtual ~Unit();

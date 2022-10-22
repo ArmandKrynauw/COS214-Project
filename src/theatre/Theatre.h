@@ -7,15 +7,15 @@
 #include "../exception/WarException.h"
 #include "../faction/Faction.h"
 #include "../utilities/uuid.h"
-#include "../war-strategy/WarStrategy.h"
+#include "../war-strategy/PlanStrategy.h"
+#include "../war-strategy/CounterStrategy.h"
+#include "../war-strategy/AttackStrategy.h"
 #include "../zone-factory/AirZoneFactory.h"
 #include "../zone-factory/LandZoneFactory.h"
 #include "../zone-factory/SeaZoneFactory.h"
-#include "../entity/product/Unit.h"
 #include "Zone.h"
 #include <map>
 
-class Strategy;
 
 class Theatre
 {
@@ -25,7 +25,7 @@ protected:
     int limit;
     std::vector<std::vector<Zone*>> armies;
     std::map<std::string, int> factions;  //key -> name, value -> index
-    std::vector<Strategy*> strategies;
+    std::vector<WarStrategy*> strategies;
     AirZoneFactory* airFactory;
     LandZoneFactory* landFactory;
     SeaZoneFactory* seaFactory;
@@ -36,7 +36,7 @@ public:
     void addUnit(std::string faction,Unit* unit);
     Unit* removeUnit(std::string faction,int type,int index);
     std::string getName() const;
-    float changeStrategy(int num);
+    void changeStrategy(std::string faction,std::string strat);
     void Battle(std::string attacker,std::string defender);
     virtual ~Theatre();
 };

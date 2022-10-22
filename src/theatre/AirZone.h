@@ -6,11 +6,12 @@
 class AirZone : public Zone
 {
 private:
-    std::string type = "Air";
 
 public:
-    AirZone(std::string name,std::string type);
-    virtual ~AirZone();
+    AirZone(std::string name);
+    void takeDamage(int damage) override;
+    std::string getType() override;
+     ~AirZone();
 };
 
 #endif // AIRTHEATRE_H

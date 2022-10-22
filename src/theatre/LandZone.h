@@ -10,6 +10,8 @@ private:
 
 public:
     LandZone(std::string name);
+    void takeDamage(int damage) override;
+    std::string getType() override;
     virtual ~LandZone();
 };
 

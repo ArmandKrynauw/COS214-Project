@@ -24,7 +24,12 @@ void Unit::setDamage(int damage) {
     this->damage = damage;
 }
 
-void Unit::takeDamage(int damage) {}
+bool Unit::takeDamage(int damage) {
+    this->HP = this->HP = damage;
+    if(this->HP<=0) return true;
+    else
+    return false;
+}
 
 std::string Unit::print() {
     std::cout << "Printing for testing purposes" << std::endl;

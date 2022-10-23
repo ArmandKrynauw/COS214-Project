@@ -14,7 +14,7 @@ class ArmedForce : public Entity {
     ~ArmedForce();
     void add(Entity* entity);
     void remove(Entity* entity);
-    // std::string print() override;
+    void print();
     /**
      * Calculates the total damage capability of this armed force by summing
      * the damage values of all the entities contained within itself.

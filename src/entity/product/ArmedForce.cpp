@@ -38,3 +38,11 @@ void ArmedForce::update() {
     }
     // this->setDamage(damage);
 }
+
+void ArmedForce::print(){
+    std::vector<Entity*>::iterator it;
+
+    for(it = entities.begin(); it != entities.end(); it++){
+        (*it)->print();
+    }
+}

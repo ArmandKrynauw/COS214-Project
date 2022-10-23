@@ -19,7 +19,7 @@ class Unit : public Entity {
     void setHP(int HP);
     void setDamage(int damage);
     virtual bool takeDamage(int damage);
-    std::string print();
+    void print();
     virtual Entity* clone() = 0;
     virtual ~Unit();
 };

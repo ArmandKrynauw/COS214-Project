@@ -18,7 +18,7 @@ class Entity {
     std::string getId() const;
     virtual int getValue() const = 0;
     void setName(std::string name);
-    // virtual std::string print() = 0;
+    virtual void print() = 0;
     virtual Entity* clone() = 0;
     virtual ~Entity();
 };

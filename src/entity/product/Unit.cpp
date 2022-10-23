@@ -31,8 +31,8 @@ bool Unit::takeDamage(int damage) {
     return false;
 }
 
-std::string Unit::print() {
-    std::cout << "Printing for testing purposes" << std::endl;
+void Unit::print() {
+    std::cout << this->name + " HP: " + std::to_string(this->HP) + " Damage: " + std::to_string(this->damage) << std::endl;
 }
 
 Unit::~Unit() {}

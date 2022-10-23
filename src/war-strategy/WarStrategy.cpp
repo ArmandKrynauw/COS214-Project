@@ -12,5 +12,8 @@ bool WarStrategy::getPlanned(){
     return this->planned;
 }
 
-WarStrategy::~WarStrategy(){
+std::string WarStrategy::getDefendant() const {
+    return defendant; 
 }
+
+WarStrategy::~WarStrategy() { }

@@ -2,6 +2,11 @@
 
 #include "../faction/Country.h"
 
+WarEngine* WarEngine::instance() {
+    static WarEngine warEngine;     
+    return &warEngine;
+}
+
 WarEngine::WarEngine() {
     addNames();
     unitFactories["land"] = new LandUnitFactory();
@@ -262,6 +267,7 @@ WarEngine::~WarEngine() {
         delete it->second;
     }
 }
+
 
 // ============================================================================
 // UTILITY FUNCTIONS

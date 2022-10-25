@@ -12,8 +12,6 @@ Client::Client(){
 void Client::Run(){
     std::cout<<"\033[1;32m================== CLIENT BOOTUP =================="<<std::endl;
     std::cout<<std::endl;
-    //Singular Engine to run Simulations
-    WarEngine * engine = new WarEngine();
 
     //Different Country Unit Names
     availableCountries.push_back("Germany");
@@ -35,21 +33,20 @@ void Client::Run(){
 
     /**Assign Country for each side of the simulation*/
     std::pair<std::string,std::string> choices = getPlayerCountries();
-    engine->setFaction1UnitNames(countries[choices.first]);
-    engine->setFaction2UnitNames(countries[choices.second]);
+    WarEngine::instance()->setFaction1UnitNames(countries[choices.first]);
+    WarEngine::instance()->setFaction2UnitNames(countries[choices.second]);
     
-    engine->setCountryNames(choices);
+    WarEngine::instance()->setCountryNames(choices);
 
-    engine->setsFactionBaseResoures(350,400);
+    WarEngine::instance()->setsFactionBaseResoures(350,400);
 
 
     std::cout<<"War to take place: "<<choices.first<< " Vs " <<choices.second<<std::endl;
     std::cout<<std::endl;
     printHeader();
-    engine->startSimulation();
+    WarEngine::instance()->startSimulation();
 
     printFooter();
-    delete engine;
 }
 
 std::pair<std::string,std::string> Client::getPlayerCountries(){

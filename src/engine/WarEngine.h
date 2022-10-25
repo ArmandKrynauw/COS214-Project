@@ -36,8 +36,15 @@ class WarEngine {
     void printMap();
     std::string toLower(std::string& str) const;
 
-   public:
+    // =============== Singleton =============== 
     WarEngine();
+    WarEngine(WarEngine&);
+    WarEngine& operator=(WarEngine&);
+    ~WarEngine();
+    
+
+   public:
+    static WarEngine* instance();
     // Main War loop
     void startSimulation();
     // Set Names of players countries that were input in client
@@ -51,7 +58,7 @@ class WarEngine {
     void buyUnits();
     void displayUnits();
     void displayUnitMenu();
-    void placeTroops();
+    void placeEntities();
     void chooseStrategies();
     void CommenceBattle();
     ~WarEngine();

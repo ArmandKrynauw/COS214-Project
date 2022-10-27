@@ -6,9 +6,9 @@ CounterStrategy::CounterStrategy(){
 }
 
 float CounterStrategy::executeStrategy(WarStrategy* strat){
-    PlanStrategy* test = dynamic_cast<PlanStrategy*> (strat);
+    AttackStrategy* test = dynamic_cast<AttackStrategy*> (strat);
     if(test != nullptr && strat->getPlanned()){
-        return 2.0;
+        return 2.3;
     }
     else{
         return 0.7;

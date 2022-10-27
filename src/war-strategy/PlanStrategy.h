@@ -7,7 +7,7 @@ class PlanStrategy : public WarStrategy
 {
 public:
     PlanStrategy();
-    void planOfAction();
+    float executeStrategy(WarStrategy* strat);
     ~PlanStrategy();
 };
 

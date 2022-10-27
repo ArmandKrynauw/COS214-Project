@@ -1,11 +1,18 @@
 #ifndef WARSTRATEGY_H
 #define WARSTRATEGY_H
 
-class WarStrategy
-{
+#include <string>
+class WarStrategy{
+private:
+    bool planned;
+    std::string defendant;
+
 public:
     WarStrategy();
-    virtual void planOfAction() = 0;
+    void setPlanned(bool p);
+    bool getPlanned();
+    std::string getDefendant() const;
+    virtual float executeStrategy(WarStrategy* strat) = 0;
     virtual ~WarStrategy();
 };
 

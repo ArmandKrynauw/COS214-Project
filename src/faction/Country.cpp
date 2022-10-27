@@ -1,5 +1,5 @@
 #include "Country.h"
-
+#include "../entity/product/Unit.h"
 Country::Country(std::string name) : Faction(name) {}
 
 void Country::generateResources() {
@@ -12,7 +12,7 @@ int Country::getResourceCount() {
     return resourceCount;
 }
 
-void Country::setResourceCount(int baseResourceCount) {
+void Country::setBaseResourceCount(int baseResourceCount) {
     this->baseResourceCount = baseResourceCount;
 }
 
@@ -51,7 +51,7 @@ void Country::makeDecision() {}
 
 // TUI prompts user to choose strategy for each theatre
 void Country::chooseStrategy() {
-    std::cout << "Choosing my strategies" << std::endl;
+    std::cout <<this->getName() << " choosing strategies" << std::endl;
     // Need to Notify TUI that we need user input
     // Receive input and assign strategy for each theatre - input validation TUI
     // side? Thinking of using a mediator
@@ -60,5 +60,11 @@ void Country::chooseStrategy() {
     // {
     //     std::string input = someNotifyFunction();
     //     t->setStrategy(input);
+    // }
+}
+
+void Country::printUnits(){
+    // for(Unit * u : units){
+    //     std::cout<<u->getName()<<std::endl;
     // }
 }

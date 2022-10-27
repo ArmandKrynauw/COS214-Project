@@ -14,7 +14,7 @@ class Alliance : public Faction {
     void removeCountry(Country* country);
     virtual void generateResources() override;
     virtual int getResourceCount() override;
-    virtual void setResourceCount(int baseResourceCount) override;
+    virtual void setBaseResourceCount(int baseResourceCount) override;
     virtual Alliance* getAlliance() override;
 
     virtual void makeDecision() override;  // For each member in alliance call makeDecision()

@@ -7,7 +7,7 @@ class CounterStrategy : public WarStrategy
 {
 public:
     CounterStrategy();
-    void planOfAction();
+    float executeStrategy(WarStrategy* strat);
     ~CounterStrategy();
 };
 

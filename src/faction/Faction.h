@@ -28,6 +28,7 @@ class Faction {
     void setName(std::string name);
     void decreaseMoraleBy(int amount);
     void increaseMoraleBy(int amount);
+
     /**
      * This method is used generate new resources for each Faction after each
      * turn in the war. Newly generated resources is calculated using the

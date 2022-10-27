@@ -1,5 +1,6 @@
 #include "Country.h"
 #include "../entity/product/Unit.h"
+#include "../entity/product/Entity.h"
 Country::Country(std::string name) : Faction(name) {}
 
 void Country::generateResources() {
@@ -64,7 +65,15 @@ void Country::chooseStrategy() {
 }
 
 void Country::printUnits(){
-    // for(Unit * u : units){
-    //     std::cout<<u->getName()<<std::endl;
-    // }
+    int counter = 1;
+    
+    for(Unit * u : units){
+        std::cout<<counter<<". "<<u->getName()<<std::endl;
+        counter++;
+    }
+    std::cout<<std::endl;
+}
+
+Unit* Country::getUnit(int index){
+    return units[index];
 }

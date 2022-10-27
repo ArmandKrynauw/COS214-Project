@@ -3,7 +3,7 @@
 TARGET_EXEC := main
 CXX := g++ -std=c++17
 BUILD_DIR := ./build
-SRC_DIRS :=  ./embed ./client ./utilities ./faction ./engine ./entity ./theatre ./zone-factory ./war-strategy  ./exception 
+SRC_DIRS :=  ./embed ./client ./utilities ./faction ./engine ./entity ./theatre ./zone-factory ./war-strategy 
 
 # Find all the C and C++ files we want to compile
 # Note the single quotes around the * expressions. Make will incorrectly expand these otherwise.

@@ -35,4 +35,8 @@ void Unit::print() {
     std::cout << this->name + " HP: " + std::to_string(this->HP) + " Damage: " + std::to_string(this->damage) << std::endl;
 }
 
+std::string Unit::getName() const {
+    return name;
+}
+
 Unit::~Unit() {}

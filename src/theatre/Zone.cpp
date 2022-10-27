@@ -32,4 +32,12 @@ int Zone::sum()
     return sum;
 }
 
+std::vector<Unit*> Zone::getUnits(){
+    return units;
+}
+
+std::string Zone::getName() const {
+    return name;
+}
+
 Zone::~Zone() {}

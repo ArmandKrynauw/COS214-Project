@@ -87,6 +87,13 @@ public:
      * Theatre.
     */
     void battle();
+
+    /**
+     * Provides functionality to display the internals of a theatre. This being troop count per faction and theatre name.
+     * 
+     */
+    void printTheatre();
+    
     virtual ~Theatre();
 };
 

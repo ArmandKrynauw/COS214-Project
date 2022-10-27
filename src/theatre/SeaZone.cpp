@@ -1,4 +1,4 @@
-#include "SeaZone.h"SeaZone
+#include "SeaZone.h"
 
 SeaZone::SeaZone(std::string name) : Zone(name) {
     this->name+="_SeaZone";

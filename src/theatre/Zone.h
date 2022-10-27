@@ -26,7 +26,7 @@ public:
     std::string getType() const;
     virtual void takeDamage(int damage)=0;
     virtual std::string getType()=0;
-    virtual ~Zone() = 0;
+    virtual ~Zone();
 };
 
 #endif // ZONE_H

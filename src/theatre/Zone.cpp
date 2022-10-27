@@ -31,3 +31,5 @@ int Zone::sum()
     }
     return sum;
 }
+
+Zone::~Zone() {}

@@ -1,5 +1,6 @@
 #include "CounterStrategy.h"
 #include "PlanStrategy.h"
+#include "AttackStrategy.h"
 
 CounterStrategy::CounterStrategy(){
 

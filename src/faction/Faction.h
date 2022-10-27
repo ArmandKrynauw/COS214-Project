@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include "../exception/WarException.h"
+#include "../utilities/WarException.h"
 #include "../utilities/uuid.h"
 
 class Alliance;

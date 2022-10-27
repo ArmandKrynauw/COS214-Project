@@ -13,3 +13,7 @@ std::string Entity::getId() const {
 void Entity::setName(std::string name) {
     this->name = name;
 }
+
+std::string Entity::getType() const {
+    return type;
+}

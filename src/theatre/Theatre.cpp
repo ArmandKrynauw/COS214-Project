@@ -6,6 +6,9 @@ Theatre::Theatre(std::string name, bool seaZone) {
     if(seaZone) this->limit = 3;
     else
     this->limit = 2;
+    landFactory = new LandZoneFactory();
+    seaFactory = new SeaZoneFactory();
+    airFactory = new AirZoneFactory();
 }
 
 Theatre::~Theatre() { }
@@ -14,12 +17,13 @@ void Theatre::addFaction(std::string faction) {
     if (zones.count(faction)) {
         return;
     }
-
+    
     std::vector<Zone*> armedForce;
-    armedForce.push_back(landFactory->createZone(name));
+    armedForce.push_back(landFactory->createZone(this->name)); //seg fault
+    
     armedForce.push_back(airFactory->createZone(name));
     if(limit==3){ armedForce.push_back(seaFactory->createZone(name)); }
-
+    
     zones[faction] = armedForce;
 }
 
@@ -40,7 +44,7 @@ void Theatre::addUnit(std::string faction, Unit* unit) {
     if (!zones.count(faction)) {
         addFaction(faction);
     }
-
+    
     std::vector<Zone*> factionZones = zones[faction];
 
     for (int i = 0; i < factionZones.size(); i++) {
@@ -146,4 +150,16 @@ void Theatre::changeStrategy(std::string faction, WarStrategy* strategy) {
         }
     }
     strategies[faction] = strategy;
+}
+
+void Theatre::printTheatre(){
+     std::unordered_map<std::string, std::vector<Zone*>>::iterator it = zones.begin();
+    std::cout<<getName()<<": "<<std::endl;
+    while(it != zones.end()){
+        std::cout<<"\t"<<it->first<<": "<<std::endl;
+        for(Zone * z : it->second){
+            std::cout<<"\t\t"<<z->getName()<<"["<<z->getUnits().size()<<"]"<<std::endl;
+        }
+        it++;
+    }
 }

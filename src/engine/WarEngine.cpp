@@ -15,11 +15,15 @@ WarEngine::WarEngine() {
 
     theatreSize = 3;
     theatres = new Theatre**[theatreSize];
+    int counter = 1;
     for (int i = 0; i < theatreSize; i++) {
         theatres[i] = new Theatre*[theatreSize];
         for (int j = 0; j < theatreSize; j++) {
-            theatres[i][j] = new Theatre("Theatre-" + std::to_string(i+j+1), false);
+            
+            theatres[i][j] = new Theatre("Theatre-" + std::to_string(counter), true);   //defaut all theatres sea for testing
+            counter++;
         }
+        
     } 
 }
 
@@ -71,6 +75,7 @@ void WarEngine::startSimulation() {
             buyUnits();
             displayUnits();
             placeTroops();
+            printMap();
             // std::cout<<"\033[1;32"<< 32 +
             // player<<"m======================================"<<std::endl;
             // std::cout<<std::endl;
@@ -108,15 +113,19 @@ void WarEngine::buyUnits() {
     //displayUnitMenu();
     if(player1Turn){
         std::cout<<faction1->getName()<<" buying troops"<<std::endl;
+        std::cout<<"Name: "<<faction1UnitNames["MediumAirUnit"]<<std::endl;
+
         ((Country *)faction1)->addUnit(unitFactories["land"]->createHeavyUnit(faction1UnitNames["HeavyLandUnit"]));
         ((Country *)faction1)->addUnit(unitFactories["air"]->createHeavyUnit(faction1UnitNames["HeavyAirUnit"]));
         ((Country *)faction1)->addUnit(unitFactories["sea"]->createHeavyUnit(faction1UnitNames["HeavySeaUnit"]));
+        std::cout<<std::endl;
     }
     else{
         std::cout<<faction2->getName()<<" buying troops"<<std::endl;
         ((Country *)faction2)->addUnit(unitFactories["land"]->createHeavyUnit(faction2UnitNames["HeavyLandUnit"]));
         ((Country *)faction2)->addUnit(unitFactories["air"]->createHeavyUnit(faction2UnitNames["HeavyAirUnit"]));
         ((Country *)faction2)->addUnit(unitFactories["sea"]->createHeavyUnit(faction2UnitNames["HeavySeaUnit"]));
+        std::cout<<std::endl;
     }
     //std::cout << "Enter Unit Type (Land, Sea, Air): ";
     //std::cout<<std::endl;
@@ -126,19 +135,42 @@ void WarEngine::buyUnits() {
 
 void WarEngine::displayUnits(){
     if(player1Turn){
+        std::cout<<faction1->getName()<< " Troops:"<<std::endl;
         ((Country *)faction1)->printUnits();
     }
     else{
+        std::cout<<faction2->getName()<< " Troops:"<<std::endl;
         ((Country *)faction2)->printUnits();
     }
 }
+/**
+ * @brief Add 'parent' to unit to know which theatre its in
+ * 
+ */
 
 void WarEngine::placeTroops(){
     if(player1Turn){
-        std::cout<<faction1->getName()<<" placing troops"<<std::endl;
+        std::cout<<faction1->getName()<<" troop movements:"<<std::endl<<std::endl;
+        //std::cout<<((Country*) faction1)->getUnit(0)->getName()<<std::endl;   //working
+        std::cout<<((Country*) faction1)->getUnit(0)->getName()<<" moving to "<<theatres[0][0]->getName()<<std::endl;
+        theatres[0][0]->addUnit(faction1->getName(),((Country*) faction1)->getUnit(0));
+
+        std::cout<<((Country*) faction1)->getUnit(1)->getName()<<" moving to "<<theatres[1][1]->getName()<<std::endl;
+        theatres[1][1]->addUnit(faction1->getName(),((Country*) faction1)->getUnit(1));
+
+        std::cout<<((Country*) faction1)->getUnit(2)->getName()<<" moving to "<<theatres[2][2]->getName()<<std::endl;
+        theatres[2][2]->addUnit(faction1->getName(),((Country*) faction1)->getUnit(2));
     }
     else{
-        std::cout<<faction2->getName()<<" placing troops"<<std::endl;
+        std::cout<<faction2->getName()<<" troop movements:"<<std::endl<<std::endl;
+        std::cout<<((Country*) faction2)->getUnit(0)->getName()<<" moving to "<<theatres[0][0]->getName()<<std::endl;
+        theatres[0][0]->addUnit(faction2->getName(),((Country*) faction2)->getUnit(0));
+
+        std::cout<<((Country*) faction2)->getUnit(1)->getName()<<" moving to "<<theatres[1][1]->getName()<<std::endl;
+        theatres[1][1]->addUnit(faction2->getName(),((Country*) faction2)->getUnit(1));
+        
+        std::cout<<((Country*) faction2)->getUnit(2)->getName()<<" moving to "<<theatres[2][2]->getName()<<std::endl;
+        theatres[2][2]->addUnit(faction2->getName(),((Country*) faction2)->getUnit(2));
     }
 }
 
@@ -245,13 +277,17 @@ void WarEngine::displayUnitMenu(){
 
 void WarEngine::chooseStrategies() {
     if (player1Turn) {
+        std::cout<<"\033[1;33m";
         faction1->chooseStrategy();
     } else {
+        std::cout<<"\033[1;34m";
         faction2->chooseStrategy();
     }
 }
 
-void WarEngine::CommenceBattle() {}
+void WarEngine::CommenceBattle() {
+    std::cout<<"\033[1;32mBattle Commencing"<<std::endl;
+}
 
 WarEngine::~WarEngine() {
     for (int i = 0; i < theatreSize; i++) {
@@ -318,6 +354,13 @@ void WarEngine::addNames() {
 }
 
 void WarEngine::printMap() {
+    std::cout<<"Map: "<<std::endl;
+    for (int i = 0; i < theatreSize; i++) {
+        for (int j = 0; j < theatreSize; j++) {
+            theatres[i][j]->printTheatre();
+        }
+    } 
+    std::cout<<std::endl;
     
 }
 

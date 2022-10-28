@@ -18,6 +18,7 @@ class Country : public Faction {
 
     void addUnit(Unit* unit);
     void removeUnit(Unit* unit);
+    Unit * getUnit(int index);
 
     virtual void makeDecision() override;
     virtual void chooseStrategy() override;

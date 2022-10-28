@@ -15,16 +15,24 @@ void Client::Run(){
 
     //Different Country Unit Names
     availableCountries.push_back("Germany");
-    std::vector<std::string> germany{"Foot Soldier","BMP-3","Leopard 2A7",
-                                     "Baden-Württemberg class","Braunschweig class","Type 212 Submarine",
-                                     "CH-53G","Eurofighter Typhoon","Luftwaffe A400M"};
+    // std::vector<std::string> germany{"Foot Soldier","BMP-3","Leopard 2A7",
+    //                                  "Baden-Württemberg class","Braunschweig class","Type 212 Submarine",
+    //                                  "CH-53G","Eurofighter Typhoon","Luftwaffe A400M"};
+
+    std::vector<std::string> germany{"Luftwaffe A400M","Leopard 2A7","Type 212 Submarine",
+                                     "CH-53G","Foot Soldier","Baden-Württemberg class",
+                                     "Eurofighter Typhoon","BMP-3","Braunschweig class"};
 
     countries.insert(std::pair<std::string,std::vector<std::string>>("Germany",germany));
     
     availableCountries.push_back("America");
-    std::vector<std::string> america{"Foot Soldier","HMMWV","M1 Abrams",
-                                     "Cruiser","Destroyer","USS Nebraska (SSBN-739)",
-                                     "F-22A Raptors","A-10","C-17"};
+    // std::vector<std::string> america{"Foot Soldier","HMMWV","M1 Abrams",
+    //                                  "Cruiser","Destroyer","USS Nebraska (SSBN-739)",
+    //                                  "F-22A Raptors","A-10","C-17"};
+
+    std::vector<std::string> america{"C-17","M1 Abrams","USS Nebraska (SSBN-739)",
+                                     "F-22A Raptors","Foot Soldier","Cruiser",
+                                    "A-10","HMMWV","Destroyer"};
 
     countries.insert(std::pair<std::string,std::vector<std::string>>("America",america));
 

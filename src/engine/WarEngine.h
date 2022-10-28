@@ -59,9 +59,10 @@ class WarEngine {
     void displayUnits();
     void displayUnitMenu();
     void placeEntities();
+    void placeTroops();
     void chooseStrategies();
     void CommenceBattle();
-    ~WarEngine();
+    //~WarEngine();
 };
 
 #endif  // WARENGINE_H

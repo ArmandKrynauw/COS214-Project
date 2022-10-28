@@ -8,8 +8,7 @@ std::string LandZone::getType(){
     return "land";
 }
 
-void LandZone::takeDamage(int damage)
-{
+void LandZone::takeDamage(int damage){
     // Ground forces tend to have unpredictable engagements just as often as expected engagements.
 
     int divisor = units.size(); 
@@ -18,13 +17,11 @@ void LandZone::takeDamage(int damage)
     int random;
 
 
-    for (int i = 0; i < divisor; i++)
-    {
+    for (int i = 0; i < divisor; i++){
         srand(time(NULL)+rand());
-        random = (rand()%units.size()) +0;
-        if(units.at(random)->takeDamage(hit))   // Unit died
-        {
-            units.at(random)->~Unit();
+        random = (rand()%units.size()) + 0;
+        if(units.at(random)->takeDamage(hit)){
+            delete units[random];
             units.erase(units.begin()+random-1);
         }
     }

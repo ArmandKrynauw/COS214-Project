@@ -25,6 +25,7 @@ void Theatre::addFaction(std::string faction) {
     if(limit==3){ armedForce.push_back(seaFactory->createZone(name)); }
     
     zones[faction] = armedForce;
+    strategies[faction] = NULL;
 }
 
 void Theatre::removeFaction(std::string faction) {
@@ -40,10 +41,16 @@ std::string Theatre::getName() const {
     return name;
 }
 
+std::string Theatre::getId() const {
+    return id;
+}
+
 void Theatre::addUnit(std::string faction, Unit* unit) {
     if (!zones.count(faction)) {
         addFaction(faction);
     }
+
+    
     
     std::vector<Zone*> factionZones = zones[faction];
 
@@ -120,15 +127,15 @@ void Theatre::battle() {
 
     while (it != strategies.end()) {
         std::string attacker = it->first;
-        std::string defendant = it->second->getDefendant();
+        std::string defendant = it->second->getTarget();
         WarStrategy* strategy = it->second;
 
         int attackModifier = strategy->executeStrategy(strategies[defendant]);
         int defendModifier = strategies[defendant]->executeStrategy(strategies[attacker]);
 
         for(int i = 0 ; i < limit; i++) {
-            int attackFinal = zones[attacker][i]->sum() * attackModifier;
-            int defendFinal = zones[defendant][i]->sum() * defendModifier;
+            int attackFinal = zones[attacker][i]->getTotalDamage() * attackModifier;
+            int defendFinal = zones[defendant][i]->getTotalDamage() * defendModifier;
             zones[attacker][i]->takeDamage(defendFinal);  // defender deals damage
             zones[defendant][i]->takeDamage(attackFinal);  // attacker deals damage
         }
@@ -140,12 +147,13 @@ void Theatre::battle() {
 }
 
 void Theatre::changeStrategy(std::string faction, WarStrategy* strategy) {
+   
     if (!strategy) {
         throw WarException("NULL Strategy");
     }
 
-    if (dynamic_cast<AttackStrategy*>(strategy)) {
-        if(strategies[faction]->getPlanned()) {
+    if (strategy->getType() == "Attack") {
+        if(strategies[faction] != NULL && strategies[faction]->getPlanned()) {
             strategy->setPlanned(true);
         }
     }
@@ -158,8 +166,32 @@ void Theatre::printTheatre(){
     while(it != zones.end()){
         std::cout<<"\t"<<it->first<<": "<<std::endl;
         for(Zone * z : it->second){
-            std::cout<<"\t\t"<<z->getName()<<"["<<z->getUnits().size()<<"]"<<std::endl;
+            std::cout<<"\t\t"<<z->getName()<<"["<<z->getTotalDamage()<<"]"<<std::endl;
         }
         it++;
     }
+}
+
+bool Theatre::checkForFaction(std::string factionName){
+    std::unordered_map<std::string, std::vector<Zone*>>::iterator it = zones.begin();
+    while(it != zones.end()){
+        if(it->first == factionName){ return true; }
+        it++;
+    }
+    return false;
+}
+
+void Theatre::printStrategies(){
+    std::cout<<getName()<<": "<<std::endl;
+    if(strategies.size() != 0){
+       std::unordered_map<std::string, WarStrategy*>::iterator it = strategies.begin();
+
+       while(it != strategies.end()){
+            std::cout<<"\t"<<it->first<<": "<<it->second->getType()<<std::endl;
+            it++;
+       }
+    } else{
+        std::cout<<getName()<<" is Empty."<<std::endl;
+    }
+    //std::cout<<std::endl;
 }

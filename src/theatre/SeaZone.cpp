@@ -8,8 +8,7 @@ std::string SeaZone::getType(){
     return "sea";
 }
 
-void SeaZone::takeDamage(int damage)
-{
+void SeaZone::takeDamage(int damage){
     // Ships tend to have very low engagement rates, while having much higher decisive battles
 
     int divisor = units.size()/2; 
@@ -18,13 +17,11 @@ void SeaZone::takeDamage(int damage)
     int random;
 
 
-    for (int i = 0; i < divisor; i++)
-    {
+    for (int i = 0; i < divisor; i++){
         srand(time(NULL)+rand());
         random = (rand()%units.size()) +0;
-        if(units.at(random)->takeDamage(hit))   // Unit died
-        {
-            units.at(random)->~Unit();
+        if(units.at(random)->takeDamage(hit)){
+            delete units[random];
             units.erase(units.begin()+random-1);
         }
     }

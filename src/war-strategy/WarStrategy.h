@@ -3,15 +3,17 @@
 
 #include <string>
 class WarStrategy{
-private:
+protected:
     bool planned;
-    std::string defendant;
+    std::string target;
+    std::string type;
 
 public:
-    WarStrategy();
+    WarStrategy(std::string target);
     void setPlanned(bool p);
     bool getPlanned();
-    std::string getDefendant() const;
+    std::string getTarget() const;
+    std::string getType();
     virtual float executeStrategy(WarStrategy* strat) = 0;
     virtual ~WarStrategy();
 };

@@ -38,21 +38,25 @@ void Client::Run(){
 
 
     
-
+    
     /**Assign Country for each side of the simulation*/
     std::pair<std::string,std::string> choices = getPlayerCountries();
+    //std::cout<<"here"<<std::endl;
     WarEngine::instance()->setFaction1UnitNames(countries[choices.first]);
     WarEngine::instance()->setFaction2UnitNames(countries[choices.second]);
+    //std::cout<<"here"<<std::endl;
     
     WarEngine::instance()->setCountryNames(choices);
+    //std::cout<<"here"<<std::endl;
 
     WarEngine::instance()->setsFactionBaseResoures(350,400);
+
 
 
     std::cout<<"War to take place: "<<choices.first<< " Vs " <<choices.second<<std::endl;
     std::cout<<std::endl;
     printHeader();
-    WarEngine::instance()->startSimulation();
+   WarEngine::instance()->startSimulation();
 
     printFooter();
 }

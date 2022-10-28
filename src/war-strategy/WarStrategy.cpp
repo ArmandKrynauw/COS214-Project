@@ -1,6 +1,6 @@
 #include "WarStrategy.h"
 
-WarStrategy::WarStrategy(){
+WarStrategy::WarStrategy(std::string target) : target(target){
     this->planned = false;
 }
 
@@ -12,8 +12,11 @@ bool WarStrategy::getPlanned(){
     return this->planned;
 }
 
-std::string WarStrategy::getDefendant() const {
-    return defendant; 
+std::string WarStrategy::getTarget() const {
+    return target; 
 }
 
+std::string WarStrategy::getType(){
+    return type;
+}
 WarStrategy::~WarStrategy() { }

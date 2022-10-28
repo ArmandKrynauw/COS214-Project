@@ -21,6 +21,8 @@ class Alliance : public Faction {
     virtual void chooseStrategy() override;  // For each member in alliance call chooseStrategy()
 
     virtual int getAttackPower(Theatre* theatre) override;
+
+    //virtual bool addTheatre(Theatre *  theatre) override;
 };
 
 #endif  // ALLIANCE_H

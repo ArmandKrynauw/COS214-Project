@@ -19,7 +19,7 @@ class Zone{
 
     public:
         Zone(std::string name);
-        int sum();
+        int getTotalDamage();
         void addUnit(Unit* unit);
         Unit* removeUnit(int index);
         std::string getType() const;

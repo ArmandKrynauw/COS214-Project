@@ -2,8 +2,8 @@
 #include "PlanStrategy.h"
 #include "AttackStrategy.h"
 
-CounterStrategy::CounterStrategy(){
-
+CounterStrategy::CounterStrategy(std::string target) : WarStrategy(target){
+    this->type = "Counter";
 }
 
 float CounterStrategy::executeStrategy(WarStrategy* strat){

@@ -6,7 +6,7 @@
 class PlanStrategy : public WarStrategy
 {
 public:
-    PlanStrategy();
+    PlanStrategy(std::string target);
     float executeStrategy(WarStrategy* strat);
     ~PlanStrategy();
 };

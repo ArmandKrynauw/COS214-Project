@@ -19,8 +19,9 @@
 class Theatre;
 class WarEngine {
    private:
-    Faction* faction1;
-    Faction* faction2;
+    std::vector<Faction*> factions;
+    // Faction* faction1;
+    // Faction* faction2;
     Theatre*** theatres;
     int theatreSize;
     std::map<std::string, std::string>::iterator it;
@@ -62,6 +63,7 @@ class WarEngine {
     void placeTroops();
     void chooseStrategies();
     void CommenceBattle();
+    void viewStrategies();
     //~WarEngine();
 };
 

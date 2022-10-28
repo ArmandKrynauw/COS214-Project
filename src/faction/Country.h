@@ -23,6 +23,8 @@ class Country : public Faction {
     virtual void makeDecision() override;
     virtual void chooseStrategy() override;
 
+    //virtual bool addTheatre(Theatre *  theatre) override;
+    
     void printUnits();
 };
 

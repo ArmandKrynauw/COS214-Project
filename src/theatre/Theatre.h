@@ -72,6 +72,7 @@ public:
     */
     Unit* removeUnit(std::string faction, std::string type, int index);
     std::string getName() const;
+    std::string getId() const;
     /**
      * Provides functionality to change the War Strategy for a specific Faction
      * for the next round of the war.
@@ -93,6 +94,10 @@ public:
      * 
      */
     void printTheatre();
+
+    bool checkForFaction(std::string factionName);
+
+    void printStrategies();
     
     virtual ~Theatre();
 };

@@ -18,7 +18,7 @@ class Faction {
     int baseResourceCount;
     int resourceCount;
     Mobilization* mobilization;
-    std::vector<Theatre*> theatres;
+    //std::vector<Theatre*> theatres;
 
    public:
     Faction(std::string name);
@@ -54,6 +54,8 @@ class Faction {
     // Turn
     virtual void makeDecision() = 0;
     virtual void chooseStrategy() = 0;
+
+    //virtual bool addTheatre(Theatre *  theatre);
 };
 
 #endif  // FACTION_H

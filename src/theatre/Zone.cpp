@@ -22,7 +22,7 @@ std::string Zone::getType() const {
     return type; 
 }
 
-int Zone::sum()
+int Zone::getTotalDamage()
 {
     int sum = 0;
     for(int i=0;i<units.size();i++)

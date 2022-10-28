@@ -1,6 +1,7 @@
 #include "AttackStrategy.h"
 
-AttackStrategy::AttackStrategy(){
+AttackStrategy::AttackStrategy(std::string target) : WarStrategy(target) {
+    this->type = "Attack";
 }
 
 float AttackStrategy::executeStrategy(WarStrategy* strat){

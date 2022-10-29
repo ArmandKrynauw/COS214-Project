@@ -2,9 +2,9 @@
 
 SeaZoneFactory::SeaZoneFactory() {}
 
-Zone *SeaZoneFactory::createZone(std::string theatreName)
+Zone *SeaZoneFactory::createZone(std::string ZoneName)
 {
-    return new SeaZone(theatreName);
+    return new SeaZone(ZoneName);
 }
 
 SeaZoneFactory::~SeaZoneFactory() {}

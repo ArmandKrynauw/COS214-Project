@@ -2,9 +2,9 @@
 
 AirZoneFactory::AirZoneFactory() {}
 
-Zone *AirZoneFactory::createZone(std::string theatreName)
+Zone *AirZoneFactory::createZone(std::string ZoneName)
 {
-    return new AirZone(theatreName);
+    return new AirZone(ZoneName);
 }
 
 AirZoneFactory::~AirZoneFactory() {}

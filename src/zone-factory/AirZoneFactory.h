@@ -8,7 +8,7 @@ class AirZoneFactory : public ZoneFactory {
     private:
     public:
         AirZoneFactory();
-        Zone* createZone(std::string theatreName);
+        Zone* createZone(std::string ZoneName);
         ~AirZoneFactory();
 };
 

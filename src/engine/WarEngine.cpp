@@ -85,18 +85,22 @@ void WarEngine::startSimulation() {
 
         // Phase 2
         chooseStrategies();
-        viewStrategies();
+        //viewStrategies();
             
         
 
         // Phase 3
-        //CommenceBattle();
+        CommenceBattle();
+        CommenceBattle();
+        CommenceBattle();
+        printMap();
 
         // Switch Order of players taking turns for fairness
         player1Turn = player1Turn ? false : true;
         // To end while loop for testing
         warInProgress = false;
         // SAVE STATE HERE
+        turnCounter++;
     }
 }
 
@@ -116,15 +120,28 @@ void WarEngine::buyUnits() {
         std::cout<<"Name: "<<faction1UnitNames["MediumAirUnit"]<<std::endl;
 
         ((Country *)factions[0])->addUnit(unitFactories["land"]->createHeavyUnit(faction1UnitNames["HeavyLandUnit"]));
+        //((Country *)factions[0])->addUnit(unitFactories["land"]->createLightUnit(faction1UnitNames["LightLandUnit"]));
+        //((Country *)factions[0])->addUnit(unitFactories["land"]->createLightUnit(faction1UnitNames["LightLandUnit"]));
         ((Country *)factions[0])->addUnit(unitFactories["air"]->createHeavyUnit(faction1UnitNames["HeavyAirUnit"]));
+        //((Country *)factions[0])->addUnit(unitFactories["sea"]->createHeavyUnit(faction1UnitNames["HeavySeaUnit"]));
+        //((Country *)factions[0])->addUnit(unitFactories["sea"]->createHeavyUnit(faction1UnitNames["HeavySeaUnit"]));
         ((Country *)factions[0])->addUnit(unitFactories["sea"]->createHeavyUnit(faction1UnitNames["HeavySeaUnit"]));
         std::cout<<std::endl;
     }
     else{
         std::cout<<factions[1]->getName()<<" buying troops"<<std::endl;
-        ((Country *)factions[1])->addUnit(unitFactories["land"]->createHeavyUnit(faction2UnitNames["HeavyLandUnit"]));
-        ((Country *)factions[1])->addUnit(unitFactories["air"]->createHeavyUnit(faction2UnitNames["HeavyAirUnit"]));
-        ((Country *)factions[1])->addUnit(unitFactories["sea"]->createHeavyUnit(faction2UnitNames["HeavySeaUnit"]));
+        // ((Country *)factions[1])->addUnit(unitFactories["land"]->createHeavyUnit(faction2UnitNames["HeavyLandUnit"]));
+        // ((Country *)factions[1])->addUnit(unitFactories["land"]->createHeavyUnit(faction2UnitNames["HeavyLandUnit"]));
+        // ((Country *)factions[1])->addUnit(unitFactories["land"]->createHeavyUnit(faction2UnitNames["HeavyLandUnit"]));
+        // ((Country *)factions[1])->addUnit(unitFactories["land"]->createHeavyUnit(faction2UnitNames["HeavyLandUnit"]));
+        // ((Country *)factions[1])->addUnit(unitFactories["air"]->createHeavyUnit(faction2UnitNames["HeavyAirUnit"]));
+        // ((Country *)factions[1])->addUnit(unitFactories["air"]->createMediumUnit(faction2UnitNames["MediumAirUnit"]));
+        // ((Country *)factions[1])->addUnit(unitFactories["sea"]->createHeavyUnit(faction2UnitNames["HeavySeaUnit"]));
+        ((Country *)factions[1])->addUnit(unitFactories["land"]->createLightUnit(faction1UnitNames["LightLandUnit"]));
+        
+        ((Country *)factions[1])->addUnit(unitFactories["air"]->createLightUnit(faction1UnitNames["LightAirUnit"]));
+       
+        ((Country *)factions[1])->addUnit(unitFactories["sea"]->createLightUnit(faction1UnitNames["LightSeaUnit"]));
         std::cout<<std::endl;
     }
     //std::cout << "Enter Unit Type (Land, Sea, Air): ";
@@ -151,36 +168,30 @@ void WarEngine::displayUnits(){
 void WarEngine::placeTroops(){
     if(player1Turn){
         std::cout<<factions[0]->getName()<<" troop movements:"<<std::endl<<std::endl;
-        //std::cout<<((Country*) factions[0])->getUnit(0)->getName()<<std::endl;   //working
-        std::cout<<((Country*) factions[0])->getUnit(0)->getName()<<" moving to "<<theatres[0][0]->getName()<<std::endl;
-        theatres[0][0]->addUnit(factions[0]->getName(),((Country*) factions[0])->getUnit(0));
+        std::vector<std::pair<int,int>> movements = {std::pair<int,int>(0,0),
+                                                     std::pair<int,int>(1,1),
+                                                     std::pair<int,int>(2,2)};
+        int moveCount = 3; //I want to move 3 troops - random
 
-        std::cout<<((Country*) factions[0])->getUnit(1)->getName()<<" moving to "<<theatres[1][1]->getName()<<std::endl;
-        theatres[1][1]->addUnit(factions[0]->getName(),((Country*) factions[0])->getUnit(1));
-
-        std::cout<<((Country*) factions[0])->getUnit(2)->getName()<<" moving to "<<theatres[2][2]->getName()<<std::endl;
-        theatres[2][2]->addUnit(factions[0]->getName(),((Country*) factions[0])->getUnit(2));
+        for(int k =0; k < moveCount;k++){
+            std::cout<<((Country*) factions[0])->getUnit(k)->getName()<<" moving to "<<theatres[movements[k].first][movements[k].second]->getName()<<std::endl;
+            theatres[movements[k].first][movements[k].second]->addUnit(factions[0]->getName(),((Country*) factions[0])->getUnit(k));
+        }
     }
     else{
         std::cout<<factions[1]->getName()<<" troop movements:"<<std::endl<<std::endl;
-        std::cout<<((Country*) factions[1])->getUnit(0)->getName()<<" moving to "<<theatres[0][0]->getName()<<std::endl;
-        theatres[0][0]->addUnit(factions[1]->getName(),((Country*) factions[1])->getUnit(0));
+        std::vector<std::pair<int,int>> movements = {std::pair<int,int>(0,0),
+                                                     std::pair<int,int>(1,1),
+                                                     std::pair<int,int>(2,2)};
+        int moveCount = 3; //I want to move 3 troops - random
 
-        std::cout<<((Country*) factions[1])->getUnit(1)->getName()<<" moving to "<<theatres[1][1]->getName()<<std::endl;
-        theatres[1][1]->addUnit(factions[1]->getName(),((Country*) factions[1])->getUnit(1));
-        
-        std::cout<<((Country*) factions[1])->getUnit(2)->getName()<<" moving to "<<theatres[2][2]->getName()<<std::endl;
-        theatres[2][2]->addUnit(factions[1]->getName(),((Country*) factions[1])->getUnit(2));
+        for(int k =0; k < moveCount;k++){
+            std::cout<<((Country*) factions[1])->getUnit(k)->getName()<<" moving to "<<theatres[movements[k].first][movements[k].second]->getName()<<std::endl;
+            theatres[movements[k].first][movements[k].second]->addUnit(factions[1]->getName(),((Country*) factions[1])->getUnit(k));
+        }
     }
 }
 
-
-// List of Available Units
-    //      Land:
-    //          1. Trooper
-    //          2. Troop
-    //      Sea:
-    //      Air:
 void WarEngine::displayUnitMenu(){
     std::cout<<"List of Available Units"<<std::endl;
     if(player1Turn)
@@ -305,7 +316,7 @@ void WarEngine::displayUnitMenu(){
 void WarEngine::chooseStrategies() {
     //set of strategies for each faction - vector for scalability
     std::vector<std::vector<WarStrategy*>> strategies = {{new AttackStrategy("America"), new CounterStrategy("America"), new PlanStrategy("America")},
-                                                         {new AttackStrategy("Germany"), new CounterStrategy("Germany"), new PlanStrategy("Germany")}};
+                                                         {new PlanStrategy("Germany"), new AttackStrategy("Germany"), new CounterStrategy("Germany")}};
 
     std::vector<std::vector<std::pair<int,int>>> targets = {{std::pair<int,int>(0,0),std::pair<int,int>(1,1),std::pair<int,int>(2,2)},
                                                             {std::pair<int,int>(0,0),std::pair<int,int>(1,1),std::pair<int,int>(2,2)}};
@@ -327,7 +338,8 @@ void WarEngine::chooseStrategies() {
 }
 
 void WarEngine::CommenceBattle() {
-    std::cout<<"Battle "<<turnCounter<<": "<<std::endl;
+    std::cout<<"Battle "<<turnCounter<<" commencing... "<<std::endl;
+    
     for (int i = 0; i < theatreSize; i++) {
         for (int j = 0; j < theatreSize; j++) {
             theatres[i][j]->battle();
@@ -401,12 +413,13 @@ void WarEngine::addNames() {
 }
 
 void WarEngine::printMap() {
-    std::cout<<"Map: "<<std::endl;
+    std::cout<<"\033[0m=================MAP BEGIN================"<<std::endl;
     for (int i = 0; i < theatreSize; i++) {
         for (int j = 0; j < theatreSize; j++) {
             theatres[i][j]->printTheatre();
         }
     } 
+    std::cout<<"=================MAP END================"<<std::endl;
     std::cout<<std::endl;
     
 }
@@ -422,9 +435,12 @@ std::string WarEngine::toLower(std::string& str) const {
 }
 
 void WarEngine::viewStrategies(){
+    std::cout<<"\033[1;32m=================TEST STRATS================="<<std::endl;
     for (int i = 0; i < theatreSize; i++) {
         for (int j = 0; j < theatreSize; j++) {
             theatres[i][j]->printStrategies();
         }
     } 
+    std::cout<<"\033[1;32m============================================="<<std::endl;
 }
+

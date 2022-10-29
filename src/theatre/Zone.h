@@ -25,6 +25,7 @@ class Zone{
         std::string getType() const;
         std::string getName() const;
         std::vector<Unit*> getUnits();
+        int getUnitCount();
         virtual void takeDamage(int damage)=0;
         virtual std::string getType()=0;
         virtual ~Zone();

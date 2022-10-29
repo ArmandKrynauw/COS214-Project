@@ -25,7 +25,7 @@ void Unit::setDamage(int damage) {
 }
 
 bool Unit::takeDamage(int damage) {
-    this->HP = this->HP = damage;
+    this->HP = this->HP - damage;
     if(this->HP<=0) return true;
     else
     return false;

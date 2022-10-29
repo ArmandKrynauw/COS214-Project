@@ -25,15 +25,18 @@ std::string Zone::getType() const {
 int Zone::getTotalDamage()
 {
     int sum = 0;
-    for(int i=0;i<units.size();i++)
-    {
-        sum+=units.at(i)->getDamage();
+    for(int i=0;i<units.size();i++){
+        sum = sum + units[i]->getDamage();
     }
     return sum;
 }
 
 std::vector<Unit*> Zone::getUnits(){
     return units;
+}
+
+int Zone::getUnitCount(){
+    return units.size();
 }
 
 std::string Zone::getName() const {

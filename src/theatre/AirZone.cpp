@@ -12,7 +12,7 @@ void AirZone::takeDamage(int damage){
     // Planes have much higher contact rates with the enemy, however lower losses per engagement generally.
 
     int divisor = units.size()*2; 
-
+    
     int hit = damage/divisor;
     int random;
 
@@ -21,7 +21,7 @@ void AirZone::takeDamage(int damage){
         random = (rand()%units.size()) +0;
         if(units.at(random)->takeDamage(hit)){   // Unit died
             delete units[random];
-            units.erase(units.begin()+random-1);
+            units.erase(units.begin()+random);
         }
     }
     

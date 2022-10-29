@@ -16,7 +16,6 @@
 #include "Zone.h"
 #include <map>
 
-
 class Theatre
 {
 private:
@@ -47,6 +46,7 @@ private:
      * @param name Name of the Faction to be removed
     */
     void removeFaction(std::string name);
+    
 public:
     Theatre(std::string name, bool seaZone);
     /**
@@ -57,7 +57,7 @@ public:
      * @param faction Name of the faction to be added
      * @param unit Unit to be add to the Theatre
     */
-    void addUnit(std::string faction, Unit* unit);
+    void addEntity(std::string faction, Entity* unit);
     /**
      * Provides functionality to remove a specific Faction's Unit from a
      * Theatre. If the Faction has no more Units stationed in this Theatre then
@@ -70,7 +70,7 @@ public:
      * @return The removed Unit
      * @throws WarException if index is out of bounds or if Unit is not found
     */
-    Unit* removeUnit(std::string faction, std::string type, int index);
+    Entity* removeEntity(std::string faction, std::string type, int index);
     std::string getName() const;
     std::string getId() const;
     /**

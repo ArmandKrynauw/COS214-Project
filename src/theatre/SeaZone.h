@@ -6,12 +6,11 @@
 class SeaZone : public Zone
 {
 private:
-        std::string type = "Sea";
+        virtual int getDamageDivisor() override;
 
 public:
         SeaZone(std::string name);
-        void takeDamage(int damage) override;
-        std::string getType() override;
+        virtual std::string getType() override;
         virtual ~SeaZone();
 };
 

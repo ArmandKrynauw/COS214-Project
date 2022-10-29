@@ -1,7 +1,7 @@
 #include "Unit.h"
 
 Unit::Unit(std::string name, std::string type, int HP, int damage, int value)
-    : Entity(name, type), HP(HP), damage(damage), value(value) {
+    : Entity(name, type), HP(HP), damage(damage), value(value), theatre(NULL) {
 }
 
 int Unit::getHP() const {
@@ -25,18 +25,34 @@ void Unit::setDamage(int damage) {
 }
 
 bool Unit::takeDamage(int damage) {
-    this->HP = this->HP - damage;
-    if(this->HP<=0) return true;
-    else
-    return false;
+    this->HP -= damage;
+    HP = (HP - damage <= 0) ? 0 : HP - damage;
+
+    return HP == 0;
+}
+
+int Unit::getUnitCount() const {
+   return 1; 
 }
 
 void Unit::print() {
     std::cout << this->name + " HP: " + std::to_string(this->HP) + " Damage: " + std::to_string(this->damage) << std::endl;
 }
 
+void Unit::setTheatre(Theatre* theatre) {
+    this->theatre = theatre; 
+}
+
 std::string Unit::getName() const {
     return name;
+}
+
+std::string Unit::getTheatre() const {
+    if (theatre) {
+        return theatre->getName();
+    }
+
+    return "";
 }
 
 Unit::~Unit() { }

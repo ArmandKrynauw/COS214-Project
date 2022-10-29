@@ -1,4 +1,5 @@
 #include "Theatre.h"
+#include "../entity/product/Entity.h"
 
 Theatre::Theatre(std::string name, bool seaZone) {
     this->name = name;
@@ -45,43 +46,45 @@ std::string Theatre::getId() const {
     return id;
 }
 
-void Theatre::addUnit(std::string faction, Unit* unit) {
+void Theatre::addEntity(std::string faction, Entity* entity) {
+    if (!entity) {
+        return;
+    }
     if (!zones.count(faction)) {
         addFaction(faction);
     }
-
-    
     
     std::vector<Zone*> factionZones = zones[faction];
 
     for (int i = 0; i < factionZones.size(); i++) {
-         if (factionZones[i]->getType() == unit->getType()){
-             factionZones[i]->addUnit(unit);
-             break;
+         if (factionZones[i]->getType() == entity->getType()){
+            entity->setTheatre(this);
+            factionZones[i]->addEntity(entity);
+            break;
          } 
     }
 }
 
-Unit* Theatre::removeUnit(std::string faction, std::string type, int index) {
+Entity* Theatre::removeEntity(std::string faction, std::string type, int index) {
     if (!zones.count(faction)) {
         throw WarException("Faction not found.");
     }
     
-    Unit* unit = NULL;
+    Entity* entity = NULL;
     std::vector<Zone*> factionZones = zones[faction];
 
     for (int i = 0; i < factionZones.size(); i++) {
          if (factionZones[i]->getType() == type) {
             if (index < 0 || index >= factionZones.size()) {
-                throw WarException("Unit not found.", "out-of-bounds");
+                throw WarException("Entity not found.", "out-of-bounds");
             }
-             unit = factionZones[i]->removeUnit(index);
+             entity = factionZones[i]->removeEntity(index);
              break;
          } 
     }
 
-    if (!unit) {
-        throw WarException("Unit not found.");
+    if (!entity) {
+        throw WarException("Entity not found.");
     }
 
     // TODO: Check if Faction has any Units left in the Theatre
@@ -95,7 +98,8 @@ Unit* Theatre::removeUnit(std::string faction, std::string type, int index) {
     //     }
     // }
 
-    return  unit;
+    entity->setTheatre(NULL);
+    return  entity;
 }
 
 void Theatre::battle() {

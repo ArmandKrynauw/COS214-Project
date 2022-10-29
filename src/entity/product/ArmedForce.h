@@ -22,7 +22,11 @@ class ArmedForce : public Entity {
      * @return Total damage
      */
     virtual int getDamage() const override;
+    virtual int getHP() const override;
+    virtual bool takeDamage(int damage) override;
+    virtual int getUnitCount() const override;
     virtual int getValue() const override;
+    virtual void setTheatre(Theatre* theatre) override;
     virtual Entity* clone() override;
     void update();
 };

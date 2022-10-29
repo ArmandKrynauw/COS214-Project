@@ -5,10 +5,10 @@
 
 class AirZone : public Zone{
     private:
+        virtual int getDamageDivisor() override;
 
     public:
         AirZone(std::string name);
-        void takeDamage(int damage) override;
         std::string getType() override;
         virtual ~AirZone();
 };

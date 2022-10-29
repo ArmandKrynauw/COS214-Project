@@ -6,11 +6,10 @@
 class LandZone : public Zone
 {
 private:
-    std:: string type = "Land";
+    virtual int getDamageDivisor() override;
 
 public:
     LandZone(std::string name);
-    void takeDamage(int damage) override;
     std::string getType() override;
     virtual ~LandZone();
 };

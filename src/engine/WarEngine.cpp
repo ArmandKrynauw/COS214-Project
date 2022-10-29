@@ -175,7 +175,7 @@ void WarEngine::placeTroops(){
 
         for(int k =0; k < moveCount;k++){
             std::cout<<((Country*) factions[0])->getUnit(k)->getName()<<" moving to "<<theatres[movements[k].first][movements[k].second]->getName()<<std::endl;
-            theatres[movements[k].first][movements[k].second]->addUnit(factions[0]->getName(),((Country*) factions[0])->getUnit(k));
+            theatres[movements[k].first][movements[k].second]->addEntity(factions[0]->getName(),((Country*) factions[0])->getUnit(k));
         }
     }
     else{
@@ -187,7 +187,7 @@ void WarEngine::placeTroops(){
 
         for(int k =0; k < moveCount;k++){
             std::cout<<((Country*) factions[1])->getUnit(k)->getName()<<" moving to "<<theatres[movements[k].first][movements[k].second]->getName()<<std::endl;
-            theatres[movements[k].first][movements[k].second]->addUnit(factions[1]->getName(),((Country*) factions[1])->getUnit(k));
+            theatres[movements[k].first][movements[k].second]->addEntity(factions[1]->getName(),((Country*) factions[1])->getUnit(k));
         }
     }
 }

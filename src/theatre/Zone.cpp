@@ -1,4 +1,5 @@
 #include "Zone.h"
+#include "../entity/product/Entity.h"
 
 Zone::Zone(std::string name)
 {
@@ -6,37 +7,49 @@ Zone::Zone(std::string name)
     this->id = uuid::generate();
 }
 
-void Zone::addUnit(Unit* unit)
-{
-    units.push_back(unit);
+void Zone::addEntity(Entity* entity) {
+    entities.push_back(entity);
 }
 
-Unit* Zone::removeUnit(int index)
+Entity* Zone::removeEntity(int index)
 {
-    Unit* temp = units.at(index);
-    units.erase(units.begin()+index-1);
+    Entity* temp = entities.at(index);
+    entities.erase(entities.begin()+index-1);
     return temp;
 }
 
-std::string Zone::getType() const {
-    return type; 
-}
-
-int Zone::getTotalDamage()
-{
+int Zone::getTotalDamage() {
     int sum = 0;
-    for(int i=0;i<units.size();i++){
-        sum = sum + units[i]->getDamage();
+    for(int i=0;i<entities.size();i++){
+        sum += entities[i]->getDamage();
     }
     return sum;
 }
 
-std::vector<Unit*> Zone::getUnits(){
-    return units;
+void Zone::takeDamage(int damage) {
+    int divisor = getDamageDivisor();
+    int hit = damage / divisor;
+
+    for (int i = 0; i < divisor; i++){
+        int random = (rand() % entities.size());
+        if(entities[random]->takeDamage(hit)){
+            entities.erase(entities.begin() + random);
+        }
+    }
 }
 
-int Zone::getUnitCount(){
-    return units.size();
+int Zone::getUnitCount() const {
+    int capacity = 0;
+
+    for (int i = 0; i < entities.size(); i++) {
+        capacity += entities[i]->getUnitCount();
+    }
+
+    return capacity ;
+}
+
+std::vector<Entity*> Zone::getEntities(){
+    return entities;
 }
 
 std::string Zone::getName() const {

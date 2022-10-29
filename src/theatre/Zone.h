@@ -7,28 +7,33 @@
 #include "../utilities/WarException.h"
 #include "../faction/Faction.h"
 #include "../utilities/uuid.h"
-#include "../entity/product/Unit.h"
 
+class Entity;
 
 class Zone{
     protected:
         std::string name;
         std::string id;
-        std::string type;
-        std::vector<Unit*> units;
+        std::vector<Entity*> entities;
+
 
     public:
         Zone(std::string name);
         int getTotalDamage();
-        void addUnit(Unit* unit);
-        Unit* removeUnit(int index);
-        std::string getType() const;
+        void addEntity(Entity* entity);
+        Entity* removeEntity(int index);
         std::string getName() const;
-        std::vector<Unit*> getUnits();
-        int getUnitCount();
-        virtual void takeDamage(int damage)=0;
-        virtual std::string getType()=0;
+        int getUnitCount() const;
+        std::vector<Entity*> getEntities();
+        virtual std::string getType() = 0;
         virtual ~Zone();
+        
+        // =============== Template Method =============== 
+        void takeDamage(int damage);
+
+    private: 
+        virtual int getDamageDivisor() = 0;
+
 };
 
 #endif // ZONE_H

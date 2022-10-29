@@ -19,6 +19,8 @@ class Unit : public Entity {
     std::string getName() const;
     void setHP(int HP);
     void setDamage(int damage);
+    void setState(UnitState* state);
+    UnitState* getState();
     virtual bool takeDamage(int damage);
     void print();
     virtual Entity* clone() = 0;

@@ -4,9 +4,19 @@
 #include <fstream>
 #include <iostream>
 
-Client::Client() {
-    loadSimulations("utilities/simulations.json");
-    runTerminalMode();
+Client::Client(bool GUIMode) : GUIMode(GUIMode) {
+    try {
+        loadSimulations("utilities/simulations.json");
+
+        if (GUIMode) {
+            runGUIMode();
+        } else {
+            runTerminalMode();
+        }
+    } catch(WarException& e) {
+        std::cout << e.what() << std::endl;
+    }
+
 }
 
 void Client::runTerminalMode() { 

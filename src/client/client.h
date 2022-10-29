@@ -10,16 +10,16 @@
 using json = nlohmann::json;
 
 class Client{
-
     private:
+        std::vector<json> simulations;
+        bool GUIMode;
         std::map<std::string, std::vector<std::string> > countries;
         //WarEngine * engine;
         std::vector<std::string> availableCountries;
 
-        std::vector<json> simulations;
 
     public:
-        Client();
+        Client(bool GUIMode);
         //Main Client Function called by our "Embedded Hardware" Class, main.cpp
         void Run();
         std::vector<std::string> getCoutryUnits(std::string countryName);
@@ -41,7 +41,6 @@ class Client{
         int getIntegerInput(std::string prompt, int rangeStart, int rangeEnd);
         bool isDigit(const std::string& str);
         int toInt(const std::string& str);
-
 };
 
 #endif // CLIENT_H

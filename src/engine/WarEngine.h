@@ -19,28 +19,23 @@
 
 using json = nlohmann::json;
 
-class Theatre;
 class WarEngine {
    private:
         std::vector<Faction*> factions;
-        // Faction* faction1;
-        // Faction* faction2;
         Theatre*** theatres;
         int theatreSize;
-        std::map<std::string, std::string>::iterator it;
-        std::map<std::string, std::string> faction1UnitNames;
-        std::map<std::string, std::string> faction2UnitNames;
+        std::unordered_map<std::string, std::unordered_map<std::string, std::string>> countryUnitNames;
+        std::unordered_map<std::string, UnitFactory*> unitFactories;
+    
         int turnCounter;
         bool player1Turn;
 
-        std::unordered_map<std::string, UnitFactory*> unitFactories;
     
-    // =============== Utility Functions ===============
-        void addNames();
+        // =============== Utility Functions ===============
         void printMap();
         std::string toLower(std::string& str) const;
 
-    // =============== Singleton =============== 
+        // =============== Singleton =============== 
         WarEngine();    
         WarEngine(WarEngine&);
         WarEngine& operator=(WarEngine&);
@@ -48,44 +43,22 @@ class WarEngine {
     
 
    public:
-       static WarEngine* instance();
-   // ===================== SETUP =====================
-    /**
-        * @brief Instantiate factions
-        * 
-        * @param filePath Path to access json simulations file
+        static WarEngine* instance();
+
+        // ===================== SETUP =====================
+        /**
+         * Provides functionality to load a war simulation from a JSON object. 
+         * 
+         * @param simulation JSON object containing simulation
         */
-
-        void loadSimulation(json& simulation);
-
-        
-        
+        void loadSimulation(const json& simulation);
         /**
-         * @brief Create Factions
+         * Provides functionality to load countries from a JSON array. 
          * 
-         * @param faction1 Faction 1 name
-         * @param faction2 Faction 2 name
-         */
-        void generateFactions(std::string faction1, std::string faction2);
-        /**
-         * @brief Set the Faction 1 Generic Unit Names
-         * 
-         * @param names String vector
-         */
-        void setFaction1UnitNames(std::vector<std::string> names);
-        /**
-         * @brief Set the Faction 2 Generic Unit Names
-         * 
-         * @param names String vector
-         */
-        void setFaction2UnitNames(std::vector<std::string> names);
-        /**
-         * @brief Set factions base resources
-         * 
-         * @param faction1BaseCount Faction 1 base resources
-         * @param faction2BaseCount Faction 2 base resources
-         */
-        void setsFactionBaseResoures(int faction1BaseCount, int faction2BaseCount);
+         * @param simulation JSON array containing country details
+        */
+        void loadCountries(const json& countries);
+        void loadFactions(const json& factions);
 
         // =====================JSON UTILITIES==============
         /**
@@ -95,7 +68,6 @@ class WarEngine {
          * @return std::vector<std::string> 
          */
         std::vector<std::string> setToString(json array);
-        int setToInteger(std::string data);
 
         // ====================MAIN WAR FUNCTIONS===========
         void startSimulation(json war);

@@ -1,157 +1,180 @@
 {
-    "Wars" :[{
-            "WarTitle" : "Battle of the Bulge [1944]",
-                "factions" :  [{
-                    "factionName" : "Germany",
-                    "names" : ["Luftwaffe A400M","Leopard 2A7","Type 212 Submarine",
-                               "CH-53G","Foot Soldier","Baden-Württemberg class",
-                               "Eurofighter Typhoon","BMP-3","Braunschweig class"],
-                    "type" : "Country",
-                    "baseResourceCount" : 450
+    "Wars": [
+        {
+            "WarTitle": "Battle of the Bulge [1944]",
+            "countries": [
+                {
+                    "name": "Germany",
+                    "units": [
+                        { "HeavyAirUnit": "Luftwaffe A400M" },
+                        { "HeavyLandUnit": "Leopard 2A7" },
+                        { "LightAirUnit": "CH-53G" },
+                        { "LightLandUnit": "Foot Soldier" },
+                        { "LightSeaUnit": "Baden-Württemberg class" },
+                        { "MediumAirUnit": "Eurofighter Typhoon" },
+                        { "MediumLandUnit": "BMP-3" },
+                        { "MediumSeaUnit": "Braunschweig class" }
+                    ],
+                    "baseResourceCount": 450
                 },
                 {
-                    "factionName" : "America",
-                    "names" : ["C-17","M1 Abrams","USS Nebraska (SSBN-739)",
-                               "F-22A Raptors","Foot Soldier","Cruiser",
-                               "A-10","HMMWV","Destroyer"],
-                    "type" : "Country",
-                    "baseResourceCount" : 300
-                }],
-                "WarSimulation" : [
-                    {
-                        "WarState" : "EarlyStage",
-                        "turnNumber" : 1,
-                            "factionsTroopPurchase" : {
-                                                        "factions": [
-                                                            {
-                                                                "faction": "Germany",
-                                                                "units": [
-                                                                    {
-                                                                        "0": "HeavyLandUnit"
-                                                                    },
-                                                                    {
-                                                                        "1": "HeavyAirUnit"
-                                                                    },
-                                                                    {
-                                                                        "2": "HeavySeaUnit"
-                                                                    }
-                                                                ]
-                                                            },
-                                                            {
-                                                                "faction": "America",
-                                                                "units": [
-                                                                    {
-                                                                        "0": "LightLandUnit"
-                                                                    },
-                                                                    {
-                                                                        "1": "LightAirUnit"
-                                                                    },
-                                                                    {
-                                                                        "2": "LightSeaUnit"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ]
-                                                   },
-                        "factionsTroopPlacement" : {
-                                                    "factions": [
-                                                        {
-                                                            "faction": "Germany",
-                                                            "movements": [
-                                                                {
-                                                                    "0": "0,0"
-                                                                },
-                                                                {
-                                                                    "1": "1,1"
-                                                                },
-                                                                {
-                                                                    "2": "2,2"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "faction": "America",
-                                                            "movements": [
-                                                                {
-                                                                    "0": "0,0"
-                                                                },
-                                                                {
-                                                                    "1": "1,1"
-                                                                },
-                                                                {
-                                                                    "2": "2,2"
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                   },
-                        
-                                                    
-                                                   
-                        "factionStrategies": [
-                                                    {
-                                                      "faction": "Germany",
-                                                      "strategies": [
-                                                        {
-                                                            "Strategy": "Attack",
-                                                            "Theatre": "0,0",
-                                                            "Target": "America"
-                                                        },
-                                                        {
-                                                            "Strategy": "Counter",
-                                                            "Theatre": "1,1",
-                                                            "Target": "America"
-                                                        },
-                                                        {
-                                                            "Strategy": "Plan",
-                                                            "Theatre": "2,2",
-                                                            "Target": "America"
-                                                        }
-                                                      ]
-                                                    },
-                                                    {
-                                                      "faction": "America",
-                                                      "strategies": [
-                                                        {
-                                                            "Strategy": "Plan",
-                                                            "Theatre": "0,0",
-                                                            "Target": "Germany"
-                                                        },
-                                                        {
-                                                            "Strategy": "Attack",
-                                                            "Theatre": "1,1",
-                                                            "Target": "Germany"
-                                                        },
-                                                        {
-                                                            "Strategy": "Counter",
-                                                            "Theatre": "2,2",
-                                                            "Target": "Germany"
-                                                        }
-                                                      ]
-                                                    }
-                                            ]
-                                                      
+                    "name": "America",
+                    "units": [
+                        { "HeavyAirUnit": "C-17" },
+                        { "HeavyLandUnit": "M1 Abrams" },
+                        { "HeavySeaUnit": "USS Nebraska (SSBN-739)" },
+                        { "LightAirUnit": "F-22A Raptors" },
+                        { "LightLandUnit": "Foot Soldier" },
+                        { "LightSeaUnit": "Cruiser" },
+                        { "MediumAirUnit": "A-10" },
+                        { "MediumLandUnit": "HMMWV" },
+                        { "MediumSeaUnit": "Destroyer" }
+                    ],
+                    "baseResourceCount": 300
+                }
+            ],
+            "alliances": [
+                {
+                    "Faction1": ["Germany", "America"]
+                },
+                {
+                    "Faction2": []
+                }
+            ],
+            "WarSimulation": [
+                {
+                    "WarState": "EarlyStage",
+                    "turnNumber": 1,
+                    "factionsTroopPurchase": {
+                        "factions": [
+                            {
+                                "faction": "Germany",
+                                "units": [
+                                    {
+                                        "0": "HeavyLandUnit"
+                                    },
+                                    {
+                                        "1": "HeavyAirUnit"
+                                    },
+                                    {
+                                        "2": "HeavySeaUnit"
+                                    }
+                                ]
+                            },
+                            {
+                                "faction": "America",
+                                "units": [
+                                    {
+                                        "0": "LightLandUnit"
+                                    },
+                                    {
+                                        "1": "LightAirUnit"
+                                    },
+                                    {
+                                        "2": "LightSeaUnit"
+                                    }
+                                ]
+                            }
+                        ]
                     },
-                    {
-                        "WarState" : "MiddleStage",
-                        "turnNumber" : 2
+                    "factionsTroopPlacement": {
+                        "factions": [
+                            {
+                                "faction": "Germany",
+                                "movements": [
+                                    {
+                                        "0": "0,0"
+                                    },
+                                    {
+                                        "1": "1,1"
+                                    },
+                                    {
+                                        "2": "2,2"
+                                    }
+                                ]
+                            },
+                            {
+                                "faction": "America",
+                                "movements": [
+                                    {
+                                        "0": "0,0"
+                                    },
+                                    {
+                                        "1": "1,1"
+                                    },
+                                    {
+                                        "2": "2,2"
+                                    }
+                                ]
+                            }
+                        ]
                     },
-                    {
-                        "WarState" : "LateStage",
-                        "turnNumber" : 3
-                    }
-                ]
-        
-    },
-    {
-        "WarTitle" : "Battle of France [1940]",
-        "factions" :  [{
-            "faction" : "Germany",
-            "baseResourceCount" : 450
+
+                    "factionStrategies": [
+                        {
+                            "faction": "Germany",
+                            "strategies": [
+                                {
+                                    "Strategy": "Attack",
+                                    "Theatre": "0,0",
+                                    "Target": "America"
+                                },
+                                {
+                                    "Strategy": "Counter",
+                                    "Theatre": "1,1",
+                                    "Target": "America"
+                                },
+                                {
+                                    "Strategy": "Plan",
+                                    "Theatre": "2,2",
+                                    "Target": "America"
+                                }
+                            ]
+                        },
+                        {
+                            "faction": "America",
+                            "strategies": [
+                                {
+                                    "Strategy": "Plan",
+                                    "Theatre": "0,0",
+                                    "Target": "Germany"
+                                },
+                                {
+                                    "Strategy": "Attack",
+                                    "Theatre": "1,1",
+                                    "Target": "Germany"
+                                },
+                                {
+                                    "Strategy": "Counter",
+                                    "Theatre": "2,2",
+                                    "Target": "Germany"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "WarState": "MiddleStage",
+                    "turnNumber": 2
+                },
+                {
+                    "WarState": "LateStage",
+                    "turnNumber": 3
+                }
+            ]
         },
         {
-            "faction" : "France",
-            "baseResourceCount" : 300
-        }]
-    }]
+            "WarTitle": "Battle of France [1940]",
+            "countries": [
+                {
+                    "faction": "Germany",
+                    "baseResourceCount": 450
+                },
+                {
+                    "faction": "France",
+                    "baseResourceCount": 300
+                }
+            ]
+        }
+    ]
 }

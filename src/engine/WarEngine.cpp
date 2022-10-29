@@ -1,6 +1,10 @@
 #include "WarEngine.h"
-
 #include "../faction/Country.h"
+#include "../utilities/json.hpp"
+#include <fstream>
+
+using json = nlohmann::json;
+
 
 WarEngine* WarEngine::instance() {
     static WarEngine warEngine;     
@@ -432,6 +436,16 @@ std::string WarEngine::toLower(std::string& str) const {
     }
 
     return lower;
+}
+
+void WarEngine::readSimulation(std::string filePath) {
+    std::ifstream file(filePath);
+    if (!file) {
+        throw WarException("file-not-found");
+    }
+
+    json data = json::parse(file);
+    std::cout << data["Wars"][0]["WarTitle"] << std::endl;
 }
 
 void WarEngine::viewStrategies(){

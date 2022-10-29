@@ -45,6 +45,7 @@ class WarEngine {
     
 
    public:
+    void readSimulation(std::string filePath);
     static WarEngine* instance();
     // Main War loop
     void startSimulation();

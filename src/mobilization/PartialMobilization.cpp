@@ -11,5 +11,3 @@ float PartialMobilization::getIndustryModifier(){
 int PartialMobilization::getNationalMoraleTick(){
     return -1;
 }
-
-PartialMobilization::~PartialMobilization(){}

@@ -23,6 +23,6 @@ class Mobilization {
     */
     virtual std::string getState()=0;
 
-    virtual ~Mobilization() = 0 ;
+    virtual ~Mobilization() ;
 };
 #endif

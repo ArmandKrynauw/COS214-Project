@@ -11,5 +11,3 @@ float TotalMobilization::getIndustryModifier(){
 int TotalMobilization::getNationalMoraleTick(){
     return -4;
 }
-
-TotalMobilization::~TotalMobilization(){}

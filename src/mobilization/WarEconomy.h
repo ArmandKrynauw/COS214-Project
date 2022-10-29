@@ -8,6 +8,5 @@ class WarEconomy : Mobilization{
      float getIndustryModifier();
      int getNationalMoraleTick();
      std::string getState();
-     ~WarEconomy();
 };
 #endif

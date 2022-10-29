@@ -5,9 +5,8 @@
 
 class TotalMobilization : Mobilization{
    public:
-     int getIndustryModifier();
+     float getIndustryModifier();
      int getNationalMoraleTick();
      std::string getState();
-     ~TotalMobilization();
 };
 #endif

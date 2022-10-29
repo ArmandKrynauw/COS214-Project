@@ -11,5 +11,3 @@ float WarEconomy::getIndustryModifier(){
 int WarEconomy::getNationalMoraleTick(){
     return -2;
 }
-
-WarEconomy::~WarEconomy(){}

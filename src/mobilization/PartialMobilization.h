@@ -8,6 +8,5 @@ class PartialMobilization : Mobilization {
      float getIndustryModifier();
      int getNationalMoraleTick();
      std::string getState();
-     ~PartialMobilization();
 };
 #endif

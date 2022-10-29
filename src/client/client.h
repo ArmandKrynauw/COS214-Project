@@ -5,6 +5,9 @@
 #include <iostream>
 #include <vector>
 
+#include "../engine/WarEngine.h"
+
+using json = nlohmann::json;
 
 class Client{
 
@@ -12,6 +15,9 @@ class Client{
         std::map<std::string, std::vector<std::string> > countries;
         //WarEngine * engine;
         std::vector<std::string> availableCountries;
+
+        std::vector<json> simulations;
+
     public:
         Client();
         //Main Client Function called by our "Embedded Hardware" Class, main.cpp
@@ -22,5 +28,20 @@ class Client{
 
         void printHeader();
         void printFooter();
+
+    // =================== UTILITY FUNCTIONS ==============
+    public:
+        std::string getListOfSimulations(); 
+        void selectSimulation(int index);
+
+    private: 
+        void runTerminalMode();
+        void runGUIMode();
+        void loadSimulations(std::string filePath);
+        int getIntegerInput(std::string prompt, int rangeStart, int rangeEnd);
+        bool isDigit(const std::string& str);
+        int toInt(const std::string& str);
+
 };
+
 #endif // CLIENT_H

@@ -1,10 +1,7 @@
 #include "WarEngine.h"
 #include "../faction/Country.h"
-#include "../utilities/json.hpp"
+
 #include <fstream>
-
-using json = nlohmann::json;
-
 
 WarEngine* WarEngine::instance() {
     static WarEngine warEngine;     
@@ -31,6 +28,13 @@ WarEngine::WarEngine() {
     } 
 }
 
+void WarEngine::loadSimulation(json& simulation) {
+    generateFactions(simulation["factions"][0]["factionName"].get<std::string>(),simulation["factions"][1]["factionName"].get<std::string>());
+    setsFactionBaseResoures(simulation["factions"][0]["baseResourceCount"].get<int>(),simulation["factions"][1]["baseResourceCount"].get<int>());
+    setFaction1UnitNames(setToString((json)simulation["factions"][0]["names"]));
+    setFaction2UnitNames(setToString((json)simulation["factions"][0]["names"]));
+}
+
 void WarEngine::setFaction1UnitNames(std::vector<std::string> names) {
     int counter = 0;
     for (it = faction1UnitNames.begin(); it != faction1UnitNames.end(); ++it) {
@@ -47,13 +51,12 @@ void WarEngine::setFaction2UnitNames(std::vector<std::string> names) {
     }
 }
 
-void WarEngine::setCountryNames(std::pair<std::string, std::string> names) {
-    factions.push_back(new Country(names.first));
-    factions.push_back(new Country(names.second));
+void WarEngine::generateFactions(std::string faction1, std::string faction2) {
+    factions.push_back(new Country(faction1));
+    factions.push_back(new Country(faction2));
 }
 
 void WarEngine::setsFactionBaseResoures(int faction1BaseCount, int faction2BaseCount){
-    std::cout<<factions[0]->getName()<<std::endl;
     factions[0]->setBaseResourceCount(faction1BaseCount);
     factions[0]->generateResources();
     factions[1]->setBaseResourceCount(faction2BaseCount);
@@ -62,7 +65,7 @@ void WarEngine::setsFactionBaseResoures(int faction1BaseCount, int faction2BaseC
 
 
 // Think about output
-void WarEngine::startSimulation() {
+void WarEngine::startSimulation(json war) {
     turnCounter = 1;
     player1Turn = true;
     bool warInProgress = true;
@@ -438,15 +441,7 @@ std::string WarEngine::toLower(std::string& str) const {
     return lower;
 }
 
-void WarEngine::readSimulation(std::string filePath) {
-    std::ifstream file(filePath);
-    if (!file) {
-        throw WarException("file-not-found");
-    }
 
-    json data = json::parse(file);
-    std::cout << data["Wars"][0]["WarTitle"] << std::endl;
-}
 
 void WarEngine::viewStrategies(){
     std::cout<<"\033[1;32m=================TEST STRATS================="<<std::endl;
@@ -457,4 +452,19 @@ void WarEngine::viewStrategies(){
     } 
     std::cout<<"\033[1;32m============================================="<<std::endl;
 }
+
+std::vector<std::string> WarEngine::setToString(json array){
+    std::vector<std::string> str;
+    for(std::string name : array){
+       str.push_back(name);
+    }
+    return str;
+}
+
+// int WarEngine::setToInteger(std::string data){
+//     std::stringstream ss(setToString(data));
+//     int num = 0;
+//     ss >> num;
+//     return num;
+// }
 

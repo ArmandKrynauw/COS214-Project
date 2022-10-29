@@ -1,13 +1,19 @@
 {
     "Wars" :[{
-            "WarTitle" : "Germany Vs America",
+            "WarTitle" : "Battle of the Bulge [1944]",
                 "factions" :  [{
-                    "faction" : "Germany",
+                    "factionName" : "Germany",
+                    "names" : ["Luftwaffe A400M","Leopard 2A7","Type 212 Submarine",
+                               "CH-53G","Foot Soldier","Baden-Württemberg class",
+                               "Eurofighter Typhoon","BMP-3","Braunschweig class"],
                     "type" : "Country",
                     "baseResourceCount" : 450
                 },
                 {
-                    "faction" : "America",
+                    "factionName" : "America",
+                    "names" : ["C-17","M1 Abrams","USS Nebraska (SSBN-739)",
+                               "F-22A Raptors","Foot Soldier","Cruiser",
+                               "A-10","HMMWV","Destroyer"],
                     "type" : "Country",
                     "baseResourceCount" : 300
                 }],
@@ -138,7 +144,7 @@
         
     },
     {
-        "WarTitle" : "Germany Vs France",
+        "WarTitle" : "Battle of France [1940]",
         "factions" :  [{
             "faction" : "Germany",
             "baseResourceCount" : 450

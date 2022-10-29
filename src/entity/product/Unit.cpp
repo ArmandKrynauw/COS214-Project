@@ -38,3 +38,5 @@ void Unit::print() {
 std::string Unit::getName() const {
     return name;
 }
+
+Unit::~Unit() { }

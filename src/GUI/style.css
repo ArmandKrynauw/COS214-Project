@@ -14,12 +14,34 @@
 
 * {
   color: var(--white);
+  font-family: Arial;
+  font-size: 20px;
+  line-height: 35px;
+  font-weight: 500;
+  border: 0 !important;
 }
 .Info {
   width: 100%;
   background-color: var(--darkgray);
   height: 100px;
   color: var(--white);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.hide {
+  display: none !important;
+}
+
+#BattleName {
+  font-family: Arial;
+  font-size: 37px;
+  line-height: 35px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .fightdisplay {
@@ -28,20 +50,21 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  height: 800px;
+  background-image: url("./media/images/map.png");
+  height: 100vh !important;
   background-color: var(--lightgray);
 }
 
-.enemyImage1 {
-  background-image: url("./media/images/germany.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+#enemyLeft {
+  position: absolute;
+  top: 100px;
+  left: 0%;
 }
 
-.enemyImage2 {
-  background-image: url("./media/images/usa.jfif");
-  background-repeat: no-repeat;
-  background-size: cover;
+#enemyRight {
+  position: absolute;
+  top: 100px;
+  right: 0%;
 }
 
 .enemy {
@@ -55,4 +78,48 @@
 
 body {
   margin: 0;
+}
+
+img {
+  height: 200px;
+}
+
+.card {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.card img {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.card-body {
+  background-color: var(--darkgray);
+}
+
+.card-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial;
+  font-size: 37px;
+  line-height: 35px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.head {
+  background-color: var(--medgray);
+}
+
+ul {
+  background-color: var(--medgray) !important;
+  margin-bottom: 20px !important;
+}
+
+li {
+  color: var(--white) !important;
+  background-color: var(--lightgray) !important;
 }

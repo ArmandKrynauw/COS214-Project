@@ -27,6 +27,7 @@ class Entity {
     virtual void print() = 0;
     virtual void setTheatre(Theatre* theatre) = 0;
     virtual Entity* clone() = 0;
+    virtual nlohmann::json toJSON() const = 0;
     virtual ~Entity();
 };
 

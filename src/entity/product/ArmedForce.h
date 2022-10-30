@@ -28,6 +28,7 @@ class ArmedForce : public Entity {
     virtual int getValue() const override;
     virtual void setTheatre(Theatre* theatre) override;
     virtual Entity* clone() override;
+    virtual nlohmann::json toJSON() const override;
     void update();
 };
 

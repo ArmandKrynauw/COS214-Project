@@ -1,5 +1,7 @@
 #include "ArmedForce.h"
 
+using json = nlohmann::json;
+
 ArmedForce::ArmedForce(std::string name, std::string type)
     : Entity(name, type) {}
 
@@ -76,6 +78,24 @@ void ArmedForce::setTheatre(Theatre* theatre) {
 }
 
 Entity* ArmedForce::clone() {}
+
+json ArmedForce::toJSON() const {
+    json data = json::array();
+
+    for (int i = 0; i < entities.size(); i++) {
+        json j = entities[i]->toJSON();
+
+        if (j.is_array()) {
+            for (json e : j) {
+                data.push_back(e);
+            }
+        } else {
+            data.push_back(j);
+        }
+    }
+
+    return data;
+}
 
 void ArmedForce::update() {
     int damage = 0;

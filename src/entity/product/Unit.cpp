@@ -46,12 +46,14 @@ void Unit::setTheatre(Theatre* theatre) {
     this->theatre = theatre;
 }
 
-void Unit::to_json(json& j, const Unit& u) {
-    j = json{{"name", u.name},
-             {"type", u.type},
-             {"hp", u.HP},
-             {"damage", u.damage},
-             {"theatre", getTheatre()}};
+json Unit::toJSON() const {
+    return json{
+        {"name", name},
+        {"type", type},
+        {"hp", HP},
+        {"damage", damage},
+        {"theatre", getTheatre()}
+    };
 }
 
 std::string Unit::getName() const {

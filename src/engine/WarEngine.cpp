@@ -414,6 +414,21 @@ void WarEngine::viewStrategies() {
               << std::endl;
 }
 
+// ============================================================================
+// JSON UTILITY FUNCTIONS
+// ============================================================================
+
+json WarEngine::getCountryUnits() {
+    json data; 
+
+    std::unordered_map<std::string, Country*>::iterator it;
+    for (it = countries.begin(); it != countries.end(); ++it) {
+        data.push_back(it->second->getListOfUnits());
+    }
+
+    return data;
+}
+
 std::vector<std::string> WarEngine::setToString(json array) {
     std::vector<std::string> str;
     for(std::string name : array) {

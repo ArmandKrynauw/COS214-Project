@@ -32,6 +32,8 @@ void Client::runTerminalMode() {
     selectSimulation(choice);
     WarEngine::instance()->purchaseUnits(
         simulations[choice]["rounds"][0]["unitsToPurchase"]);
+
+    std::cout << WarEngine::instance()->getCountryUnits().dump() << std::endl;
 }
 
 void Client::runGUIMode() {}

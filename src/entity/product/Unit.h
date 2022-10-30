@@ -24,7 +24,7 @@ class Unit : public Entity {
     void print();
     virtual void setTheatre(Theatre* theatre) override;
     virtual Entity* clone() = 0;
-    virtual void to_json(nlohmann::json& j, const Unit& e);
+    virtual nlohmann::json toJSON() const override;
     virtual ~Unit();
 };
 

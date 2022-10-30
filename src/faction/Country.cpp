@@ -41,7 +41,6 @@ void Country::addEntity(Entity* entity) {
     }
     resourceCount -= entity->getValue();
     armedForces[entity->getType()]->add(entity);
-    std::cout << "Adding: " << entity->getName() << std::endl;
 }
 
 void Country::removeEntity(Entity* entity) {
@@ -71,15 +70,35 @@ void Country::chooseStrategy() {
 }
 
 json Country::getListOfUnits() {
-    // json data = json{
-    //     {"name", name},
-    //     {"units", json::array()}
-    // };
+    json data = json{
+        {"name", name},
+        {"units", json::array()}
+    };
+    json units;
 
-    // std::unordered_map<std::string, ArmedForce*>::iterator it;
-    // for (it = armedForces.begin(); it != armedForces.end(); ++it) {
+    std::unordered_map<std::string, ArmedForce*>::iterator it;
+    for (it = armedForces.begin(); it != armedForces.end(); ++it) {
+        json j = it->second->toJSON();
+        for (json u : j) {
+            std::string theatre = u["theatre"];
+            if (!units.contains(theatre)) {
+                units[theatre] = json::array();
+            }
 
-    // }
+            u.erase("theatre");
+            units[theatre].push_back(u);
+        }
+    }
+
+    json::iterator theatreIt = units.begin();
+    for (; theatreIt != units.end(); ++theatreIt) {
+        data["units"].push_back(json{
+            {"theatre", theatreIt.key()},
+            {"units", theatreIt.value()}
+        });
+    }
+
+    return data;
 }
 
 void Country::printUnits() {

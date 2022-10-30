@@ -47,14 +47,9 @@
                         {
                             "name" : "Germany",
                             "units" : [
-                                { 
-                                    "type" : "HeavyLandUnit",
-                                    "quantity" : 4
-                                },
-                                { 
-                                    "type" : "HeavyAirUnit",
-                                    "quantity" : 2
-                                }
+                                { "type" : "HeavyLandUnit", "quantity" : 3 },
+                                { "type" : "HeavyAirUnit", "quantity" : 2 },
+                                { "type" : "LightSeaUnit", "quantity" : 1 }
                             ]
                         }
                     ],

@@ -104,6 +104,14 @@ class WarEngine {
     // ====================== JSON UTILITIES ======================
 
     /**
+     * Provides functionality to generate a JSON array of the current Unit
+     * states for each Country sorted by Theatre.
+     *
+     * @return JSON array with each Country's units
+    */
+    nlohmann::json getCountryUnits();
+
+    /**
      * @brief Convert json object to string vector
      *
      * @param array A json object to be converted

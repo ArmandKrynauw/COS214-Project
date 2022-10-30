@@ -36,7 +36,23 @@ void Client::runTerminalMode() {
     std::cout << WarEngine::instance()->getCountryUnits().dump() << std::endl;
 }
 
-void Client::runGUIMode() {}
+void Client::runGUIMode() {
+    this->socket = new WarSocket();
+    std::cout << "\033[1;32m==============SELECT SIMULATION===========\033[0m"
+              << std::endl;
+    for(int i = 0; i < simulations.size(); i++) {
+        std::cout << i + 1 << ". "
+                  << simulations[i]["WarTitle"].get<std::string>() << std::endl;
+    }
+    std::cout << std::endl;
+    int choice =
+        getIntegerInput("Select a simulation", 1, simulations.size()) - 1;
+    selectSimulation(choice);
+    WarEngine::instance()->purchaseUnits(
+        simulations[choice]["rounds"][0]["unitsToPurchase"]);
+
+    this->socket->listen();
+}
 
 // ======================================================================================
 // UTILITY FUNCTIONS

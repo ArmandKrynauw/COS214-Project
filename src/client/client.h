@@ -5,7 +5,7 @@
 #include <map>
 #include <vector>
 
-#include "../engine/WarEngine.h"
+#include "WarSocket.h"
 
 using json = nlohmann::json;
 
@@ -15,6 +15,7 @@ class Client {
     bool GUIMode;
     std::map<std::string, std::vector<std::string> > countries;
     // WarEngine * engine;
+    WarSocket* socket;
     std::vector<std::string> availableCountries;
 
    public:

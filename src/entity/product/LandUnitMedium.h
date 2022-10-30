@@ -6,7 +6,8 @@
 class LandUnitMedium : public LandUnit {
    public:
     LandUnitMedium();
-    LandUnitMedium(std::string name, std::string type, int HP, int damage, int value);
+    LandUnitMedium(std::string name, std::string type, int HP, int damage,
+                   int value);
     virtual Entity* clone() override;
     ~LandUnitMedium();
 };

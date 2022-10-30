@@ -5,7 +5,8 @@
 
 class SeaUnitHeavy : public SeaUnit {
    public:
-    SeaUnitHeavy(std::string name, std::string type, int HP, int damage, int value);
+    SeaUnitHeavy(std::string name, std::string type, int HP, int damage,
+                 int value);
     virtual Entity* clone() override;
     ~SeaUnitHeavy();
 };

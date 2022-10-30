@@ -1,8 +1,9 @@
 #include "Unit.h"
 
+using json = nlohmann::json;
+
 Unit::Unit(std::string name, std::string type, int HP, int damage, int value)
-    : Entity(name, type), HP(HP), damage(damage), value(value), theatre(NULL) {
-}
+    : Entity(name, type), HP(HP), damage(damage), value(value), theatre(NULL) {}
 
 int Unit::getHP() const {
     return HP;
@@ -32,15 +33,25 @@ bool Unit::takeDamage(int damage) {
 }
 
 int Unit::getUnitCount() const {
-   return 1; 
+    return 1;
 }
 
 void Unit::print() {
-    std::cout << this->name + " HP: " + std::to_string(this->HP) + " Damage: " + std::to_string(this->damage) << std::endl;
+    std::cout << this->name + " HP: " + std::to_string(this->HP) +
+                     " Damage: " + std::to_string(this->damage)
+              << std::endl;
 }
 
 void Unit::setTheatre(Theatre* theatre) {
-    this->theatre = theatre; 
+    this->theatre = theatre;
+}
+
+void Unit::to_json(json& j, const Unit& u) {
+    j = json{{"name", u.name},
+             {"type", u.type},
+             {"hp", u.HP},
+             {"damage", u.damage},
+             {"theatre", getTheatre()}};
 }
 
 std::string Unit::getName() const {
@@ -48,11 +59,11 @@ std::string Unit::getName() const {
 }
 
 std::string Unit::getTheatre() const {
-    if (theatre) {
+    if(theatre) {
         return theatre->getName();
     }
 
-    return "";
+    return "None";
 }
 
-Unit::~Unit() { }
+Unit::~Unit() {}

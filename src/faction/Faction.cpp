@@ -22,4 +22,3 @@ bool Faction::equals(Faction* faction) const {
 void Faction::setName(std::string name) {
     this->name = name;
 }
-

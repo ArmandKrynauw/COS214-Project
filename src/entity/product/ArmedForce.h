@@ -31,4 +31,4 @@ class ArmedForce : public Entity {
     void update();
 };
 
-#endif // ARMEDFORCE_H
+#endif  // ARMEDFORCE_H

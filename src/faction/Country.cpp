@@ -1,8 +1,14 @@
 #include "Country.h"
-#include "../entity/product/Unit.h"
+
 #include "../entity/product/Entity.h"
+#include "../entity/product/Unit.h"
 #include "../theatre/Theatre.h"
-Country::Country(std::string name) : Faction(name) {}
+
+Country::Country(std::string name) : Faction(name) {
+    armedForces["land"] = new ArmedForce("Army", "land");
+    armedForces["sea"] = new ArmedForce("Navy", "sea");
+    armedForces["air"] = new ArmedForce("Air Force", "air");
+}
 
 void Country::generateResources() {
     // TODO: Calculate newly generated resources by adding boosts provided by
@@ -28,33 +34,31 @@ Alliance* Country::getAlliance() {
     return NULL;
 }
 
-void Country::addUnit(Unit* unit) {
-    // TODO: Subtract Unit Cost from resource count. If resource count is less
-    // cost throw exception.
-
-    // if (true) {
-    //     throw WarException("Insufficient resources available.",
-    //     "insufficient-resources");
-    // }
-
-    units.push_back(unit);
+void Country::addEntity(Entity* entity) {
+    if(resourceCount - entity->getValue() < 0) {
+        throw WarException("Insufficient resources available.",
+                           "insufficient_resources");
+    }
+    resourceCount -= entity->getValue();
+    armedForces[entity->getType()]->add(entity);
+    std::cout << "Adding: " << entity->getName() << std::endl;
 }
 
-void Country::removeUnit(Unit* unit) {
-    for (int i = 0; i < units.size(); i++) {
-        if (units[i] == unit) {
-            units.erase(units.begin() + i);
-        }
+void Country::removeEntity(Entity* entity) {
+    if(entity) {
+        armedForces[entity->getType()]->remove(entity);
     }
 }
+
+Entity* getEntity(int index) {}
 
 // Buy Troops and Place where necessary
 void Country::makeDecision() {}
 
 // TUI prompts user to choose strategy for each theatre
 void Country::chooseStrategy() {
-    std::cout <<this->getName() << " choosing strategies" << std::endl;
-    
+    std::cout << this->getName() << " choosing strategies" << std::endl;
+
     // Need to Notify TUI that we need user input
     // Receive input and assign strategy for each theatre - input validation TUI
     // side? Thinking of using a mediator
@@ -66,27 +70,24 @@ void Country::chooseStrategy() {
     // }
 }
 
-void Country::printUnits(){
-    int counter = 1;
-    
-    for(Unit * u : units){
-        std::cout<<counter<<". "<<u->getName()<<std::endl;
-        counter++;
-    }
-    std::cout<<std::endl;
+json Country::getListOfUnits() {
+    // json data = json{
+    //     {"name", name},
+    //     {"units", json::array()}
+    // };
+
+    // std::unordered_map<std::string, ArmedForce*>::iterator it;
+    // for (it = armedForces.begin(); it != armedForces.end(); ++it) {
+
+    // }
 }
 
-Unit* Country::getUnit(int index){
-    return units[index];
-}
+void Country::printUnits() {
+    // int counter = 1;
 
-// bool Country::addTheatre(Theatre *  theatre){
-//     bool flag = false;
-//     for(Theatre * t : theatres){
-//         if(t->getId() == theatre->getId()){  flag = true; } 
-//     }
-    
-//     if(!flag){
-//         theatres.push_back(theatre);
-//     }
-//}
+    // for(Unit * u : units){
+    //     std::cout<<counter<<". "<<u->getName()<<std::endl;
+    //     counter++;
+    // }
+    // std::cout<<std::endl;
+}

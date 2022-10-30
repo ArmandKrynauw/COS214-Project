@@ -1,10 +1,11 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "../../theatre/Theatre.h"
-
 #include <iostream>
 #include <string>
+
+#include "../../theatre/Theatre.h"
+#include "../../utilities/json.hpp"
 
 class Entity {
    protected:

@@ -1,114 +1,135 @@
 {
-  "Wars": [
-    {
-      "WarTitle": "Battle of the Bulge [1944]",
-      "countries": [
+    "Wars": [
         {
-          "name": "Germany",
-          "units": [
-            { "HeavyAirUnit": "Luftwaffe A400M" },
-            { "HeavyLandUnit": "Leopard 2A7" },
-            { "LightAirUnit": "CH-53G" },
-            { "LightLandUnit": "Foot Soldier" },
-            { "LightSeaUnit": "Baden-Württemberg class" },
-            { "MediumAirUnit": "Eurofighter Typhoon" },
-            { "MediumLandUnit": "BMP-3" },
-            { "MediumSeaUnit": "Braunschweig class" }
-          ],
-          "baseResourceCount": 450
-        },
-        {
-          "name": "America",
-          "units": [
-            { "HeavyAirUnit": "C-17" },
-            { "HeavyLandUnit": "M1 Abrams" },
-            { "HeavySeaUnit": "USS Nebraska (SSBN-739)" },
-            { "LightAirUnit": "F-22A Raptors" },
-            { "LightLandUnit": "Foot Soldier" },
-            { "LightSeaUnit": "Cruiser" },
-            { "MediumAirUnit": "A-10" },
-            { "MediumLandUnit": "HMMWV" },
-            { "MediumSeaUnit": "Destroyer" }
-          ],
-          "baseResourceCount": 300
-        }
-      ],
-      "alliances": [
-        {
-          "Faction1": ["Germany", "America"]
-        },
-        {
-          "Faction2": []
-        }
-      ],
-      "WarSimulation": [
-        {
-          "WarState": "EarlyStage",
-          "turnNumber": 1,
-          "factionsTroopPurchase": {
-            "factions": [
-              {
-                "faction": "Germany",
-                "units": [
-                  {
-                    "0": "HeavyLandUnit"
-                  },
-                  {
-                    "1": "HeavyAirUnit"
-                  },
-                  {
-                    "2": "HeavySeaUnit"
-                  }
-                ]
-              },
-              {
-                "faction": "America",
-                "units": [
-                  {
-                    "0": "LightLandUnit"
-                  },
-                  {
-                    "1": "LightAirUnit"
-                  },
-                  {
-                    "2": "LightSeaUnit"
-                  }
-                ]
-              }
-            ]
-          },
-          "factionsTroopPlacement": {
-            "factions": [
-              {
-                "faction": "Germany",
-                "movements": [
-                  {
-                    "0": "0,0"
-                  },
-                  {
-                    "1": "1,1"
-                  },
-                  {
-                    "2": "2,2"
-                  }
-                ]
-              },
-              {
-                "faction": "America",
-                "movements": [
-                  {
-                    "0": "0,0"
-                  },
-                  {
-                    "1": "1,1"
-                  },
-                  {
-                    "2": "2,2"
-                  }
-                ]
-              }
-            ]
-          },
+            "WarTitle": "Battle of the Bulge [1944]",
+            "countries": [
+                {
+                    "name": "Germany",
+                    "units": [
+                        { "HeavyAirUnit": "Luftwaffe A400M" },
+                        { "HeavyLandUnit": "Leopard 2A7" },
+                        { "LightAirUnit": "CH-53G" },
+                        { "LightLandUnit": "Foot Soldier" },
+                        { "LightSeaUnit": "Baden-Württemberg class" },
+                        { "MediumAirUnit": "Eurofighter Typhoon" },
+                        { "MediumLandUnit": "BMP-3" },
+                        { "MediumSeaUnit": "Braunschweig class" }
+                    ],
+                    "baseResourceCount": 200
+                },
+                {
+                    "name": "America",
+                    "units": [
+                        { "HeavyAirUnit": "C-17" },
+                        { "HeavyLandUnit": "M1 Abrams" },
+                        { "HeavySeaUnit": "USS Nebraska (SSBN-739)" },
+                        { "LightAirUnit": "F-22A Raptors" },
+                        { "LightLandUnit": "Foot Soldier" },
+                        { "LightSeaUnit": "Cruiser" },
+                        { "MediumAirUnit": "A-10" },
+                        { "MediumLandUnit": "HMMWV" },
+                        { "MediumSeaUnit": "Destroyer" }
+                    ],
+                    "baseResourceCount": 300
+                }
+            ],
+            "alliances": [
+                {
+                    "name" : "Alliance1",
+                    "countries" : ["Germany", "America"]
+                }
+            ],
+            "rounds": [
+                {
+                    "WarState": "EarlyStage",
+                    "turnNumber": 1,
+                    "unitsToPurchase" : [
+                        {
+                            "name" : "Germany",
+                            "units" : [
+                                { 
+                                    "type" : "HeavyLandUnit",
+                                    "quantity" : 4
+                                },
+                                { 
+                                    "type" : "HeavyAirUnit",
+                                    "quantity" : 2
+                                }
+                            ]
+                        }
+                    ],
+                    "unitsToTransport" : [
+                        {
+                            "name" : "Germany",
+                            "units" : [
+
+                            ]
+                        }
+                    ],
+                    "factionsTroopPurchase": {
+                        "factions": [
+                            {
+                                "faction": "Germany",
+                                "units": [
+                                    {
+                                        "0": "HeavyLandUnit"
+                                    },
+                                    {
+                                        "1": "HeavyAirUnit"
+                                    },
+                                    {
+                                        "2": "HeavySeaUnit"
+                                    }
+                                ]
+                            },
+                            {
+                                "faction": "America",
+                                "units": [
+                                    {
+                                        "0": "LightLandUnit"
+                                    },
+                                    {
+                                        "1": "LightAirUnit"
+                                    },
+                                    {
+                                        "2": "LightSeaUnit"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "factionsTroopPlacement": {
+                        "factions": [
+                            {
+                                "faction": "Germany",
+                                "movements": [
+                                    {
+                                        "0": "0,0"
+                                    },
+                                    {
+                                        "1": "1,1"
+                                    },
+                                    {
+                                        "2": "2,2"
+                                    }
+                                ]
+                            },
+                            {
+                                "faction": "America",
+                                "movements": [
+                                    {
+                                        "0": "0,0"
+                                    },
+                                    {
+                                        "1": "1,1"
+                                    },
+                                    {
+                                        "2": "2,2"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
 
           "factionStrategies": [
             {

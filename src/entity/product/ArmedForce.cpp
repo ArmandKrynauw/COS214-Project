@@ -1,6 +1,7 @@
 #include "ArmedForce.h"
 
-ArmedForce::ArmedForce(std::string name, std::string type) : Entity(name, type) {}
+ArmedForce::ArmedForce(std::string name, std::string type)
+    : Entity(name, type) {}
 
 ArmedForce::~ArmedForce() {}
 
@@ -9,9 +10,9 @@ void ArmedForce::add(Entity* entity) {
 }
 
 void ArmedForce::remove(Entity* entity) {
-    std::vector<Entity* >::iterator it;
-    for (it = entities.begin(); it != entities.end(); ++it) {
-        if ((*it)->getId() == entity->getId()) {
+    std::vector<Entity*>::iterator it;
+    for(it = entities.begin(); it != entities.end(); ++it) {
+        if((*it)->getId() == entity->getId()) {
             entities.erase(it);
         }
     }
@@ -21,7 +22,7 @@ int ArmedForce::getDamage() const {
     int damage = 0;
     std::vector<Entity*>::const_iterator it;
 
-    for (it = entities.begin(); it != entities.end(); ++it) {
+    for(it = entities.begin(); it != entities.end(); ++it) {
         damage += (*it)->getDamage();
     }
 
@@ -32,12 +33,11 @@ int ArmedForce::getHP() const {
     int HP = 0;
     std::vector<Entity*>::const_iterator it;
 
-    for (it = entities.begin(); it != entities.end(); ++it) {
+    for(it = entities.begin(); it != entities.end(); ++it) {
         HP += (*it)->getHP();
     }
 
     return HP;
-     
 }
 
 bool ArmedForce::takeDamage(int damage) {
@@ -51,7 +51,7 @@ int ArmedForce::getUnitCount() const {
     int capacity = 0;
     std::vector<Entity*>::const_iterator it;
 
-    for (it = entities.begin(); it != entities.end(); ++it) {
+    for(it = entities.begin(); it != entities.end(); ++it) {
         capacity += (*it)->getUnitCount();
     }
 
@@ -61,7 +61,7 @@ int ArmedForce::getUnitCount() const {
 int ArmedForce::getValue() const {
     int value = 0;
 
-    for (Entity* entity : entities) {
+    for(Entity* entity : entities) {
         value += entity->getValue();
     }
 
@@ -70,7 +70,7 @@ int ArmedForce::getValue() const {
 
 void ArmedForce::setTheatre(Theatre* theatre) {
     std::vector<Entity*>::iterator it;
-    for (it = entities.begin(); it != entities.end(); ++it) {
+    for(it = entities.begin(); it != entities.end(); ++it) {
         (*it)->setTheatre(theatre);
     }
 }
@@ -85,10 +85,10 @@ void ArmedForce::update() {
     // this->setDamage(damage);
 }
 
-void ArmedForce::print(){
+void ArmedForce::print() {
     std::vector<Entity*>::iterator it;
 
-    for(it = entities.begin(); it != entities.end(); it++){
+    for(it = entities.begin(); it != entities.end(); it++) {
         (*it)->print();
     }
 }

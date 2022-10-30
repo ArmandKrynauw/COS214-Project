@@ -5,7 +5,8 @@
 
 class AirUnitMedium : public AirUnit {
    public:
-    AirUnitMedium(std::string name, std::string type, int HP, int damage, int value);
+    AirUnitMedium(std::string name, std::string type, int HP, int damage,
+                  int value);
     virtual Entity* clone() override;
     ~AirUnitMedium();
 };

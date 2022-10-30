@@ -17,12 +17,12 @@ class Alliance : public Faction {
     virtual void setBaseResourceCount(int baseResourceCount) override;
     virtual Alliance* getAlliance() override;
 
-    virtual void makeDecision() override;  // For each member in alliance call makeDecision()
-    virtual void chooseStrategy() override;  // For each member in alliance call chooseStrategy()
+    virtual void makeDecision()
+        override;  // For each member in alliance call makeDecision()
+    virtual void chooseStrategy()
+        override;  // For each member in alliance call chooseStrategy()
 
     virtual int getAttackPower(Theatre* theatre) override;
-
-    //virtual bool addTheatre(Theatre *  theatre) override;
 };
 
 #endif  // ALLIANCE_H

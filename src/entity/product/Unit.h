@@ -12,8 +12,8 @@ class Unit : public Entity {
 
    public:
     Unit(std::string name, std::string type, int HP, int damage, int value);
-    virtual int getDamage() const override;
-    virtual int getHP() const override;
+    virtual int getDamage()  override;
+    virtual int getHP()  override;
     virtual int getValue() const override;
     std::string getName() const;
     std::string getTheatre() const;

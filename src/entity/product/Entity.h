@@ -15,8 +15,9 @@ class Entity {
 
    public:
     Entity(std::string name, std::string type);
-    virtual int getDamage() const = 0;
-    virtual int getHP() const = 0;
+    virtual int getDamage()  = 0;
+    virtual int getHP() = 0;
+    Entity();
     std::string getName() const;
     std::string getType() const;
     std::string getId() const;

@@ -21,8 +21,8 @@ class ArmedForce : public Entity {
      *
      * @return Total damage
      */
-    virtual int getDamage() const override;
-    virtual int getHP() const override;
+    virtual int getDamage()  override;
+    virtual int getHP()  override;
     virtual bool takeDamage(int damage) override;
     virtual int getUnitCount() const override;
     virtual int getValue() const override;

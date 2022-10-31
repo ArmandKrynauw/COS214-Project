@@ -5,11 +5,11 @@ using json = nlohmann::json;
 Unit::Unit(std::string name, std::string type, int HP, int damage, int value)
     : Entity(name, type), HP(HP), damage(damage), value(value), theatre(NULL) {}
 
-int Unit::getHP() const {
+int Unit::getHP() {
     return HP;
 }
 
-int Unit::getDamage() const {
+int Unit::getDamage() {
     return damage;
 }
 
@@ -26,9 +26,7 @@ void Unit::setDamage(int damage) {
 }
 
 bool Unit::takeDamage(int damage) {
-    this->HP -= damage;
     HP = (HP - damage <= 0) ? 0 : HP - damage;
-
     return HP == 0;
 }
 
@@ -52,20 +50,16 @@ json Unit::toJSON() const {
         {"type", type},
         {"hp", HP},
         {"damage", damage},
-        {"theatre", getTheatre()}
+        {"theatre", (theatre) ? theatre->getName() : "None"}
     };
 }
 
-std::string Unit::getName() const {
+std::string Unit::getName() const{
     return name;
 }
 
-std::string Unit::getTheatre() const {
-    if(theatre) {
-        return theatre->getName();
-    }
-
-    return "None";
+Theatre * Unit::getTheatre() {
+    return theatre;
 }
 
 Unit::~Unit() {}

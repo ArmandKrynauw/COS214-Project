@@ -12,15 +12,17 @@ void ArmedForce::add(Entity* entity) {
 }
 
 void ArmedForce::remove(Entity* entity) {
+    
     std::vector<Entity*>::iterator it;
     for(it = entities.begin(); it != entities.end(); ++it) {
         if((*it)->getId() == entity->getId()) {
             entities.erase(it);
+            break;
         }
     }
 }
 
-int ArmedForce::getDamage() const {
+int ArmedForce::getDamage() {
     int damage = 0;
     std::vector<Entity*>::const_iterator it;
 
@@ -31,7 +33,7 @@ int ArmedForce::getDamage() const {
     return damage;
 }
 
-int ArmedForce::getHP() const {
+int ArmedForce::getHP() {
     int HP = 0;
     std::vector<Entity*>::const_iterator it;
 
@@ -111,4 +113,16 @@ void ArmedForce::print() {
     for(it = entities.begin(); it != entities.end(); it++) {
         (*it)->print();
     }
+}
+
+Entity * ArmedForce::operator[](int index){
+    return entities[index];
+}
+
+Entity * ArmedForce::getEntity(int index){
+    return entities[index];
+}
+
+std::vector<Entity*> ArmedForce::getEntities(){
+    return entities;
 }

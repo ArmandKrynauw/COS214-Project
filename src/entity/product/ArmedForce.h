@@ -30,6 +30,9 @@ class ArmedForce : public Entity {
     virtual Entity* clone() override;
     virtual nlohmann::json toJSON() const override;
     void update();
+    Entity * operator[](int index);
+    Entity * getEntity(int index);
+    std::vector<Entity*> getEntities();
 };
 
 #endif  // ARMEDFORCE_H

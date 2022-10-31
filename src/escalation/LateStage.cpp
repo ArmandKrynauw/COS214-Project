@@ -1,7 +1,9 @@
 #include "LateStage.h"
 
+LateStage::LateStage() : Escalation("LateStage"){}
+
 std::string LateStage::getState(){
-    return "LateStage";
+    return state;
 }
 
 bool LateStage::mobilizationCheck(std::string mobilization){
@@ -10,6 +12,8 @@ bool LateStage::mobilizationCheck(std::string mobilization){
     else
     return true;
 }
+
+LateStage::~LateStage(){}
 
 
 

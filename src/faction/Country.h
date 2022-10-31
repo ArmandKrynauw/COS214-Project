@@ -59,13 +59,14 @@ class Country : public Faction {
      * @param
      *
      */
-    Entity* getEntity(int index);
+    Entity* getEntity(const std::string& type, const int& index);
 
     virtual void makeDecision() override;
     virtual void chooseStrategy() override;
 
     void printUnits();
     json getListOfUnits();
+    void removeCasualties();
 };
 
 #endif  // COUNTRY_H

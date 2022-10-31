@@ -1,7 +1,9 @@
 #include "MiddleStage.h"
 
+MiddleStage::MiddleStage() : Escalation("MiddleStage"){}
+
 std::string MiddleStage::getState(){
-    return "MiddleStage";
+    return state;
 }
 
 bool MiddleStage::mobilizationCheck(std::string mobilization){
@@ -11,5 +13,6 @@ bool MiddleStage::mobilizationCheck(std::string mobilization){
     return true;
 }
 
+MiddleStage::~MiddleStage(){}
 
 

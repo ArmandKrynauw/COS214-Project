@@ -1,7 +1,10 @@
 #include "EarlyStage.h"
 
+
+EarlyStage::EarlyStage(std::string stage) : Escalation(stage){}
+
 std::string EarlyStage::getState(){
-    return "EarlyStage";
+    return state;
 }
 
 bool EarlyStage::mobilizationCheck(std::string mobilization){
@@ -10,6 +13,8 @@ bool EarlyStage::mobilizationCheck(std::string mobilization){
     else
     return true;
 }
+
+EarlyStage::~EarlyStage(){}
 
 
 

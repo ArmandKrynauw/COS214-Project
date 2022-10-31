@@ -1,13 +1,13 @@
 #include "Entity.h"
 
+Entity::Entity(){}
+
 Entity::Entity(std::string name, std::string type) {
     this->name = name;
     this->type = type;
 }
 
 Entity::~Entity() {}
-
-int Entity::getDamage() const {}
 
 std::string Entity::getId() const {
     return id;

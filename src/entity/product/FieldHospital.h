@@ -9,7 +9,7 @@ class FieldHospital : public  SupportCompany {
     FieldHospital(Entity* entity);
     int getDamage()  override;
     int getHP()  override;
-    ~FieldHospital() override;
+    virtual ~FieldHospital();
 };
 
 #endif  // FIELDHOSPITAL_H

@@ -14,10 +14,11 @@ class Entity {
     std::string type;
 
    public:
+    Entity();
     Entity(std::string name, std::string type);
     virtual int getDamage()  = 0;
     virtual int getHP() = 0;
-    Entity();
+    
     std::string getName() const;
     std::string getType() const;
     std::string getId() const;

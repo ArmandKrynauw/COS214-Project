@@ -39,7 +39,7 @@ void Theatre::removeFaction(std::string faction) {
     }
 }
 
-std::string Theatre::getName() const {
+std::string Theatre::getName(){
     return name;
 }
 
@@ -48,6 +48,7 @@ std::string Theatre::getId() const {
 }
 
 void Theatre::addEntity(std::string faction, Entity* entity) {
+    //std::cout<<entity->getName()<<std::endl;
     if (!entity) {
         return;
     }
@@ -66,7 +67,7 @@ void Theatre::addEntity(std::string faction, Entity* entity) {
     }
 }
 
-Entity* Theatre::removeEntity(std::string faction, std::string type, int index) {
+Entity* Theatre::removeEntity(std::string faction, std::string type, std::string id) {
     if (!zones.count(faction)) {
         throw WarException("Faction not found.");
     }
@@ -76,11 +77,8 @@ Entity* Theatre::removeEntity(std::string faction, std::string type, int index) 
 
     for (int i = 0; i < factionZones.size(); i++) {
          if (factionZones[i]->getType() == type) {
-            if (index < 0 || index >= factionZones.size()) {
-                throw WarException("Entity not found.", "out-of-bounds");
-            }
-             entity = factionZones[i]->removeEntity(index);
-             break;
+                entity = factionZones[i]->removeEntity(id);
+                break;
          } 
     }
 
@@ -104,36 +102,13 @@ Entity* Theatre::removeEntity(std::string faction, std::string type, int index) 
 }
 
 void Theatre::battle() {
-    // auto it = factions.find(attacker);
-    // int indexAttacker = it->second;
-
-    // it = factions.find(defender);
-    // int indexDefender = it->second;
-
-    // int attackModifier = strategies[attackingFaction]->executeStrategy(strategies[defendingFaction]);
-    // int defendModifier = strategies[defendingFaction]->executeStrategy(strategies[attackingFaction]);
-
-    // // int attackModifier = strategies.at(indexAttacker)->executeStrategy(strategies.at(indexDefender));
-    // // int defendModifier = strategies.at(indexDefender)->executeStrategy(strategies.at(indexAttacker));
-
-    // int attackFinal;
-    // int defendFinal;
-
-    // for(int i = 0 ; i < limit; i++)
-    // {
-    //     attackFinal = armies[attackingFaction][i]->sum()*attackModifier;
-    //     defendFinal = armies[defendingFaction][i]->sum()*defendModifier;
-
-    //     armies[attackingFaction][i]->takeDamage(defendFinal);  // defender deals damage
-    //     armies[defendingFaction][i]->takeDamage(attackFinal);  // attacker deals damage
-    // }
-
+    
     std::unordered_map<std::string, WarStrategy*>::iterator it = strategies.begin();
     if(strategies.size() > 1){
-        std::cout<<getName()<<" has a battle."<<std::endl;
+        //std::cout<<getName()<<" has a battle."<<std::endl;
         while (it != strategies.end()) {
-            std::string attacker = it->first;
-            std::string defendant = it->second->getTarget();
+            std::string attacker = it->first;                   //America
+            std::string defendant = it->second->getTarget();    //Germany
             WarStrategy* strategy = it->second;
             float attackModifier = strategy->executeStrategy(strategies[defendant]);
             float defendModifier = strategies[defendant]->executeStrategy(strategies[attacker]);
@@ -142,7 +117,6 @@ void Theatre::battle() {
                 if(zones[attacker][i]->getUnitCount() > 0 && zones[defendant][i]->getUnitCount() > 0){
                     int attackFinal = zones[attacker][i]->getTotalDamage() * attackModifier;
                     int defendFinal = zones[defendant][i]->getTotalDamage() * defendModifier;
-                    
                     zones[attacker][i]->takeDamage(defendFinal);  // defender deals damage
                     
                     //zones[defendant][i]->takeDamage(attackFinal);  // attacker deals damage
@@ -156,7 +130,7 @@ void Theatre::battle() {
     }
     else {
         //Nobody in Theatre
-        std::cout<<getName()<<" is neutral."<<std::endl;
+        //std::cout<<getName()<<" is neutral."<<std::endl;
     }
 
    //results?

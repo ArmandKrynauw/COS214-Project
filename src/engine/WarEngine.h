@@ -17,6 +17,8 @@
 #include "../faction/Faction.h"
 #include "../theatre/Theatre.h"
 #include "../utilities/json.hpp"
+#include "../escalation/Escalation.h"
+#include "../escalation/EarlyStage.h"
 
 using json = nlohmann::json;
 
@@ -25,6 +27,7 @@ class WarEngine {
     std::unordered_map<std::string, Alliance*> alliances;
     std::unordered_map<std::string, Country*> countries;
 
+    Escalation * warStage;
     // Depreciated!!!!
     std::vector<Faction*> factions;
 
@@ -37,6 +40,8 @@ class WarEngine {
 
     int turnCounter;
     bool player1Turn;
+
+
 
     // =============== Utility Functions ===============
     void printMap();
@@ -90,7 +95,14 @@ class WarEngine {
      * @throws WarException if Country does not have sufficient resources
      */
     void purchaseUnits(const json& data);
-
+    /**
+     * @brief Provides functionality for Countries to relocate troops to different
+     * theatres.
+     * 
+     * @param data JSON array containing units to move and their destinations
+     * @throws WarException if request was malformed
+     */
+    void relocateUnits(const json& data);
     /**
      * Provides functionality to generate Units for specific Countries.
      *
@@ -118,6 +130,32 @@ class WarEngine {
      * @return std::vector<std::string>
      */
     std::vector<std::string> setToString(json array);
+
+    /**
+     * @brief Convert JSON object to pair of int
+     * 
+     * @param data location of unit in json format
+     * @return std::pair<int,int> 
+     */
+    std::pair<int,int> getLocation(const json& data);
+
+    /**
+     * @brief Transport a unit between to theatres or home base and a theatre
+     * 
+     * @param destination The final destination of the unit
+     * @param country The country the unit fights for
+     * @param type The type of unit being land, sea or air
+     * @param id  The index of the unit in the list to move
+     */
+    void transportUnit(Theatre * destination, const std::string& country, const std::string& type, const int& index);
+
+    void assignStrategies(const json& data);
+
+    void printBattleResults();
+
+    void printUnit(const json& unit);
+
+    void checkEscalation(const json& data);
 
     // ====================== MAIN WAR FUNCTIONS ======================
 

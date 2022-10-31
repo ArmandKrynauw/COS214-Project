@@ -79,13 +79,13 @@ public:
      *
      * @param faction Name of Faction Unit to be removed
      * @param type Type of Unit which has to be removed
-     * @param index The index of the Unit to be removed in the Zone
+     * @param id The id of the Unit to be removed in the Zone
      *
      * @return The removed Unit
      * @throws WarException if index is out of bounds or if Unit is not found
     */
-    Entity* removeEntity(std::string faction, std::string type, int index);
-    std::string getName() const;
+    Entity* removeEntity(std::string faction, std::string type, std::string id);
+    std::string getName();
     std::string getId() const;
     /**
      * Provides functionality to change the War Strategy for a specific Faction

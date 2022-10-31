@@ -9,7 +9,7 @@ class Engineers : public  SupportCompany {
     Engineers(Entity* entity);
     int getDamage()  override;
     int getHP()  override;
-    ~Engineers() override;
+    virtual ~Engineers() ;
 };
 
 #endif  // Engineers_H

@@ -18,7 +18,7 @@ class SupportCompany : public Entity {
     void setTheatre(Theatre* theatre)override;
     Entity* clone() override;
     nlohmann::json toJSON()  const override ;
-    virtual ~SupportCompany() override;
+    virtual ~SupportCompany();
 };
 
 #endif  // SUPPORTCOMPANY_H

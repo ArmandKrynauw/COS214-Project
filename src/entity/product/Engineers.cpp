@@ -11,5 +11,5 @@ Engineers::Engineers(Entity* entity) : SupportCompany(entity){
     }
 
     Engineers::~Engineers(){
-        SupportCompany::~SupportCompany();
+        
     }

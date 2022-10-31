@@ -37,7 +37,7 @@ void Client::runTerminalMode() {
 }
 
 void Client::runGUIMode() {
-    this->socket = new WarSocket();
+    //this->socket = new WarSocket();
     std::cout << "\033[1;32m==============SELECT SIMULATION===========\033[0m"
               << std::endl;
     for(int i = 0; i < simulations.size(); i++) {
@@ -48,10 +48,39 @@ void Client::runGUIMode() {
     int choice =
         getIntegerInput("Select a simulation", 1, simulations.size()) - 1;
     selectSimulation(choice);
-    WarEngine::instance()->purchaseUnits(
-        simulations[choice]["rounds"][0]["unitsToPurchase"]);
 
-    this->socket->listen();
+    runSimulation();
+    // WarEngine::instance()->purchaseUnits(
+    //     simulations[choice]["rounds"][0]["unitsToPurchase"]);
+
+    //this->socket->listen();
+}
+
+void Client::runSimulation(){
+    int end = getRoundCount(chosenSimulation["rounds"]);
+    int roundCnt = 0;
+    for(json roundData : chosenSimulation["rounds"][roundCnt]){
+        if(roundCnt != end){
+        WarEngine::instance()->checkEscalation(chosenSimulation["rounds"][roundCnt]["WarState"]);
+        WarEngine::instance()->purchaseUnits(
+            chosenSimulation["rounds"][roundCnt]["unitsToPurchase"]);
+        // std::cout << WarEngine::instance()->getCountryUnits().dump(2) << std::endl;
+        WarEngine::instance()->relocateUnits(
+            chosenSimulation["rounds"][roundCnt]["unitsToRelocate"]);
+        WarEngine::instance()->assignStrategies(
+            chosenSimulation["rounds"][roundCnt]["strategies"]
+        );
+        WarEngine::instance()->CommenceBattle();
+        //WarEngine::instance()->printMap();
+        WarEngine::instance()->printBattleResults();
+        roundCnt++;
+
+        std::cout<<"Press any key to continue...";
+        std::string input;
+        std::cin >> input;
+        std::cout<<std::endl;
+        }
+    }
 }
 
 // ======================================================================================
@@ -89,6 +118,17 @@ void Client::selectSimulation(int index) {
     }
 
     WarEngine::instance()->loadSimulation(simulations[index]);
+    chosenSimulation = simulations[index];
+}
+
+int Client::getRoundCount(const json& data){
+    int max = 0;
+    for(json round : data){
+        if(round["turnNumber"].get<int>() > max){
+            max++;
+        }
+    }
+    return max;
 }
 
 // void Client::Run(){

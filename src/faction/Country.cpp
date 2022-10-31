@@ -4,6 +4,8 @@
 #include "../entity/product/Unit.h"
 #include "../theatre/Theatre.h"
 
+using json = nlohmann::json;
+
 Country::Country(std::string name) : Faction(name) {
     armedForces["land"] = new ArmedForce("Army", "land");
     armedForces["sea"] = new ArmedForce("Navy", "sea");
@@ -49,7 +51,12 @@ void Country::removeEntity(Entity* entity) {
     }
 }
 
-Entity* getEntity(int index) {}
+Entity* Country::getEntity(const std::string& type, const int& index) {
+    if(armedForces[type]->getUnitCount()-1 < index || index < 0){
+        throw WarException("out-of-bounds");
+    }
+    return armedForces[type]->getEntity(index);
+}
 
 // Buy Troops and Place where necessary
 void Country::makeDecision() {}
@@ -99,6 +106,17 @@ json Country::getListOfUnits() {
     }
 
     return data;
+}
+
+void Country::removeCasualties() {
+     std::unordered_map<std::string, ArmedForce*>::iterator it;
+    for (it = armedForces.begin(); it != armedForces.end(); ++it) {
+        for(Entity * e : it->second->getEntities()){
+            if(e->getHP() == 0){
+                it->second->remove(e);
+            }
+        }
+    }
 }
 
 void Country::printUnits() {

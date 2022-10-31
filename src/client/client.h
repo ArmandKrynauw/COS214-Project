@@ -17,6 +17,7 @@ class Client {
     // WarEngine * engine;
     WarSocket* socket;
     std::vector<std::string> availableCountries;
+    json chosenSimulation;
 
    public:
     Client(bool GUIMode);
@@ -42,6 +43,8 @@ class Client {
     int getIntegerInput(std::string prompt, int rangeStart, int rangeEnd);
     bool isDigit(const std::string& str);
     int toInt(const std::string& str);
+    void runSimulation();
+    int getRoundCount(const json& data);
 };
 
 #endif  // CLIENT_H

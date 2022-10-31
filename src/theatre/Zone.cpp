@@ -11,11 +11,21 @@ void Zone::addEntity(Entity* entity) {
     entities.push_back(entity);
 }
 
-Entity* Zone::removeEntity(int index)
-{
-    Entity* temp = entities.at(index);
-    entities.erase(entities.begin()+index-1);
-    return temp;
+Entity* Zone::removeEntity(std::string id){
+    Entity * entity = NULL;
+    int count = 0;
+    for(Entity * e : entities){
+        if(e->getId() == id){
+            entity = e;
+            entities.erase(entities.begin() + count);
+            break;
+        }
+        count++;
+    }
+    if(!entity){
+        throw WarException("unit-not-found");
+    }
+    return entity;
 }
 
 int Zone::getTotalDamage() {
@@ -29,7 +39,8 @@ int Zone::getTotalDamage() {
 void Zone::takeDamage(int damage) {
     int divisor = getDamageDivisor();
     int hit = damage / divisor;
-
+    //std::cout<<hit<<std::endl;
+    //std::cout<<divisor<<std::endl;
     for (int i = 0; i < divisor; i++){
         int random = (rand() % entities.size());
         if(entities[random]->takeDamage(hit)){

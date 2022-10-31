@@ -3,9 +3,11 @@
 #include <iostream>
 #include "Escalation.h"
 
-class LateStage : Escalation {
+class LateStage : public Escalation {
    public:
+     LateStage();
      bool mobilizationCheck(std::string mobilization);
      std::string getState();
+     virtual ~LateStage();
 };
 #endif

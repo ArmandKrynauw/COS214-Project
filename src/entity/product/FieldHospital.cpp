@@ -11,5 +11,5 @@ FieldHospital::FieldHospital(Entity* entity) : SupportCompany(entity){
     }
 
     FieldHospital::~FieldHospital(){
-        SupportCompany::~SupportCompany();
+        
     }

@@ -21,7 +21,7 @@ class Zone{
         Zone(std::string name);
         int getTotalDamage();
         void addEntity(Entity* entity);
-        Entity* removeEntity(int index);
+        Entity* removeEntity(std::string id);
         std::string getName() const;
         int getUnitCount() const;
         std::vector<Entity*> getEntities();

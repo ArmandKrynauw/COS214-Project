@@ -137,6 +137,7 @@ void WarEngine::startSimulation(json war) {
                       << std::endl
                       << "Turn: " << turnCounter << std::endl;
             displayResources();
+
             buyUnits();
             displayUnits();
             placeTroops();

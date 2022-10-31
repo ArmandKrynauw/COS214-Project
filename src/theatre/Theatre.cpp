@@ -1,7 +1,7 @@
 #include "Theatre.h"
 #include "../entity/product/Entity.h"
 
-Theatre::Theatre(std::string name, bool seaZone) {
+Theatre::Theatre(std::string name, bool seaZone,int resource) {
     this->name = name;
     this->id = uuid::generate();
     if(seaZone) this->limit = 3;
@@ -10,6 +10,7 @@ Theatre::Theatre(std::string name, bool seaZone) {
     landFactory = new LandZoneFactory();
     seaFactory = new SeaZoneFactory();
     airFactory = new AirZoneFactory();
+    this->resource = resource;
 }
 
 Theatre::~Theatre() { }
@@ -218,4 +219,35 @@ void Theatre::printStrategies(){
         std::cout<<getName()<<" is Empty."<<std::endl;
     }
     //std::cout<<std::endl;
+}
+
+
+
+
+int Theatre::getResource(std::string Faction)
+{
+    return resource*calculateControl(Faction);
+}
+
+float Theatre::calculateControl(std::string Faction)
+{
+    float ourSum=0;
+    float TotalSum=0;
+    float final=0;
+    for(int i=0;i<limit;i++)
+    {
+        ourSum = zones[Faction][i]->getTotalDamage();
+        std::unordered_map<std::string, std::vector<Zone*>>::iterator it = zones.begin();
+
+        while(it != zones.end()){
+        TotalSum += it->second[i]->getTotalDamage();
+        it++;
+        }
+
+        ourSum = TotalSum/ourSum;
+        final += ourSum;
+    }
+
+
+    return final/zones.size();
 }

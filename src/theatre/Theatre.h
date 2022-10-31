@@ -22,6 +22,7 @@ private:
     std::string name;
     std::string id;
     int limit;
+    int resource;
     std::unordered_map<std::string, std::vector<Zone*>> zones;
     std::unordered_map<std::string, WarStrategy*> strategies;
     AirZoneFactory* airFactory;
@@ -46,9 +47,22 @@ private:
      * @param name Name of the Faction to be removed
     */
     void removeFaction(std::string name);
+
+    
+
+    /**
+     * Provides functionality to get the percentage control of a faction in this threatre
+     * @param faction Name of the faction whose percentage control needs to be returned
+     * @return The percentage as a float : i.e 0.45
+     * 
+     */
+
+    float calculateControl(std::string faction); 
     
 public:
-    Theatre(std::string name, bool seaZone);
+
+    
+    Theatre(std::string name, bool seaZone,int resource);
     /**
      * Provides functionality to add a Unit from a Faction to a specific
      * Theatre. If the Faction does not have any Zones in the current Theatre
@@ -88,6 +102,17 @@ public:
      * Theatre.
     */
     void battle();
+
+    /**
+     * Provides functionality to get the amount of resources a faction earns of the resource pool of a threatre
+     * @param faction Name of the faction whose resources portion needs to be returned
+     * @return The resources portion of the specified faction for this threatre 
+     * 
+     */
+
+    int getResource(std::string faction);
+
+    
 
     /**
      * Provides functionality to display the internals of a theatre. This being troop count per faction and theatre name.

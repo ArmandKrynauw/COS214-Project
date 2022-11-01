@@ -3,7 +3,7 @@
 
 int main(int argc, char **argv) {
     bool flag = argc > 1 ? std::string(argv[1]) == "gui" : false;
-    flag = false;
+    flag = true;
     
     if (flag) {
         Client::instance()->runGUIMode();

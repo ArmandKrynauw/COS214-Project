@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Page Title</title>
+    <title>War Thunder</title>
     <link rel="stylesheet" href="./style.css" />
     <link
       rel="stylesheet"
@@ -37,26 +37,10 @@
       <!-- Name -->
       <div id="BattleName">Battle name</div>
       <div id="State"></div>
-      <div id="Round"></div>
-      <button type="button" class="btn btn-secondary nextRound">NEXT</button>
-      <div class="dropdown show">
-        <a
-          class="btn btn-secondary dropdown-toggle"
-          href="#"
-          role="button"
-          id="dropdownMenuLink"
-          data-bs-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Buy Troops
-        </a>
-
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">Land troops</a>
-          <a class="dropdown-item" href="#">Sea troops</a>
-          <a class="dropdown-item" href="#">Air troops</a>
-        </div>
+      <div id="Day"></div>
+      <div>
+        <button type="button" class="btn btn-secondary MapBTN">Map</button>
+        <button type="button" class="btn btn-secondary nextRound">NEXT</button>
       </div>
     </div>
     <div class="fightdisplay">
@@ -64,54 +48,136 @@
       <div class="card" style="width: 18rem" id="enemyLeft">
         <img
           class="card-img-top img1"
-          src="./media/images/germanflag.png"
+          src="./media/images/Germany.png"
           alt="Card image cap"
         />
         <div class="card-body head">
           <h5 class="card-title Name0">Name</h5>
         </div>
         <div class="card-body">
-          <p class="Units0" onclick="showLeftTroops()">Units</p>
+          <p class="Units0" onclick="showLeftTroops()">
+            <i class="fa-solid fa-truck-plane"></i> Units
+            <i class="fa-solid fa-chevron-down"></i>
+          </p>
           <ul class="list-group list-group-flush list0 hide"></ul>
-          <p class="Res0">Resources</p>
-          <p class="Allies0" onclick="showLeftAllies()">Alliances</p>
+          <p class="Res0">
+            <i class="fa-solid fa-money-bill-wave"></i> Resources
+          </p>
+          <p class="Allies0" onclick="showLeftAllies()">
+            <i class="fa-solid fa-user-group"></i> Alliances
+            <i class="fa-solid fa-chevron-down"></i>
+          </p>
           <ul class="list-group list-group-flush Allies0List hide"></ul>
-          <p class="Start0">Strategies</p>
+          <p class="Start0"><i class="fa-regular fa-map"></i> Strategies</p>
         </div>
       </div>
-
-      <!-- <img src="./media/images/map.png" alt="" id="map" /> -->
-      <div class="grid-container fightingMap">
-        <div class="grid-item item1 area_0-0">1</div>
-        <div class="grid-item area_0,1">2</div>
-        <div class="grid-item area_0,2">3</div>
-        <div class="grid-item area_1,0">4</div>
-        <div class="grid-item area_1,1">5</div>
-        <div class="grid-item area_1,2">6</div>
-        <div class="grid-item area_2,0">7</div>
-        <div class="grid-item area_2,1">8</div>
-        <div class="grid-item area_2,2">9</div>
-      </div>
-
       <div class="card" id="enemyRight" style="width: 18rem">
         <img
           class="card-img-top img1"
-          src="./media/images/usaflag.png"
+          src="./media/images/America.png"
           alt="Card image cap"
         />
         <div class="card-body head">
           <h5 class="card-title Name1">Name</h5>
         </div>
         <div class="card-body">
-          <p class="Units1" onclick="showRightTroops()">Units</p>
+          <p class="Units1" onclick="showRightTroops()">
+            <i class="fa-solid fa-truck-plane"></i> Units
+            <i class="fa-solid fa-chevron-down"></i>
+          </p>
           <ul class="list-group list-group-flush list1 hide"></ul>
-          <p class="Res1">Resources</p>
-          <p class="Allies1" onclick="showRightAllies()">Alliances</p>
+          <p class="Res1">
+            <i class="fa-solid fa-money-bill-wave"></i> Resources
+          </p>
+          <p class="Allies1" onclick="showRightAllies()">
+            <i class="fa-solid fa-user-group"></i> Alliances
+            <i class="fa-solid fa-chevron-down"></i>
+          </p>
           <ul class="list-group list-group-flush Allies1List hide"></ul>
-          <p class="Start1">Strategies</p>
+          <p class="Start1"><i class="fa-regular fa-map"></i> Strategies</p>
         </div>
       </div>
     </div>
+
+    <!-- <img src="./media/images/map.png" alt="" id="map" /> -->
+    <div class="grid-container fightingMap hide">
+      <div class="grid-item item1 area_0-0" onclick="showfight('0-0')">
+        <div class="TheatreName">1</div>
+        <div class="data"></div>
+      </div>
+      <div class="grid-item area_0-1" onclick="showfight('0-1')">
+        <div class="TheatreName">1</div>
+        <div class="data"></div>
+      </div>
+      <div class="grid-item area_0-2" onclick="showfight('0-2')">
+        <div class="TheatreName">1</div>
+        <div class="data"></div>
+      </div>
+      <div class="grid-item area_1-0" onclick="showfight('1-0')">
+        <div class="TheatreName">1</div>
+        <div class="data"></div>
+      </div>
+      <div class="grid-item area_1-1" onclick="showfight('1-1')">
+        <div class="TheatreName">1</div>
+        <div class="data"></div>
+      </div>
+      <div class="grid-item area_1-2" onclick="showfight('1-2')">
+        <div class="TheatreName">1</div>
+        <div class="data"></div>
+      </div>
+      <div class="grid-item area_2-0" onclick="showfight('2-0')">
+        <div class="TheatreName">1</div>
+        <div class="data"></div>
+      </div>
+      <div class="grid-item area_2-1" onclick="showfight('2-1')">
+        <div class="TheatreName">1</div>
+        <div class="data"></div>
+      </div>
+      <div class="grid-item area_2-2" onclick="showfight('2-2')">
+        <div class="TheatreName">1</div>
+        <div class="data"></div>
+      </div>
+    </div>
+
+    <!-- MODAL -->
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content"></div>
+    </div>
+    <script>
+      let ws = new WebSocket("ws://127.0.0.1:8000/websocket");
+      connect = () => {
+        return new Promise((resolve, reject) => {
+          // if (ws) {
+          //   ws.close();
+          //   return;
+          // }
+          if (!ws) return;
+          ws.onopen = function () {
+            console.log("CONNECTION OPENED<br/>");
+          };
+          ws.onmessage = function (ev) {
+            console.log("RECEIVED: " + ev.data + "<br/>");
+          };
+          ws.onerror = function (ev) {
+            console.log("ERROR: " + ev + "<br/>");
+          };
+          ws.onclose = function () {
+            console.log("CONNECTION CLOSED<br/>");
+            enable(false);
+            ws = null;
+          };
+          resolve(ws);
+        });
+      };
+
+      connect();
+      $(`body`).click(() => {
+        console.log("clicked");
+        ws.send("message.value");
+      });
+      // const data = assign data here
+    </script>
     <script src="./script.js"></script>
   </body>
 </html>

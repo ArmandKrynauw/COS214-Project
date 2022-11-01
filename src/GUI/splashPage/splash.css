@@ -16,21 +16,32 @@ body {
 
 .header {
   background-color: var(--darkgray);
+  height: 100px;
+  color: var(--white);
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 
 h1 {
   /* color: rgb(30, 32, 62); */
-  color: var(--white);
+  /* color: var(--white);
   text-shadow: 0 0 15px black;
   font-family: Arial;
   font-size: 450% !important;
   line-height: 35px;
   letter-spacing: 5px;
   text-transform: uppercase;
-  font-weight: 900;
+  font-weight: 900; */
+  font-family: Arial;
+  font-size: 37px;
+  line-height: 35px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-weight: 700 !important;
 
-  padding-top: 1%;
-  padding-bottom: 1%;
+  /* padding-top: 1%;
+  padding-bottom: 1%; */
 }
 
 .list-group {

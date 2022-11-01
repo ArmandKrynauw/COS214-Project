@@ -44,6 +44,16 @@
   font-weight: 700;
 }
 
+#State,
+#Round {
+  font-family: Arial;
+  font-size: 20px;
+  line-height: 35px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
 .fightdisplay {
   width: 100%;
   display: flex;
@@ -122,4 +132,25 @@ ul {
 li {
   color: var(--white) !important;
   background-color: var(--lightgray) !important;
+}
+
+/*-------GRID--------*/
+.fightingMap {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: var(--darkgray);
+  padding: 10px;
+  position: absolute;
+  left: 38%;
+  top: 25%;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--darkgray) !important;
+  padding: 20px;
+  font-size: 30px;
+  width: 200px;
+  height: 200px;
+  text-align: center;
 }

@@ -12,6 +12,7 @@ int FieldHospital::getHP() {
     return SupportCompany::getHP() * 1.25;
 }
 
+
 FieldHospital::~FieldHospital() {
 
 }

@@ -10,6 +10,11 @@ public:
 
     int getDamage() override;
 
+    /**
+     * Calculates the result of the unit's HP *1.25
+     * @return int : HP
+     */
+
     int getHP() override;
 
     virtual ~FieldHospital();

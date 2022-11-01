@@ -4,7 +4,7 @@
 int main(int argc, char **argv) {
     bool flag = argc > 1 ? std::string(argv[1]) == "gui" : false;
 
-    Client *client = new Client(true);
+    Client *client = new Client(false);
     // client->Run();
     delete client;
 

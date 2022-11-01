@@ -20,61 +20,55 @@ Client::Client(bool GUIMode) : GUIMode(GUIMode) {
 }
 
 void Client::runTerminalMode() {
-    std::cout << "\033[1;32m==============SELECT SIMULATION===========\033[0m"
-              << std::endl;
+    std::cout << "\033[1;32m==============SELECT SIMULATION===========\033[0m" << std::endl;
     for (int i = 0; i < simulations.size(); i++) {
-        std::cout << i + 1 << ". "
-                  << simulations[i]["WarTitle"].get<std::string>() << std::endl;
+        std::cout << i + 1 << ". " << simulations[i]["WarTitle"].get<std::string>() << std::endl;
     }
     std::cout << std::endl;
-    int choice =
-            getIntegerInput("Select a simulation", 1, simulations.size()) - 1;
+    int choice = getIntegerInput("Select a simulation", 1, simulations.size()) - 1;
     selectSimulation(choice);
-    WarEngine::instance()->purchaseUnits(
-            simulations[choice]["rounds"][0]["unitsToPurchase"]);
-
-    std::cout << WarEngine::instance()->getCountryUnits().dump() << std::endl;
+    runSimulation();
 }
 
 void Client::runGUIMode() {
-    //this->socket = new WarSocket();
-    std::cout << "\033[1;32m==============SELECT SIMULATION===========\033[0m"
-              << std::endl;
-    for (int i = 0; i < simulations.size(); i++) {
-        std::cout << i + 1 << ". "
-                  << simulations[i]["WarTitle"].get<std::string>() << std::endl;
-    }
-    std::cout << std::endl;
-    int choice =
-            getIntegerInput("Select a simulation", 1, simulations.size()) - 1;
-    selectSimulation(choice);
+    // this->socket = new WarSocket();
+    // this->socket->listen();
+    // selectSimulation(choice);
 
-    runSimulation();
-    // WarEngine::instance()->purchaseUnits(
-    //     simulations[choice]["rounds"][0]["unitsToPurchase"]);
+    // WarEngine::instance()->checkEscalation(chosenSimulation["rounds"][0]["WarState"]);
+    // WarEngine::instance()->purchaseUnits(chosenSimulation["rounds"][0]["unitsToPurchase"]);
 
-    //this->socket->listen();
+    // this->socket->listen();
+}
+
+// ======================================================================================
+// MAIN FUNCTIONS
+// ======================================================================================
+
+json Client::runNextRound() {
+        WarEngine::instance()->checkEscalation(chosenSimulation["rounds"][currentRound]["WarState"]);
+        WarEngine::instance()->purchaseUnits(chosenSimulation["rounds"][currentRound]["unitsToPurchase"]);
+        WarEngine::instance()->relocateUnits(chosenSimulation["rounds"][currentRound]["unitsToRelocate"]);
+        WarEngine::instance()->assignStrategies(chosenSimulation["rounds"][currentRound]["strategies"]);
+        WarEngine::instance()->CommenceBattle();
+        currentRound++;
+        return WarEngine::instance()->getRoundResults();
+}
+
+void Client::goToPreviousRound() {
+    
 }
 
 void Client::runSimulation() {
+    currentRound = 0;
     int end = getRoundCount(chosenSimulation["rounds"]);
-    int roundCnt = 0;
-    for (json roundData: chosenSimulation["rounds"][roundCnt]) {
-        if (roundCnt != end) {
-            WarEngine::instance()->checkEscalation(chosenSimulation["rounds"][roundCnt]["WarState"]);
-            WarEngine::instance()->purchaseUnits(
-                    chosenSimulation["rounds"][roundCnt]["unitsToPurchase"]);
-            // std::cout << WarEngine::instance()->getCountryUnits().dump(2) << std::endl;
-            WarEngine::instance()->relocateUnits(
-                    chosenSimulation["rounds"][roundCnt]["unitsToRelocate"]);
-            WarEngine::instance()->assignStrategies(
-                    chosenSimulation["rounds"][roundCnt]["strategies"]
-            );
-            WarEngine::instance()->CommenceBattle();
-            //WarEngine::instance()->printMap();
-            WarEngine::instance()->printBattleResults();
-            roundCnt++;
-
+    for (json roundData: chosenSimulation["rounds"][currentRound]) {
+        if (currentRound != end) {
+            std::cout << "Battle " << currentRound + 1 << " commencing... " << std::endl;
+            json result = runNextRound();
+            json deaths = result["casualities"];
+            printRoundResults();
+            //pass data to GUI
             std::cout << "Press any key to continue...";
             std::string input;
             std::cin >> input;
@@ -99,6 +93,8 @@ void Client::loadSimulations(std::string filePath) {
     for (json simulation: data["Wars"]) {
         simulations.push_back(simulation);
     }
+
+    
 }
 
 std::string Client::getListOfSimulations() {
@@ -129,6 +125,27 @@ int Client::getRoundCount(const json &data) {
         }
     }
     return max;
+}
+
+void Client::printRoundResults(){
+    //Remove Casualties 
+    std::cout << "=====================BATTLE RESULTS=====================" << std::endl;
+    json data = WarEngine::instance()->getCountryUnits();
+    for (json country: data) {
+        std::cout << country["name"].get<std::string>() << ": " << std::endl;
+        for (json theatre: country["units"]) {
+            std::cout << "\t" << theatre["theatre"].get<std::string>() << ": " << std::endl;
+            for (json unit: theatre["units"]) {
+                printUnit(unit);
+            }
+        }
+    }
+    std::cout << "========================================================" << std::endl;
+}
+
+void Client::printUnit(const json &unit) {
+    std::cout << "\t\t" << "Name: " << unit["name"].get<std::string>() << " Type: " << unit["type"].get<std::string>()
+              << " Hp: " << unit["hp"] << std::endl;
 }
 
 // void Client::Run(){

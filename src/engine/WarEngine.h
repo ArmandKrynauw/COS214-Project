@@ -88,6 +88,8 @@ public:
      */
     void loadAlliances(const json &data);
 
+    
+
     /**
      * Provides functionality for Countries to purchase units. This method
      * expects a JSON array of objects. Each object requires the name of the
@@ -117,6 +119,7 @@ public:
      * @throws WarException if Country or Type is not found
      */
     Unit *generateUnit(const std::string &country, const std::string &type);
+
 
     // ====================== JSON UTILITIES ======================
 
@@ -156,9 +159,9 @@ public:
 
     void assignStrategies(const json &data);
 
-    void printBattleResults();
+   
 
-    void printUnit(const json &unit);
+    
 
     void checkEscalation(const json &data);
 
@@ -195,6 +198,10 @@ public:
      *
      */
     void CommenceBattle();
+
+    json clearCasualties();
+
+    json getRoundResults();
 
     // ====================== UTILITY FUNCTIONS ======================
     void debug();

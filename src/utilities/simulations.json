@@ -1,7 +1,20 @@
 {
     "Wars": [
         {
-            "WarTitle": "Battle of the Bulge [1944]",
+            "WarTitle": "Western Front [1943]",
+            "theatres" : [
+              
+                { "name" : "Sicily", "seaZone": true , "resourceCount" : 10 },
+                { "name" : "Tunisia", "seaZone": true , "resourceCount" : 5 },
+                { "name" : "Normandy", "seaZone": true , "resourceCount" : 15 },
+                { "name" : "Netherlands", "seaZone": true , "resourceCount" : 15 },
+                { "name" : "Belgium", "seaZone": true , "resourceCount" : 15 },
+                { "name" : "Ruhr", "seaZone": true , "resourceCount" : 20 },
+                { "name" : "Paris", "seaZone": true , "resourceCount" : 20 },
+                { "name" : "Alsace-Lorraine", "seaZone": true , "resourceCount" : 10 },
+                { "name" : "Italy", "seaZone": true , "resourceCount" : 20 }
+              
+            ],
             "countries": [
                 {
                     "name": "Germany",

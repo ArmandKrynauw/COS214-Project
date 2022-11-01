@@ -8,21 +8,35 @@
 #include "../entity/product/Unit.h"
 #include "../utilities/json.hpp"
 #include "Faction.h"
+#include "../mobilization/Mobilization.h"
 
 using json = nlohmann::json;
 
 class Country : public Faction {
 private:
     std::unordered_map<std::string, ArmedForce *> armedForces;
+    Mobilization* mobilization;
 
 public:
     Country(std::string name);
 
-    virtual void generateResources() override;
+    /**
+     * Provides functionality to change the mobilization state of the country
+     * @return void
+     */
 
-    virtual int getResourceCount() override;
+    void  changeMobilization(std::string mobilization);
 
-    virtual void setBaseResourceCount(int baseResourceCount) override;
+    /**
+     * This method is used generate new resources for each Faction after each
+     * turn in the war. Newly generated resources is calculated using the
+     * current mobilization and morale of a Faction.
+     */
+    void generateResources();
+
+    int getResourceCount();
+
+    void setBaseResourceCount(int baseResourceCount);
 
     virtual int getAttackPower(Theatre *theatre) override;
 
@@ -73,7 +87,7 @@ public:
 
     json getListOfUnits();
 
-    void removeCasualties();
+    json removeCasualties();
 };
 
 #endif  // COUNTRY_H

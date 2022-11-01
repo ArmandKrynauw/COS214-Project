@@ -4,13 +4,17 @@
 #include <iostream>
 #include "Mobilization.h"
 
-class TotalMobilization : Mobilization {
+class TotalMobilization : public Mobilization {
 public:
+    TotalMobilization(std::string state);
+
     float getIndustryModifier();
 
     int getNationalMoraleTick();
 
     std::string getState();
+
+    virtual ~TotalMobilization();
 };
 
 #endif

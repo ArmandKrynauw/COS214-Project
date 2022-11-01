@@ -1,6 +1,5 @@
 #include "WarSocket.h"
 
-
 void WarSocket::listen() {
     struct mg_mgr mgr;  // Event manager
     mg_mgr_init(&mgr);  // Initialise event manager
@@ -13,8 +12,6 @@ void WarSocket::listen() {
 
 
 void WarSocket::CountryUnits(struct mg_connection *c, struct mg_ws_message *message) {
-    //const char *test = "bey";
-
     if (strcmp(message->data.ptr, "GetCountry") == 0) {
         std::string dump = WarEngine::instance()->getCountryUnits().dump();
         int size = dump.size();

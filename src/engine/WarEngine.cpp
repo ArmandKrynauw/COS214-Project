@@ -35,7 +35,7 @@ void WarEngine::loadSimulation(const json &simulation) {
         throw WarException("Malformed JSON object, countries not found.",
                            "malformed_countries");
     }
-
+    
     loadCountries(simulation["countries"]);
 
     if (simulation.contains("alliances")) {
@@ -123,6 +123,7 @@ Unit *WarEngine::generateUnit(const std::string &country,
 }
 
 
+
 void WarEngine::relocateUnits(const json &data) {
     if (!data.is_array()) {
         throw WarException("Expected a JSON array.", "malformed_object");
@@ -139,15 +140,13 @@ void WarEngine::relocateUnits(const json &data) {
     }
 }
 
-void
-WarEngine::transportUnit(Theatre *destination, const std::string &country, const std::string &type, const int &index) {
+void WarEngine::transportUnit(Theatre *destination, const std::string &country, const std::string &type, const int &index) {
     Theatre *oldHome = ((Unit *) countries[country]->getEntity(type, index))->getTheatre();
     destination->addEntity(country, countries[country]->getEntity(type, index));
     if (oldHome) {
         oldHome->removeEntity(country, type, ((Unit *) countries[country]->getEntity(type, index))->getId());
     }
 }
-
 
 void WarEngine::assignStrategies(const json &data) {
     for (json country: data) {
@@ -185,8 +184,10 @@ void WarEngine::checkEscalation(const json &data) {
     }
 }
 
+// ============================================================================
+// MAIN WAR FUNCTIONS
+// ============================================================================
 
-// Think about output
 void WarEngine::startSimulation(json war) {
     // turnCounter = 1;
     // player1Turn = true;
@@ -366,42 +367,26 @@ void WarEngine::chooseStrategies() {
 }
 
 void WarEngine::CommenceBattle() {
-    std::cout << "Battle " << turnCounter + 1 << " commencing... " << std::endl;
-
     for (int i = 0; i < theatreSize; i++) {
         for (int j = 0; j < theatreSize; j++) {
             theatres[i][j]->battle();
         }
     }
-    std::cout << std::endl;
-    turnCounter++;
 }
 
-void WarEngine::printBattleResults() {
+json WarEngine::getRoundResults() {
+    // clearCasualties();
+    return json{};
+}
+
+json WarEngine::clearCasualties() {
     std::unordered_map<std::string, Country *>::iterator it;
     for (it = countries.begin(); it != countries.end(); ++it) {
         it->second->removeCasualties();
     }
-
-    std::cout << "=====================BATTLE RESULTS=====================" << std::endl;
-    json data = getCountryUnits();
-    for (json country: data) {
-        std::cout << country["name"].get<std::string>() << ": " << std::endl;
-        for (json theatre: country["units"]) {
-            std::cout << "\t" << theatre["theatre"].get<std::string>() << ": " << std::endl;
-            for (json unit: theatre["units"]) {
-                printUnit(unit);
-            }
-        }
-    }
-
-    std::cout << "========================================================" << std::endl;
+    return json{};
 }
 
-void WarEngine::printUnit(const json &unit) {
-    std::cout << "\t\t" << "Name: " << unit["name"].get<std::string>() << " Type: " << unit["type"].get<std::string>()
-              << " Hp: " << unit["hp"] << std::endl;
-}
 
 WarEngine::~WarEngine() {
     for (int i = 0; i < theatreSize; i++) {

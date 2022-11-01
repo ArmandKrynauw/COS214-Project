@@ -10,12 +10,17 @@ Country::Country(std::string name) : Faction(name) {
     armedForces["land"] = new ArmedForce("Army", "land");
     armedForces["sea"] = new ArmedForce("Navy", "sea");
     armedForces["air"] = new ArmedForce("Air Force", "air");
+    //this->mobilization = mobilization;
+}
+
+void Country::changeMobilization(std::string mobilization)
+{
+    //this->mobilization->changeState(mobilization);
 }
 
 void Country::generateResources() {
-    // TODO: Calculate newly generated resources by adding boosts provided by
-    // mobilization to current resources.
-    resourceCount += baseResourceCount + 0;
+    resourceCount += baseResourceCount;
+    // resourceCount += baseResourceCount * mobilization->getIndustryModifier();
 }
 
 int Country::getResourceCount() {
@@ -108,10 +113,10 @@ json Country::getListOfUnits() {
     return data;
 }
 
-void Country::removeCasualties() {
+json Country::removeCasualties() {
     std::unordered_map<std::string, ArmedForce *>::iterator it;
     for (it = armedForces.begin(); it != armedForces.end(); ++it) {
-        for (Entity *e: it->second->getEntities()) {
+        for (Entity* e: it->second->getEntities()) {
             if (e->getHP() == 0) {
                 it->second->remove(e);
             }

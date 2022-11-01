@@ -15,14 +15,19 @@ private:
     std::vector<json> simulations;
     bool GUIMode;
     std::map<std::string, std::vector<std::string> > countries;
-    // WarEngine * engine;
     WarSocket *socket;
     std::vector<std::string> availableCountries;
     json chosenSimulation;
+    int currentRound;
 
 public:
     Client(bool GUIMode);
 
+    // =================== MAIN FUNCTIONS ==============
+    json runNextRound();
+    void goToPreviousRound();
+    void printRoundResults();
+    void printUnit(const json &unit);
     // Main Client Function called by our "Embedded Hardware" Class, main.cpp
     void Run();
 
@@ -39,7 +44,6 @@ public:
     // =================== UTILITY FUNCTIONS ==============
 public:
     std::string getListOfSimulations();
-
     void selectSimulation(int index);
 
 private:

@@ -1,7 +1,11 @@
 #include "TotalMobilization.h"
 
+TotalMobilization::TotalMobilization(std::string state) : Mobilization(state){
+
+}
+
 std::string TotalMobilization::getState() {
-    return "TotalMobilization";
+    return state;
 }
 
 float TotalMobilization::getIndustryModifier() {
@@ -10,4 +14,8 @@ float TotalMobilization::getIndustryModifier() {
 
 int TotalMobilization::getNationalMoraleTick() {
     return -4;
+}
+
+TotalMobilization::~TotalMobilization(){
+    
 }

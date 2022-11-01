@@ -15,4 +15,13 @@ public:
     virtual ~EarlyStage();
 };
 
+/**
+        * Early :
+        Partial or War
+          Middle 
+        War or Total
+          Late
+        can only revert, 
+        */
+
 #endif

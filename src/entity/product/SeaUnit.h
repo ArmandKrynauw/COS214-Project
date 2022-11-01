@@ -4,14 +4,21 @@
 #include "Unit.h"
 
 class SeaUnit : public Unit {
-   private:
-   public:
+private:
+public:
     SeaUnit(std::string name, std::string type, int HP, int damage, int value);
+
     void primitiveAttack();
-    void attack(Unit* unit);
+
+    void attack(Unit *unit);
+
     void primitiveDefend();
-    void defend(Unit* unit);
-    virtual Entity* clone() = 0;
+
+    void defend(Unit *unit);
+
+    virtual Entity *clone() = 0;
+
     ~SeaUnit();
 };
+
 #endif

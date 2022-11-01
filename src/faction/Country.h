@@ -12,15 +12,19 @@
 using json = nlohmann::json;
 
 class Country : public Faction {
-   private:
-    std::unordered_map<std::string, ArmedForce*> armedForces;
+private:
+    std::unordered_map<std::string, ArmedForce *> armedForces;
 
-   public:
+public:
     Country(std::string name);
+
     virtual void generateResources() override;
+
     virtual int getResourceCount() override;
+
     virtual void setBaseResourceCount(int baseResourceCount) override;
-    virtual int getAttackPower(Theatre* theatre) override;
+
+    virtual int getAttackPower(Theatre *theatre) override;
 
     /**
      * Provides functionality determine whether a Faction is an Alliance
@@ -28,7 +32,7 @@ class Country : public Faction {
      *
      * @return NULL
      */
-    virtual Alliance* getAlliance() override;
+    virtual Alliance *getAlliance() override;
 
     /**
      * Provides functionality to add either a Unit or an Armed Force to one of
@@ -40,7 +44,7 @@ class Country : public Faction {
      * @param entity The Entity to add
      * @throws WarException if insufficent resources is available
      */
-    void addEntity(Entity* entity);
+    void addEntity(Entity *entity);
 
     /**
      * Provides functionality to remove either a Unit or an Armed Force from the
@@ -49,7 +53,7 @@ class Country : public Faction {
      *
      * @param entity The entity to remove
      */
-    void removeEntity(Entity* entity);
+    void removeEntity(Entity *entity);
 
     /**
      * Provides functionality to retrieve a specific Unit or Armed Force from a
@@ -59,13 +63,16 @@ class Country : public Faction {
      * @param
      *
      */
-    Entity* getEntity(const std::string& type, const int& index);
+    Entity *getEntity(const std::string &type, const int &index);
 
     virtual void makeDecision() override;
+
     virtual void chooseStrategy() override;
 
     void printUnits();
+
     json getListOfUnits();
+
     void removeCasualties();
 };
 

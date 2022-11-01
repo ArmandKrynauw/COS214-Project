@@ -16,18 +16,18 @@
 #include "Zone.h"
 #include <map>
 
-class Theatre
-{
+class Theatre {
 private:
     std::string name;
     std::string id;
     int limit;
     int resource;
-    std::unordered_map<std::string, std::vector<Zone*>> zones;
-    std::unordered_map<std::string, WarStrategy*> strategies;
-    AirZoneFactory* airFactory;
-    LandZoneFactory* landFactory;
-    SeaZoneFactory* seaFactory;
+    std::unordered_map <std::string, std::vector<Zone *>> zones;
+    std::unordered_map<std::string, WarStrategy *> strategies;
+    AirZoneFactory *airFactory;
+    LandZoneFactory *landFactory;
+    SeaZoneFactory *seaFactory;
+
     /**
      * Provides functionality to add a Faction to a Theatre. Respective Zones
      * will be generated for each Faction when it gets added to a Theatre. This
@@ -38,6 +38,7 @@ private:
      * @param name Name of the Faction to be added
     */
     void addFaction(std::string name);
+
     /**
      * Provides functionality to remove a Faction from a Theatre. The Factions's
      * respective Zones will be removed from the Theatre. This method is called
@@ -48,7 +49,6 @@ private:
     */
     void removeFaction(std::string name);
 
-    
 
     /**
      * Provides functionality to get the percentage control of a faction in this threatre
@@ -57,12 +57,13 @@ private:
      * 
      */
 
-    float calculateControl(std::string faction); 
-    
+    float calculateControl(std::string faction);
+
 public:
 
-    
-    Theatre(std::string name, bool seaZone,int resource);
+
+    Theatre(std::string name, bool seaZone, int resource);
+
     /**
      * Provides functionality to add a Unit from a Faction to a specific
      * Theatre. If the Faction does not have any Zones in the current Theatre
@@ -71,7 +72,8 @@ public:
      * @param faction Name of the faction to be added
      * @param unit Unit to be add to the Theatre
     */
-    void addEntity(std::string faction, Entity* unit);
+    void addEntity(std::string faction, Entity *unit);
+
     /**
      * Provides functionality to remove a specific Faction's Unit from a
      * Theatre. If the Faction has no more Units stationed in this Theatre then
@@ -84,9 +86,12 @@ public:
      * @return The removed Unit
      * @throws WarException if index is out of bounds or if Unit is not found
     */
-    Entity* removeEntity(std::string faction, std::string type, std::string id);
+    Entity *removeEntity(std::string faction, std::string type, std::string id);
+
     std::string getName();
+
     std::string getId() const;
+
     /**
      * Provides functionality to change the War Strategy for a specific Faction
      * for the next round of the war.
@@ -94,7 +99,8 @@ public:
      * @param faction Name of the faction whose Strategy has to be changed
      * @param strategy The new Strategy
     */
-    void changeStrategy(std::string faction, WarStrategy* strategy);
+    void changeStrategy(std::string faction, WarStrategy *strategy);
+
     /**
      * Provides functionality to simulate battles taking place for each turn in
      * the war. All the Factions in the Theatre will be iterated through and
@@ -112,7 +118,6 @@ public:
 
     int getResource(std::string faction);
 
-    
 
     /**
      * Provides functionality to display the internals of a theatre. This being troop count per faction and theatre name.
@@ -123,7 +128,7 @@ public:
     bool checkForFaction(std::string factionName);
 
     void printStrategies();
-    
+
     virtual ~Theatre();
 };
 

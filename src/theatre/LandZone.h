@@ -3,14 +3,15 @@
 
 #include "Zone.h"
 
-class LandZone : public Zone
-{
+class LandZone : public Zone {
 private:
     virtual int getDamageDivisor() override;
 
 public:
     LandZone(std::string name);
+
     std::string getType() override;
+
     virtual ~LandZone();
 };
 

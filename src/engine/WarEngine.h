@@ -23,38 +23,41 @@
 using json = nlohmann::json;
 
 class WarEngine {
-   private:
-    std::unordered_map<std::string, Alliance*> alliances;
-    std::unordered_map<std::string, Country*> countries;
+private:
+    std::unordered_map<std::string, Alliance *> alliances;
+    std::unordered_map<std::string, Country *> countries;
 
-    Escalation * warStage;
+    Escalation *warStage;
     // Depreciated!!!!
-    std::vector<Faction*> factions;
+    std::vector<Faction *> factions;
 
-    Theatre*** theatres;
+    Theatre ***theatres;
     int theatreSize;
     std::unordered_map<std::string,
-                       std::unordered_map<std::string, std::string>>
-        countryUnitNames;
-    std::unordered_map<std::string, UnitFactory*> unitFactories;
+            std::unordered_map<std::string, std::string>>
+            countryUnitNames;
+    std::unordered_map<std::string, UnitFactory *> unitFactories;
 
     int turnCounter;
     bool player1Turn;
 
 
-
     // =============== Utility Functions ===============
     void printMap();
-    std::string toLower(std::string& str) const;
+
+    std::string toLower(std::string &str) const;
 
     // =============== Singleton ===============
     WarEngine();
-    WarEngine(WarEngine&);
-    WarEngine& operator=(WarEngine&);
+
+    WarEngine(WarEngine &);
+
+    WarEngine &operator=(WarEngine &);
+
     ~WarEngine();
 
-   public:
-    static WarEngine* instance();
+public:
+    static WarEngine *instance();
 
     // ====================== LOAD SIMULATIONS ======================
 
@@ -65,7 +68,7 @@ class WarEngine {
      *
      * @param simulation JSON object containing simulation
      */
-    void loadSimulation(const json& simulation);
+    void loadSimulation(const json &simulation);
 
     /**
      * Provides functionality to load country objects from a JSON array.
@@ -74,7 +77,7 @@ class WarEngine {
      *
      * @param data JSON array containing country objects
      */
-    void loadCountries(const json& data);
+    void loadCountries(const json &data);
 
     /**
      * Provides functionality to load Alliance objects from a JSON array.
@@ -83,7 +86,7 @@ class WarEngine {
      *
      * @param simulation JSON array containing Alliance objects
      */
-    void loadAlliances(const json& data);
+    void loadAlliances(const json &data);
 
     /**
      * Provides functionality for Countries to purchase units. This method
@@ -94,7 +97,8 @@ class WarEngine {
      * @throws WarException if request was malformed
      * @throws WarException if Country does not have sufficient resources
      */
-    void purchaseUnits(const json& data);
+    void purchaseUnits(const json &data);
+
     /**
      * @brief Provides functionality for Countries to relocate troops to different
      * theatres.
@@ -102,7 +106,8 @@ class WarEngine {
      * @param data JSON array containing units to move and their destinations
      * @throws WarException if request was malformed
      */
-    void relocateUnits(const json& data);
+    void relocateUnits(const json &data);
+
     /**
      * Provides functionality to generate Units for specific Countries.
      *
@@ -111,7 +116,7 @@ class WarEngine {
      *
      * @throws WarException if Country or Type is not found
      */
-    Unit* generateUnit(const std::string& country, const std::string& type);
+    Unit *generateUnit(const std::string &country, const std::string &type);
 
     // ====================== JSON UTILITIES ======================
 
@@ -137,7 +142,7 @@ class WarEngine {
      * @param data location of unit in json format
      * @return std::pair<int,int> 
      */
-    std::pair<int,int> getLocation(const json& data);
+    std::pair<int, int> getLocation(const json &data);
 
     /**
      * @brief Transport a unit between to theatres or home base and a theatre
@@ -147,39 +152,44 @@ class WarEngine {
      * @param type The type of unit being land, sea or air
      * @param id  The index of the unit in the list to move
      */
-    void transportUnit(Theatre * destination, const std::string& country, const std::string& type, const int& index);
+    void transportUnit(Theatre *destination, const std::string &country, const std::string &type, const int &index);
 
-    void assignStrategies(const json& data);
+    void assignStrategies(const json &data);
 
     void printBattleResults();
 
-    void printUnit(const json& unit);
+    void printUnit(const json &unit);
 
-    void checkEscalation(const json& data);
+    void checkEscalation(const json &data);
 
     // ====================== MAIN WAR FUNCTIONS ======================
 
     void startSimulation(json war);
+
     /**
      * @brief Display Faction Resources
      *
      */
     void displayResources();
+
     /**
      * @brief Allow Faction to Buy Units
      *
      */
     void buyUnits();
+
     /**
      * @brief Allow Factions to transport troops to theatres
      *
      */
     void placeTroops();
+
     /**
      * @brief Allow Factions to select Strategies for theatres
      *
      */
     void chooseStrategies();
+
     /**
      * @brief Commence all battles in active theatres
      *
@@ -188,8 +198,11 @@ class WarEngine {
 
     // ====================== UTILITY FUNCTIONS ======================
     void debug();
+
     void viewStrategies();
+
     void displayUnits();
+
     void displayUnitMenu();
 };
 

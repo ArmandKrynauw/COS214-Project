@@ -2,9 +2,9 @@
 
 AirUnitHeavy::AirUnitHeavy(std::string name, std::string type, int HP,
                            int damage, int value)
-    : AirUnit(name, type, HP, damage, value) {}
+        : AirUnit(name, type, HP, damage, value) {}
 
-Entity* AirUnitHeavy::clone() {
+Entity *AirUnitHeavy::clone() {
     return new AirUnitHeavy(*this);
 }
 

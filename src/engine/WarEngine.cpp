@@ -4,7 +4,7 @@
 
 #include "../faction/Country.h"
 
-WarEngine* WarEngine::instance() {
+WarEngine *WarEngine::instance() {
     static WarEngine warEngine;
     return &warEngine;
 }
@@ -17,37 +17,37 @@ WarEngine::WarEngine() {
     unitFactories["air"] = new AirUnitFactory();
 
     theatreSize = 3;
-    theatres = new Theatre**[theatreSize];
+    theatres = new Theatre **[theatreSize];
     int counter = 1;
-    for(int i = 0; i < theatreSize; i++) {
-        theatres[i] = new Theatre*[theatreSize];
-        for(int j = 0; j < theatreSize; j++) {
+    for (int i = 0; i < theatreSize; i++) {
+        theatres[i] = new Theatre *[theatreSize];
+        for (int j = 0; j < theatreSize; j++) {
             theatres[i][j] =
-                new Theatre("Theatre-" + std::to_string(counter),
-                            true,69);  // defaut all theatres sea for testing
+                    new Theatre("Theatre-" + std::to_string(counter),
+                                true, 69);  // defaut all theatres sea for testing
             counter++;
         }
     }
 }
 
-void WarEngine::loadSimulation(const json& simulation) {
-    if(!simulation.contains("countries")) {
+void WarEngine::loadSimulation(const json &simulation) {
+    if (!simulation.contains("countries")) {
         throw WarException("Malformed JSON object, countries not found.",
                            "malformed_countries");
     }
 
     loadCountries(simulation["countries"]);
 
-    if(simulation.contains("alliances")) {
+    if (simulation.contains("alliances")) {
         loadAlliances(simulation["alliances"]);
     }
 }
 
-void WarEngine::loadCountries(const json& data) {
-    for(json c : data) {
-        Country* country = new Country(c["name"]);
+void WarEngine::loadCountries(const json &data) {
+    for (json c: data) {
+        Country *country = new Country(c["name"]);
 
-        for(int i = 0; i < c["units"].size(); ++i) {
+        for (int i = 0; i < c["units"].size(); ++i) {
             json::iterator it = c["units"][i].begin();
             countryUnitNames[country->getName()][it.key()] = it.value();
         }
@@ -57,11 +57,11 @@ void WarEngine::loadCountries(const json& data) {
     }
 }
 
-void WarEngine::loadAlliances(const json& data) {
-    for(json a : data) {
-        Alliance* alliance = new Alliance(a["name"]);
+void WarEngine::loadAlliances(const json &data) {
+    for (json a: data) {
+        Alliance *alliance = new Alliance(a["name"]);
 
-        for(int i = 0; i < a["countries"].size(); ++i) {
+        for (int i = 0; i < a["countries"].size(); ++i) {
             alliance->addCountry(countries[a["countries"][i]]);
         }
 
@@ -73,49 +73,49 @@ void WarEngine::loadAlliances(const json& data) {
 // SIMULATION HELPER FUNCTIONS
 // ============================================================================
 
-void WarEngine::purchaseUnits(const json& data) {
-    if(!data.is_array()) {
+void WarEngine::purchaseUnits(const json &data) {
+    if (!data.is_array()) {
         throw WarException("Expected a JSON array.", "malformed_object");
     }
 
-    for(json country : data) {
-        for(json unit : country["units"]) {
+    for (json country: data) {
+        for (json unit: country["units"]) {
             countries[country["name"]]->generateResources();
-            for(int i = 0; i < unit["quantity"]; i++) {
+            for (int i = 0; i < unit["quantity"]; i++) {
                 countries[country["name"]]->addEntity(
-                    generateUnit(country["name"], unit["type"]));
+                        generateUnit(country["name"], unit["type"]));
             }
         }
     }
 }
 
-Unit* WarEngine::generateUnit(const std::string& country,
-                              const std::string& type) {
+Unit *WarEngine::generateUnit(const std::string &country,
+                              const std::string &type) {
     // TODO: Add check to make sure country and unit type exists
     std::string unitName = countryUnitNames[country][type];
-    Unit* unit = NULL;
+    Unit *unit = NULL;
 
-    if(type == "HeavyLandUnit") {
+    if (type == "HeavyLandUnit") {
         unit = unitFactories["land"]->createHeavyUnit(unitName);
-    } else if(type == "MediumLandUnit") {
+    } else if (type == "MediumLandUnit") {
         unit = unitFactories["land"]->createMediumUnit(unitName);
-    } else if(type == "LightLandUnit") {
+    } else if (type == "LightLandUnit") {
         unit = unitFactories["land"]->createLightUnit(unitName);
-    } else if(type == "HeavySeaUnit") {
+    } else if (type == "HeavySeaUnit") {
         unit = unitFactories["sea"]->createHeavyUnit(unitName);
-    } else if(type == "MediumSeaUnit") {
+    } else if (type == "MediumSeaUnit") {
         unit = unitFactories["sea"]->createMediumUnit(unitName);
-    } else if(type == "LightSeaUnit") {
+    } else if (type == "LightSeaUnit") {
         unit = unitFactories["sea"]->createLightUnit(unitName);
-    } else if(type == "HeavyAirUnit") {
+    } else if (type == "HeavyAirUnit") {
         unit = unitFactories["air"]->createHeavyUnit(unitName);
-    } else if(type == "MediumAirUnit") {
+    } else if (type == "MediumAirUnit") {
         unit = unitFactories["air"]->createMediumUnit(unitName);
-    } else if(type == "LightAirUnit") {
+    } else if (type == "LightAirUnit") {
         unit = unitFactories["air"]->createLightUnit(unitName);
     }
 
-    if(!unit) {
+    if (!unit) {
         throw WarException("Could not generate Unit.", "malformed_request");
     }
 
@@ -123,69 +123,67 @@ Unit* WarEngine::generateUnit(const std::string& country,
 }
 
 
-void WarEngine::relocateUnits(const json& data){
-    if(!data.is_array()) {
+void WarEngine::relocateUnits(const json &data) {
+    if (!data.is_array()) {
         throw WarException("Expected a JSON array.", "malformed_object");
     }
     int cnt = 0;
-    for(json country : data){
-        for(json unit : country["movements"]){
-            std::pair<int,int> destination = getLocation(unit["destination"]);
-            transportUnit(theatres[destination.first][destination.second],country["name"],unit["type"].get<std::string>(),unit["index"].get<int>());                                             
-            cnt++;  
+    for (json country: data) {
+        for (json unit: country["movements"]) {
+            std::pair<int, int> destination = getLocation(unit["destination"]);
+            transportUnit(theatres[destination.first][destination.second], country["name"],
+                          unit["type"].get<std::string>(), unit["index"].get<int>());
+            cnt++;
         }
-        
+
     }
 }
 
-void WarEngine::transportUnit(Theatre * destination, const std::string& country, const std::string& type, const int& index){
-     Theatre * oldHome = ((Unit*)countries[country]->getEntity(type,index))->getTheatre();
-     destination->addEntity(country, countries[country]->getEntity(type,index));
-     if(oldHome){
-        oldHome->removeEntity(country,type,((Unit*)countries[country]->getEntity(type,index))->getId());
-     }    
+void
+WarEngine::transportUnit(Theatre *destination, const std::string &country, const std::string &type, const int &index) {
+    Theatre *oldHome = ((Unit *) countries[country]->getEntity(type, index))->getTheatre();
+    destination->addEntity(country, countries[country]->getEntity(type, index));
+    if (oldHome) {
+        oldHome->removeEntity(country, type, ((Unit *) countries[country]->getEntity(type, index))->getId());
+    }
 }
 
 
-void WarEngine::assignStrategies(const json& data){
-    for(json country : data){
-        for(json strategy : country["strategies"]){
+void WarEngine::assignStrategies(const json &data) {
+    for (json country: data) {
+        for (json strategy: country["strategies"]) {
             // std::cout<<strategy["theatre"].get<std::string>();
             // std::cout<<"here";
-            std::pair<int,int> theatre = getLocation(strategy["theatre"]);
-            
-            if(theatres[theatre.first][theatre.second]->checkForFaction(country["name"].get<std::string>())) {
-                WarStrategy * strt;
+            std::pair<int, int> theatre = getLocation(strategy["theatre"]);
+
+            if (theatres[theatre.first][theatre.second]->checkForFaction(country["name"].get<std::string>())) {
+                WarStrategy *strt;
                 std::string str = strategy["strategy"].get<std::string>();
                 std::string target = strategy["target"].get<std::string>();
-                if(str == "Attack"){
+                if (str == "Attack") {
                     strt = new AttackStrategy(target);
-                }
-                else if(str == "Counter"){
+                } else if (str == "Counter") {
                     strt = new CounterStrategy(target);
-                }
-                else if(str == "Plan"){
-                    strt = new PlanStrategy(target); 
-                }
-                else{
+                } else if (str == "Plan") {
+                    strt = new PlanStrategy(target);
+                } else {
                     throw WarException("strategy-not-found");
                 }
-                theatres[theatre.first][theatre.second]->changeStrategy(countries[country["name"]]->getName(),strt); 
+                theatres[theatre.first][theatre.second]->changeStrategy(countries[country["name"]]->getName(), strt);
             }
         }
     }
     //viewStrategies();
 }
 
-void WarEngine::checkEscalation(const json& data){
-    
+void WarEngine::checkEscalation(const json &data) {
+
     std::string oldStage = warStage->getState();
     warStage = warStage->checkStageOfWar(data.get<std::string>());
-    if(oldStage != warStage->getState()){
-        std::cout<<"=============== NEW WAR PHASE: "<<warStage->getState()<<" ==============="<<std::endl;
+    if (oldStage != warStage->getState()) {
+        std::cout << "=============== NEW WAR PHASE: " << warStage->getState() << " ===============" << std::endl;
     }
 }
-
 
 
 // Think about output
@@ -237,24 +235,25 @@ void WarEngine::displayResources() {
     int resources = player1Turn ? factions[0]->getResourceCount()
                                 : factions[1]->getResourceCount();
     std::string factionName =
-        player1Turn ? factions[0]->getName() : factions[1]->getName();
+            player1Turn ? factions[0]->getName() : factions[1]->getName();
     std::cout << factionName << " Resources: " << resources << std::endl;
     // std::cout<<std::endl;
 }
 
 void WarEngine::buyUnits() {
-    
+
 }
 
 void WarEngine::displayUnits() {
-    
-        std::cout << "Germany" << " Troops:" << std::endl;
-        std::cout<<countries["Germany"]->getListOfUnits()<<std::endl;
-    
-        std::cout << "America" << " Troops:" << std::endl;
-        std::cout<<countries["America"]->getListOfUnits()<<std::endl;
-    
+
+    std::cout << "Germany" << " Troops:" << std::endl;
+    std::cout << countries["Germany"]->getListOfUnits() << std::endl;
+
+    std::cout << "America" << " Troops:" << std::endl;
+    std::cout << countries["America"]->getListOfUnits() << std::endl;
+
 }
+
 /**
  * @brief Add 'parent' to unit to know which theatre its in
  *  Need to make function to remove unit from a theatre when its moved parent
@@ -367,10 +366,10 @@ void WarEngine::chooseStrategies() {
 }
 
 void WarEngine::CommenceBattle() {
-    std::cout << "Battle " << turnCounter+1 << " commencing... " << std::endl;
+    std::cout << "Battle " << turnCounter + 1 << " commencing... " << std::endl;
 
-    for(int i = 0; i < theatreSize; i++) {
-        for(int j = 0; j < theatreSize; j++) {
+    for (int i = 0; i < theatreSize; i++) {
+        for (int j = 0; j < theatreSize; j++) {
             theatres[i][j]->battle();
         }
     }
@@ -378,42 +377,43 @@ void WarEngine::CommenceBattle() {
     turnCounter++;
 }
 
-void WarEngine::printBattleResults(){
-    std::unordered_map<std::string, Country*>::iterator it;
+void WarEngine::printBattleResults() {
+    std::unordered_map<std::string, Country *>::iterator it;
     for (it = countries.begin(); it != countries.end(); ++it) {
         it->second->removeCasualties();
     }
-    
-    std::cout<<"=====================BATTLE RESULTS====================="<<std::endl;
+
+    std::cout << "=====================BATTLE RESULTS=====================" << std::endl;
     json data = getCountryUnits();
-    for(json country : data){
-        std::cout<<country["name"].get<std::string>()<<": "<<std::endl;
-        for(json theatre : country["units"]){
-            std::cout<<"\t"<<theatre["theatre"].get<std::string>()<<": "<<std::endl;
-            for(json unit : theatre["units"]){
+    for (json country: data) {
+        std::cout << country["name"].get<std::string>() << ": " << std::endl;
+        for (json theatre: country["units"]) {
+            std::cout << "\t" << theatre["theatre"].get<std::string>() << ": " << std::endl;
+            for (json unit: theatre["units"]) {
                 printUnit(unit);
             }
         }
     }
-    
-    std::cout<<"========================================================"<<std::endl;
+
+    std::cout << "========================================================" << std::endl;
 }
 
-void WarEngine::printUnit(const json& unit){
-    std::cout<<"\t\t"<<"Name: "<<unit["name"].get<std::string>()<<" Type: "<<unit["type"].get<std::string>()<<" Hp: "<<unit["hp"]<<std::endl;
+void WarEngine::printUnit(const json &unit) {
+    std::cout << "\t\t" << "Name: " << unit["name"].get<std::string>() << " Type: " << unit["type"].get<std::string>()
+              << " Hp: " << unit["hp"] << std::endl;
 }
 
 WarEngine::~WarEngine() {
-    for(int i = 0; i < theatreSize; i++) {
-        for(int j = 0; j < theatreSize; j++) {
+    for (int i = 0; i < theatreSize; i++) {
+        for (int j = 0; j < theatreSize; j++) {
             delete theatres[i][j];
         }
         delete[] theatres[i];
     }
     delete theatres;
 
-    std::unordered_map<std::string, UnitFactory*>::iterator it;
-    for(it = unitFactories.begin(); it != unitFactories.end(); it++) {
+    std::unordered_map<std::string, UnitFactory *>::iterator it;
+    for (it = unitFactories.begin(); it != unitFactories.end(); it++) {
         delete it->second;
     }
 }
@@ -427,8 +427,8 @@ void WarEngine::debug() {}
 void WarEngine::printMap() {
     std::cout << "\033[0m=================MAP BEGIN================"
               << std::endl;
-    for(int i = 0; i < theatreSize; i++) {
-        for(int j = 0; j < theatreSize; j++) {
+    for (int i = 0; i < theatreSize; i++) {
+        for (int j = 0; j < theatreSize; j++) {
             theatres[i][j]->printTheatre();
         }
     }
@@ -436,10 +436,10 @@ void WarEngine::printMap() {
     std::cout << std::endl;
 }
 
-std::string WarEngine::toLower(std::string& str) const {
+std::string WarEngine::toLower(std::string &str) const {
     std::string lower = "";
 
-    for(int i = 0; i < str.length(); i++) {
+    for (int i = 0; i < str.length(); i++) {
         lower += tolower(str[i]);
     }
 
@@ -449,8 +449,8 @@ std::string WarEngine::toLower(std::string& str) const {
 void WarEngine::viewStrategies() {
     std::cout << "\033[1;32m=================TEST STRATS================="
               << std::endl;
-    for(int i = 0; i < theatreSize; i++) {
-        for(int j = 0; j < theatreSize; j++) {
+    for (int i = 0; i < theatreSize; i++) {
+        for (int j = 0; j < theatreSize; j++) {
             theatres[i][j]->printStrategies();
         }
     }
@@ -463,9 +463,9 @@ void WarEngine::viewStrategies() {
 // ============================================================================
 
 json WarEngine::getCountryUnits() {
-    json data; 
+    json data;
 
-    std::unordered_map<std::string, Country*>::iterator it;
+    std::unordered_map<std::string, Country *>::iterator it;
     for (it = countries.begin(); it != countries.end(); ++it) {
         data.push_back(it->second->getListOfUnits());
     }
@@ -475,18 +475,18 @@ json WarEngine::getCountryUnits() {
 
 std::vector<std::string> WarEngine::setToString(json array) {
     std::vector<std::string> str;
-    for(std::string name : array) {
+    for (std::string name: array) {
         str.push_back(name);
     }
     return str;
 }
 
-std::pair<int,int> WarEngine::getLocation(const json& data){
+std::pair<int, int> WarEngine::getLocation(const json &data) {
     std::stringstream ss(data.get<std::string>());
-    std::pair<int,int> destination;
-    std::string row,col;
-    std::getline(ss,row,',');
-    std::getline(ss,col);
+    std::pair<int, int> destination;
+    std::string row, col;
+    std::getline(ss, row, ',');
+    std::getline(ss, col);
     std::stringstream ss2(row);
     std::stringstream ss3(col);
     ss2 >> destination.first;

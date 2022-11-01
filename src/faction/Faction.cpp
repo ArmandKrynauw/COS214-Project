@@ -15,7 +15,7 @@ std::string Faction::getId() const {
     return id;
 }
 
-bool Faction::equals(Faction* faction) const {
+bool Faction::equals(Faction *faction) const {
     return id == faction->id;
 }
 

@@ -5,11 +5,13 @@
 #include "../theatre/SeaZone.h"
 
 class SeaZoneFactory : public ZoneFactory {
-    private:
-    public:
-        SeaZoneFactory();
-        Zone* createZone(std::string ZoneName);
-        ~SeaZoneFactory();
+private:
+public:
+    SeaZoneFactory();
+
+    Zone *createZone(std::string ZoneName);
+
+    ~SeaZoneFactory();
 };
 
 #endif

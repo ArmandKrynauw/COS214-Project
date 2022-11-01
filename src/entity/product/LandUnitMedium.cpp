@@ -2,9 +2,9 @@
 
 LandUnitMedium::LandUnitMedium(std::string name, std::string type, int HP,
                                int damage, int value)
-    : LandUnit(name, type, HP, damage, value) {}
+        : LandUnit(name, type, HP, damage, value) {}
 
-Entity* LandUnitMedium::clone() {
+Entity *LandUnitMedium::clone() {
     return new LandUnitMedium(*this);
 }
 

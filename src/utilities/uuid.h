@@ -9,6 +9,7 @@ namespace uuid {
     static std::random_device rd;
     static std::mt19937_64 gen(rd());
     static std::uniform_int_distribution<> dis(0, 15);
+
     std::string generate();
 };
 

@@ -1,19 +1,19 @@
 #include "LateStage.h"
 
-LateStage::LateStage() : Escalation("LateStage"){}
+LateStage::LateStage() : Escalation("LateStage") {}
 
-std::string LateStage::getState(){
+std::string LateStage::getState() {
     return state;
 }
 
-bool LateStage::mobilizationCheck(std::string mobilization){
-    if(mobilization!="PartialMobilization")  //May only demobilize on de-escalation
-     return false;
+bool LateStage::mobilizationCheck(std::string mobilization) {
+    if (mobilization != "PartialMobilization")  //May only demobilize on de-escalation
+        return false;
     else
-    return true;
+        return true;
 }
 
-LateStage::~LateStage(){}
+LateStage::~LateStage() {}
 
 
 

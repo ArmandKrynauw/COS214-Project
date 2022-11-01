@@ -1,14 +1,18 @@
 #ifndef ESCALATION_H
 #define ESCALATION_H
+
 #include <iostream>
+
 class EarlyStage;
+
 class MiddleStage;
+
 class LateStage;
 
 class Escalation {
-   protected:
-        std::string state;
-   public:
+protected:
+    std::string state;
+public:
     /**
      * Provides functionality to check if current escalation level allows
      *  country to change to a certain mobilization level.
@@ -16,7 +20,7 @@ class Escalation {
     */
     Escalation(std::string stage);
 
-    Escalation * checkStageOfWar(std::string stage);
+    Escalation *checkStageOfWar(std::string stage);
 
     virtual bool mobilizationCheck(std::string mobilization) = 0;
 
@@ -26,8 +30,9 @@ class Escalation {
     */
 
 
-    virtual std::string getState()=0;
+    virtual std::string getState() = 0;
 
-    virtual ~Escalation() ;
+    virtual ~Escalation();
 };
+
 #endif

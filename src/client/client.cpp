@@ -9,12 +9,12 @@ Client::Client(bool GUIMode) : GUIMode(GUIMode) {
     try {
         loadSimulations("utilities/simulations.json");
 
-        if(GUIMode) {
+        if (GUIMode) {
             runGUIMode();
         } else {
             runTerminalMode();
         }
-    } catch(WarException& e) {
+    } catch (WarException &e) {
         std::cout << e.what() << std::endl;
     }
 }
@@ -22,16 +22,16 @@ Client::Client(bool GUIMode) : GUIMode(GUIMode) {
 void Client::runTerminalMode() {
     std::cout << "\033[1;32m==============SELECT SIMULATION===========\033[0m"
               << std::endl;
-    for(int i = 0; i < simulations.size(); i++) {
+    for (int i = 0; i < simulations.size(); i++) {
         std::cout << i + 1 << ". "
                   << simulations[i]["WarTitle"].get<std::string>() << std::endl;
     }
     std::cout << std::endl;
     int choice =
-        getIntegerInput("Select a simulation", 1, simulations.size()) - 1;
+            getIntegerInput("Select a simulation", 1, simulations.size()) - 1;
     selectSimulation(choice);
     WarEngine::instance()->purchaseUnits(
-        simulations[choice]["rounds"][0]["unitsToPurchase"]);
+            simulations[choice]["rounds"][0]["unitsToPurchase"]);
 
     std::cout << WarEngine::instance()->getCountryUnits().dump() << std::endl;
 }
@@ -40,13 +40,13 @@ void Client::runGUIMode() {
     //this->socket = new WarSocket();
     std::cout << "\033[1;32m==============SELECT SIMULATION===========\033[0m"
               << std::endl;
-    for(int i = 0; i < simulations.size(); i++) {
+    for (int i = 0; i < simulations.size(); i++) {
         std::cout << i + 1 << ". "
                   << simulations[i]["WarTitle"].get<std::string>() << std::endl;
     }
     std::cout << std::endl;
     int choice =
-        getIntegerInput("Select a simulation", 1, simulations.size()) - 1;
+            getIntegerInput("Select a simulation", 1, simulations.size()) - 1;
     selectSimulation(choice);
 
     runSimulation();
@@ -56,29 +56,29 @@ void Client::runGUIMode() {
     //this->socket->listen();
 }
 
-void Client::runSimulation(){
+void Client::runSimulation() {
     int end = getRoundCount(chosenSimulation["rounds"]);
     int roundCnt = 0;
-    for(json roundData : chosenSimulation["rounds"][roundCnt]){
-        if(roundCnt != end){
-        WarEngine::instance()->checkEscalation(chosenSimulation["rounds"][roundCnt]["WarState"]);
-        WarEngine::instance()->purchaseUnits(
-            chosenSimulation["rounds"][roundCnt]["unitsToPurchase"]);
-        // std::cout << WarEngine::instance()->getCountryUnits().dump(2) << std::endl;
-        WarEngine::instance()->relocateUnits(
-            chosenSimulation["rounds"][roundCnt]["unitsToRelocate"]);
-        WarEngine::instance()->assignStrategies(
-            chosenSimulation["rounds"][roundCnt]["strategies"]
-        );
-        WarEngine::instance()->CommenceBattle();
-        //WarEngine::instance()->printMap();
-        WarEngine::instance()->printBattleResults();
-        roundCnt++;
+    for (json roundData: chosenSimulation["rounds"][roundCnt]) {
+        if (roundCnt != end) {
+            WarEngine::instance()->checkEscalation(chosenSimulation["rounds"][roundCnt]["WarState"]);
+            WarEngine::instance()->purchaseUnits(
+                    chosenSimulation["rounds"][roundCnt]["unitsToPurchase"]);
+            // std::cout << WarEngine::instance()->getCountryUnits().dump(2) << std::endl;
+            WarEngine::instance()->relocateUnits(
+                    chosenSimulation["rounds"][roundCnt]["unitsToRelocate"]);
+            WarEngine::instance()->assignStrategies(
+                    chosenSimulation["rounds"][roundCnt]["strategies"]
+            );
+            WarEngine::instance()->CommenceBattle();
+            //WarEngine::instance()->printMap();
+            WarEngine::instance()->printBattleResults();
+            roundCnt++;
 
-        std::cout<<"Press any key to continue...";
-        std::string input;
-        std::cin >> input;
-        std::cout<<std::endl;
+            std::cout << "Press any key to continue...";
+            std::string input;
+            std::cin >> input;
+            std::cout << std::endl;
         }
     }
 }
@@ -90,13 +90,13 @@ void Client::runSimulation(){
 void Client::loadSimulations(std::string filePath) {
     std::ifstream file(filePath);
 
-    if(!file) {
+    if (!file) {
         throw WarException("file-not-found");
     }
 
     json data = json::parse(file);
 
-    for(json simulation : data["Wars"]) {
+    for (json simulation: data["Wars"]) {
         simulations.push_back(simulation);
     }
 }
@@ -104,7 +104,7 @@ void Client::loadSimulations(std::string filePath) {
 std::string Client::getListOfSimulations() {
     std::vector<std::string> names;
 
-    for(int i = 0; i < simulations.size(); i++) {
+    for (int i = 0; i < simulations.size(); i++) {
         names.push_back(simulations[i]["WarTitle"].get<std::string>());
     }
 
@@ -113,7 +113,7 @@ std::string Client::getListOfSimulations() {
 }
 
 void Client::selectSimulation(int index) {
-    if(index < 0 || index >= simulations.size()) {
+    if (index < 0 || index >= simulations.size()) {
         throw WarException("out-of-bounds");
     }
 
@@ -121,10 +121,10 @@ void Client::selectSimulation(int index) {
     chosenSimulation = simulations[index];
 }
 
-int Client::getRoundCount(const json& data){
+int Client::getRoundCount(const json &data) {
     int max = 0;
-    for(json round : data){
-        if(round["turnNumber"].get<int>() > max){
+    for (json round: data) {
+        if (round["turnNumber"].get<int>() > max) {
             max++;
         }
     }
@@ -232,8 +232,8 @@ int Client::getIntegerInput(std::string prompt, int rangeStart, int rangeEnd) {
     std::cout << prompt << ": ";
     std::getline(std::cin, line);
 
-    while(!isDigit(line) || toInt(line) < rangeStart ||
-          toInt(line) > rangeEnd) {
+    while (!isDigit(line) || toInt(line) < rangeStart ||
+           toInt(line) > rangeEnd) {
         std::cout << "\033[1;31mPick a number [" << rangeStart << "-"
                   << rangeEnd << "]: \033[0m";
         std::getline(std::cin, line);
@@ -242,16 +242,16 @@ int Client::getIntegerInput(std::string prompt, int rangeStart, int rangeEnd) {
     return toInt(line);
 }
 
-bool Client::isDigit(const std::string& str) {
-    for(int i = 0; i < str.length(); i++) {
-        if(!isdigit(str[i])) {
+bool Client::isDigit(const std::string &str) {
+    for (int i = 0; i < str.length(); i++) {
+        if (!isdigit(str[i])) {
             return false;
         }
     }
     return true;
 }
 
-int Client::toInt(const std::string& str) {
+int Client::toInt(const std::string &str) {
     std::stringstream ss;
     ss << str;
     int val;

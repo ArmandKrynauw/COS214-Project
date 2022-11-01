@@ -1,10 +1,11 @@
 #ifndef MOBILIZATION_h
 #define MOBILIZATION_h
+
 #include <iostream>
 
 
 class Mobilization {
-   public:
+public:
     /**
      * Provides the industryModifier of this state as a percentage
      * @return float : The industryModifier for this state.
@@ -21,8 +22,9 @@ class Mobilization {
      * Specifies what state the current state is
      * @return string : The current state
     */
-    virtual std::string getState()=0;
+    virtual std::string getState() = 0;
 
-    virtual ~Mobilization() ;
+    virtual ~Mobilization();
 };
+
 #endif

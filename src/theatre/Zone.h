@@ -10,29 +10,37 @@
 
 class Entity;
 
-class Zone{
-    protected:
-        std::string name;
-        std::string id;
-        std::vector<Entity*> entities;
+class Zone {
+protected:
+    std::string name;
+    std::string id;
+    std::vector<Entity *> entities;
 
 
-    public:
-        Zone(std::string name);
-        int getTotalDamage();
-        void addEntity(Entity* entity);
-        Entity* removeEntity(std::string id);
-        std::string getName() const;
-        int getUnitCount() const;
-        std::vector<Entity*> getEntities();
-        virtual std::string getType() = 0;
-        virtual ~Zone();
-        
-        // =============== Template Method =============== 
-        void takeDamage(int damage);
+public:
+    Zone(std::string name);
 
-    private: 
-        virtual int getDamageDivisor() = 0;
+    int getTotalDamage();
+
+    void addEntity(Entity *entity);
+
+    Entity *removeEntity(std::string id);
+
+    std::string getName() const;
+
+    int getUnitCount() const;
+
+    std::vector<Entity *> getEntities();
+
+    virtual std::string getType() = 0;
+
+    virtual ~Zone();
+
+    // =============== Template Method ===============
+    void takeDamage(int damage);
+
+private:
+    virtual int getDamageDivisor() = 0;
 
 };
 

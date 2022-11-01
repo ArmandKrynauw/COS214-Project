@@ -1,10 +1,10 @@
 #include "LandZone.h"
 
 LandZone::LandZone(std::string name) : Zone(name) {
-    this->name+="_LandZone";
+    this->name += "_LandZone";
 }
 
-std::string LandZone::getType(){
+std::string LandZone::getType() {
     return "land";
 }
 

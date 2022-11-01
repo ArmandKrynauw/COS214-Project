@@ -4,10 +4,12 @@
 #include "SeaUnit.h"
 
 class SeaUnitLight : public SeaUnit {
-   public:
+public:
     SeaUnitLight(std::string name, std::string type, int HP, int damage,
                  int value);
-    virtual Entity* clone() override;
+
+    virtual Entity *clone() override;
+
     ~SeaUnitLight();
 };
 

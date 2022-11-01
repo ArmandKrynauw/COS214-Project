@@ -2,9 +2,9 @@
 
 SeaUnitHeavy::SeaUnitHeavy(std::string name, std::string type, int HP,
                            int damage, int value)
-    : SeaUnit(name, type, HP, damage, value) {}
+        : SeaUnit(name, type, HP, damage, value) {}
 
-Entity* SeaUnitHeavy::clone() {
+Entity *SeaUnitHeavy::clone() {
     return new SeaUnitHeavy(*this);
 }
 

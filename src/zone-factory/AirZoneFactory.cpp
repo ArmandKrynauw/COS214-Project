@@ -2,8 +2,7 @@
 
 AirZoneFactory::AirZoneFactory() {}
 
-Zone *AirZoneFactory::createZone(std::string ZoneName)
-{
+Zone *AirZoneFactory::createZone(std::string ZoneName) {
     return new AirZone(ZoneName);
 }
 

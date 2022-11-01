@@ -3,15 +3,16 @@
 
 #include "Zone.h"
 
-class SeaZone : public Zone
-{
+class SeaZone : public Zone {
 private:
-        virtual int getDamageDivisor() override;
+    virtual int getDamageDivisor() override;
 
 public:
-        SeaZone(std::string name);
-        virtual std::string getType() override;
-        virtual ~SeaZone();
+    SeaZone(std::string name);
+
+    virtual std::string getType() override;
+
+    virtual ~SeaZone();
 };
 
 #endif // SEATHEATRE_H

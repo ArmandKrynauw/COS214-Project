@@ -4,11 +4,15 @@
 #include "UnitFactory.h"
 
 class AirUnitFactory : public UnitFactory {
-   public:
+public:
     AirUnitFactory();
-    virtual Unit* createLightUnit(std::string name) override;
-    virtual Unit* createMediumUnit(std::string name) override;
-    virtual Unit* createHeavyUnit(std::string name) override;
+
+    virtual Unit *createLightUnit(std::string name) override;
+
+    virtual Unit *createMediumUnit(std::string name) override;
+
+    virtual Unit *createHeavyUnit(std::string name) override;
+
     virtual ~AirUnitFactory();
 };
 

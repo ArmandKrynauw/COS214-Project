@@ -1,18 +1,18 @@
 #include "MiddleStage.h"
 
-MiddleStage::MiddleStage() : Escalation("MiddleStage"){}
+MiddleStage::MiddleStage() : Escalation("MiddleStage") {}
 
-std::string MiddleStage::getState(){
+std::string MiddleStage::getState() {
     return state;
 }
 
-bool MiddleStage::mobilizationCheck(std::string mobilization){
-    if(mobilization=="PartialMobilization")  //Cannot demobilize at peak of the war
-     return false;
+bool MiddleStage::mobilizationCheck(std::string mobilization) {
+    if (mobilization == "PartialMobilization")  //Cannot demobilize at peak of the war
+        return false;
     else
-    return true;
+        return true;
 }
 
-MiddleStage::~MiddleStage(){}
+MiddleStage::~MiddleStage() {}
 
 

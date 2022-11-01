@@ -4,12 +4,13 @@
 #include "ZoneFactory.h"
 #include "../theatre/LandZone.h"
 
-class LandZoneFactory : public ZoneFactory
-{
+class LandZoneFactory : public ZoneFactory {
 private:
 public:
     LandZoneFactory();
+
     Zone *createZone(std::string ZoneName);
+
     ~LandZoneFactory();
 };
 

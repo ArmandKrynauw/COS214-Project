@@ -1,5 +1,5 @@
 #include "Mobilization.h"
 
-Mobilization::~Mobilization(){
-    
+Mobilization::~Mobilization() {
+
 }

@@ -1,82 +1,137 @@
-const getJson = () =>
-  $.getJSON("../utilities/simulations.json", function (data) {
-    data = data["Wars"];
-    // console.log(data);
-    //Set the Name of the War
-    $("#BattleName").text(data[0].WarTitle);
-    //Set the State of the War
-    for (let m = 0; m < 2; m++) {
-      // Set the Name of each country
-      let countires = data[0].countries;
-      $(`.Name${m}`).text(countires[m].name);
-      //set the resources
-      $(`.Res${m}`).html(
-        `<i class="fa-solid fa-money-bill-1-wave"></i>  Resorces: ${countires[m].baseResourceCount}`
+// New Work
+const data = {};
+
+/*-------nextBTN-------*/
+let nextIndex = 1;
+const maxIndex = data.engine.duration;
+$(`.nextRound`).click(() => {
+  if (nextIndex < maxIndex) {
+    nextIndex++;
+    $(`#Day`).text(`Day: ${nextIndex}`);
+  } else {
+    $(`#State`).text(`Game Over you dubm nonce 😲`);
+  }
+});
+$(`#Day`).text(`Day: ${nextIndex}`);
+
+// Add name
+$(`#BattleName`).text("war in planet earth");
+
+// Set state
+$(`#State`).text(data.engine.stage);
+
+// Set day
+
+//Load theatres
+const theatres = data.theatres.data;
+theatres.forEach((theatre) => {
+  $(`.area_${theatre.coordinates} > .TheatreName`).text(theatre.name);
+  const theatreData = theatre.data;
+  if (theatreData[0]) {
+    theatreData.forEach((theatreData) => {
+      // console.log(theatreData);
+      let str = `<div class="TheatreHead">${theatreData.name}</div>`;
+      $(`.area_${theatre.coordinates} > .data`).append(str);
+    });
+  }
+});
+
+// modal
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+showfight = (id) => {
+  modal.style.display = "block";
+  const theatre = data.theatres.data;
+  let loadIndex = -1;
+  $(`.modal-content`).empty();
+  for (let i = 0; i < theatre.length; i++) {
+    if (theatre[i].coordinates === id) {
+      loadIndex = theatre[i].data;
+      $(`.modal-content`).append(
+        `<div class="theatreNameDisplay">${theatre[i].name}</div>`
       );
-      //Set the troops
-      // let troops = countires[m].units;
-      // troops.sort((a, b) => (Object.keys(a) > Object.keys(b) ? 1 : -1));
-      // for (let i = 0; i < troops.length; i++) {
-      //   let typeI;
-      //   if (
-      //     Object.keys(troops[i]) == "HeavyAirUnit" ||
-      //     Object.keys(troops[i]) == "LightAirUnit" ||
-      //     Object.keys(troops[i]) == "MediumAirUnit"
-      //   ) {
-      //     typeI = `<i class="fa-solid fa-jet-fighter"></i>`;
-      //   } else if (
-      //     Object.keys(troops[i]) == "LightLandUnit" ||
-      //     Object.keys(troops[i]) == "MediumLandUnit" ||
-      //     Object.keys(troops[i]) == "HeavyLandUnit"
-      //   ) {
-      //     typeI = `<i class="fa-solid fa-truck-moving"></i>`;
-      //   } else {
-      //     typeI = `<i class="fa-solid fa-ship"></i>`;
-      //   }
-      //   $(`.list${m}`).append(
-      //     `<li class="list-group-item">${typeI}  ${Object.values(
-      //       troops[i]
-      //     )}</li>`
-      //   );
-      // }
-      // $(`.Units${m}`).html(
-      //   `<i class="fa-solid fa-jet-fighter-up"></i>  Units: ${countires[0].units.length} <i class="fa-solid fa-chevron-down"></i>`
-      // );
-      // Set the alliances
-      let allies = data[0].alliances;
-      let factions = m == 0 ? allies[m] : allies[m];
-      if (factions == undefined) {
-        $(`.Allies${m}`).html(
-          `<i class="fa-solid fa-user-group"></i>  Allies:</i>`
-        );
-      } else {
-        // console.log(factions.countries);
-        factions = factions.countries;
-        $(`.Allies${m}`).html(
-          `<i class="fa-solid fa-user-group"></i>  Allies: <i class="fa-solid fa-chevron-down"></i>`
-        );
-        if (factions.length == 0) {
-          $(`.Allies${m}List`).append(
-            `<li class="list-group-item"><i class="fa-regular fa-flag"></i>  No Allies</li>`
-          );
-        }
-        for (let i = 0; i < factions.length; i++) {
-          $(`.Allies${m}List`).append(
-            `<li class="list-group-item"><i class="fa-regular fa-flag"></i>  ${factions[i]}</li>`
-          );
-        }
-      }
-
-      // Set the stratergy
-      $(`.Start${m}`).html(`<i class="fa-regular fa-map"></i>  Strategy: OP`);
     }
+  }
 
-    // console.log(factions);
+  // console.log(loadIndex.data);
+  loadIndex.forEach((theatreData) => {
+    console.log(theatreData.name);
+    const str = `
+      <div class="card niceCards" style="width: 18rem">
+          <img
+            class="card-img-top img1"
+            src="./media/images/${theatreData.name}.png"
+            alt="Card image cap"
+          />
+          <div class="card-body head">
+            <h5 class="card-title NameTheatre">${theatreData.name}</h5>
+          </div>
+          <div class="card-body">
+            <p class="SeaPower"><i class="fa-solid fa-ship"></i>  SeaPower: ${theatreData.seaPower}</p>
+            <p class="AirPower"><i class="fa-solid fa-jet-fighter"></i>  AirPower: ${theatreData.airPower}</p>
+            <p class="LandPower"><i class="fa-solid fa-person-rifle"></i>  LandPower: ${theatreData.landPower}</p>
+          </div>
+        </div>
+      `;
+    $(`.modal-content`).append(str);
   });
+};
 
-getJson();
+$(document).on("keyup", function (e) {
+  if (e.key == "Enter" || e.key == "Escape") {
+    modal.style.display = "none";
+  }
+});
 
-// -------------------- dropDowns
+// When the user clicks on <span> (x), close the modal
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+/*--------Overall work---------*/
+const overallUnits = data.overallUnits.data;
+
+overallUnits.forEach((overallUnit, i = 0) => {
+  $(`.Name${i}`).text(overallUnit.name);
+  const units = overallUnit.units;
+  units.forEach((unit) => {
+    let type;
+    if (unit.type === "land") {
+      type = `<i class="fa-solid fa-person-rifle"></i>`;
+    } else if (unit.type === "air") {
+      type = `<i class="fa-solid fa-jet-fighter"></i>`;
+    } else {
+      type = `<i class="fa-solid fa-ship"></i>`;
+    }
+    $(`.list${i}`).append(
+      `<li class="list-group-item">${type}  ${unit.name}  ${Math.round(
+        (unit.currentHP / unit.initialHP) * 100
+      )}%</li>`
+    );
+  });
+});
+
+/*--------Allies---------*/
+const allies = data.alliances.data;
+console.log(allies);
+
+allies.forEach((ally, i = 0) => {
+  const countries = ally.countries;
+  countries.forEach((country) => {
+    $(`.Allies${i}List`).append(
+      `<li class="list-group-item"><i class="fa-solid fa-font-awesome"></i>  ${country}</li>`
+    );
+  });
+});
 
 showLeftTroops = () => {
   $(`.list0`).toggleClass("hide");
@@ -94,95 +149,8 @@ showRightAllies = () => {
   $(`.Allies1List`).toggleClass("hide");
 };
 
-/*-----MODAL------*/
+// Show map
 
-const getMap = (i) => {
-  $.getJSON("../utilities/simulations.json", function (data) {
-    data = data["Wars"];
-    data = data[0];
-
-    // loop through rounds
-    let round = data.rounds;
-    if (i < round.length) {
-      console.log(round[i]);
-      $(`#State`).text(`${round[i].WarState}`);
-      $(`#Round`).text(`Round ${i + 1}`);
-
-      // Troops
-      /**
-       * @brief : loop through each country and get the troops
-       * add a icon to the front of the troop depeding on the type of unit
-       * add the troops to the list
-       */
-      for (let m = 0; m < 2; m++) {
-        $(`.list${m}`).empty();
-        if (round[i].unitsToPurchase[m].units != null) {
-          let troops = round[i].unitsToPurchase[m].units;
-          // console.log(troops);
-          for (let i = 0; i < troops.length; i++) {
-            let typeI;
-            if (
-              troops[i].type == "HeavyAirUnit" ||
-              troops[i].type == "LightAirUnit" ||
-              troops[i].type == "MediumAirUnit"
-            ) {
-              typeI = `<i class="fa-solid fa-jet-fighter"></i>`;
-            } else if (
-              troops[i].type == "LightLandUnit" ||
-              troops[i].type == "MediumLandUnit" ||
-              troops[i].type == "HeavyLandUnit"
-            ) {
-              typeI = `<i class="fa-solid fa-truck-moving"></i>`;
-            } else {
-              typeI = `<i class="fa-solid fa-ship"></i>`;
-            }
-            /**
-             * @brief gets the datastructure with all of the types of unit for countries
-             * then we loop through the array and try to match the type of unit to the type of
-             * unit in the datastructure
-             * if we find a match we display the name of the unit
-             */
-            const troopNames = data.countries[m].units;
-            let unit;
-            for (let j = 0; j < troopNames.length; j++) {
-              if (troops[i].type == Object.keys(troopNames[j])) {
-                unit = Object.values(troopNames[j]);
-              }
-            }
-            for (let j = 0; j < troops[i].count; j++) {}
-            $(`.list${m}`).append(
-              `<li class="list-group-item">${typeI}  ${unit} : ${troops[i].quantity} </li>`
-            );
-          }
-          $(`.Units${m}`).html(
-            `<i class="fa-solid fa-jet-fighter-up"></i>  Units: ${troops.length} <i class="fa-solid fa-chevron-down"></i>`
-          );
-        }
-        // place troops on map
-        /**
-         * @brief : Loop through each country units it needs to place
-         */
-        let unitsRelocate = round[i].unitsToRelocate[m];
-        // console.log(unitsRelocate);
-        unitsRelocate.movements.map((unit) => {
-          console.log(`.area_${unit.destination}`);
-          $(`.area_${unit.destination}`).append(
-            `<div class="${i == 0 ? "blue" : "red"}">${unit.type}</div>`
-          );
-        });
-      }
-    } else {
-      alert("No more rounds");
-    }
-  });
-};
-
-getMap(0);
-
-let round = 1;
-$(`.nextRound`).click(() => {
-  getMap(round++);
+$(`.MapBTN`).click(() => {
+  $(`.fightingMap`).toggleClass("hide");
 });
-
-$(`.area_0-0`).append(`<div class="red">tank</div>`);
-$(`.item1`).append(`<div class="blue">tank</div>`);

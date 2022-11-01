@@ -54,6 +54,14 @@
   font-weight: 700;
 }
 
+.blue {
+  background-color: blue;
+}
+
+.red {
+  background-color: red;
+}
+
 .fightdisplay {
   width: 100%;
   display: flex;

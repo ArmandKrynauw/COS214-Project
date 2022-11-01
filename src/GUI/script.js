@@ -109,6 +109,11 @@ const getMap = (i) => {
       $(`#Round`).text(`Round ${i + 1}`);
 
       // Troops
+      /**
+       * @brief : loop through each country and get the troops
+       * add a icon to the front of the troop depeding on the type of unit
+       * add the troops to the list
+       */
       for (let m = 0; m < 2; m++) {
         $(`.list${m}`).empty();
         if (round[i].unitsToPurchase[m].units != null) {
@@ -153,6 +158,18 @@ const getMap = (i) => {
             `<i class="fa-solid fa-jet-fighter-up"></i>  Units: ${troops.length} <i class="fa-solid fa-chevron-down"></i>`
           );
         }
+        // place troops on map
+        /**
+         * @brief : Loop through each country units it needs to place
+         */
+        let unitsRelocate = round[i].unitsToRelocate[m];
+        // console.log(unitsRelocate);
+        unitsRelocate.movements.map((unit) => {
+          console.log(`.area_${unit.destination}`);
+          $(`.area_${unit.destination}`).append(
+            `<div class="${i == 0 ? "blue" : "red"}">${unit.type}</div>`
+          );
+        });
       }
     } else {
       alert("No more rounds");
@@ -166,3 +183,6 @@ let round = 1;
 $(`.nextRound`).click(() => {
   getMap(round++);
 });
+
+$(`.area_0-0`).append(`<div class="red">tank</div>`);
+$(`.item1`).append(`<div class="blue">tank</div>`);

@@ -1,0 +1,17 @@
+{
+  "battle1": {
+    "name": "D-day [1944]",
+    "country1": "USA",
+    "country2": "Germany"
+  },
+  "battle2": {
+    "name": "Western Front [1943]",
+    "country1": "USA",
+    "country2": "Germany"
+  },
+  "battle3": {
+    "name": "Battle of France [1940]",
+    "country1": "France",
+    "country2": "Germany"
+  }
+}

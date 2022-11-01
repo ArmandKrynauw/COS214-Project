@@ -13,15 +13,22 @@ using json = nlohmann::json;
 class Client {
 private:
     std::vector<json> simulations;
-    bool GUIMode;
     std::map<std::string, std::vector<std::string> > countries;
     WarSocket *socket;
     std::vector<std::string> availableCountries;
     json chosenSimulation;
     int currentRound;
 
+    // =============== Singleton ===============
+    Client();
+    Client(Client &);
+    Client &operator=(Client &);
+    ~Client();
+
 public:
-    Client(bool GUIMode);
+    static Client* instance();
+    static bool GUIMode;
+
 
     // =================== MAIN FUNCTIONS ==============
     json runNextRound();
@@ -41,15 +48,19 @@ public:
 
     void printFooter();
 
+    // =================== GUI FUNCTIONS ==============
+
+    json getAvailableSimulations();
+
+
     // =================== UTILITY FUNCTIONS ==============
 public:
     std::string getListOfSimulations();
     void selectSimulation(int index);
+    void runTerminalMode();
+    void runGUIMode();
 
 private:
-    void runTerminalMode();
-
-    void runGUIMode();
 
     void loadSimulations(std::string filePath);
 

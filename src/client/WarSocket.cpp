@@ -1,4 +1,7 @@
 #include "WarSocket.h"
+#include "client.h"
+
+WarSocket::WarSocket() { }
 
 void WarSocket::listen() {
     struct mg_mgr mgr;  // Event manager
@@ -10,17 +13,16 @@ void WarSocket::listen() {
     mg_mgr_free(&mgr);
 }
 
-
-void WarSocket::CountryUnits(struct mg_connection *c, struct mg_ws_message *message) {
-    if (strcmp(message->data.ptr, "GetCountry") == 0) {
-        std::string dump = WarEngine::instance()->getCountryUnits().dump();
-        int size = dump.size();
-        const char *str = dump.c_str();
-        mg_ws_send(c, str, size, WEBSOCKET_OP_TEXT);
-    }
-    std::cout << message->data.ptr << std::endl;
+void WarSocket::sendMessage(struct mg_connection *c, json data) {
+    std::string dump = data.dump();
+    int size = dump.size();
+    const char *str = dump.c_str();
+    mg_ws_send(c, str, size, WEBSOCKET_OP_TEXT);
 }
 
+bool WarSocket::checkMessage(struct mg_ws_message* message, char* compare) {
+    return strcmp(message->data.ptr, compare) == 0;
+}
 
 void WarSocket::HTTPHandler(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
     if (ev == MG_EV_OPEN) {
@@ -35,7 +37,14 @@ void WarSocket::HTTPHandler(struct mg_connection *c, int ev, void *ev_data, void
     } else if (ev == MG_EV_WS_MSG) {
         // Got websocket frame. Received data is wm->data. Echo it back!
         struct mg_ws_message *wm = (struct mg_ws_message *) ev_data;
-        CountryUnits(c, wm);
+        
+        // ================================== API Cases ================================== 
+        if (checkMessage(wm, "GetCountry")) {
+            sendMessage(c, WarEngine::instance()->getCountryUnits());
+        }
+        if (checkMessage(wm, "getAvailableSimulations")) {
+            sendMessage(c, Client::instance()->getAvailableSimulations());
+        }
     }
     (void) fn_data;
 }

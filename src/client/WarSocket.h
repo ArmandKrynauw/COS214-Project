@@ -5,12 +5,15 @@
 #include "../engine/WarEngine.h"
 #include <iostream>
 
+class Client;
+
 class WarSocket {
 public:
+    WarSocket();
     void listen();
 
-    static void CountryUnits(struct mg_connection *c, struct mg_ws_message *message);
-
+    static void sendMessage(struct mg_connection *c, nlohmann::json data);
+    static bool checkMessage(struct mg_ws_message* message, char* compare);
     static void HTTPHandler(struct mg_connection *c, int ev, void *ev_data, void *fn_data);
 
 private:

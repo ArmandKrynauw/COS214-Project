@@ -1,22 +1,23 @@
 #include "client.h"
 
+bool Client::GUIMode = false;
+
 #include <limits.h>
 
 #include <fstream>
 #include <iostream>
 
-Client::Client(bool GUIMode) : GUIMode(GUIMode) {
+Client::Client() {
     try {
         loadSimulations("utilities/simulations.json");
-
-        if (GUIMode) {
-            runGUIMode();
-        } else {
-            runTerminalMode();
-        }
     } catch (WarException &e) {
         std::cout << e.what() << std::endl;
     }
+}
+
+Client* Client::instance() {
+    static Client client;
+    return &client;
 }
 
 void Client::runTerminalMode() {
@@ -31,6 +32,7 @@ void Client::runTerminalMode() {
 }
 
 void Client::runGUIMode() {
+    selectSimulation(0);
     // this->socket = new WarSocket();
     // this->socket->listen();
     // selectSimulation(choice);
@@ -75,6 +77,20 @@ void Client::runSimulation() {
             std::cout << std::endl;
         }
     }
+}
+
+// ======================================================================================
+// GUI FUNCTIONS
+// ======================================================================================
+
+json Client::getAvailableSimulations() {
+    json j;
+
+    for (json s : simulations) {
+        j.push_back(s["WarTitle"]);
+    }
+
+    return j;
 }
 
 // ======================================================================================
@@ -275,3 +291,5 @@ int Client::toInt(const std::string &str) {
     ss >> val;
     return val;
 }
+
+Client::~Client() {}

@@ -38,8 +38,9 @@ private:
             countryUnitNames;
     std::unordered_map<std::string, UnitFactory *> unitFactories;
 
-    int turnCounter;
+    int roundCounter;
     bool player1Turn;
+    int warDuration;
 
 
     // =============== Utility Functions ===============
@@ -90,7 +91,6 @@ public:
 
     void checkMobilization(const json& data);
 
-    
 
     /**
      * Provides functionality for Countries to purchase units. This method
@@ -132,6 +132,18 @@ public:
      * @return JSON array with each Country's units
     */
     nlohmann::json getCountryUnits();
+    /**
+     * This method calls all the stats getters to generate on big stats object
+    */
+    json getStat();
+    json getEngineStats();
+    json getCountryStats();
+    json getAllianceStats();
+    json getTheatreStats();
+    // Replaces getCountryUnits()
+    json getTheatreUnits();
+    json getOverallUnits();
+    json getCasualties();
 
     /**
      * @brief Convert json object to string vector

@@ -10,6 +10,7 @@ WarEngine *WarEngine::instance() {
 }
 
 WarEngine::WarEngine() {
+    roundCounter = 0;
     srand(1);
     warStage = new EarlyStage("pre-war");
     unitFactories["land"] = new LandUnitFactory();
@@ -41,6 +42,8 @@ void WarEngine::loadSimulation(const json &simulation) {
     if (simulation.contains("alliances")) {
         loadAlliances(simulation["alliances"]);
     }
+
+    warDuration = simulation["duration"];
 }
 
 void WarEngine::loadCountries(const json &data) {
@@ -70,11 +73,12 @@ void WarEngine::loadAlliances(const json &data) {
     }
 }
 
+
 // ============================================================================
 // SIMULATION HELPER FUNCTIONS
 // ============================================================================
 void WarEngine::checkMobilization(const json& data){
- 
+    roundCounter++;
     for (json country: data["countries"]) {
             countries[country["name"].get<std::string>()]->checkMobilization(warStage->getState(), country["mobilization"].get<std::string>()); 
     }
@@ -467,6 +471,23 @@ json WarEngine::getCountryUnits() {
     }
 
     return data;
+}
+
+json WarEngine::getEngineStats(){
+    std::string stage;
+    if(warStage->getState() == "EarlyStage"){
+        stage = "Early Stage";
+    }
+    else if(warStage->getState() == "MiddleStage"){
+        stage = "Middle Stage";
+    }else if(warStage->getState() == "LateStage"){
+        stage = "Late Stage";
+    }
+    return json {{"stage" , stage},
+                 {"duration", warDuration},
+                 {"day", roundCounter},
+                 {"numberOfCountries", countries.size()},
+                 {"numberOfAlliances", alliances.size()}};
 }
 
 std::vector<std::string> WarEngine::setToString(json array) {

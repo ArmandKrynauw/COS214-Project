@@ -64,6 +64,8 @@ private:
 
     void loadSimulations(std::string filePath);
 
+    void loadMobilization(const json& data);
+
     int getIntegerInput(std::string prompt, int rangeStart, int rangeEnd);
 
     bool isDigit(const std::string &str);

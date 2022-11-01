@@ -48,9 +48,11 @@ void Client::runGUIMode() {
 // ======================================================================================
 
 json Client::runNextRound() {
+        WarEngine::instance()->checkMobilization(chosenSimulation["rounds"][currentRound]["mobilization"]);
         WarEngine::instance()->checkEscalation(chosenSimulation["rounds"][currentRound]["WarState"]);
         WarEngine::instance()->purchaseUnits(chosenSimulation["rounds"][currentRound]["unitsToPurchase"]);
         WarEngine::instance()->relocateUnits(chosenSimulation["rounds"][currentRound]["unitsToRelocate"]);
+        
         WarEngine::instance()->assignStrategies(chosenSimulation["rounds"][currentRound]["strategies"]);
         WarEngine::instance()->CommenceBattle();
         currentRound++;

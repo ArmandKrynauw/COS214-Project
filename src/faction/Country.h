@@ -9,6 +9,7 @@
 #include "../utilities/json.hpp"
 #include "Faction.h"
 #include "../mobilization/Mobilization.h"
+#include "../mobilization/PartialMobilization.h"
 
 using json = nlohmann::json;
 
@@ -25,7 +26,9 @@ public:
      * @return void
      */
 
-    void  changeMobilization(std::string mobilization);
+    void  setMobilization(std::string mobilization);
+
+    void checkMobilization(std::string warState, std::string newMobilization);
 
     /**
      * This method is used generate new resources for each Faction after each

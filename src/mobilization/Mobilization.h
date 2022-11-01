@@ -2,7 +2,10 @@
 #define MOBILIZATION_h
 
 #include <iostream>
-
+#include "../utilities/WarException.h"
+class WarEconomy;
+class PartialMobilization;
+class TotalMobilization;
 
 class Mobilization {
     protected:
@@ -13,7 +16,7 @@ class Mobilization {
 
         Mobilization(std::string state);
 
-        void checkWarState(std::string state);
+        Mobilization * checkWarState(std::string warState, std::string newMobilization);
         /**
         * Provides the industryModifier of this state as a percentage
         * @return float : The industryModifier for this state.
@@ -31,6 +34,8 @@ class Mobilization {
         * @return string : The current state
         */
         virtual std::string getState() = 0;
+
+        void setState(std::string state);
 
         virtual ~Mobilization();
 };

@@ -88,6 +88,8 @@ public:
      */
     void loadAlliances(const json &data);
 
+    void checkMobilization(const json& data);
+
     
 
     /**

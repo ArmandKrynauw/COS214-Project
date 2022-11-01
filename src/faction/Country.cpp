@@ -10,18 +10,25 @@ Country::Country(std::string name) : Faction(name) {
     armedForces["land"] = new ArmedForce("Army", "land");
     armedForces["sea"] = new ArmedForce("Navy", "sea");
     armedForces["air"] = new ArmedForce("Air Force", "air");
-    //this->mobilization = mobilization;
+    this->mobilization = new PartialMobilization("pre-war");
 }
 
-void Country::changeMobilization(std::string mobilization)
+void Country::setMobilization(std::string mobilization)
 {
-    //this->mobilization->changeState(mobilization);
+    this->mobilization->setState(mobilization);
+}
+
+void Country::checkMobilization(std::string warState, std::string newMobilization){
+    this->mobilization = this->mobilization->checkWarState(warState,newMobilization);
 }
 
 void Country::generateResources() {
-    resourceCount += baseResourceCount;
-    // resourceCount += baseResourceCount * mobilization->getIndustryModifier();
+    //resourceCount += baseResourceCount;
+    // 500 * 0.3
+    resourceCount += baseResourceCount * mobilization->getIndustryModifier();
 }
+
+
 
 int Country::getResourceCount() {
     return resourceCount;

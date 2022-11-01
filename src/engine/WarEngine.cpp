@@ -53,6 +53,7 @@ void WarEngine::loadCountries(const json &data) {
         }
 
         country->setBaseResourceCount(c["baseResourceCount"]);
+        country->setMobilization("PartialMobilization");
         countries[c["name"]] = country;
     }
 }
@@ -72,11 +73,21 @@ void WarEngine::loadAlliances(const json &data) {
 // ============================================================================
 // SIMULATION HELPER FUNCTIONS
 // ============================================================================
+void WarEngine::checkMobilization(const json& data){
+ 
+    for (json country: data["countries"]) {
+            countries[country["name"].get<std::string>()]->checkMobilization(warStage->getState(), country["mobilization"].get<std::string>()); 
+    }
+}
+
+
 
 void WarEngine::purchaseUnits(const json &data) {
     if (!data.is_array()) {
         throw WarException("Expected a JSON array.", "malformed_object");
     }
+
+
 
     for (json country: data) {
         for (json unit: country["units"]) {

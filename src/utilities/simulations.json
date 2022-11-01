@@ -29,7 +29,7 @@
                         { "MediumLandUnit": "BMP-3" },
                         { "MediumSeaUnit": "Braunschweig class" }
                     ],
-                    "baseResourceCount": 200
+                    "baseResourceCount": 1000
                 },
                 {
                     "name": "America",
@@ -44,7 +44,7 @@
                         { "MediumLandUnit": "HMMWV" },
                         { "MediumSeaUnit": "Destroyer" }
                     ],
-                    "baseResourceCount": 300
+                    "baseResourceCount": 1000
                 }
             ],
             "alliances": [
@@ -57,6 +57,19 @@
                 {
                     "WarState": "EarlyStage",
                     "turnNumber": 1,
+                    "mobilization" : 
+                      {
+                        "countries" : [
+                          {
+                            "name" : "Germany",
+                            "mobilization" : "PartialMobilization"
+                          },
+                          {
+                            "name" : "America",
+                            "mobilization" : "PartialMobilization"
+                          }
+                        ]
+                      },
                     "unitsToPurchase" : [
                         {
                             "name" : "Germany",
@@ -150,6 +163,19 @@
         {
           "WarState": "MiddleStage",
           "turnNumber": 2,
+          "mobilization" : 
+            {
+              "countries" : [
+                {
+                  "name" : "Germany",
+                  "mobilization" : "TotalMobilization"
+                },
+                {
+                  "name" : "America",
+                  "mobilization" : "WarEconomy"
+                }
+              ]
+            },
           "unitsToPurchase" : [
               {
                   "name" : "Germany",
@@ -243,6 +269,19 @@
     {
       "WarState": "LateStage",
       "turnNumber": 3,
+      "mobilization" : 
+        {
+          "countries" : [
+            {
+              "name" : "Germany",
+              "mobilization" : "TotalMobilization"
+            },
+            {
+              "name" : "America",
+              "mobilization" : "PartialMobilization"
+            }
+          ]
+        },
       "unitsToPurchase" : [
           
       ],

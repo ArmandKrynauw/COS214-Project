@@ -1,5 +1,275 @@
 // New Work
-const data = {};
+const data = {
+  engine: {
+    stage: "Early Stage",
+    duration: 4,
+    day: 1,
+    numberOfCountries: 2,
+    numberOfAlliances: 2,
+  },
+  countries: {
+    data: [
+      {
+        name: "Germany",
+        resources: 50,
+        totalUnits: 10,
+      },
+      {
+        name: "America",
+        resources: 60,
+        totalUnits: 5,
+      },
+      {
+        name: "France",
+        resources: 40,
+        totalUnits: 15,
+      },
+      {
+        name: "Russia",
+        resources: 45,
+        totalUnits: 18,
+      },
+    ],
+  },
+  alliances: {
+    data: [
+      {
+        name: "Allies",
+        countries: ["America", "France"],
+      },
+      {
+        name: "Central European Powers",
+        countries: ["Germany", "Russia"],
+      },
+    ],
+  },
+  theatres: {
+    data: [
+      {
+        name: "Sicily",
+        coordinates: "0-0",
+        data: [
+          {
+            name: "Germany",
+            landPower: 100,
+            seaPower: 20,
+            airPower: 40,
+          },
+        ],
+      },
+      {
+        name: "Tunisia",
+        coordinates: "0-1",
+        data: [
+          {
+            name: "Germany",
+            landPower: 100,
+            seaPower: 20,
+            airPower: 40,
+          },
+          {
+            name: "America",
+            landPower: 120,
+            seaPower: 30,
+            airPower: 20,
+          },
+          {
+            name: "Russia",
+            landPower: 100,
+            seaPower: 20,
+            airPower: 40,
+          },
+          {
+            name: "France",
+            landPower: 120,
+            seaPower: 30,
+            airPower: 20,
+          },
+        ],
+      },
+      {
+        name: "Normandy",
+        coordinates: "0-2",
+        data: [],
+      },
+      {
+        name: "Netherlands",
+        coordinates: "1-0",
+        data: [],
+      },
+      {
+        name: "Belgium",
+        coordinates: "1-1",
+        data: [
+          {
+            name: "Germany",
+            landPower: 100,
+            seaPower: 20,
+            airPower: 40,
+          },
+          {
+            name: "America",
+            landPower: 120,
+            seaPower: 30,
+            airPower: 20,
+          },
+        ],
+      },
+      {
+        name: "Ruhr",
+        coordinates: "1-2",
+        data: [],
+      },
+      {
+        name: "Paris",
+        coordinates: "2-0",
+        data: [
+          {
+            name: "Germany",
+            landPower: 100,
+            seaPower: 20,
+            airPower: 40,
+          },
+        ],
+      },
+      {
+        name: "Alsace-Lorraine",
+        coordinates: "2-1",
+        data: [],
+      },
+      {
+        name: "Italy",
+        coordinates: "2-2",
+        data: [
+          {
+            name: "America",
+            landPower: 120,
+            seaPower: 30,
+            airPower: 20,
+          },
+        ],
+      },
+    ],
+  },
+  theatreUnits: {
+    data: [
+      {
+        name: "Germany",
+        units: [
+          {
+            theatre: "Sicily",
+            coordinates: "0-0",
+            units: [
+              {
+                name: "Foot Soldier",
+                type: "land",
+                initialHP: 50,
+                currentHP: 10,
+                damage: 5,
+              },
+              {
+                name: "Luftwaffe A400M",
+                type: "air",
+                initialHP: 100,
+                currentHP: 50,
+                damage: 20,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "America",
+        units: [
+          {
+            theatre: "Italy",
+            coordinates: "2-2",
+            units: [
+              {
+                name: "Foot Soldier",
+                type: "land",
+                initialHP: 50,
+                currentHP: 10,
+                damage: 5,
+              },
+              {
+                name: "C-17",
+                type: "air",
+                initialHP: 100,
+                currentHP: 50,
+                damage: 20,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  overallUnits: {
+    data: [
+      {
+        name: "Germany",
+        units: [
+          {
+            name: "Foot Soldier",
+            type: "land",
+            initialHP: 50,
+            currentHP: 10,
+            damage: 5,
+          },
+          {
+            name: "Luftwaffe A400M",
+            type: "air",
+            initialHP: 100,
+            currentHP: 50,
+            damage: 20,
+          },
+        ],
+      },
+      {
+        name: "America",
+        units: [
+          {
+            name: "Foot Soldier",
+            type: "land",
+            initialHP: 50,
+            currentHP: 10,
+            damage: 5,
+          },
+          {
+            name: "C-17",
+            type: "air",
+            initialHP: 100,
+            currentHP: 50,
+            damage: 20,
+          },
+        ],
+      },
+    ],
+  },
+  casualties: {
+    data: [
+      {
+        name: "Germany",
+        units: [
+          {
+            theatre: "Sicily",
+            coordinates: "0-0",
+            units: [
+              {
+                name: "Foot Soldier",
+                type: "land",
+                initialHP: 50,
+                currentHP: 0,
+                damage: 5,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+};
 
 /*-------nextBTN-------*/
 let nextIndex = 1;
@@ -60,7 +330,7 @@ showfight = (id) => {
 
   // console.log(loadIndex.data);
   loadIndex.forEach((theatreData) => {
-    console.log(theatreData.name);
+    // console.log(theatreData.name);
     const str = `
       <div class="card niceCards" style="width: 18rem">
           <img
@@ -122,7 +392,7 @@ overallUnits.forEach((overallUnit, i = 0) => {
 
 /*--------Allies---------*/
 const allies = data.alliances.data;
-console.log(allies);
+// console.log(allies);
 
 allies.forEach((ally, i = 0) => {
   const countries = ally.countries;

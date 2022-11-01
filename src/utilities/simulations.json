@@ -2,6 +2,7 @@
     "Wars": [
         {
             "WarTitle": "Western Front [1943]",
+            "duration" : 3,
             "theatres" : [
               
                 { "name" : "Sicily", "seaZone": true , "resourceCount" : 10 },

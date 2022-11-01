@@ -8,8 +8,8 @@ void CareTaker::store(Memento *state) {
     this->states.push_back(state);
 }
 
-Memento * CareTaker::undo() {
-    Memento * state = this->states.back();
+Memento *CareTaker::undo() {
+    Memento *state = this->states.back();
     this->states.pop_back();
     return state;
 }

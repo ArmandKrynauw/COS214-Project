@@ -4,14 +4,21 @@
 #include "Unit.h"
 
 class LandUnit : public Unit {
-   private:
-   public:
+private:
+public:
     LandUnit(std::string name, std::string type, int HP, int damage, int value);
+
     void primitiveAttack();
-    void attack(Unit* unit);
+
+    void attack(Unit *unit);
+
     void primitiveDefend();
-    void defend(Unit* unit);
-    virtual Entity* clone() override = 0;
+
+    void defend(Unit *unit);
+
+    virtual Entity *clone() override = 0;
+
     ~LandUnit();
 };
+
 #endif

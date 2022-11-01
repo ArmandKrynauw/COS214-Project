@@ -3,11 +3,12 @@
 
 #include "WarStrategy.h"
 
-class PlanStrategy : public WarStrategy
-{
+class PlanStrategy : public WarStrategy {
 public:
     PlanStrategy(std::string target);
-    float executeStrategy(WarStrategy* strat);
+
+    float executeStrategy(WarStrategy *strat);
+
     ~PlanStrategy();
 };
 

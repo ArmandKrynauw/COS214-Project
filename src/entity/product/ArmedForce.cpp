@@ -3,19 +3,19 @@
 using json = nlohmann::json;
 
 ArmedForce::ArmedForce(std::string name, std::string type)
-    : Entity(name, type) {}
+        : Entity(name, type) {}
 
 ArmedForce::~ArmedForce() {}
 
-void ArmedForce::add(Entity* entity) {
+void ArmedForce::add(Entity *entity) {
     entities.push_back(entity);
 }
 
-void ArmedForce::remove(Entity* entity) {
-    
-    std::vector<Entity*>::iterator it;
-    for(it = entities.begin(); it != entities.end(); ++it) {
-        if((*it)->getId() == entity->getId()) {
+void ArmedForce::remove(Entity *entity) {
+
+    std::vector<Entity *>::iterator it;
+    for (it = entities.begin(); it != entities.end(); ++it) {
+        if ((*it)->getId() == entity->getId()) {
             entities.erase(it);
             break;
         }
@@ -24,9 +24,9 @@ void ArmedForce::remove(Entity* entity) {
 
 int ArmedForce::getDamage() {
     int damage = 0;
-    std::vector<Entity*>::const_iterator it;
+    std::vector<Entity *>::const_iterator it;
 
-    for(it = entities.begin(); it != entities.end(); ++it) {
+    for (it = entities.begin(); it != entities.end(); ++it) {
         damage += (*it)->getDamage();
     }
 
@@ -35,9 +35,9 @@ int ArmedForce::getDamage() {
 
 int ArmedForce::getHP() {
     int HP = 0;
-    std::vector<Entity*>::const_iterator it;
+    std::vector<Entity *>::const_iterator it;
 
-    for(it = entities.begin(); it != entities.end(); ++it) {
+    for (it = entities.begin(); it != entities.end(); ++it) {
         HP += (*it)->getHP();
     }
 
@@ -53,9 +53,9 @@ bool ArmedForce::takeDamage(int damage) {
 
 int ArmedForce::getUnitCount() const {
     int capacity = 0;
-    std::vector<Entity*>::const_iterator it;
+    std::vector<Entity *>::const_iterator it;
 
-    for(it = entities.begin(); it != entities.end(); ++it) {
+    for (it = entities.begin(); it != entities.end(); ++it) {
         capacity += (*it)->getUnitCount();
     }
 
@@ -65,21 +65,21 @@ int ArmedForce::getUnitCount() const {
 int ArmedForce::getValue() const {
     int value = 0;
 
-    for(Entity* entity : entities) {
+    for (Entity *entity: entities) {
         value += entity->getValue();
     }
 
     return value;
 }
 
-void ArmedForce::setTheatre(Theatre* theatre) {
-    std::vector<Entity*>::iterator it;
-    for(it = entities.begin(); it != entities.end(); ++it) {
+void ArmedForce::setTheatre(Theatre *theatre) {
+    std::vector<Entity *>::iterator it;
+    for (it = entities.begin(); it != entities.end(); ++it) {
         (*it)->setTheatre(theatre);
     }
 }
 
-Entity* ArmedForce::clone() {}
+Entity *ArmedForce::clone() {}
 
 json ArmedForce::toJSON() const {
     json data = json::array();
@@ -88,7 +88,7 @@ json ArmedForce::toJSON() const {
         json j = entities[i]->toJSON();
 
         if (j.is_array()) {
-            for (json e : j) {
+            for (json e: j) {
                 data.push_back(e);
             }
         } else {
@@ -101,28 +101,28 @@ json ArmedForce::toJSON() const {
 
 void ArmedForce::update() {
     int damage = 0;
-    for(int i = 0; i < entities.size(); i++) {
+    for (int i = 0; i < entities.size(); i++) {
         damage += entities.at(i)->getDamage();
     }
     // this->setDamage(damage);
 }
 
 void ArmedForce::print() {
-    std::vector<Entity*>::iterator it;
+    std::vector<Entity *>::iterator it;
 
-    for(it = entities.begin(); it != entities.end(); it++) {
+    for (it = entities.begin(); it != entities.end(); it++) {
         (*it)->print();
     }
 }
 
-Entity * ArmedForce::operator[](int index){
+Entity *ArmedForce::operator[](int index) {
     return entities[index];
 }
 
-Entity * ArmedForce::getEntity(int index){
+Entity *ArmedForce::getEntity(int index) {
     return entities[index];
 }
 
-std::vector<Entity*> ArmedForce::getEntities(){
+std::vector<Entity *> ArmedForce::getEntities() {
     return entities;
 }

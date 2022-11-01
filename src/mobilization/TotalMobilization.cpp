@@ -1,13 +1,13 @@
 #include "TotalMobilization.h"
 
-std::string TotalMobilization::getState(){
+std::string TotalMobilization::getState() {
     return "TotalMobilization";
 }
 
-float TotalMobilization::getIndustryModifier(){
+float TotalMobilization::getIndustryModifier() {
     return 0.9;
 }
 
-int TotalMobilization::getNationalMoraleTick(){
+int TotalMobilization::getNationalMoraleTick() {
     return -4;
 }

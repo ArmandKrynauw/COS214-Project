@@ -1,10 +1,10 @@
 #include "AirZone.h"
 
 AirZone::AirZone(std::string name) : Zone(name) {
-    this->name+="_AirZone";
+    this->name += "_AirZone";
 }
 
-std::string AirZone::getType(){
+std::string AirZone::getType() {
     return "air";
 }
 

@@ -2,8 +2,7 @@
 
 LandZoneFactory::LandZoneFactory() {}
 
-Zone *LandZoneFactory::createZone(std::string ZoneName)
-{
+Zone *LandZoneFactory::createZone(std::string ZoneName) {
     return new LandZone(ZoneName);
 }
 

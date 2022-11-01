@@ -1,13 +1,13 @@
 #include "PartialMobilization.h"
 
-std::string PartialMobilization::getState(){
+std::string PartialMobilization::getState() {
     return "PartialMobilization";
 }
 
-float PartialMobilization::getIndustryModifier(){
+float PartialMobilization::getIndustryModifier() {
     return 0.3;
 }
 
-int PartialMobilization::getNationalMoraleTick(){
+int PartialMobilization::getNationalMoraleTick() {
     return -1;
 }

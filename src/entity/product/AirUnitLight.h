@@ -4,10 +4,12 @@
 #include "AirUnit.h"
 
 class AirUnitLight : public AirUnit {
-   public:
+public:
     AirUnitLight(std::string name, std::string type, int HP, int damage,
                  int value);
-    virtual Entity* clone() override;
+
+    virtual Entity *clone() override;
+
     ~AirUnitLight();
 };
 

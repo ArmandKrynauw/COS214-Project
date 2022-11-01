@@ -5,17 +5,16 @@
 
 #include "../theatre/Zone.h"
 
-class ZoneFactory
-{ 
-    private: 
-    Zone * zone;
-    public: 
+class ZoneFactory {
+private:
+    Zone *zone;
+public:
     ZoneFactory();
+
     virtual Zone *createZone(std::string ZoneName) = 0;
+
     ~ZoneFactory();
 };
-
-
 
 
 #endif

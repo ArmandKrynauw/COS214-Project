@@ -26,18 +26,18 @@ void Country::setBaseResourceCount(int baseResourceCount) {
     this->baseResourceCount = baseResourceCount;
 }
 
-int Country::getAttackPower(Theatre* theatre) {
+int Country::getAttackPower(Theatre *theatre) {
     // Search through theatres that country is battling
     // Sum attack power of army in that specific theatre
     return 10;
 }
 
-Alliance* Country::getAlliance() {
+Alliance *Country::getAlliance() {
     return NULL;
 }
 
-void Country::addEntity(Entity* entity) {
-    if(resourceCount - entity->getValue() < 0) {
+void Country::addEntity(Entity *entity) {
+    if (resourceCount - entity->getValue() < 0) {
         throw WarException("Insufficient resources available.",
                            "insufficient_resources");
     }
@@ -45,14 +45,14 @@ void Country::addEntity(Entity* entity) {
     armedForces[entity->getType()]->add(entity);
 }
 
-void Country::removeEntity(Entity* entity) {
-    if(entity) {
+void Country::removeEntity(Entity *entity) {
+    if (entity) {
         armedForces[entity->getType()]->remove(entity);
     }
 }
 
-Entity* Country::getEntity(const std::string& type, const int& index) {
-    if(armedForces[type]->getUnitCount()-1 < index || index < 0){
+Entity *Country::getEntity(const std::string &type, const int &index) {
+    if (armedForces[type]->getUnitCount() - 1 < index || index < 0) {
         throw WarException("out-of-bounds");
     }
     return armedForces[type]->getEntity(index);
@@ -78,15 +78,15 @@ void Country::chooseStrategy() {
 
 json Country::getListOfUnits() {
     json data = json{
-        {"name", name},
-        {"units", json::array()}
+            {"name",  name},
+            {"units", json::array()}
     };
     json units;
 
-    std::unordered_map<std::string, ArmedForce*>::iterator it;
+    std::unordered_map<std::string, ArmedForce *>::iterator it;
     for (it = armedForces.begin(); it != armedForces.end(); ++it) {
         json j = it->second->toJSON();
-        for (json u : j) {
+        for (json u: j) {
             std::string theatre = u["theatre"];
             if (!units.contains(theatre)) {
                 units[theatre] = json::array();
@@ -100,8 +100,8 @@ json Country::getListOfUnits() {
     json::iterator theatreIt = units.begin();
     for (; theatreIt != units.end(); ++theatreIt) {
         data["units"].push_back(json{
-            {"theatre", theatreIt.key()},
-            {"units", theatreIt.value()}
+                {"theatre", theatreIt.key()},
+                {"units",   theatreIt.value()}
         });
     }
 
@@ -109,10 +109,10 @@ json Country::getListOfUnits() {
 }
 
 void Country::removeCasualties() {
-     std::unordered_map<std::string, ArmedForce*>::iterator it;
+    std::unordered_map<std::string, ArmedForce *>::iterator it;
     for (it = armedForces.begin(); it != armedForces.end(); ++it) {
-        for(Entity * e : it->second->getEntities()){
-            if(e->getHP() == 0){
+        for (Entity *e: it->second->getEntities()) {
+            if (e->getHP() == 0) {
                 it->second->remove(e);
             }
         }

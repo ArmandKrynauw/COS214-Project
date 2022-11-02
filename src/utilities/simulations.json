@@ -2,23 +2,22 @@
     "Wars": [
         {
             "WarTitle": "Western Front [1943]",
-            "duration" : 3,
-            "theatres" : [
-              
-                { "name" : "Sicily", "seaZone": true , "resourceCount" : 10 },
-                { "name" : "Tunisia", "seaZone": true , "resourceCount" : 5 },
-                { "name" : "Normandy", "seaZone": true , "resourceCount" : 15 },
-                { "name" : "Netherlands", "seaZone": true , "resourceCount" : 15 },
-                { "name" : "Belgium", "seaZone": true , "resourceCount" : 15 },
-                { "name" : "Ruhr", "seaZone": true , "resourceCount" : 20 },
-                { "name" : "Paris", "seaZone": true , "resourceCount" : 20 },
-                { "name" : "Alsace-Lorraine", "seaZone": true , "resourceCount" : 10 },
-                { "name" : "Italy", "seaZone": true , "resourceCount" : 20 }
-              
+            "duration": 3,
+            "theatres": [
+                { "name": "Sicily", "seaZone": true, "resourceCount": 10 },
+                { "name": "Tunisia", "seaZone": true, "resourceCount": 5 },
+                { "name": "Normandy", "seaZone": true, "resourceCount": 15 },
+                { "name": "Netherlands", "seaZone": true, "resourceCount": 15 },
+                { "name": "Belgium", "seaZone": true, "resourceCount": 15 },
+                { "name": "Ruhr", "seaZone": true, "resourceCount": 20 },
+                { "name": "Paris", "seaZone": true, "resourceCount": 20 },
+                { "name": "Alsace-Lorraine", "seaZone": true, "resourceCount": 10 },
+                { "name": "Italy", "seaZone": true, "resourceCount": 20 }
             ],
             "countries": [
                 {
                     "name": "Germany",
+                    "countryCode": "GER",
                     "units": [
                         { "HeavyAirUnit": "Luftwaffe A400M" },
                         { "HeavyLandUnit": "Leopard 2A7" },
@@ -34,6 +33,7 @@
                 },
                 {
                     "name": "America",
+                    "countryCode": "USA",
                     "units": [
                         { "HeavyAirUnit": "C-17" },
                         { "HeavyLandUnit": "M1 Abrams" },
@@ -48,336 +48,380 @@
                     "baseResourceCount": 600
                 },
                 {
-                  "name": "France",
-                  "units": [
-                      { "HeavyAirUnit": "Luftwaffe A400M" },
-                      { "HeavyLandUnit": "Leopard 2A7" },
-                      { "HeavySeaUnit": "Type 212 Submarine" },
-                      { "LightAirUnit": "CH-53G" },
-                      { "LightLandUnit": "Foot Soldier" },
-                      { "LightSeaUnit": "Baden-Württemberg class" },
-                      { "MediumAirUnit": "Eurofighter Typhoon" },
-                      { "MediumLandUnit": "BMP-3" },
-                      { "MediumSeaUnit": "Braunschweig class" }
-                  ],
-                  "baseResourceCount": 600
-              },
-              {
-                "name": "Russia",
-                "units": [
-                    { "HeavyAirUnit": "Luftwaffe A400M" },
-                    { "HeavyLandUnit": "Leopard 2A7" },
-                    { "HeavySeaUnit": "Type 212 Submarine" },
-                    { "LightAirUnit": "CH-53G" },
-                    { "LightLandUnit": "Foot Soldier" },
-                    { "LightSeaUnit": "Baden-Württemberg class" },
-                    { "MediumAirUnit": "Eurofighter Typhoon" },
-                    { "MediumLandUnit": "BMP-3" },
-                    { "MediumSeaUnit": "Braunschweig class" }
-                ],
-                "baseResourceCount": 600
-            }
+                    "name": "France",
+                    "countryCode": "FRA",
+                    "units": [
+                        { "HeavyAirUnit": "Luftwaffe A400M" },
+                        { "HeavyLandUnit": "Leopard 2A7" },
+                        { "HeavySeaUnit": "Type 212 Submarine" },
+                        { "LightAirUnit": "CH-53G" },
+                        { "LightLandUnit": "Foot Soldier" },
+                        { "LightSeaUnit": "Baden-Württemberg class" },
+                        { "MediumAirUnit": "Eurofighter Typhoon" },
+                        { "MediumLandUnit": "BMP-3" },
+                        { "MediumSeaUnit": "Braunschweig class" }
+                    ],
+                    "baseResourceCount": 600
+                },
+                {
+                    "name": "Russia",
+                    "countryCode": "RUS",
+                    "units": [
+                        { "HeavyAirUnit": "Luftwaffe A400M" },
+                        { "HeavyLandUnit": "Leopard 2A7" },
+                        { "HeavySeaUnit": "Type 212 Submarine" },
+                        { "LightAirUnit": "CH-53G" },
+                        { "LightLandUnit": "Foot Soldier" },
+                        { "LightSeaUnit": "Baden-Württemberg class" },
+                        { "MediumAirUnit": "Eurofighter Typhoon" },
+                        { "MediumLandUnit": "BMP-3" },
+                        { "MediumSeaUnit": "Braunschweig class" }
+                    ],
+                    "baseResourceCount": 600
+                }
             ],
-            "alliances": [
+        "alliances": [
+                {
+                    "name": "Allies",
+                    "countries": ["America", "France"]
+                },
+                {
+                    "name": "Central European Powers",
+                    "countries": ["Germany", "Russia"]
+                }
             ],
             "rounds": [
                 {
                     "WarState": "EarlyStage",
                     "turnNumber": 1,
-                    "mobilization" : 
-                      {
-                        "countries" : [
-                          {
-                            "name" : "Germany",
-                            "mobilization" : "PartialMobilization"
-                          },
-                          {
-                            "name" : "America",
-                            "mobilization" : "PartialMobilization"
-                          }
+                    "mobilization": {
+                        "countries": [
+                            {
+                                "name": "Germany",
+                                "mobilization": "PartialMobilization"
+                            },
+                            {
+                                "name": "America",
+                                "mobilization": "PartialMobilization"
+                            }
                         ]
-                      },
-                    "unitsToPurchase" : [
-                        {
-                            "name" : "Germany",
-                            "units" : [
-                                { "type" : "HeavyLandUnit", "quantity" : 1 },
-                                { "type" : "HeavyAirUnit", "quantity" : 1 },
-                                { "type" : "HeavySeaUnit", "quantity" : 1 }
-                            ]
-                        },
-                        {
-                            "name" : "America",
-                            "units" : [
-                                { "type" : "LightLandUnit", "quantity" : 1 },
-                                { "type" : "LightAirUnit", "quantity" : 1 },
-                                { "type" : "LightSeaUnit", "quantity" : 1 }
-                          ]
-                        }
-                    ],
-                    "unitsToTransport" : [
-                        {
-                            "name" : "Germany",
-                            "units" : [
-
-                            ]
-                        }
-                    ],
-                   
-                    "unitsToRelocate": [
-                          {
-                              "name": "Germany",
-                              "movements": [
-                                  { "type" : "land", "index" : 0, "destination": "0,0" },
-                                  { "type" : "air",  "index" : 0, "destination": "1,1" },
-                                  { "type" : "sea",  "index" : 0, "destination": "2,2" }
-                              ]
-                          },
-                          {
-                              "name": "America",
-                              "movements": [
-                                  { "type" : "land", "index" : 0, "destination": "0,0" },
-                                  { "type" : "air",  "index" : 0, "destination": "1,1" },
-                                  { "type" : "sea",  "index" : 0, "destination": "2,2" }
-                              ]
-                          }
-                        
-                      ],
-
-                  "strategies": [
-                    {
-                      "name": "Germany",
-                      "strategies": [
-                        {
-                          "strategy": "Attack",
-                          "theatre": "0,0",
-                          "target": "America"
-                        },
-                        {
-                          "strategy": "Counter",
-                          "theatre": "1,1",
-                          "target": "America"
-                        },
-                        {
-                          "strategy": "Plan",
-                          "theatre": "2,2",
-                          "target": "America"
-                        }
-                      ]
                     },
-                    {
-                      "name": "America",
-                      "strategies": [
+                    "unitsToPurchase": [
                         {
-                          "strategy": "Plan",
-                          "theatre": "0,0",
-                          "target": "Germany"
+                            "name": "Germany",
+                            "units": [
+                                { "type": "HeavyLandUnit", "quantity": 1 },
+                                { "type": "HeavyAirUnit", "quantity": 1 },
+                                { "type": "HeavySeaUnit", "quantity": 1 }
+                            ]
                         },
                         {
-                          "strategy": "Attack",
-                          "theatre": "1,1",
-                          "target": "Germany"
-                        },
-                        {
-                          "strategy": "Counter",
-                          "theatre": "2,2",
-                          "target": "Germany"
+                            "name": "America",
+                            "units": [
+                                { "type": "LightLandUnit", "quantity": 1 },
+                                { "type": "LightAirUnit", "quantity": 1 },
+                                { "type": "LightSeaUnit", "quantity": 1 }
+                            ]
                         }
-                      ]
-                    }
-                  ]
-        },
-        {
-          "WarState": "MiddleStage",
-          "turnNumber": 2,
-          "mobilization" : 
-            {
-              "countries" : [
-                {
-                  "name" : "Germany",
-                  "mobilization" : "TotalMobilization"
+                    ],
+                    "unitsToTransport": [
+                        {
+                            "name": "Germany",
+                            "units": []
+                        }
+                    ],
+
+                    "unitsToRelocate": [
+                        {
+                            "name": "Germany",
+                            "movements": [
+                                {
+                                    "type": "land",
+                                    "index": 0,
+                                    "destination": "0,0"
+                                },
+                                {
+                                    "type": "air",
+                                    "index": 0,
+                                    "destination": "1,1"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 0,
+                                    "destination": "2,2"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "America",
+                            "movements": [
+                                {
+                                    "type": "land",
+                                    "index": 0,
+                                    "destination": "0,0"
+                                },
+                                {
+                                    "type": "air",
+                                    "index": 0,
+                                    "destination": "1,1"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 0,
+                                    "destination": "2,2"
+                                }
+                            ]
+                        }
+                    ],
+
+                    "strategies": [
+                        {
+                            "name": "Germany",
+                            "strategies": [
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "0,0",
+                                    "target": "America"
+                                },
+                                {
+                                    "strategy": "Counter",
+                                    "theatre": "1,1",
+                                    "target": "America"
+                                },
+                                {
+                                    "strategy": "Plan",
+                                    "theatre": "2,2",
+                                    "target": "America"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "America",
+                            "strategies": [
+                                {
+                                    "strategy": "Plan",
+                                    "theatre": "0,0",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "1,1",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Counter",
+                                    "theatre": "2,2",
+                                    "target": "Germany"
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
-                  "name" : "America",
-                  "mobilization" : "WarEconomy"
-                }
-              ]
-            },
-          "unitsToPurchase" : [
-              {
-                  "name" : "Germany",
-                  "units" : [
-                      { "type" : "HeavyLandUnit", "quantity" : 1 },
-                      { "type" : "HeavyAirUnit", "quantity" : 1 },
-                      { "type" : "HeavySeaUnit", "quantity" : 1 }
-                  ]
-              },
-              {
-                  "name" : "America",
-                  "units" : [
-                      { "type" : "LightLandUnit", "quantity" : 1 },
-                      { "type" : "LightAirUnit", "quantity" : 1 },
-                      { "type" : "LightSeaUnit", "quantity" : 1 }
-                ]
-              }
-          ],
-          "unitsToTransport" : [
-              {
-                  "name" : "Germany",
-                  "units" : [
+                    "WarState": "MiddleStage",
+                    "turnNumber": 2,
+                    "mobilization": {
+                        "countries": [
+                            {
+                                "name": "Germany",
+                                "mobilization": "TotalMobilization"
+                            },
+                            {
+                                "name": "America",
+                                "mobilization": "WarEconomy"
+                            }
+                        ]
+                    },
+                    "unitsToPurchase": [
+                        {
+                            "name": "Germany",
+                            "units": [
+                                { "type": "HeavyLandUnit", "quantity": 1 },
+                                { "type": "HeavyAirUnit", "quantity": 1 },
+                                { "type": "HeavySeaUnit", "quantity": 1 }
+                            ]
+                        },
+                        {
+                            "name": "America",
+                            "units": [
+                                { "type": "LightLandUnit", "quantity": 1 },
+                                { "type": "LightAirUnit", "quantity": 1 },
+                                { "type": "LightSeaUnit", "quantity": 1 }
+                            ]
+                        }
+                    ],
+                    "unitsToTransport": [
+                        {
+                            "name": "Germany",
+                            "units": []
+                        }
+                    ],
 
-                  ]
-              }
-          ],
-         
-          "unitsToRelocate": [
+                    "unitsToRelocate": [
+                        {
+                            "name": "Germany",
+                            "movements": [
+                                {
+                                    "type": "land",
+                                    "index": 1,
+                                    "destination": "0,0"
+                                },
+                                {
+                                    "type": "air",
+                                    "index": 1,
+                                    "destination": "1,1"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 1,
+                                    "destination": "2,2"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "America",
+                            "movements": [
+                                {
+                                    "type": "land",
+                                    "index": 1,
+                                    "destination": "0,0"
+                                },
+                                {
+                                    "type": "air",
+                                    "index": 1,
+                                    "destination": "1,1"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 1,
+                                    "destination": "2,2"
+                                }
+                            ]
+                        }
+                    ],
+
+                    "strategies": [
+                        {
+                            "name": "Germany",
+                            "strategies": [
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "0,0",
+                                    "target": "America"
+                                },
+                                {
+                                    "strategy": "Counter",
+                                    "theatre": "1,1",
+                                    "target": "America"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "2,2",
+                                    "target": "America"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "America",
+                            "strategies": [
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "0,0",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "1,1",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Counter",
+                                    "theatre": "2,2",
+                                    "target": "Germany"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "WarState": "LateStage",
+                    "turnNumber": 3,
+                    "mobilization": {
+                        "countries": [
+                            {
+                                "name": "Germany",
+                                "mobilization": "TotalMobilization"
+                            },
+                            {
+                                "name": "America",
+                                "mobilization": "PartialMobilization"
+                            }
+                        ]
+                    },
+                    "unitsToPurchase": [],
+                    "unitsToTransport": [],
+
+                    "unitsToRelocate": [],
+
+                    "strategies": [
+                        {
+                            "name": "Germany",
+                            "strategies": [
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "0,0",
+                                    "target": "America"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "1,1",
+                                    "target": "America"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "2,2",
+                                    "target": "America"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "America",
+                            "strategies": [
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "0,0",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "1,1",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "2,2",
+                                    "target": "Germany"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "WarTitle": "Battle of France [1940]",
+            "countries": [
                 {
                     "name": "Germany",
-                    "movements": [
-                        { "type" : "land", "index" : 1, "destination": "0,0" },
-                        { "type" : "air",  "index" : 1, "destination": "1,1" },
-                        { "type" : "sea",  "index" : 1, "destination": "2,2" }
-                    ]
+                    "countryCode": "GER",
+                    "baseResourceCount": 450
                 },
                 {
-                    "name": "America",
-                    "movements": [
-                        { "type" : "land", "index" : 1, "destination": "0,0" },
-                        { "type" : "air",  "index" : 1, "destination": "1,1" },
-                        { "type" : "sea",  "index" : 1, "destination": "2,2" }
-                    ]
+                    "name": "France",
+                    "countryCode": "FRA",
+                    "baseResourceCount": 300
                 }
-              
-            ],
-
-        "strategies": [
-          {
-            "name": "Germany",
-            "strategies": [
-              {
-                "strategy": "Attack",
-                "theatre": "0,0",
-                "target": "America"
-              },
-              {
-                "strategy": "Counter",
-                "theatre": "1,1",
-                "target": "America"
-              },
-              {
-                "strategy": "Attack",
-                "theatre": "2,2",
-                "target": "America"
-              }
             ]
-          },
-          {
-            "name": "America",
-            "strategies": [
-              {
-                "strategy": "Attack",
-                "theatre": "0,0",
-                "target": "Germany"
-              },
-              {
-                "strategy": "Attack",
-                "theatre": "1,1",
-                "target": "Germany"
-              },
-              {
-                "strategy": "Counter",
-                "theatre": "2,2",
-                "target": "Germany"
-              }
-            ]
-          }
-        ]
-},
-    {
-      "WarState": "LateStage",
-      "turnNumber": 3,
-      "mobilization" : 
-        {
-          "countries" : [
-            {
-              "name" : "Germany",
-              "mobilization" : "TotalMobilization"
-            },
-            {
-              "name" : "America",
-              "mobilization" : "PartialMobilization"
-            }
-          ]
-        },
-      "unitsToPurchase" : [
-          
-      ],
-      "unitsToTransport" : [
-          
-      ],
-    
-      "unitsToRelocate": [
-            
-          
-        ],
-
-    "strategies": [
-          {
-            "name": "Germany",
-            "strategies": [
-              {
-                "strategy": "Attack",
-                "theatre": "0,0",
-                "target": "America"
-              },
-              {
-                "strategy": "Attack",
-                "theatre": "1,1",
-                "target": "America"
-              },
-              {
-                "strategy": "Attack",
-                "theatre": "2,2",
-                "target": "America"
-              }
-            ]
-          },
-          {
-            "name": "America",
-            "strategies": [
-              {
-                "strategy": "Attack",
-                "theatre": "0,0",
-                "target": "Germany"
-              },
-              {
-                "strategy": "Attack",
-                "theatre": "1,1",
-                "target": "Germany"
-              },
-              {
-                "strategy": "Attack",
-                "theatre": "2,2",
-                "target": "Germany"
-              }
-            ]
-          }
-    ]
-    }
-      ]
-    },
-    {
-      "WarTitle": "Battle of France [1940]",
-      "countries": [
-        {
-          "faction": "Germany",
-          "baseResourceCount": 450
-        },
-        {
-          "faction": "France",
-          "baseResourceCount": 300
         }
-      ]
-    }
-  ]
+    ]
 }

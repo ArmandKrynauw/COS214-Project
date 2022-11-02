@@ -97,13 +97,30 @@ json Client::runNextRound() {
 // ======================================================================================
 
 json Client::getAvailableSimulations() {
-    json j;
+    json data;
 
     for (json s : simulations) {
-        j.push_back(s["WarTitle"]);
+        json j = json{
+            { "name", s["WarTitle"] },
+            { "countries", json::array() },
+            { "alliances", json::array() }
+        };
+
+        for (json c : s["countries"]) {
+            j["countries"].push_back({
+                { "name", c["name"] },
+                { "countryCode", c["countryCode"] },
+            });
+        }
+
+        for (json a : s["alliances"]) {
+            j["alliances"].push_back(a);
+        }
+
+        data.push_back(j);
     }
 
-    return j;
+    return data;
 }
 
 // ======================================================================================

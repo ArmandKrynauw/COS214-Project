@@ -5,6 +5,10 @@
 
 class AirZone : public Zone {
 private:
+    /*
+     * Provides functionality to get the divisor as capacity*2
+     * @return int : Divisor 
+     */
     virtual int getDamageDivisor() override;
 
 public:

@@ -5,6 +5,10 @@
 
 class LandZone : public Zone {
 private:
+    /*
+     * Provides functionality to get the divisor as capacity
+     * @return int : Divisor 
+     */
     virtual int getDamageDivisor() override;
 
 public:

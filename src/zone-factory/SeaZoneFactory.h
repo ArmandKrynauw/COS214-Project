@@ -8,7 +8,11 @@ class SeaZoneFactory : public ZoneFactory {
 private:
 public:
     SeaZoneFactory();
-
+    /**
+     * Provides functionality to create a new sea Zone
+     * @param name Name of new sea Zone
+     * @return Zone pointer to new seaZone object
+    */
     Zone *createZone(std::string ZoneName);
 
     ~SeaZoneFactory();

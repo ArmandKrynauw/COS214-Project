@@ -39,11 +39,20 @@ void WarSocket::HTTPHandler(struct mg_connection *c, int ev, void *ev_data, void
         struct mg_ws_message *wm = (struct mg_ws_message *) ev_data;
         
         // ================================== API Cases ================================== 
-        if (checkMessage(wm, "GetCountry")) {
-            sendMessage(c, WarEngine::instance()->getCountryUnits());
+        if (checkMessage(wm, "loadNextRound")) {
+            sendMessage(c, Client::instance()->loadNextRound());
+        }
+        if (checkMessage(wm, "loadRoundResults")) {
+            sendMessage(c, Client::instance()->loadRoundResults());
+        }
+        if (checkMessage(wm, "selectSimulation")) {
+            sendMessage(c, Client::instance()->selectSimulation(1));
         }
         if (checkMessage(wm, "getAvailableSimulations")) {
             sendMessage(c, Client::instance()->getAvailableSimulations());
+        }
+        if (checkMessage(wm, "runNextRound")) {
+            sendMessage(c, Client::instance()->runNextRound());
         }
     }
     (void) fn_data;

@@ -43,7 +43,7 @@ public:
      * turn in the war. Newly generated resources is calculated using the
      * current mobilization and morale of a Faction.
      */
-    virtual void generateResources() = 0;
+    virtual void generateResources(int theatreResource) = 0;
 
     virtual int getResourceCount() = 0;
 
@@ -54,7 +54,7 @@ public:
      * @param theatre Theatre to sum attack power for
      * @return Sum of attack power
      */
-    virtual int getAttackPower(Theatre *theatre) = 0;
+    // virtual int getAttackPower(Theatre *theatre) = 0;
 
     virtual void setBaseResourceCount(int baseResourceCount) = 0;
 

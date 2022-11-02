@@ -127,7 +127,7 @@ public:
      * This method will be called each round before the simulation proceeds to
      * the purchase Unit phase.
     */
-    void generateCountryResources();
+    void generateCountryResources(const json& c,const json& a);
 
 
 

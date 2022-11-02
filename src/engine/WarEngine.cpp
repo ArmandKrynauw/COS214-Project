@@ -86,14 +86,49 @@ void WarEngine::checkMobilization(const json& data) {
     }
 }
 
+
+void WarEngine::generateCountryResources(const json& c,const json& a){
+    int sum =0;
+     
+    if(alliances.size()==0)
+    {
+        for (json country: c) {
+            sum = 0;
+
+            for (int i = 0; i < theatreSize; i++) { 
+              for (int j = 0; j < theatreSize; j++) { 
+               sum += theatres[i][j]->getResource(c["name"].get<std::string>());
+             }
+            }
+
+            countries[c["name"].get<std::string>()]->generateResources(sum);
+         }
+    }
+    else
+    {
+       for (json all: a) {
+
+           sum = 0;
+
+            for (int i = 0; i < theatreSize; i++) { 
+              for (int j = 0; j < theatreSize; j++) { 
+               sum += theatres[i][j]->getResource(a["name"].get<std::string>());
+             }
+            }
+            alliances[a["name"].get<std::string>()]->generateResources(sum);
+         }
+
+    }
+}
+
 void WarEngine::purchaseUnits(const json &data) {
+    // generateCountryResources();
     if (!data.is_array()) {
         throw WarException("Expected a JSON array.", "malformed_object");
     }
 
     for (json country: data) {
         for (json unit: country["units"]) {
-            countries[country["name"]]->generateResources();
             for (int i = 0; i < unit["quantity"]; i++) {
                 countries[country["name"]]->addEntity(
                         generateUnit(country["name"], unit["type"]));

@@ -23,10 +23,10 @@ void Country::checkMobilization(std::string warState, std::string newMobilizatio
     this->mobilization = this->mobilization->checkWarState(warState,newMobilization);
 }
 
-void Country::generateResources() {
+void Country::generateResources(int theatreResource) {
     //resourceCount += baseResourceCount;
     // 500 * 0.3
-    resourceCount += baseResourceCount * mobilization->getIndustryModifier();
+    resourceCount += baseResourceCount * mobilization->getIndustryModifier() + theatreResource;
 }
 
 int Country::getResourceCount() {
@@ -37,11 +37,11 @@ void Country::setBaseResourceCount(int baseResourceCount) {
     this->baseResourceCount = baseResourceCount;
 }
 
-int Country::getAttackPower(Theatre *theatre) {
-    // Search through theatres that country is battling
-    // Sum attack power of army in that specific theatre
-    return 10;
-}
+// int Country::getAttackPower(Theatre *theatre) {
+//     // Search through theatres that country is battling
+//     // Sum attack power of army in that specific theatre
+//     return 10;
+// }
 
 Alliance *Country::getAlliance() {
     return alliance;
@@ -152,6 +152,7 @@ json Country::removeCasualties() {
             }
         }
     }
+    return json {};
 }
 
 json Country::allUnitsToJSON(){

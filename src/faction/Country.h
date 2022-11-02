@@ -35,13 +35,13 @@ public:
      * turn in the war. Newly generated resources is calculated using the
      * current mobilization and morale of a Faction.
      */
-    void generateResources();
+    void generateResources(int theatreResource);
 
     int getResourceCount();
 
     void setBaseResourceCount(int baseResourceCount);
 
-    virtual int getAttackPower(Theatre *theatre) override;
+    // virtual int getAttackPower(Theatre *theatre) override;
 
     /**
      * Provides functionality determine whether a Faction is an Alliance

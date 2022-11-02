@@ -15,7 +15,7 @@ public:
 
     void removeCountry(Country *country);
 
-    virtual void generateResources() override;
+    virtual void generateResources(int theatreResource) override;
 
     virtual int getResourceCount() override;
 
@@ -28,7 +28,7 @@ public:
     virtual void chooseStrategy()
     override;  // For each member in alliance call chooseStrategy()
 
-    virtual int getAttackPower(Theatre *theatre) override;
+    // virtual int getAttackPower(Theatre *theatre) override;
 
 
     json toJSON();

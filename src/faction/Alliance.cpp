@@ -21,10 +21,12 @@ void Alliance::removeCountry(Country *country) {
     }
 }
 
-void Alliance::generateResources() {
-    // TODO: Add multiplier for members in alliance
+void Alliance::generateResources(int theatreResource) {
+    int base = theatreResource / members.size();  //split up resource between countries
+
+
     for (Faction *faction: members) {
-        faction->generateResources();
+        faction->generateResources(base);
     }
 }
 
@@ -56,15 +58,15 @@ void Alliance::chooseStrategy() {
     }
 }
 
-int Alliance::getAttackPower(Theatre *theatre) {
-    int power = 0;
+// int Alliance::getAttackPower(Theatre *theatre) {
+//     int power = 0;
 
-    for (Faction *faction: members) {
-        power += faction->getAttackPower(theatre);
-    }
+//     for (Faction *faction: members) {
+//         power += faction->getAttackPower(theatre);
+//     }
 
-    return power;
-}
+//     return power;
+// }
 
 json Alliance::toJSON(){
     json data;

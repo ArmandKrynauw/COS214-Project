@@ -47,6 +47,28 @@ void Alliance::chooseStrategy() {
     }
 }
 
+void Alliance::setResearch(int researchPoints,std::string category)
+{
+    
+    
+    // Faction::setResearch(researchPoints,category);
+    // this->resourceCount -= researchPoints;
+
+    // if(research.at(0)>=1000)
+    // {
+    //     research.at(0) -= 1000;
+    //     baseResourceCount = baseResourceCount*1.2;
+        
+    // }
+    // else if(research.at(1)>=1000)
+    // {
+    //     research.at(1) -= 1000;
+    //     morale = morale*1.2;
+    // }
+
+
+}
+
 // int Alliance::getAttackPower(Theatre *theatre) {
 //     int power = 0;
 

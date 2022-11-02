@@ -17,6 +17,9 @@ public:
 
      void generateResources(int theatreResource) override;
 
+    virtual void setResearch(int researchPoints,std::string category);
+
+
 
     virtual Alliance *getAlliance() override;
 

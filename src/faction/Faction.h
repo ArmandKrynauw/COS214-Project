@@ -35,6 +35,7 @@ public:
 
     void setName(std::string name);
 
+
     void decreaseMoraleBy(int amount);
 
     void increaseMoraleBy(int amount);
@@ -47,7 +48,7 @@ public:
     virtual void generateResources(int theatreResource)=0;
 
 
-    virtual void setResearch(int researchPoints,std::string category);
+    virtual void setResearch(int researchPoints,std::string category)=0;
 
     /**
      * This method is used to sum all the attack power of a faction for a

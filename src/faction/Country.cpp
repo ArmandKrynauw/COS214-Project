@@ -41,18 +41,21 @@ void Country::setBaseResourceCount(int baseResourceCount) {
 
 void Country::setResearch(int researchPoints,std::string category)
 {
+    
+    
     Faction::setResearch(researchPoints,category);
     this->resourceCount -= researchPoints;
 
     if(research.at(0)>=1000)
     {
         research.at(0) -= 1000;
-        baseResourceCount = baseResourceCount*0.2;
+        baseResourceCount = baseResourceCount*1.2;
+        
     }
     else if(research.at(1)>=1000)
     {
         research.at(1) -= 1000;
-        morale = morale*0.2;
+        morale = morale*1.2;
     }
 
 

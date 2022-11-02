@@ -46,7 +46,7 @@ void WarSocket::HTTPHandler(struct mg_connection *c, int ev, void *ev_data, void
             sendMessage(c, Client::instance()->loadRoundResults());
         }
         if (checkMessage(wm, "selectSimulation")) {
-            sendMessage(c, Client::instance()->selectSimulation(1));
+            sendMessage(c, Client::instance()->selectSimulation(0));
         }
         if (checkMessage(wm, "getAvailableSimulations")) {
             sendMessage(c, Client::instance()->getAvailableSimulations());

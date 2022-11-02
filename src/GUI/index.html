@@ -40,15 +40,15 @@
       <div id="Day"></div>
       <div>
         <button type="button" class="btn btn-secondary MapBTN">Map</button>
-        <button type="button" class="btn btn-secondary nextRound">NEXT</button>
+        <button type="button" class="btn btn-secondary nextRound">Start</button>
       </div>
     </div>
     <div class="fightdisplay">
       <!-- Card left -->
       <div class="card" style="width: 18rem" id="enemyLeft">
         <img
-          class="card-img-top img1"
-          src="./media/images/Germany.png"
+          class="card-img-top img0"
+          src="./media/images/new.png"
           alt="Card image cap"
         />
         <div class="card-body head">
@@ -74,7 +74,7 @@
       <div class="card" id="enemyRight" style="width: 18rem">
         <img
           class="card-img-top img1"
-          src="./media/images/America.png"
+          src="./media/images/new.png"
           alt="Card image cap"
         />
         <div class="card-body head">
@@ -144,40 +144,6 @@
       <!-- Modal content -->
       <div class="modal-content"></div>
     </div>
-    <script>
-      let ws = new WebSocket("ws://127.0.0.1:8000/websocket");
-      var test_data
-      connect = () => {
-          if (!ws) return;
-          ws.onopen = function () {
-            console.log("CONNECTION OPENED");
-          };
-          ws.onmessage = function (ev) {
-            //When warengine respons with a message it is sent here.
-            test_data = JSON.parse(ev.data);
-            console.log("RECEIVED: " + test_data[0]);
-          };
-          ws.onerror = function (ev) {
-            console.log("ERROR: " + ev);
-          };
-          ws.onclose = function () {
-            console.log("CONNECTION CLOSED");
-            ws = null;
-          };
-
-          $(`body`).click(() => {
-            if(!ws){
-              return;
-            }
-            //Command to send to warengine
-            ws.send("getAvailableSimulations");
-      });;
-      };
-
-      connect();
-      //assign data here with parsed data "test_data" 
-      //const data = test_data;
-    </script>
     <script src="./script.js"></script>
   </body>
 </html>

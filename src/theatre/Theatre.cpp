@@ -195,14 +195,19 @@ void Theatre::printStrategies() {
 
 
 int Theatre::getResource(std::string Faction) {
-    return resource * calculateControl(Faction);
+    return (checkForFaction(Faction)) ?  this->resource * calculateControl(Faction) : 0;   
 }
 
 float Theatre::calculateControl(std::string Faction) {
-    float ourSum = 0;
-    float TotalSum = 0;
-    float final = 0;
+    if(!zones.count(Faction)){
+       throw WarException("faction-not-found");
+    }
+
+    float ourSum = 0.0;
+    float TotalSum = 0.0;
+    float final = 0.0;
     for (int i = 0; i < limit; i++) {
+        
         ourSum = zones[Faction][i]->getTotalDamage();
         std::unordered_map<std::string, std::vector<Zone *>>::iterator it = zones.begin();
 
@@ -210,13 +215,16 @@ float Theatre::calculateControl(std::string Faction) {
             TotalSum += it->second[i]->getTotalDamage();
             it++;
         }
-
-        ourSum = TotalSum / ourSum;
+        
+        if(ourSum != 0){
+            ourSum = TotalSum / ourSum;
+        }
         final += ourSum;
+        
     }
 
 
-    return final / zones.size();
+    return final / limit;
 }
 
 json Theatre::toJSON(int row, int col){

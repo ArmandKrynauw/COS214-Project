@@ -30,7 +30,7 @@
                         { "MediumLandUnit": "BMP-3" },
                         { "MediumSeaUnit": "Braunschweig class" }
                     ],
-                    "baseResourceCount": 1000
+                    "baseResourceCount": 600
                 },
                 {
                     "name": "America",
@@ -45,7 +45,7 @@
                         { "MediumLandUnit": "HMMWV" },
                         { "MediumSeaUnit": "Destroyer" }
                     ],
-                    "baseResourceCount": 1000
+                    "baseResourceCount": 600
                 },
                 {
                   "name": "France",
@@ -60,7 +60,7 @@
                       { "MediumLandUnit": "BMP-3" },
                       { "MediumSeaUnit": "Braunschweig class" }
                   ],
-                  "baseResourceCount": 1000
+                  "baseResourceCount": 600
               },
               {
                 "name": "Russia",
@@ -75,7 +75,7 @@
                     { "MediumLandUnit": "BMP-3" },
                     { "MediumSeaUnit": "Braunschweig class" }
                 ],
-                "baseResourceCount": 1000
+                "baseResourceCount": 600
             }
             ],
             "alliances": [

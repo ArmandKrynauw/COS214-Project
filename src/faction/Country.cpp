@@ -12,6 +12,8 @@ Country::Country(std::string name) : Faction(name) {
     armedForces["air"] = new ArmedForce("Air Force", "air");
     this->mobilization = new PartialMobilization("pre-war");
     alliance = NULL;
+    baseResourceCount = 0;
+    resourceCount = 0;
 }
 
 void Country::setMobilization(std::string mobilization)

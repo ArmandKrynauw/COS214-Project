@@ -35,7 +35,7 @@ public:
      * turn in the war. Newly generated resources is calculated using the
      * current mobilization and morale of a Faction.
      */
-    void generateResources(int theatreResource);
+    virtual void generateResources(int theatreResource) override;
 
     int getResourceCount();
 

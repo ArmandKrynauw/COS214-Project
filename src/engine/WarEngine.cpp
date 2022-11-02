@@ -27,7 +27,7 @@ void WarEngine::loadTheatres(const json& data){
         for (int j = 0; j < theatreSize; j++) {
             theatres[i][j] =
                     new Theatre(data[counter]["name"].get<std::string>(),
-                                true, 69);  // defaut all theatres sea for testing
+                                true, data[counter]["resourceCount"].get<int>());  // defaut all theatres sea for testing
             counter++;
         }
     }
@@ -87,26 +87,25 @@ void WarEngine::checkMobilization(const json& data) {
 }
 
 
-void WarEngine::generateCountryResources(const json& c,const json& a){
-    int sum =0;
-     
+void WarEngine::generateCountryResources(const json& counts,const json& alls){
+    int sum = 0;
     if(alliances.size()==0)
     {
-        for (json country: c) {
+        for (json c: counts) {
             sum = 0;
 
             for (int i = 0; i < theatreSize; i++) { 
               for (int j = 0; j < theatreSize; j++) { 
                sum += theatres[i][j]->getResource(c["name"].get<std::string>());
+               //std::cout<<sum<<std::endl;
              }
             }
-
             countries[c["name"].get<std::string>()]->generateResources(sum);
          }
     }
     else
     {
-       for (json all: a) {
+       for (json a: alls) {
 
            sum = 0;
 

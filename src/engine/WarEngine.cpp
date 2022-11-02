@@ -19,16 +19,14 @@ WarEngine::WarEngine() {
 }
 
 void WarEngine::loadTheatres(const json& data){
-    theatreSize = 3;
+    theatreSize = pow(data.size(), 0.5);
     theatres = new Theatre **[theatreSize];
-    int counter = 0;
+
     for (int i = 0; i < theatreSize; i++) {
         theatres[i] = new Theatre *[theatreSize];
         for (int j = 0; j < theatreSize; j++) {
-            theatres[i][j] =
-                    new Theatre(data[counter]["name"].get<std::string>(),
-                                true, data[counter]["resourceCount"].get<int>());  // defaut all theatres sea for testing
-            counter++;
+            int counter = theatreSize * i + j;
+            theatres[i][j] = new Theatre(data[counter]["name"], true, data[counter]["resourceCount"]);
         }
     }
 }
@@ -74,7 +72,6 @@ void WarEngine::loadAlliances(const json &data) {
         alliances[a["name"]] = alliance;
     }
 }
-
 
 // ============================================================================
 // SIMULATION HELPER FUNCTIONS
@@ -495,17 +492,6 @@ void WarEngine::viewStrategies() {
 // JSON UTILITY FUNCTIONS
 // ============================================================================
 
-json WarEngine::getCountryUnits() {
-    json data;
-
-    std::unordered_map<std::string, Country *>::iterator it;
-    for (it = countries.begin(); it != countries.end(); ++it) {
-        data.push_back(it->second->getListOfUnits());
-    }
-
-    return data;
-}
-
 json WarEngine::getStats(){
     return json{{"engine", getEngineStats()},
                 {"countries", getCountryStats()},
@@ -580,6 +566,32 @@ json WarEngine::getTheatreStats(){
     }
 
     return json{{"data", data}};
+}
+
+json WarEngine::getTheatreUnits() {
+    json data;
+    std::unordered_map<std::string, std::string> coordinates;
+
+    // Derive coordinates for each Theatre
+    for (int i = 0; i < theatreSize; i++) {
+        for (int j = 0; j < theatreSize; j++) {
+            std::string c = std::to_string(i) + "-" + std::to_string(j); 
+            coordinates[theatres[i][j]->getName()] = c;
+        }
+    }
+
+    std::unordered_map<std::string, Country *>::iterator it;
+
+    // Get list of units for each country
+    for (it = countries.begin(); it != countries.end(); ++it) {
+        json j = it->second->getListOfUnits();
+        for (json& unit : j["units"]) {
+            unit["coordinates"] = coordinates[unit["theatre"]];
+        }
+        data.push_back(j);
+    }
+
+    return data;
 }
 
 std::vector<std::string> WarEngine::setToString(json array) {

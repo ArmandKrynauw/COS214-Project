@@ -132,14 +132,6 @@ public:
 
 
     // ====================== JSON UTILITIES ======================
-
-    /**
-     * Provides functionality to generate a JSON array of the current Unit
-     * states for each Country sorted by Theatre.
-     *
-     * @return JSON array with each Country's units
-    */
-    nlohmann::json getCountryUnits();
     /**
      * This method calls all the stats getters to generate on big stats object
     */
@@ -149,10 +141,14 @@ public:
     json getCountryStats();
     json getAllianceStats();
     json getOverallUnits();
-
-
     json getTheatreStats();
-    // Replaces getCountryUnits()
+
+    /**
+     * Provides functionality to generate a JSON array of the current Unit
+     * states for each Country sorted by Theatre.
+     *
+     * @return JSON array with each Country's units
+    */
     json getTheatreUnits();
 
    

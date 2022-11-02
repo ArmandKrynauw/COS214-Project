@@ -48,7 +48,8 @@ json Unit::toJSON() const {
     return json{
             {"name",    name},
             {"type",    type},
-            {"hp",      HP},
+            {"initialHP", initialHP},
+            {"currentHP", HP},
             {"damage",  damage},
             {"theatre", (theatre) ? theatre->getName() : "None"}
     };

@@ -37,6 +37,8 @@ void WarSocket::HTTPHandler(struct mg_connection *c, int ev, void *ev_data, void
     } else if (ev == MG_EV_WS_MSG) {
         // Got websocket frame. Received data is wm->data. Echo it back!
         struct mg_ws_message *wm = (struct mg_ws_message *) ev_data;
+
+        std::cout << wm->data.ptr << std::endl;
         
         // ================================== API Cases ================================== 
         if (checkMessage(wm, "loadNextRound")) {

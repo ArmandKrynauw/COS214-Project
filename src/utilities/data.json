@@ -1,13 +1,33 @@
 {
     "engine": {
         "stage": "Early Stage",
-		"duration" : 4,
+        "duration": 4,
         "day": 1,
         "numberOfCountries": 2,
         "numberOfAlliances": 2
     },
     "countries": {
         "data": [
+            {
+                "name": "Germany",
+                "resources": 50,
+                "totalUnits": 10
+            },
+            {
+                "name": "America",
+                "resources": 60,
+                "totalUnits": 5
+            },
+            {
+                "name": "France",
+                "resources": 40,
+                "totalUnits": 15
+            },
+            {
+                "name": "Russia",
+                "resources": 45,
+                "totalUnits": 18
+            }
         ]
     },
     "alliances": {

@@ -26,13 +26,13 @@ class WarEngine {
 private:
     std::unordered_map<std::string, Alliance *> alliances;
     std::unordered_map<std::string, Country *> countries;
+    Theatre ***theatres;
+    int theatreSize;
 
     Escalation *warStage;
     // Depreciated!!!!
     std::vector<Faction *> factions;
 
-    Theatre ***theatres;
-    int theatreSize;
     std::unordered_map<std::string,
             std::unordered_map<std::string, std::string>>
             countryUnitNames;
@@ -122,6 +122,13 @@ public:
      * @throws WarException if Country or Type is not found
      */
     Unit *generateUnit(const std::string &country, const std::string &type);
+
+    /**
+     * This method will be called each round before the simulation proceeds to
+     * the purchase Unit phase.
+    */
+    void generateCountryResources();
+
 
 
     // ====================== JSON UTILITIES ======================

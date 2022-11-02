@@ -21,6 +21,7 @@ protected:
     int baseResourceCount;
     int resourceCount;
     Mobilization *mobilization;
+    Alliance* alliance;
 
 public:
     Faction(std::string name);

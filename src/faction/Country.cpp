@@ -28,8 +28,6 @@ void Country::generateResources() {
     resourceCount += baseResourceCount * mobilization->getIndustryModifier();
 }
 
-
-
 int Country::getResourceCount() {
     return resourceCount;
 }

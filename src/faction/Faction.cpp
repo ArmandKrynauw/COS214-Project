@@ -3,8 +3,6 @@
 Faction::Faction(std::string name) {
     this->name = name;
     this->id = uuid::generate();
-    baseResourceCount = 0;
-    resourceCount = 0;
 }
 
 std::string Faction::getName() {

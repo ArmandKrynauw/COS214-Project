@@ -79,10 +79,6 @@
             }
             ],
             "alliances": [
-                {
-                    "name" : "Alliance1",
-                    "countries" : ["Germany", "America"] 
-                }
             ],
             "rounds": [
                 {

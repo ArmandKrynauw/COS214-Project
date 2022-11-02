@@ -1,4 +1,6 @@
-// New Work
+/**
+ * Temporary json file to display the data
+ */
 const data = {
   engine: {
     stage: "Early Stage",
@@ -272,6 +274,10 @@ const data = {
 };
 
 /*-------nextBTN-------*/
+/**
+ * this function is to simulate the next day in the battle it get data from the war engine object
+ */
+
 let nextIndex = 1;
 const maxIndex = data.engine.duration;
 $(`.nextRound`).click(() => {
@@ -284,15 +290,20 @@ $(`.nextRound`).click(() => {
 });
 $(`#Day`).text(`Day: ${nextIndex}`);
 
-// Add name
+/**
+ * this function is to add the name of the country to the map
+ */
 $(`#BattleName`).text("war in planet earth");
-
-// Set state
+/**
+ * this function is to set the state of the battle
+ */
 $(`#State`).text(data.engine.stage);
 
-// Set day
-
-//Load theatres
+/**
+ * This fucntion puts the representative theatres into the theatremap so that it can be disaplyed to the client
+ * @logic loop throught the json data and loop through each theathre then we loop through each threatre threatres data and place the name and info about the theatre in the
+ * block
+ */
 const theatres = data.theatres.data;
 theatres.forEach((theatre) => {
   $(`.area_${theatre.coordinates} > .TheatreName`).text(theatre.name);
@@ -306,7 +317,7 @@ theatres.forEach((theatre) => {
   }
 });
 
-// modal
+/*----------modal----------*/
 
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -314,7 +325,16 @@ var modal = document.getElementById("myModal");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
+/**
+ * this function opens the modal and displays the countries inside the current threatre nad the units that are inside of the threatre
+ * @stage1 open the modal with the correct data
+ * @stage2 loop through the theatres and find the correct theatre
+ * @stage3 loop through the theatre units and find the correct theatre
+ */
 showfight = (id) => {
+  /**
+   * @stage1 open the modal with the correct data
+   */
   modal.style.display = "block";
   const theatre = data.theatres.data;
   let loadIndex = -1;
@@ -328,9 +348,10 @@ showfight = (id) => {
     }
   }
 
-  // console.log(loadIndex.data);
+  /**
+   * @stage2 loop through the theatres and find the correct theatre
+   */
   loadIndex.forEach((theatreData) => {
-    // console.log(theatreData.name);
     const str = `
       <div class="card niceCards" style="width: 18rem">
           <img
@@ -352,9 +373,10 @@ showfight = (id) => {
       `;
     $(`.modal-content`).append(str);
   });
-  // add unit to modal
+  /**
+   * @stage3 this function adds the units to the modal
+   */
   const theatreUnits = data.theatreUnits.data;
-  // console.log(theatreUnits);
   theatreUnits.forEach((theatreUnit) => {
     console.log(theatreUnit.units[0].units);
     if (theatreUnit.units[0].coordinates == id) {
@@ -378,20 +400,25 @@ showfight = (id) => {
   });
 };
 
+/**
+ * Opens the units for the specific theatre
+ */
 showUnitsModal = (name) => {
-  // console.log(name);
   $(`.${name}`).toggleClass("hide");
 };
 
+/**
+ * closes the theatre modal
+ */
 $(document).on("keyup", function (e) {
   if (e.key == "Enter" || e.key == "Escape") {
     modal.style.display = "none";
   }
 });
 
-// When the user clicks on <span> (x), close the modal
-
-// When the user clicks anywhere outside of the modal, close it
+/**
+ * closes the theatre modal
+ */
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
@@ -422,8 +449,10 @@ overallUnits.forEach((overallUnit, i = 0) => {
 });
 
 /*--------Allies---------*/
+/**
+ * this function adds the allies to the allies section
+ */
 const allies = data.alliances.data;
-// console.log(allies);
 
 allies.forEach((ally, i = 0) => {
   const countries = ally.countries;
@@ -433,7 +462,9 @@ allies.forEach((ally, i = 0) => {
     );
   });
 });
-
+/**
+ * These next few functions are there to dispaly the information on the units and 2 countries that are fighting
+ */
 showLeftTroops = () => {
   $(`.list0`).toggleClass("hide");
 };
@@ -450,8 +481,9 @@ showRightAllies = () => {
   $(`.Allies1List`).toggleClass("hide");
 };
 
-// Show map
-
+/**
+ * this function shows the map
+ */
 $(`.MapBTN`).click(() => {
   $(`.fightingMap`).toggleClass("hide");
 });

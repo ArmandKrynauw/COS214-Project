@@ -20,8 +20,8 @@ void WarSocket::sendMessage(struct mg_connection *c, json data) {
     mg_ws_send(c, str, size, WEBSOCKET_OP_TEXT);
 }
 
-bool WarSocket::checkMessage(struct mg_ws_message* message, char* compare) {
-    return strcmp(message->data.ptr, compare) == 0;
+bool WarSocket::checkMessage(struct mg_ws_message* message, std::string compare) {
+    return strcmp(message->data.ptr, compare.c_str()) == 0;
 }
 
 void WarSocket::HTTPHandler(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {

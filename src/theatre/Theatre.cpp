@@ -218,3 +218,31 @@ float Theatre::calculateControl(std::string Faction) {
 
     return final / zones.size();
 }
+
+json Theatre::toJSON(int row, int col){
+    std::string coordinates = std::to_string(row) + "-" + std::to_string(col);
+    json data = json::array();
+    std::unordered_map<std::string, std::vector<Zone *>>::iterator it = zones.begin();
+    int landPower = 0;
+    int seaPower = 0;
+    int airPower = 0;
+        while (it != zones.end()){
+            if(limit == 3){
+                    data.push_back(json{{"name", it->first},
+                            {"landPower", it->second[0]->getTotalDamage()},
+                            {"seaPower", it->second[2]->getTotalDamage()},
+                            {"airPower", it->second[1]->getTotalDamage()}});
+            }
+            else{
+                    data.push_back(json{{"name", it->first},
+                            {"landPower", it->second[0]->getTotalDamage()},
+                            {"seaPower", 0},
+                            {"airPower", it->second[1]->getTotalDamage()}});
+            }
+            it++;
+        }
+    
+    return json{{"name", getName()},
+                {"coordinates", coordinates},
+                {"data", data}};
+}

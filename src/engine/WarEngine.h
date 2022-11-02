@@ -62,6 +62,7 @@ public:
 
     // ====================== LOAD SIMULATIONS ======================
 
+    void loadTheatres(const json& theatres);
     /**
      * Provides functionality to load the initial war simulation setup from
      * a JSON object. This initial setup includes loading Countries and
@@ -135,17 +136,19 @@ public:
     /**
      * This method calls all the stats getters to generate on big stats object
     */
+    //Complete
     json getStats();
     json getEngineStats();
     json getCountryStats();
     json getAllianceStats();
+    json getOverallUnits();
 
 
     json getTheatreStats();
     // Replaces getCountryUnits()
     json getTheatreUnits();
 
-    json getOverallUnits();
+   
     
     json getCasualties();
 

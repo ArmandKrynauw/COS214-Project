@@ -16,15 +16,17 @@ WarEngine::WarEngine() {
     unitFactories["land"] = new LandUnitFactory();
     unitFactories["sea"] = new SeaUnitFactory();
     unitFactories["air"] = new AirUnitFactory();
+}
 
+void WarEngine::loadTheatres(const json& data){
     theatreSize = 3;
     theatres = new Theatre **[theatreSize];
-    int counter = 1;
+    int counter = 0;
     for (int i = 0; i < theatreSize; i++) {
         theatres[i] = new Theatre *[theatreSize];
         for (int j = 0; j < theatreSize; j++) {
             theatres[i][j] =
-                    new Theatre("Theatre-" + std::to_string(counter),
+                    new Theatre(data[counter]["name"].get<std::string>(),
                                 true, 69);  // defaut all theatres sea for testing
             counter++;
         }
@@ -477,7 +479,8 @@ json WarEngine::getStats(){
     return json{{"engine", getEngineStats()},
                 {"countries", getCountryStats()},
                 {"alliances", getAllianceStats()},
-                {"overallUnits", getOverallUnits()}};
+                {"overallUnits", getOverallUnits()},
+                {"theatres" , getTheatreStats()}};
 }
 
 json WarEngine::getEngineStats(){
@@ -534,6 +537,18 @@ json WarEngine::getOverallUnits(){
     }
 
     return json{{"data" , array}};
+}
+
+json WarEngine::getTheatreStats(){
+    json data = json::array();
+    
+    for (int i = 0; i < theatreSize; i++) {
+        for (int j = 0; j < theatreSize; j++) {
+            data.push_back(theatres[i][j]->toJSON(i,j));
+        }
+    }
+
+    return json{{"data", data}};
 }
 
 std::vector<std::string> WarEngine::setToString(json array) {

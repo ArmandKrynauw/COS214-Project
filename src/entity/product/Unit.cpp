@@ -55,11 +55,6 @@ json Unit::toJSON() const {
 }
 
 json Unit::unitToJSON() const {
-    int i = 0;
-    if(type == "land"){
-
-    }
-
     return json{
             {"name",    name},
             {"type",    type},

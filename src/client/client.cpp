@@ -133,6 +133,7 @@ void Client::selectSimulation(int index) {
     }
 
     WarEngine::instance()->loadSimulation(simulations[index]);
+    WarEngine::instance()->loadTheatres(simulations[index]["theatres"]);
     chosenSimulation = simulations[index];
 }
 

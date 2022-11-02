@@ -7,6 +7,7 @@
 #include "../utilities/WarException.h"
 #include "../faction/Faction.h"
 #include "../utilities/uuid.h"
+#include "../utilities/json.hpp"
 #include "../war-strategy/PlanStrategy.h"
 #include "../war-strategy/CounterStrategy.h"
 #include "../war-strategy/AttackStrategy.h"
@@ -16,6 +17,7 @@
 #include "Zone.h"
 #include <map>
 
+using json = nlohmann::json;
 class Theatre {
 private:
     std::string name;
@@ -128,6 +130,8 @@ public:
     bool checkForFaction(std::string factionName);
 
     void printStrategies();
+
+    json toJSON(int row, int col);
 
     virtual ~Theatre();
 };

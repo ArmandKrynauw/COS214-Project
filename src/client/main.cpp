@@ -3,7 +3,7 @@
 
 int main(int argc, char **argv) {
     bool flag = argc > 1 ? std::string(argv[1]) == "gui" : false;
-    flag = false;
+    // flag = false;
     
     if (flag) {
         Client::instance()->runGUIMode();
@@ -12,7 +12,6 @@ int main(int argc, char **argv) {
     } else {
         Client::instance()->runTerminalMode();
     }
-
 
     return 0;
 }

@@ -44,6 +44,12 @@ clean:
 
 run:
 	$(BUILD_DIR)/$(TARGET_EXEC) 
+
+terminal:
+	$(BUILD_DIR)/$(TARGET_EXEC) terminal
+
+socket:
+	$(BUILD_DIR)/$(TARGET_EXEC) gui
 	
 # Include the .d makefiles. The - at the front suppresses the errors of missing
 # Makefiles. Initially, all the .d files will be missing, and we don't want those

@@ -42,27 +42,46 @@ void WarSocket::HTTPHandler(struct mg_connection *c, int ev, void *ev_data, void
         //Get command
         char *command = mg_json_get_str(json, "$.command");
 
-        std::cout << command << std::endl;
         
         // ================================== API Cases ================================== 
-        if (checkMessage(command, "loadNextRound")) {
-            sendMessage(c, Client::instance()->loadNextRound());
+        //check to see if correct data was given
+        if(command){
+            std::cout << command << std::endl;
+            if (checkMessage(command, "loadNextRound")) {
+                sendMessage(c, Client::instance()->loadNextRound());
+            }
+            else if (checkMessage(command, "loadRoundResults")) {
+                sendMessage(c, Client::instance()->loadRoundResults());
+            }
+            else if (checkMessage(command, "getAvailableSimulations")) {
+                sendMessage(c, Client::instance()->getAvailableSimulations());
+            }
+            else if (checkMessage(command, "runNextRound")) {
+                sendMessage(c, Client::instance()->runNextRound());
+            }
+            else if (checkMessage(command, "selectSimulation")) {
+                //Wanted to check if param was provided but if is isn't, d is initialized to 0 which is a valid input
+                //Will have to figure it out
+                double d;
+                mg_json_get_num(json, "$.param", &d);
+                int param = (int) d;
+                std::cout << "Param: " << param << std::endl;
+                sendMessage(c, Client::instance()->selectSimulation(param));
+            }
+            else{
+                //A command was given that does not exist
+                std::cout << "Error: Invalid command " << command << std::endl;
+                const char *str = "{\"error\": \"Invalid command\"}";
+                mg_ws_send(c, str, strlen(str), WEBSOCKET_OP_TEXT);
+            }
         }
-        if (checkMessage(command, "loadRoundResults")) {
-            sendMessage(c, Client::instance()->loadRoundResults());
-        }
-        if (checkMessage(command, "getAvailableSimulations")) {
-            sendMessage(c, Client::instance()->getAvailableSimulations());
-        }
-        if (checkMessage(command, "runNextRound")) {
-            sendMessage(c, Client::instance()->runNextRound());
-        }
-        if (checkMessage(command, "selectSimulation")) {
-            double d;
-            mg_json_get_num(json, "$.param", &d);
-            int param = (int) d;
-            std::cout << "Param: " << param << std::endl;
-            sendMessage(c, Client::instance()->selectSimulation(param));
+        else{
+            //Non valid json was sent to the warengine
+            //Might want to use sendMessage funtion, don't know how to create json type string
+            //This works
+            std::cout << "Error: Check JSON data" << std::endl;
+            const char *str = "{\"error\": \"Check JSON data\"}";
+            mg_ws_send(c, str, strlen(str), WEBSOCKET_OP_TEXT);
         }
     }
     (void) fn_data;

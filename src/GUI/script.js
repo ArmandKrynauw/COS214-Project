@@ -36,8 +36,12 @@ function connectWarSocket() {
   };
   ws.onmessage = function (ev) {
     data = JSON.parse(ev.data);
-    // console.log(data);
-    updateUI(data);
+    if(data.hasOwnProperty("error")){
+      console.log("Error: " + data.error);
+    }
+    else{
+      updateUI(data);
+    }
   };
   ws.onerror = function (ev) {
     console.log("Error: " + ev);

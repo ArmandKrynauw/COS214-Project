@@ -15,11 +15,13 @@ body {
 }
 
 .header {
+  width: 100%;
   background-color: var(--darkgray);
   height: 100px;
   color: var(--white);
+  display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 

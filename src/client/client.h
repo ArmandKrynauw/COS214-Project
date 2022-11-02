@@ -22,9 +22,14 @@ public:
     void runGUIMode();
 
     // =================== WAR ENGINE CONTROL FUNCTIONS ===================
+    json loadNextRound();
+    json loadRoundResults();
+    json loadPreviousRound();
+    json selectSimulation(int index);
+
+    // Depreciated!! Needs to be merged into loadNextRound
+    // Ask Armand before removing
     json runNextRound();
-    void goToPreviousRound();
-    void selectSimulation(int index);
 
     // =================== JSON UTILITY FUNCTIONS ===================
 

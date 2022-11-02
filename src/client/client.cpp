@@ -40,6 +40,44 @@ void Client::runGUIMode() {
 // WAR ENGINE CONTROL FUNCTIONS
 // ======================================================================================
 
+json Client::loadNextRound() {
+    std::ifstream file("utilities/data.json");
+    if (!file) {
+        throw WarException("file-not-found");
+    }
+    return json::parse(file);
+}
+
+json Client::loadRoundResults() {
+    std::ifstream file("utilities/data.json");
+    if (!file) {
+        throw WarException("file-not-found");
+    }
+    return json::parse(file);
+}
+
+json Client::loadPreviousRound() {
+    std::ifstream file("utilities/data.json");
+    if (!file) {
+        throw WarException("file-not-found");
+    }
+    return json::parse(file);
+}
+
+json Client::selectSimulation(int index) {
+    if (index < 0 || index >= simulations.size()) {
+        throw WarException("out-of-bounds");
+    }
+
+    WarEngine::instance()->loadSimulation(simulations[index]);
+    WarEngine::instance()->loadTheatres(simulations[index]["theatres"]);
+    chosenSimulation = simulations[index];
+
+    // Don't ask why
+    return loadPreviousRound();
+}
+
+// Depreciated
 json Client::runNextRound() {
         WarEngine::instance()->checkMobilization(chosenSimulation["rounds"][currentRound]["mobilization"]);
         WarEngine::instance()->checkEscalation(chosenSimulation["rounds"][currentRound]["WarState"]);
@@ -52,18 +90,6 @@ json Client::runNextRound() {
         WarEngine::instance()->CommenceBattle();
         currentRound++;
         return WarEngine::instance()->getRoundResults();
-}
-
-void Client::goToPreviousRound() { }
-
-void Client::selectSimulation(int index) {
-    if (index < 0 || index >= simulations.size()) {
-        throw WarException("out-of-bounds");
-    }
-
-    WarEngine::instance()->loadSimulation(simulations[index]);
-    WarEngine::instance()->loadTheatres(simulations[index]["theatres"]);
-    chosenSimulation = simulations[index];
 }
 
 // ======================================================================================

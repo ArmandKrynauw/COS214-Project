@@ -345,11 +345,42 @@ showfight = (id) => {
             <p class="SeaPower"><i class="fa-solid fa-ship"></i>  SeaPower: ${theatreData.seaPower}</p>
             <p class="AirPower"><i class="fa-solid fa-jet-fighter"></i>  AirPower: ${theatreData.airPower}</p>
             <p class="LandPower"><i class="fa-solid fa-person-rifle"></i>  LandPower: ${theatreData.landPower}</p>
-          </div>
+            <p class="UnitsShow" onclick="showUnitsModal('${theatreData.name}')"> <i class="fa-solid fa-truck-plane"></i>  Units  <i class="fa-solid fa-chevron-down"></i></p>
+            <ul class="list-group list-group-flush ${theatreData.name} hide "></ul>
+            </div>
         </div>
       `;
     $(`.modal-content`).append(str);
   });
+  // add unit to modal
+  const theatreUnits = data.theatreUnits.data;
+  // console.log(theatreUnits);
+  theatreUnits.forEach((theatreUnit) => {
+    console.log(theatreUnit.units[0].units);
+    if (theatreUnit.units[0].coordinates == id) {
+      const units = theatreUnit.units[0].units;
+      units.forEach((unit) => {
+        let type;
+        if (unit.type === "land") {
+          type = `<i class="fa-solid fa-person-rifle"></i>`;
+        } else if (unit.type === "air") {
+          type = `<i class="fa-solid fa-jet-fighter"></i>`;
+        } else {
+          type = `<i class="fa-solid fa-ship"></i>`;
+        }
+        $(`.${theatreUnit.name}`).append(
+          `<li class="list-group-item">${type} ${unit.name} ${Math.round(
+            (unit.currentHP / unit.initialHP) * 100
+          )}%</li>`
+        );
+      });
+    }
+  });
+};
+
+showUnitsModal = (name) => {
+  // console.log(name);
+  $(`.${name}`).toggleClass("hide");
 };
 
 $(document).on("keyup", function (e) {

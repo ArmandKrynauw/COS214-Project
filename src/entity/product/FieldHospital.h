@@ -7,11 +7,15 @@
 class FieldHospital : public SupportCompany {
 public:
     FieldHospital(Entity *entity);
+    /**
+     * Provides functionality to return the entity's damage
+     * @return int : damage
+     */
 
     int getDamage() override;
 
     /**
-     * Calculates the result of the unit's HP *1.25
+     * Provides functionality to calculate the result of the entity's HP *1.25
      * @return int : HP
      */
 

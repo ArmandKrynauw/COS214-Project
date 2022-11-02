@@ -47,26 +47,22 @@ void Alliance::chooseStrategy() {
     }
 }
 
+    std::vector<Faction*> Alliance::getMembers(){
+        return members;
+    }
+
+
 void Alliance::setResearch(int researchPoints,std::string category)
 {
-    
-    
-    // Faction::setResearch(researchPoints,category);
-    // this->resourceCount -= researchPoints;
+    Faction::setResearch(researchPoints,category);    
+}
 
-    // if(research.at(0)>=1000)
-    // {
-    //     research.at(0) -= 1000;
-    //     baseResourceCount = baseResourceCount*1.2;
-        
-    // }
-    // else if(research.at(1)>=1000)
-    // {
-    //     research.at(1) -= 1000;
-    //     morale = morale*1.2;
-    // }
+int Alliance::getResearch(int i){
+    return research[i];
+}
 
-
+void Alliance::resetResearch(int index){
+    research[index] -= 1000;
 }
 
 // int Alliance::getAttackPower(Theatre *theatre) {

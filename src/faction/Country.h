@@ -11,14 +11,15 @@
 #include "../mobilization/Mobilization.h"
 #include "../mobilization/PartialMobilization.h"
 
+class Alliance;
+
 using json = nlohmann::json;
 
 class Country : public Faction {
 private:
     std::unordered_map<std::string, ArmedForce *> armedForces;
     Mobilization* mobilization;
-    int baseResourceCount;
-    int resourceCount;
+
 
 
 public:
@@ -30,6 +31,10 @@ public:
      */
 
     void  setMobilization(std::string mobilization);
+    /**
+     * Provides functionality to check whether country is allowed to change mobilization state
+     * Will change mobilization state if allowed
+     */
 
     void checkMobilization(std::string warState, std::string newMobilization);
 
@@ -39,14 +44,36 @@ public:
      * current mobilization and morale of a Faction.
      */
     virtual void generateResources(int theatreResource) override;
-
+    /**
+     * Provides functionality to get the resource count of country
+     * @return int : The resource Count of the country
+     **/
     int getResourceCount();
 
     void setBaseResourceCount(int baseResourceCount);
+    /**
+     * Provides functionality to invest research points into research for the country
+     * @param researchPoints The amount of points to invest into research
+     * @param category The category to invest the research points in
+     */
 
     virtual void setResearch(int researchPoints,std::string category);
 
+    /**
+     * Provides functionality to get research points of a category
+     * @param i The index of the research category
+     * @return Research points of current category
+     */
 
+    virtual int getResearch(int i) override;
+
+     /**
+     * Provides functionality to reduce the research points with 1000
+     * @param index The index of the category for which to reduce the
+     * research points
+     */
+
+    virtual void resetResearch(int index) override;
     // virtual int getAttackPower(Theatre *theatre) override;
 
     /**
@@ -102,13 +129,19 @@ public:
 
     json allUnitsToJSON();
 
+    /**
+     * @brief Check if Country has units in any of the zones
+     * 
+     * @return true Return true if country has at leat 1 unit in any zone
+     * @return false Return false if country has no units in any zones
+     */
     bool checkForArmedForces();
 
     /**
      * @brief Check if Country is in an Alliance
      * 
-     * @return true return if country is in alliance
-     * @return false return if country is not in alliance
+     * @return true Return if country is in alliance
+     * @return false Return if country is not in alliance
      */
     bool inAlliance();
 };

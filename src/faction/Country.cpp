@@ -3,6 +3,7 @@
 #include "../entity/product/Entity.h"
 #include "../entity/product/Unit.h"
 #include "../theatre/Theatre.h"
+#include "../faction/Alliance.h"
 
 using json = nlohmann::json;
 
@@ -39,26 +40,59 @@ void Country::setBaseResourceCount(int baseResourceCount) {
     this->baseResourceCount = baseResourceCount;
 }
 
-void Country::setResearch(int researchPoints,std::string category)
-{
-    
-    
-    Faction::setResearch(researchPoints,category);
+void Country::setResearch(int researchPoints,std::string category){
+
+    if(!((resourceCount - researchPoints) > 0)){
+        throw WarException("Insuffcient-Resources");
+    }
+
     this->resourceCount -= researchPoints;
 
-    if(research.at(0)>=1000)
-    {
-        research.at(0) -= 1000;
-        baseResourceCount = baseResourceCount*1.2;
-        
+    if(inAlliance()){
+
+        alliance->setResearch(researchPoints,category);
+
+        if(alliance->getResearch(0)>=1000)
+        {
+            alliance->resetResearch(0);
+            for(Faction * m : alliance->getMembers()){
+                m->setBaseResourceCount(m->getBaseResourceCount() * 1.2);
+            }
+            
+        }
+        if(alliance->getResearch(1)>=1000)
+        {
+            alliance->resetResearch(1);
+            for(Faction * m : alliance->getMembers()){
+                m->setMorale(m->getMorale() * 1.2);
+            }
+        }
+       return; 
     }
-    else if(research.at(1)>=1000)
+    
+
+    Faction::setResearch(researchPoints,category);
+
+    if(getResearch(0)>=1000)
     {
-        research.at(1) -= 1000;
-        morale = morale*1.2;
+        resetResearch(0);
+        setBaseResourceCount(getBaseResourceCount() * 1.2);
     }
+    if(getResearch(1)>=1000)
+    {
+        resetResearch(1);
+        setMorale(getMorale() * 1.2);
+    }
+    
+}
 
 
+int Country::getResearch(int i){
+    return research[i];
+}
+
+void Country::resetResearch(int index){
+    research[index] -= 1000;
 }
 
 

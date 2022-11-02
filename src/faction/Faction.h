@@ -68,6 +68,8 @@ public:
     virtual void makeDecision() = 0;
 
     virtual void chooseStrategy() = 0;
+
+    
 };
 
 #endif  // FACTION_H

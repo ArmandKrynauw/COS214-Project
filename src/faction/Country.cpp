@@ -11,6 +11,7 @@ Country::Country(std::string name) : Faction(name) {
     armedForces["sea"] = new ArmedForce("Navy", "sea");
     armedForces["air"] = new ArmedForce("Air Force", "air");
     this->mobilization = new PartialMobilization("pre-war");
+    alliance = NULL;
 }
 
 void Country::setMobilization(std::string mobilization)
@@ -43,7 +44,7 @@ int Country::getAttackPower(Theatre *theatre) {
 }
 
 Alliance *Country::getAlliance() {
-    return NULL;
+    return alliance;
 }
 
 void Country::addEntity(Entity *entity) {
@@ -166,5 +167,9 @@ json Country::allUnitsToJSON(){
         }
     }
     return array;
+}
+
+bool Country::inAlliance(){
+    return (alliance) ? true : false;
 }
 

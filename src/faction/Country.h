@@ -97,6 +97,14 @@ public:
     json allUnitsToJSON();
 
     bool checkForArmedForces();
+
+    /**
+     * @brief Check if Country is in an Alliance
+     * 
+     * @return true return if country is in alliance
+     * @return false return if country is not in alliance
+     */
+    bool inAlliance();
 };
 
 #endif  // COUNTRY_H

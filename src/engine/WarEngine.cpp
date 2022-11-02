@@ -144,11 +144,10 @@ void WarEngine::relocateUnits(const json &data) {
     for (json country: data) {
         for (json unit: country["movements"]) {
             std::pair<int, int> destination = getLocation(unit["destination"]);
-            // TODO: Add check to see if country is in alliance. Do it by using alliance
-            // pointer in country.
-            // IF in alliance pass alliance name to theatre add
-            // Otherwise pass country name
-            transportUnit(theatres[destination.first][destination.second], country["name"],
+            std::string name = (countries[country["name"]]->inAlliance()) ? 
+                                countries[country["name"]]->getAlliance()->getName() : country["name"].get<std::string>();
+
+            transportUnit(theatres[destination.first][destination.second], name,
                           unit["type"].get<std::string>(), unit["index"].get<int>());
             cnt++;
         }

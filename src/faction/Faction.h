@@ -18,10 +18,11 @@ protected:
     std::string name;
     std::string id;
     int morale;
-    int baseResourceCount;
-    int resourceCount;
     Mobilization *mobilization;
     Alliance* alliance;
+    std::vector<int> research;
+
+
 
 public:
     Faction(std::string name);
@@ -43,9 +44,10 @@ public:
      * turn in the war. Newly generated resources is calculated using the
      * current mobilization and morale of a Faction.
      */
-    virtual void generateResources(int theatreResource) = 0;
+    virtual void generateResources(int theatreResource)=0;
 
-    virtual int getResourceCount() = 0;
+
+    virtual void setResearch(int researchPoints,std::string category);
 
     /**
      * This method is used to sum all the attack power of a faction for a
@@ -56,7 +58,6 @@ public:
      */
     // virtual int getAttackPower(Theatre *theatre) = 0;
 
-    virtual void setBaseResourceCount(int baseResourceCount) = 0;
 
     /**
      * This method is used to determine wether a Faction is a Country or an
@@ -69,7 +70,7 @@ public:
 
     virtual void chooseStrategy() = 0;
 
-    
+    virtual ~Faction();
 };
 
 #endif  // FACTION_H

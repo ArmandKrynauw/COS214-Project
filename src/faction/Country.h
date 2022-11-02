@@ -17,6 +17,9 @@ class Country : public Faction {
 private:
     std::unordered_map<std::string, ArmedForce *> armedForces;
     Mobilization* mobilization;
+    int baseResourceCount;
+    int resourceCount;
+
 
 public:
     Country(std::string name);
@@ -40,6 +43,9 @@ public:
     int getResourceCount();
 
     void setBaseResourceCount(int baseResourceCount);
+
+    virtual void setResearch(int researchPoints,std::string category);
+
 
     // virtual int getAttackPower(Theatre *theatre) override;
 

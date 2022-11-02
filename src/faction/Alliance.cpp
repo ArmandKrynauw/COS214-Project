@@ -30,17 +30,6 @@ void Alliance::generateResources(int theatreResource) {
     }
 }
 
-int Alliance::getResourceCount() {
-    resourceCount = 0;
-    for (Faction *p: members) {
-        baseResourceCount += p->getResourceCount();
-    }
-    return resourceCount;
-}
-
-void Alliance::setBaseResourceCount(int baseResourceCount) {
-    this->baseResourceCount = baseResourceCount;
-}
 
 Alliance *Alliance::getAlliance() {
     return this;

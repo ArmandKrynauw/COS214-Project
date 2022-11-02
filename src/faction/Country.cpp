@@ -39,6 +39,26 @@ void Country::setBaseResourceCount(int baseResourceCount) {
     this->baseResourceCount = baseResourceCount;
 }
 
+void Country::setResearch(int researchPoints,std::string category)
+{
+    Faction::setResearch(researchPoints,category);
+    this->resourceCount -= researchPoints;
+
+    if(research.at(0)>=1000)
+    {
+        research.at(0) -= 1000;
+        baseResourceCount = baseResourceCount*0.2;
+    }
+    else if(research.at(1)>=1000)
+    {
+        research.at(1) -= 1000;
+        morale = morale*0.2;
+    }
+
+
+}
+
+
 // int Country::getAttackPower(Theatre *theatre) {
 //     // Search through theatres that country is battling
 //     // Sum attack power of army in that specific theatre

@@ -97,7 +97,6 @@ void WarEngine::generateCountryResources(const json& counts,const json& alls){
             for (int i = 0; i < theatreSize; i++) { 
               for (int j = 0; j < theatreSize; j++) { 
                sum += theatres[i][j]->getResource(c["name"].get<std::string>());
-               //std::cout<<sum<<std::endl;
              }
             }
             countries[c["name"].get<std::string>()]->generateResources(sum);
@@ -281,14 +280,14 @@ void WarEngine::startSimulation(json war) {
     // }
 }
 
-void WarEngine::displayResources() {
-    int resources = player1Turn ? factions[0]->getResourceCount()
-                                : factions[1]->getResourceCount();
-    std::string factionName =
-            player1Turn ? factions[0]->getName() : factions[1]->getName();
-    std::cout << factionName << " Resources: " << resources << std::endl;
-    // std::cout<<std::endl;
-}
+// void WarEngine::displayResources() {
+//     int resources = player1Turn ? factions[0]->getResourceCount()
+//                                 : factions[1]->getResourceCount();
+//     std::string factionName =
+//             player1Turn ? factions[0]->getName() : factions[1]->getName();
+//     std::cout << factionName << " Resources: " << resources << std::endl;
+//     // std::cout<<std::endl;
+// }
 
 void WarEngine::buyUnits() {
 

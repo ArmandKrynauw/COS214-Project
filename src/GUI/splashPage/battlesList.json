@@ -1,17 +1,17 @@
-{
-  "battle1": {
+[
+  {
     "name": "D-day [1944]",
-    "country1": "USA",
-    "country2": "Germany"
+    "country1": "USAflag.gif",
+    "country2": "DEUflag.gif"
   },
-  "battle2": {
+  {
     "name": "Western Front [1943]",
-    "country1": "USA",
-    "country2": "Germany"
+    "country1": "USAflag.gif",
+    "country2": "DEUflag.gif"
   },
-  "battle3": {
+  {
     "name": "Battle of France [1940]",
-    "country1": "France",
-    "country2": "Germany"
+    "country1": "FRAflag.gif",
+    "country2": "DEUflag.gif"
   }
-}
+]

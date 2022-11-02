@@ -37,15 +37,11 @@
     ></script>
     <!-- uncompressed jquery -->
     <script
-      src="https://code.jquery.com/jquery-2.2.4.js"
-      integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-      crossorigin="anonymous"
-    ></script>
-    <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
       integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
+      defer
     ></script>
     <!-- my script file -->
     <script src="splash.js" defer></script>
@@ -56,74 +52,7 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="list-group col-6 offset-3">
-          <button
-            type="button"
-            class="list-group-item list-group-item-action text-center"
-          >
-            <div class="warInfo">
-              <img
-                class="flagImage"
-                src="images/USAflag.gif"
-                alt=""
-                width="450px"
-                height="450px"
-              />
-              <div class="warName">D-day [1944]</div>
-              <img
-                class="flagImage"
-                src="images/GERflag.gif"
-                alt=""
-                width="450px"
-                height="450px"
-              />
-            </div>
-          </button>
-          <button
-            type="button"
-            class="list-group-item list-group-item-action text-center"
-          >
-            <div class="warInfo">
-              <img
-                class="flagImage"
-                src="images/GERflag.gif"
-                alt=""
-                width="450px"
-                height="450px"
-              />
-              <div class="warName">Battle of France [1940]</div>
-              <img
-                class="flagImage"
-                src="images/FREflag.gif"
-                alt=""
-                width="450px"
-                height="450px"
-              />
-            </div>
-          </button>
-          <button
-            type="button"
-            class="list-group-item list-group-item-action text-center"
-          >
-            <div class="warInfo">
-              <img
-                class="flagImage"
-                src="images/USAflag.gif"
-                alt=""
-                width="450px"
-                height="450px"
-              />
-              <div class="warName">Western Front [1943]</div>
-              <img
-                class="flagImage"
-                src="images/GERflag.gif"
-                alt=""
-                width="450px"
-                height="450px"
-              />
-            </div>
-          </button>
-        </div>
+        <div class="list-group col-6 offset-3" id="battleList"></div>
       </div>
     </div>
   </body>

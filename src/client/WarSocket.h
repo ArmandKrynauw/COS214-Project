@@ -13,7 +13,7 @@ public:
     void listen();
 
     static void sendMessage(struct mg_connection *c, nlohmann::json data);
-    static bool checkMessage(struct mg_ws_message* message, std::string compare);
+    static bool checkMessage(char* message, std::string compare);
     static void HTTPHandler(struct mg_connection *c, int ev, void *ev_data, void *fn_data);
 
 private:

@@ -7,6 +7,22 @@ let nextIndex = 0;
  */
 let preWar = true;
 
+/**
+ * Json format to send to warsocket
+ * 
+ * Remember to set command before each send
+ * Only "selectSimulation" needs the "param" as of know
+ * 
+ * Example:
+ * request.command = "selectSimulation";
+ * request.param = 0;
+ * ws.send(JSON.stringify(request));
+ */
+var request = {
+  "command" : "",
+  "param" : 0
+}
+
 function connectWarSocket() {
   if (ws) {
     ws.close();
@@ -41,10 +57,14 @@ connectWarSocket();
 
 $(`.nextRound`).click(() => {
   if (preWar) {
-    sendMessage("loadNextRound");
+    //set command that is sent
+    request.command = "loadNextRound";
+    sendMessage(JSON.stringify(request));
     $(`.nextRound`).text("Start Round");
   } else {
-    sendMessage("loadRoundResults");
+    //set the command that is sent
+    request.command = "loadRoundResults";
+    sendMessage(JSON.stringify(request));
     $(`.nextRound`).text("Next  Round");
     nextIndex++;
   }

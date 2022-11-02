@@ -20,8 +20,8 @@ void WarSocket::sendMessage(struct mg_connection *c, json data) {
     mg_ws_send(c, str, size, WEBSOCKET_OP_TEXT);
 }
 
-bool WarSocket::checkMessage(struct mg_ws_message* message, std::string compare) {
-    return strcmp(message->data.ptr, compare.c_str()) == 0;
+bool WarSocket::checkMessage(char* message, std::string compare) {
+    return strcmp(message, compare.c_str()) == 0;
 }
 
 void WarSocket::HTTPHandler(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
@@ -37,24 +37,32 @@ void WarSocket::HTTPHandler(struct mg_connection *c, int ev, void *ev_data, void
     } else if (ev == MG_EV_WS_MSG) {
         // Got websocket frame. Received data is wm->data. Echo it back!
         struct mg_ws_message *wm = (struct mg_ws_message *) ev_data;
+        //Parse json data recieved
+        struct mg_str json = mg_str(wm->data.ptr);
+        //Get command
+        char *command = mg_json_get_str(json, "$.command");
 
-        std::cout << wm->data.ptr << std::endl;
+        std::cout << command << std::endl;
         
         // ================================== API Cases ================================== 
-        if (checkMessage(wm, "loadNextRound")) {
+        if (checkMessage(command, "loadNextRound")) {
             sendMessage(c, Client::instance()->loadNextRound());
         }
-        if (checkMessage(wm, "loadRoundResults")) {
+        if (checkMessage(command, "loadRoundResults")) {
             sendMessage(c, Client::instance()->loadRoundResults());
         }
-        if (checkMessage(wm, "selectSimulation")) {
-            sendMessage(c, Client::instance()->selectSimulation(0));
-        }
-        if (checkMessage(wm, "getAvailableSimulations")) {
+        if (checkMessage(command, "getAvailableSimulations")) {
             sendMessage(c, Client::instance()->getAvailableSimulations());
         }
-        if (checkMessage(wm, "runNextRound")) {
+        if (checkMessage(command, "runNextRound")) {
             sendMessage(c, Client::instance()->runNextRound());
+        }
+        if (checkMessage(command, "selectSimulation")) {
+            double d;
+            mg_json_get_num(json, "$.param", &d);
+            int param = (int) d;
+            std::cout << "Param: " << param << std::endl;
+            sendMessage(c, Client::instance()->selectSimulation(param));
         }
     }
     (void) fn_data;

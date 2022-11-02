@@ -135,14 +135,18 @@ public:
     /**
      * This method calls all the stats getters to generate on big stats object
     */
-    json getStat();
+    json getStats();
     json getEngineStats();
     json getCountryStats();
     json getAllianceStats();
+
+
     json getTheatreStats();
     // Replaces getCountryUnits()
     json getTheatreUnits();
+
     json getOverallUnits();
+    
     json getCasualties();
 
     /**

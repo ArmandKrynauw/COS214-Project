@@ -44,6 +44,8 @@ public:
 
     virtual nlohmann::json toJSON() const = 0;
 
+    virtual nlohmann::json unitToJSON() const = 0;
+
     virtual ~Entity();
 };
 

@@ -91,6 +91,12 @@ public:
     json getListOfUnits();
 
     json removeCasualties();
+
+    int getEntityCount();
+
+    json allUnitsToJSON();
+
+    bool checkForArmedForces();
 };
 
 #endif  // COUNTRY_H

@@ -29,6 +29,9 @@ public:
     override;  // For each member in alliance call chooseStrategy()
 
     virtual int getAttackPower(Theatre *theatre) override;
+
+
+    json toJSON();
 };
 
 #endif  // ALLIANCE_H

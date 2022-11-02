@@ -52,7 +52,8 @@ json Client::runNextRound() {
         WarEngine::instance()->checkEscalation(chosenSimulation["rounds"][currentRound]["WarState"]);
         WarEngine::instance()->purchaseUnits(chosenSimulation["rounds"][currentRound]["unitsToPurchase"]);
         WarEngine::instance()->relocateUnits(chosenSimulation["rounds"][currentRound]["unitsToRelocate"]);
-        
+        std::cout<<WarEngine::instance()->getStats().dump(8)<<std::endl;
+
         WarEngine::instance()->assignStrategies(chosenSimulation["rounds"][currentRound]["strategies"]);
         WarEngine::instance()->CommenceBattle();
         currentRound++;

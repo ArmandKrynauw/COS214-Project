@@ -65,3 +65,11 @@ int Alliance::getAttackPower(Theatre *theatre) {
 
     return power;
 }
+
+json Alliance::toJSON(){
+    json data;
+    for(Faction * f : members){
+        data.push_back(f->getName());
+    }
+    return data;
+}

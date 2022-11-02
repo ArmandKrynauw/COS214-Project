@@ -99,6 +99,24 @@ json ArmedForce::toJSON() const {
     return data;
 }
 
+json ArmedForce::unitToJSON() const {
+    json data = json::array();
+
+    for (int i = 0; i < entities.size(); i++) {
+        json j = entities[i]->unitToJSON();
+
+        if (j.is_array()) {
+            for (json e: j) {
+                data.push_back(e);
+            }
+        } else {
+            data.push_back(j);
+        }
+    }
+
+    return data;
+}
+
 void ArmedForce::update() {
     int damage = 0;
     for (int i = 0; i < entities.size(); i++) {

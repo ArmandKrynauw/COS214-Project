@@ -46,7 +46,37 @@
                         { "MediumSeaUnit": "Destroyer" }
                     ],
                     "baseResourceCount": 1000
-                }
+                },
+                {
+                  "name": "France",
+                  "units": [
+                      { "HeavyAirUnit": "Luftwaffe A400M" },
+                      { "HeavyLandUnit": "Leopard 2A7" },
+                      { "HeavySeaUnit": "Type 212 Submarine" },
+                      { "LightAirUnit": "CH-53G" },
+                      { "LightLandUnit": "Foot Soldier" },
+                      { "LightSeaUnit": "Baden-Württemberg class" },
+                      { "MediumAirUnit": "Eurofighter Typhoon" },
+                      { "MediumLandUnit": "BMP-3" },
+                      { "MediumSeaUnit": "Braunschweig class" }
+                  ],
+                  "baseResourceCount": 1000
+              },
+              {
+                "name": "Russia",
+                "units": [
+                    { "HeavyAirUnit": "Luftwaffe A400M" },
+                    { "HeavyLandUnit": "Leopard 2A7" },
+                    { "HeavySeaUnit": "Type 212 Submarine" },
+                    { "LightAirUnit": "CH-53G" },
+                    { "LightLandUnit": "Foot Soldier" },
+                    { "LightSeaUnit": "Baden-Württemberg class" },
+                    { "MediumAirUnit": "Eurofighter Typhoon" },
+                    { "MediumLandUnit": "BMP-3" },
+                    { "MediumSeaUnit": "Braunschweig class" }
+                ],
+                "baseResourceCount": 1000
+            }
             ],
             "alliances": [
                 {

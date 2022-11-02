@@ -473,6 +473,13 @@ json WarEngine::getCountryUnits() {
     return data;
 }
 
+json WarEngine::getStats(){
+    return json{{"engine", getEngineStats()},
+                {"countries", getCountryStats()},
+                {"alliances", getAllianceStats()},
+                {"overallUnits", getOverallUnits()}};
+}
+
 json WarEngine::getEngineStats(){
     std::string stage;
     if(warStage->getState() == "EarlyStage"){
@@ -488,6 +495,45 @@ json WarEngine::getEngineStats(){
                  {"day", roundCounter},
                  {"numberOfCountries", countries.size()},
                  {"numberOfAlliances", alliances.size()}};
+}
+
+json WarEngine::getCountryStats(){
+    json array;
+    std::unordered_map<std::string, Country *>::iterator it = countries.begin();
+    while(it != countries.end()){
+        array.push_back(json{{"name", it->first},
+                             {"resources", it->second->getResourceCount()},
+                             {"totalUnits", it->second->getEntityCount()}});
+        it++;
+    }
+    
+    return json{{"data" , array}};
+}
+
+json WarEngine::getAllianceStats(){
+
+    json array;
+    std::unordered_map<std::string, Alliance *>::iterator it = alliances.begin();
+    while(it != alliances.end()){
+        array.push_back(json{{"name", it->first},
+                             {"countries", it->second->toJSON()}});
+        it++;
+    }
+    
+    return json{{"data" , array}};
+}
+
+json WarEngine::getOverallUnits(){
+    json array;
+    std::unordered_map<std::string, Country *>::iterator it = countries.begin();
+
+    while(it != countries.end()){
+        array.push_back(json{{"name", it->first},
+                             {"units", it->second->allUnitsToJSON()}});
+        it++;
+    }
+
+    return json{{"data" , array}};
 }
 
 std::vector<std::string> WarEngine::setToString(json array) {

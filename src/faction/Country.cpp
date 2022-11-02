@@ -88,6 +88,30 @@ void Country::chooseStrategy() {
     // }
 }
 
+void Country::printUnits() {
+    // int counter = 1;
+
+    // for(Unit * u : units){
+    //     std::cout<<counter<<". "<<u->getName()<<std::endl;
+    //     counter++;
+    // }
+    // std::cout<<std::endl;
+}
+
+int Country::getEntityCount(){
+    int count = 0;
+    std::unordered_map<std::string, ArmedForce *>::iterator it;
+    for (it = armedForces.begin(); it != armedForces.end(); ++it) {
+        count += it->second->getUnitCount();
+    }
+    return count;
+}
+
+bool Country::checkForArmedForces(){
+    return (armedForces["land"]->getUnitCount() == 0 && armedForces["air"]->getUnitCount() == 0 && armedForces["sea"]->getUnitCount() == 0) ? false : true;
+}
+// ==================JSON HELPER FUNCTIONS===========
+
 json Country::getListOfUnits() {
     json data = json{
             {"name",  name},
@@ -131,12 +155,18 @@ json Country::removeCasualties() {
     }
 }
 
-void Country::printUnits() {
-    // int counter = 1;
+json Country::allUnitsToJSON(){
+    if(!checkForArmedForces()){
+        return json::array();   
+    }
+    json array;
 
-    // for(Unit * u : units){
-    //     std::cout<<counter<<". "<<u->getName()<<std::endl;
-    //     counter++;
-    // }
-    // std::cout<<std::endl;
+    std::unordered_map<std::string, ArmedForce *>::iterator it;
+    for (it = armedForces.begin(); it != armedForces.end(); ++it) {
+        for (Entity* e: it->second->getEntities()) {
+            array.push_back(e->unitToJSON());
+        }
+    }
+    return array;
 }
+

@@ -42,6 +42,8 @@ public:
 
     virtual nlohmann::json toJSON() const override;
 
+    virtual nlohmann::json unitToJSON() const override;
+
     void update();
 
     Entity *operator[](int index);

@@ -9,6 +9,7 @@ protected:
     int damage;
     int value;
     Theatre *theatre;
+    int initialHP;
 
 public:
     Unit(std::string name, std::string type, int HP, int damage, int value);
@@ -38,6 +39,8 @@ public:
     virtual Entity *clone() = 0;
 
     virtual nlohmann::json toJSON() const override;
+
+    virtual nlohmann::json unitToJSON() const override;
 
     virtual ~Unit();
 };

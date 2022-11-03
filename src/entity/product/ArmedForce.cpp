@@ -149,10 +149,6 @@ void ArmedForce::print() {
     }
 }
 
-void clearCasualties() {
-    k
-}
-
 Entity *ArmedForce::operator[](int index) {
     return entities[index];
 }

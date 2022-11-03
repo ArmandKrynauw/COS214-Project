@@ -427,8 +427,10 @@ json WarEngine::clearCasualties() {
         }
     }
 
-    for (Country* country : countries) {
-        country->clearCasualties();
+    std::unordered_map<std::string, Country*>::iterator it;
+    for (it = countries.begin(); it != countries.end(); it++) {
+        std::cout << "Jake" << std::endl;
+        it->second->clearCasualties();
     }
 
     return data;

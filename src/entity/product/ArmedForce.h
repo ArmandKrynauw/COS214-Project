@@ -20,8 +20,6 @@ public:
 
     void print();
 
-    void clearCasualties();
-
     /**
      * Calculates the total damage capability of this armed force by summing
      * the damage values of all the entities contained within itself.

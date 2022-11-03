@@ -25,4 +25,4 @@ std::string Entity::getType() const {
     return type;
 }
 
-void clearCasualties() {}
+void Entity::clearCasualties() {}

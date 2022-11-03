@@ -7,7 +7,7 @@ void WarSocket::listen() {
     struct mg_mgr mgr;  // Event manager
     mg_mgr_init(&mgr);  // Initialise event manager
     printf("Starting WS listener on %s/websocket\n", s_listen_on);
-    mg_http_listen(&mgr, s_listen_on, HTTPHandler, NULL);  // Create HTTP listener
+    mg_http_listen(&mgr, s_listen_on, WSHandler, NULL);  // Create HTTP listener
     for (;;) mg_mgr_poll(&mgr, 1000);             // Infinite event loop
     //std::thread eventThread(EventPoll, &mgr);
     mg_mgr_free(&mgr);
@@ -24,7 +24,7 @@ bool WarSocket::checkMessage(char* message, std::string compare) {
     return strcmp(message, compare.c_str()) == 0;
 }
 
-void WarSocket::HTTPHandler(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
+void WarSocket::WSHandler(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
     if (ev == MG_EV_OPEN) {
         // c->is_hexdumping = 1;
     } else if (ev == MG_EV_HTTP_MSG) {

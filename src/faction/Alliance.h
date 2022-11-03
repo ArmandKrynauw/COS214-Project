@@ -69,24 +69,16 @@ public:
 
     virtual Alliance *getAlliance() override;
 
-    /**
-     * Provides functionality to let each country in alliance make decisions
-     */
-
-    virtual void makeDecision() override;  // For each member in alliance call makeDecision()
-
-    /**
-     * Provides functionality to let each country in alliance pick a strategy
-     */
-
-    virtual void chooseStrategy() override;  // For each member in alliance call chooseStrategy()
+    virtual void makeDecision()
+    override;  // For each member in alliance call makeDecision()
+    virtual void chooseStrategy()
+    override;  // For each member in alliance call chooseStrategy()
+    virtual void clearCasualties() override;
 
     // virtual int getAttackPower(Theatre *theatre) override;
-    
-    /**
-     * Provides functionality to create a json object containing the name of all members of the alliance
-     * @return Returns the json object
-     */
+
+
+
     json toJSON();
 
     /**

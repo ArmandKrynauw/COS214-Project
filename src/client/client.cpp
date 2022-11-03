@@ -130,9 +130,9 @@ void Client::runSimulation() {
             std::cout << "Day " << currentDay + 1 << " commencing... " << std::endl;
             json result = runNextDay();
             json deaths = result["casualities"];
-            printDayResults();
-            // std::cout << WarEngine::instance()->getTheatreUnits().dump(2) << std::endl;
-            // WarEngine::instance()->getTheatreUnits();
+            // printRoundResults();
+            std::cout << WarEngine::instance()->clearCasualties().dump(2) << std::endl;
+            // WarEngine::instance()->clearCasualties();
             // std::cout << WarEngine::instance()->clearCasualties().dump(2) << std::endl;
             //  WarEngine::instance()->clearCasualties();
             //pass data to GUI

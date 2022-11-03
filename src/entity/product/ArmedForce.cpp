@@ -5,7 +5,11 @@ using json = nlohmann::json;
 ArmedForce::ArmedForce(std::string name, std::string type)
         : Entity(name, type) {}
 
-ArmedForce::~ArmedForce() {}
+ArmedForce::~ArmedForce() {
+    for (int i = 0; i < entities.size(); i++) {
+        delete entities[i];
+    }
+}
 
 void ArmedForce::add(Entity *entity) {
     entities.push_back(entity);
@@ -79,6 +83,18 @@ void ArmedForce::setTheatre(Theatre *theatre) {
     }
 }
 
+void ArmedForce::clearCasualties() {
+    for (int i = 0; i < entities.size(); ) {
+        if (entities[i]->getHP() == 0) {
+            delete entities[i];
+            entities.erase(entities.begin() + i);
+        } else {
+            entities[i]->clearCasualties();
+            i++;
+        }
+    }
+}
+
 Entity *ArmedForce::clone() {}
 
 json ArmedForce::toJSON() const {
@@ -131,6 +147,10 @@ void ArmedForce::print() {
     for (it = entities.begin(); it != entities.end(); it++) {
         (*it)->print();
     }
+}
+
+void clearCasualties() {
+    k
 }
 
 Entity *ArmedForce::operator[](int index) {

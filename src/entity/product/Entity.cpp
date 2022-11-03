@@ -24,3 +24,5 @@ void Entity::setName(std::string name) {
 std::string Entity::getType() const {
     return type;
 }
+
+void clearCasualties() {}

@@ -403,63 +403,33 @@ json WarEngine::getRoundResults() {
 json WarEngine::clearCasualties() {
     json data = getTheatreUnits();
 
-    for (int i = 0; i != data.size();) {
-        json units = data[i]["units"];
+    for (int i = 0; i < data.size(); i++) {
+        json& country = data[i];
+        
+        for (int j = 0; j < country["theatres"].size(); j++) {
+            json& theatre = country["theatres"][j];
 
-        for (int j = 0; j < units.size(); j++) {
-            // if (units[j]["currentHP"] != 0) {
-            //     units.erase(units.begin() + j);
-            // }
-            // for (int k = 0; k < )
+            for (int k = 0; k < theatre["units"].size(); k++) {
+                json& unit = theatre["units"][k];
 
-            if (units[j]["units"].size() != 0) {
-                units.erase(units.begin() + j);
-            } else {
-                j++;
+                if (unit["currentHP"] != 0) {
+                    theatre["units"].erase(theatre["units"].begin() + k--);
+                }
+            }
+
+            if (theatre["units"].size() == 0) {
+                country["theatres"].erase(country["theatres"].begin() + j--);
             }
         }
 
-        if (data[i]["units"].size() == 0) {
-            data.erase(data.begin() + i);
-        } else {
-            i++;
+        if (country["theatres"].size() == 0) {
+            data.erase(data.begin() + i--);
         }
-
     }
-    // auto it = data.begin(); 
-    // for (; it != data.end();) {
-    //     // json units = data[i]["units"];
 
-    //     // for (int j = 0; j < units.size(); j++) {
-    //     //     if (units[j]["currentHP"] != 0) {
-    //     //         units.erase(units.begin() + j);
-    //     //     }
-    //     // }
-
-    //     std::cout << (*it)["name"] << std::endl;
-    //     std::cout << (*it)["units"].size() << std::endl;
-    //     if ((*it)["units"].size() == 0) {
-    //         it = data.erase(it);
-    //     } else {
-    //         ++it;
-    //     }
-
-    // }
-
-    // for (json& country : data) {
-    //     json units = country["units"];
-
-    //     for (int i = 0; i < units.size(); i++) {
-    //         if (units[i]["currentHP"] != 0) {
-    //             units.erase(units.begin() + i);
-    //         }
-    //     }
-    // }
-
-    // std::unordered_map<std::string, Country *>::iterator it;
-    // for (it = countries.begin(); it != countries.end(); ++it) {
-    //     it->second->removeCasualties();
-    // }
+    for (Country* country : countries) {
+        country->clearCasualties();
+    }
 
     return data;
 }

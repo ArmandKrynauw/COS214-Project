@@ -61,18 +61,32 @@ public:
 
     std::vector<Faction*> getMembers();
 
-    
+    /**
+     * Provides functionality to get the current alliance
+     * @return This alliance object as a pointer
+     */
 
 
     virtual Alliance *getAlliance() override;
 
-    virtual void makeDecision()
-    override;  // For each member in alliance call makeDecision()
-    virtual void chooseStrategy()
-    override;  // For each member in alliance call chooseStrategy()
+    /**
+     * Provides functionality to let each country in alliance make decisions
+     */
+
+    virtual void makeDecision() override;  // For each member in alliance call makeDecision()
+
+    /**
+     * Provides functionality to let each country in alliance pick a strategy
+     */
+
+    virtual void chooseStrategy() override;  // For each member in alliance call chooseStrategy()
 
     // virtual int getAttackPower(Theatre *theatre) override;
-
+    
+    /**
+     * Provides functionality to create a json object containing the name of all members of the alliance
+     * @return Returns the json object
+     */
 
 
     json toJSON();

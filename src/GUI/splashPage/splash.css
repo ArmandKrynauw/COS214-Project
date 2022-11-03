@@ -11,7 +11,6 @@ body {
   background-image: url("images/background.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
-  /* background-color: var(--darkgray) !important; */
 }
 
 .header {
@@ -26,24 +25,12 @@ body {
 }
 
 h1 {
-  /* color: rgb(30, 32, 62); */
-  /* color: var(--white);
-  text-shadow: 0 0 15px black;
-  font-family: Arial;
-  font-size: 450% !important;
-  line-height: 35px;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  font-weight: 900; */
   font-family: Arial;
   font-size: 37px;
   line-height: 35px;
   letter-spacing: 5px;
   text-transform: uppercase;
   font-weight: 700 !important;
-
-  /* padding-top: 1%;
-  padding-bottom: 1%; */
 }
 
 .list-group {

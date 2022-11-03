@@ -14,7 +14,7 @@ class Client {
 private:
     std::vector<json> simulations;
     json chosenSimulation;
-    int currentRound;
+    int currentDay;
 
 public:
     static Client* instance();
@@ -22,14 +22,14 @@ public:
     void runGUIMode();
 
     // =================== WAR ENGINE CONTROL FUNCTIONS ===================
-    json loadNextRound();
-    json loadRoundResults();
-    json loadPreviousRound();
+    json loadNextDay();
+    json loadDayResults();
+    json loadPreviousDay();
     json selectSimulation(int index);
 
     // Depreciated!! Needs to be merged into loadNextRound
     // Ask Armand before removing
-    json runNextRound();
+    json runNextDay();
 
     // =================== JSON UTILITY FUNCTIONS ===================
 
@@ -50,7 +50,7 @@ private:
 
     // =================== TERMINAL MODE FUNCTIONS ===================
     void runSimulation();
-    void printRoundResults();
+    void printDayResults();
     void printUnit(const json &unit);
 
     // =================== GUI MODE FUNCTIONS ==============

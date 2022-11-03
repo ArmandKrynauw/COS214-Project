@@ -179,7 +179,7 @@
             },
             {
                 "name": "America",
-                "units": [
+                "theatres": [
                     {
                         "theatre": "Italy",
                         "coordinates": "2-2",

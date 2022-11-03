@@ -10,7 +10,7 @@ WarEngine *WarEngine::instance() {
 }
 
 WarEngine::WarEngine() {
-    roundCounter = 0;
+    dayCounter = 0;
     srand(1);
     warStage = new EarlyStage("pre-war");
     unitFactories["land"] = new LandUnitFactory();
@@ -76,13 +76,47 @@ void WarEngine::loadAlliances(const json &data) {
 // ============================================================================
 // SIMULATION HELPER FUNCTIONS
 // ============================================================================
-void WarEngine::checkMobilization(const json& data) {
-    roundCounter++;
+void WarEngine::loadWarFactors(const json& data){
+    loadEscalation(data["WarState"]);
+    loadMobilization(data["mobilization"]);
+    loadResearch(data["research"]);
+}
+
+
+void WarEngine::loadMobilization(const json& data) {
     for (json country: data["countries"]) {
             countries[country["name"].get<std::string>()]->checkMobilization(warStage->getState(), country["mobilization"].get<std::string>()); 
     }
 }
 
+void WarEngine::loadResearch(const json& data){
+    for(json country : data["countries"]){
+        countries[country["name"].get<std::string>()]->setResearch(country["points"].get<int>(),country["research"].get<std::string>());
+    }
+}
+
+void WarEngine::loadEscalation(const json &data) {
+
+    std::string oldStage = warStage->getState();
+    warStage = warStage->checkStageOfWar(data.get<std::string>());
+    if (oldStage != warStage->getState()) {
+        std::cout << "=============== NEW WAR PHASE: " << warStage->getState() << " ===============" << std::endl;
+    }
+}
+
+void WarEngine::loadBattleDay(const json& data){
+    generateCountryResources(data["countries"],data["alliances"]);
+    loadWarFactors(data["rounds"][dayCounter]);
+    purchaseUnits(data["rounds"][dayCounter]["unitsToPurchase"]);
+    relocateUnits(data["rounds"][dayCounter]["unitsToRelocate"]);
+    assignStrategies(data["rounds"][dayCounter]["strategies"]);
+}
+
+void WarEngine::goBack(){
+    if(dayCounter != 0){
+        dayCounter--;
+    }
+}
 
 void WarEngine::generateCountryResources(const json& counts,const json& alls){
     int sum = 0;
@@ -220,85 +254,15 @@ void WarEngine::assignStrategies(const json &data) {
     //viewStrategies();
 }
 
-void WarEngine::checkEscalation(const json &data) {
 
-    std::string oldStage = warStage->getState();
-    warStage = warStage->checkStageOfWar(data.get<std::string>());
-    if (oldStage != warStage->getState()) {
-        std::cout << "=============== NEW WAR PHASE: " << warStage->getState() << " ===============" << std::endl;
-    }
-}
 
 // ============================================================================
 // MAIN WAR FUNCTIONS
 // ============================================================================
 
-void WarEngine::startSimulation(json war) {
-    // turnCounter = 1;
-    // player1Turn = true;
-    // bool warInProgress = true;
 
-    // // Round
-    // while(warInProgress) {
-    //     // Phase 1
-    //     for(int i = 0; i < 2; i++) {
-    //         int player = player1Turn ? 1 : 2;
-    //         std::cout << "\033[1;" << 32 + player << "mFaction: " << player
-    //                   << std::endl
-    //                   << "Turn: " << turnCounter << std::endl;
-    //         displayResources();
-    //         buyUnits();
-    //         displayUnits();
-    //         placeTroops();
-    //         printMap();
-    //         // std::cout<<"\033[1;32"<< 32 +
-    //         // player<<"m======================================"<<std::endl;
-    //         // std::cout<<std::endl;
-    //         player1Turn = player1Turn ? false : true;
-    //         std::cout << std::endl;
-    //     }
 
-    //     // Phase 2
-    //     chooseStrategies();
-    //     // viewStrategies();
 
-    //     // Phase 3
-    //     CommenceBattle();
-    //     CommenceBattle();
-    //     CommenceBattle();
-    //     printMap();
-
-    //     // Switch Order of players taking turns for fairness
-    //     player1Turn = player1Turn ? false : true;
-    //     // To end while loop for testing
-    //     warInProgress = false;
-    //     // SAVE STATE HERE
-    //     turnCounter++;
-    // }
-}
-
-// void WarEngine::displayResources() {
-//     int resources = player1Turn ? factions[0]->getResourceCount()
-//                                 : factions[1]->getResourceCount();
-//     std::string factionName =
-//             player1Turn ? factions[0]->getName() : factions[1]->getName();
-//     std::cout << factionName << " Resources: " << resources << std::endl;
-//     // std::cout<<std::endl;
-// }
-
-void WarEngine::buyUnits() {
-
-}
-
-void WarEngine::displayUnits() {
-
-    std::cout << "Germany" << " Troops:" << std::endl;
-    std::cout << countries["Germany"]->getListOfUnits() << std::endl;
-
-    std::cout << "America" << " Troops:" << std::endl;
-    std::cout << countries["America"]->getListOfUnits() << std::endl;
-
-}
 
 /**
  * @brief Add 'parent' to unit to know which theatre its in
@@ -417,6 +381,7 @@ void WarEngine::CommenceBattle() {
             theatres[i][j]->battle();
         }
     }
+    dayCounter++;
 }
 
 json WarEngine::getRoundResults() {
@@ -569,7 +534,7 @@ json WarEngine::getEngineStats() {
     }
     return json {{"stage" , stage},
                  {"duration", warDuration},
-                 {"day", roundCounter},
+                 {"day", dayCounter},
                  {"numberOfCountries", countries.size()},
                  {"numberOfAlliances", alliances.size()}};
 }

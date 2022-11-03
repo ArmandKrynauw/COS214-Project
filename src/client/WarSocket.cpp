@@ -47,17 +47,17 @@ void WarSocket::HTTPHandler(struct mg_connection *c, int ev, void *ev_data, void
         //check to see if correct data was given
         if(command){
             std::cout << command << std::endl;
-            if (checkMessage(command, "loadNextRound")) {
-                sendMessage(c, Client::instance()->loadNextRound());
+            if (checkMessage(command, "loadNextDay")) {
+                sendMessage(c, Client::instance()->loadNextDay());
             }
             else if (checkMessage(command, "loadRoundResults")) {
-                sendMessage(c, Client::instance()->loadRoundResults());
+                sendMessage(c, Client::instance()->loadDayResults());
             }
             else if (checkMessage(command, "getAvailableSimulations")) {
                 sendMessage(c, Client::instance()->getAvailableSimulations());
             }
-            else if (checkMessage(command, "runNextRound")) {
-                sendMessage(c, Client::instance()->runNextRound());
+            else if (checkMessage(command, "runNextDay")) {
+                sendMessage(c, Client::instance()->runNextDay());
             }
             else if (checkMessage(command, "selectSimulation")) {
                 //Wanted to check if param was provided but if is isn't, d is initialized to 0 which is a valid input

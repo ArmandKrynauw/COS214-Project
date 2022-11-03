@@ -29,7 +29,7 @@
                         { "MediumLandUnit": "BMP-3" },
                         { "MediumSeaUnit": "Braunschweig class" }
                     ],
-                    "baseResourceCount": 600
+                    "baseResourceCount": 1000
                 },
                 {
                     "name": "America",
@@ -45,7 +45,7 @@
                         { "MediumLandUnit": "HMMWV" },
                         { "MediumSeaUnit": "Destroyer" }
                     ],
-                    "baseResourceCount": 600
+                    "baseResourceCount": 1000
                 },
                 {
                     "name": "France",
@@ -61,7 +61,7 @@
                         { "MediumLandUnit": "BMP-3" },
                         { "MediumSeaUnit": "Braunschweig class" }
                     ],
-                    "baseResourceCount": 600
+                    "baseResourceCount": 1000
                 },
                 {
                     "name": "Russia",
@@ -77,7 +77,7 @@
                         { "MediumLandUnit": "BMP-3" },
                         { "MediumSeaUnit": "Braunschweig class" }
                     ],
-                    "baseResourceCount": 600
+                    "baseResourceCount": 1000
                 }
             ],
         "alliances": [
@@ -105,6 +105,19 @@
                                 "mobilization": "PartialMobilization"
                             }
                         ]
+                    },
+                    "research" : {
+                        "countries": [
+                            {
+                                "name": "Germany",
+                                "research": "industry",
+                                "points" : 50
+                            },
+                            {
+                                "name": "America",
+                                "research": "industry",
+                                "points" : 50
+                            }]
                     },
                     "unitsToPurchase": [
                         {
@@ -232,6 +245,19 @@
                             }
                         ]
                     },
+                    "research" : {
+                        "countries": [
+                            {
+                                "name": "Germany",
+                                "research": "industry",
+                                "points" : 100
+                            },
+                            {
+                                "name": "America",
+                                "research": "industry",
+                                "points" : 100
+                            }]
+                    },
                     "unitsToPurchase": [
                         {
                             "name": "Germany",
@@ -357,6 +383,19 @@
                                 "mobilization": "PartialMobilization"
                             }
                         ]
+                    },
+                    "research" : {
+                        "countries": [
+                            {
+                                "name": "Germany",
+                                "research": "industry",
+                                "points" : 100
+                            },
+                            {
+                                "name": "America",
+                                "research": "industry",
+                                "points" : 100
+                            }]
                     },
                     "unitsToPurchase": [],
                     "unitsToTransport": [],

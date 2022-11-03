@@ -47,7 +47,7 @@ h1 {
 }
 
 .list-group {
-  margin-top: 5% !important;
+  margin-top: 12% !important;
   opacity: 0.8;
   background-color: var(--medgray);
   padding: 0 !important;
@@ -62,6 +62,7 @@ h1 {
 
 .warInfo {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }

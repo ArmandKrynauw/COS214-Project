@@ -8,8 +8,10 @@ class MiddleStage : public Escalation {
 public:
     MiddleStage();
 
-    bool mobilizationCheck(std::string mobilization);
-
+    /**
+     * Specifies what state the current state is
+     * @return string : The current state
+    */
     std::string getState();
 
     virtual ~MiddleStage();

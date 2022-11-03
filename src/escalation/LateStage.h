@@ -7,9 +7,11 @@
 class LateStage : public Escalation {
 public:
     LateStage();
-
-    bool mobilizationCheck(std::string mobilization);
-
+    /**
+     * Specifies what state the current state is
+     * @return string : The current state
+    */
+    
     std::string getState();
 
     virtual ~LateStage();

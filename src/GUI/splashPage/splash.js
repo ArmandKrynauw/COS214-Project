@@ -66,7 +66,7 @@ $(document).ready(function () {
 
   // display the data from socket in the html
   displaySimulation = (simulation) => {
-    console.log(simulation);
+    console.log("heyy" + simulation);
 
     simulation.forEach((element, index) => {
       let battleName = element.name;

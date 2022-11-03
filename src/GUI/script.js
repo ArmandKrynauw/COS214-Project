@@ -1,6 +1,7 @@
 var ws;
 // let buttonCounter = 0;
 let nextIndex = 0;
+let Nations = ["Germany", "America"];
 
 /**
  * If prewar is tue then the game is in prewar phase else it is in the postwar phase
@@ -9,21 +10,21 @@ let preWar = true;
 
 /**
  * Json format to send to warsocket
- * 
+ *
  * Remember to set command before each send
  * Only "selectSimulation" needs the "param" as of know
- * 
+ *
  * Example:
  * request.command = "selectSimulation";
  * request.param = 0;
  * ws.send(JSON.stringify(request));
  */
 var request = {
-  "command" : "",
-  "param" : 0
-}
+  command: "",
+  param: 0,
+};
 
-function connectWarSocket() {
+connectWarSocket = () => {
   if (ws) {
     ws.close();
     return;
@@ -36,10 +37,9 @@ function connectWarSocket() {
   };
   ws.onmessage = function (ev) {
     data = JSON.parse(ev.data);
-    if(data.hasOwnProperty("error")){
+    if (data.hasOwnProperty("error")) {
       console.log("Error: " + data.error);
-    }
-    else{
+    } else {
       updateUI(data);
     }
   };
@@ -50,21 +50,20 @@ function connectWarSocket() {
     console.log("Connection Closed");
     ws = null;
   };
-}
+};
 
-function sendMessage(message) {
+sendMessage = (message) => {
   if (!ws) return;
   ws.send(message);
-}
+};
 
 connectWarSocket();
 
 $(`.nextRound`).click(() => {
   if (preWar) {
     //set command that is sent
-    request.command = "loadNextRound";
+    request.command = "loadNextDay";
     sendMessage(JSON.stringify(request));
-    $(`.nextRound`).text("Start Round");
   } else {
     //set the command that is sent
     request.command = "loadRoundResults";
@@ -75,7 +74,52 @@ $(`.nextRound`).click(() => {
   preWar = !preWar;
 });
 updateUI = (data) => {
-  /*-------nextBTN-------*/
+  /**
+   * Clear the theatres
+   */
+  for (let m = 0; m < 3; m++) {
+    for (let n = 0; n < 3; n++) {
+      $(`.area_${m}-${n} .data`).empty();
+    }
+  }
+
+  /**
+   * This function loads in the casualties after each round
+   * it takes all the countires current theatres and puts them into one
+   * group
+   */
+  const casualties = data.casualties.data;
+  casualties.forEach((casualty) => {
+    for (let i = 0; i < Nations.length; i++) {
+      if (casualty.name == Nations[i]) {
+        const theatres = casualty.theatres;
+        theatres.forEach((theatre) => {
+          const units = theatre.units;
+          units.forEach((unit) => {
+            let type;
+            if (unit.type === "land") {
+              type = `<i class="fa-solid fa-person-rifle"></i>`;
+            } else if (unit.type === "air") {
+              type = `<i class="fa-solid fa-jet-fighter"></i>`;
+            } else {
+              type = `<i class="fa-solid fa-ship"></i>`;
+            }
+            $(`.cau${i}List`).append(
+              `<li class="list-group-item">${type}  ${unit.name} ${theatre.coordinates}</li>`
+            );
+          });
+        });
+      }
+    }
+  });
+
+  $(`.Casualties0`).click(() => {
+    $(`.cau0List`).toggleClass(`hide`);
+  });
+
+  $(`.Casualties1`).click(() => {
+    $(`.cau1List`).toggleClass(`hide`);
+  });
 
   /**
    * Chnage the flags
@@ -184,9 +228,10 @@ updateUI = (data) => {
      */
     const theatreUnits = data.theatreUnits.data;
     theatreUnits.forEach((theatreUnit) => {
-      console.log(theatreUnit.units[0].units);
-      if (theatreUnit.units[0].coordinates == id) {
-        const units = theatreUnit.units[0].units;
+      console.log(theatreUnit);
+      console.log(theatreUnit.theatres);
+      if (theatreUnit.theatres[0].coordinates == id) {
+        const units = theatreUnit.theatres[0].units;
         units.forEach((unit) => {
           let type;
           if (unit.type === "land") {
@@ -211,6 +256,13 @@ updateUI = (data) => {
    */
   showUnitsModal = (name) => {
     $(`.${name}`).toggleClass("hide");
+  };
+
+  /**
+   *
+   */
+  showUnitsCasualties = (name) => {
+    $(`.CasualtiesUL${name}`).toggleClass("hide");
   };
 
   /**
@@ -294,6 +346,7 @@ updateUI = (data) => {
     $(`.fightingMap`).toggleClass("hide");
   });
 };
+
 /**
  * Temporary json file to display the data
  */

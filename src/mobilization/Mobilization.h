@@ -35,6 +35,11 @@ class Mobilization {
         */
         virtual std::string getState() = 0;
 
+        /**
+        * Provides functionality to set the state of the current object
+        * @param state The state of the object
+        */
+
         void setState(std::string state);
 
         virtual ~Mobilization();

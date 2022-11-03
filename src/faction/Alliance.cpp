@@ -82,3 +82,10 @@ json Alliance::toJSON(){
     }
     return data;
 }
+
+void Alliance::printResources(){
+    std::cout<<name<<": "<<std::endl;
+    for(Faction * f : members){
+        std::cout<<"\t"<<f->getName()<<": "<<((Country*)f)->getResourceCount()<<std::endl;
+    }
+}

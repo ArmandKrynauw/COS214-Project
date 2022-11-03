@@ -152,7 +152,7 @@ void Theatre::changeStrategy(std::string faction, WarStrategy *strategy) {
     }
 
     if (strategy->getType() == "Attack") {
-        if (strategies[faction] != NULL && strategies[faction]->getPlanned()) {
+        if (strategies[faction] != NULL && strategies[faction]->getType() == "Plan") {
             strategy->setPlanned(true);
         }
     }
@@ -213,7 +213,7 @@ float Theatre::calculateControl(std::string Faction) {
     }
 
     float ourSum = 0.0;
-    float TotalSum = 0.0;
+    float totalSum = 0.0;
     float final = 0.0;
     for (int i = 0; i < limit; i++) {
         
@@ -221,18 +221,19 @@ float Theatre::calculateControl(std::string Faction) {
         std::unordered_map<std::string, std::vector<Zone *>>::iterator it = zones.begin();
 
         while (it != zones.end()) {
-            TotalSum += it->second[i]->getTotalDamage();
+            totalSum += it->second[i]->getTotalDamage();
             it++;
         }
+        //std::cout<<"Theatre: "<<name<<" "<<totalSum<<std::endl;
         
-        if(ourSum != 0){
-            ourSum = TotalSum / ourSum;
+        if(totalSum != 0){
+            ourSum = ourSum / totalSum;
         }
         final += ourSum;
         
     }
 
-
+    //std::cout<<"Theatre: "<<name<<" Faction: "<<Faction<<": "<<final/limit<<std::endl;
     return final / limit;
 }
 

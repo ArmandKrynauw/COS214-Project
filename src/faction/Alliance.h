@@ -87,9 +87,13 @@ public:
      * Provides functionality to create a json object containing the name of all members of the alliance
      * @return Returns the json object
      */
-
-
     json toJSON();
+
+    /**
+     * Provides functionality to view the resources of each country in the alliance throught the terminal
+     * 
+     */
+    void printResources();
 };
 
 #endif  // ALLIANCE_H

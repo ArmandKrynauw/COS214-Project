@@ -139,18 +139,21 @@ void WarEngine::generateCountryResources(const json& counts,const json& alls){
     }
     else
     {
-       for (json a: alls) {
-
+          for (json a: alls) {
+            //std::cout<<"Name: "<<a["name"]<<": "<<std::endl;
            sum = 0;
 
             for (int i = 0; i < theatreSize; i++) { 
               for (int j = 0; j < theatreSize; j++) { 
-               sum += theatres[i][j]->getResource(a["name"].get<std::string>());
+                for (json country: a["countries"]) {
+                    sum += theatres[i][j]->getResource(country.get<std::string>());
+                    //std::cout<<theatres[i][j]->getName()<<" "<<sum<<std::endl;
+                }
              }
             }
             alliances[a["name"].get<std::string>()]->generateResources(sum);
+            alliances[a["name"].get<std::string>()]->printResources();
          }
-
     }
 }
 

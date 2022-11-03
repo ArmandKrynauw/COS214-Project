@@ -1,7 +1,13 @@
 var ws;
 // let buttonCounter = 0;
 let nextIndex = 0;
-let Nations = ["Germany", "America"];
+let Nations = new Array();
+let BattleIndex = 0;
+let loadBattle = true;
+let team4 = false;
+let leftSide = true;
+let rightSide = true;
+var data;
 
 /**
  * If prewar is tue then the game is in prewar phase else it is in the postwar phase
@@ -40,7 +46,13 @@ connectWarSocket = () => {
     if (data.hasOwnProperty("error")) {
       console.log("Error: " + data.error);
     } else {
-      updateUI(data);
+      if (loadBattle) {
+        initialiseBattle(data);
+        loadBattle = false;
+      } else {
+        data = data;
+        updateUI(data);
+      }
     }
   };
   ws.onerror = function (ev) {
@@ -60,18 +72,23 @@ sendMessage = (message) => {
 connectWarSocket();
 
 $(`.nextRound`).click(() => {
-  if (preWar) {
-    //set command that is sent
-    request.command = "loadNextDay";
+  if (loadBattle) {
+    request.command = "getAvailableSimulations";
     sendMessage(JSON.stringify(request));
   } else {
-    //set the command that is sent
-    request.command = "loadRoundResults";
-    sendMessage(JSON.stringify(request));
-    $(`.nextRound`).text("Next  Round");
-    nextIndex++;
+    if (preWar) {
+      //set command that is sent
+      request.command = "loadNextDay";
+      sendMessage(JSON.stringify(request));
+    } else {
+      //set the command that is sent
+      request.command = "loadRoundResults";
+      sendMessage(JSON.stringify(request));
+      $(`.nextRound`).text("Next  Round");
+      nextIndex++;
+    }
+    preWar = !preWar;
   }
-  preWar = !preWar;
 });
 updateUI = (data) => {
   /**
@@ -83,36 +100,6 @@ updateUI = (data) => {
     }
   }
 
-  /**
-   * This function loads in the casualties after each round
-   * it takes all the countires current theatres and puts them into one
-   * group
-   */
-  const casualties = data.casualties.data;
-  casualties.forEach((casualty) => {
-    for (let i = 0; i < Nations.length; i++) {
-      if (casualty.name == Nations[i]) {
-        const theatres = casualty.theatres;
-        theatres.forEach((theatre) => {
-          const units = theatre.units;
-          units.forEach((unit) => {
-            let type;
-            if (unit.type === "land") {
-              type = `<i class="fa-solid fa-person-rifle"></i>`;
-            } else if (unit.type === "air") {
-              type = `<i class="fa-solid fa-jet-fighter"></i>`;
-            } else {
-              type = `<i class="fa-solid fa-ship"></i>`;
-            }
-            $(`.cau${i}List`).append(
-              `<li class="list-group-item">${type}  ${unit.name} ${theatre.coordinates}</li>`
-            );
-          });
-        });
-      }
-    }
-  });
-
   $(`.Casualties0`).click(() => {
     $(`.cau0List`).toggleClass(`hide`);
   });
@@ -120,12 +107,6 @@ updateUI = (data) => {
   $(`.Casualties1`).click(() => {
     $(`.cau1List`).toggleClass(`hide`);
   });
-
-  /**
-   * Chnage the flags
-   */
-  $(`.img0`).attr(`src`, `./media/images/Germany.png`);
-  $(`.img1`).attr(`src`, `./media/images/America.png`);
 
   /**
    * this function is to simulate the next day in the battle it get data from the war engine object
@@ -140,10 +121,6 @@ updateUI = (data) => {
 
   $(`#Day`).text(`Day: ${nextIndex}`);
 
-  /**
-   * this function is to add the name of the country to the map
-   */
-  $(`#BattleName`).text("war in planet earth");
   /**
    * this function is to set the state of the battle
    */
@@ -257,6 +234,11 @@ updateUI = (data) => {
   showUnitsModal = (name) => {
     $(`.${name}`).toggleClass("hide");
   };
+  /**
+   * Casualties
+   */
+  displayCasualties(data, 0, 0);
+  displayCasualties(data, 1, 1);
 
   /**
    *
@@ -285,25 +267,37 @@ updateUI = (data) => {
 
   /*--------Overall work---------*/
   const overallUnits = data.overallUnits.data;
-
-  overallUnits.forEach((overallUnit, i = 0) => {
-    $(`.Name${i}`).text(overallUnit.name);
-    const units = overallUnit.units;
-    units.forEach((unit) => {
-      let type;
-      if (unit.type === "land") {
-        type = `<i class="fa-solid fa-person-rifle"></i>`;
-      } else if (unit.type === "air") {
-        type = `<i class="fa-solid fa-jet-fighter"></i>`;
+  displayUnits(0, 0, overallUnits);
+  displayUnits(1, 1, overallUnits);
+  /**
+   * SwitchNations Functions
+   */
+  $(`.img0`).click(() => {
+    if (team4) {
+      if (leftSide) {
+        switchflag(0, 2);
+        // CHANGE THISSSSSSSSSSSSSSSSSSS
+        displayUnits(1, 0, overallUnits);
       } else {
-        type = `<i class="fa-solid fa-ship"></i>`;
+        switchflag(0, 0);
+        displayUnits(0, 0, overallUnits);
       }
-      $(`.list${i}`).append(
-        `<li class="list-group-item">${type}  ${unit.name}  ${Math.round(
-          (unit.currentHP / unit.initialHP) * 100
-        )}%</li>`
-      );
-    });
+      leftSide = !leftSide;
+    }
+  });
+
+  $(`.img1`).click(() => {
+    if (team4) {
+      if (rightSide) {
+        switchflag(1, 3);
+        // CHANGE THISSSSSSSSSSSSSSSSSSS
+        displayUnits(0, 1, overallUnits);
+      } else {
+        switchflag(1, 1);
+        displayUnits(1, 1, overallUnits);
+      }
+      rightSide = !rightSide;
+    }
   });
 
   /*--------Allies---------*/
@@ -344,6 +338,98 @@ updateUI = (data) => {
    */
   $(`.MapBTN`).click(() => {
     $(`.fightingMap`).toggleClass("hide");
+  });
+};
+
+/**
+ * This function will initialise the battle
+ */
+initialiseBattle = (data) => {
+  // console.log(data);
+  BattleIndex = 0;
+  data = data[BattleIndex];
+  data.countries.forEach((country) => {
+    // console.log(country);
+    Nations.push(country.name);
+  });
+  $(`#BattleName`).text(data.name);
+
+  if (Nations.length == 2) {
+    team4 = false;
+  } else {
+    team4 = true;
+  }
+
+  /**
+   * set the image flags of each nation
+   */
+  $(`.img0`).attr("src", `./media/images/${Nations[0]}.png`);
+  $(`.img1`).attr("src", `./media/images/${Nations[1]}.png`);
+  $(`.Name0`).text(`${Nations[0]}`);
+  $(`.Name1`).text(`${Nations[1]}`);
+};
+
+/**
+ * Function to display all the UNITS currenlty fighting to the screen according to their index
+ */
+displayUnits = (index, side, overallUnits) => {
+  $(`.list${side}`).empty();
+  units = overallUnits[index].units;
+  units.forEach((unit) => {
+    let type;
+    if (unit.type === "land") {
+      type = `<i class="fa-solid fa-person-rifle"></i>`;
+    } else if (unit.type === "air") {
+      type = `<i class="fa-solid fa-jet-fighter"></i>`;
+    } else {
+      type = `<i class="fa-solid fa-ship"></i>`;
+    }
+    $(`.list${side}`).append(
+      `<li class="list-group-item">${type}  ${unit.name}  ${Math.round(
+        (unit.currentHP / unit.initialHP) * 100
+      )}%</li>`
+    );
+  });
+};
+
+/**
+ * this faunction will switch the flags of the nations and change their name
+ */
+switchflag = (side, country) => {
+  $(`.img${side}`).attr("src", `./media/images/${Nations[country]}.png`);
+  $(`.Name${side}`).text(`${Nations[country]}`);
+};
+
+/**
+ * This function loads in the casualties after each round
+ * it takes all the countires current theatres and puts them into one
+ * group
+ */
+displayCasualties = (data, country, side) => {
+  country = Nations[country];
+  $(`.cau${side}List`).empty();
+  const casualties = data.casualties.data;
+  casualties.forEach((casualty) => {
+    console.log(casualty.name + " " + country);
+    if (casualty.name == country) {
+      const theatres = casualty.theatres;
+      theatres.forEach((theatre) => {
+        const units = theatre.units;
+        units.forEach((unit) => {
+          let type;
+          if (unit.type === "land") {
+            type = `<i class="fa-solid fa-person-rifle"></i>`;
+          } else if (unit.type === "air") {
+            type = `<i class="fa-solid fa-jet-fighter"></i>`;
+          } else {
+            type = `<i class="fa-solid fa-ship"></i>`;
+          }
+          $(`.cau${side}List`).append(
+            `<li class="list-group-item">${type}  ${unit.name} ${theatre.coordinates}</li>`
+          );
+        });
+      });
+    }
   });
 };
 

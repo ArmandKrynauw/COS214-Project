@@ -14,6 +14,11 @@ var data;
  */
 let preWar = true;
 
+// get values from url:../index.html?battleIndex=0
+const urlParams = new URLSearchParams(window.location.search);
+const battleIndex = urlParams.get("battleIndex");
+console.log(battleIndex);
+
 /**
  * Json format to send to warsocket
  *

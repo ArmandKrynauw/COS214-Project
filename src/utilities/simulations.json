@@ -2,7 +2,7 @@
     "Wars": [
         {
             "WarTitle": "Western Front [1943]",
-            "duration": 3,
+            "duration": 5,
             "theatres": [
                 { "name": "Sicily", "seaZone": true, "resourceCount": 10 },
                 { "name": "Tunisia", "seaZone": true, "resourceCount": 5 },
@@ -81,14 +81,7 @@
                 }
             ],
         "alliances": [
-                {
-                    "name": "Allies",
-                    "countries": ["America", "France"]
-                },
-                {
-                    "name": "Central European Powers",
-                    "countries": ["Germany", "Russia"]
-                }
+                
             ],
             "rounds": [
                 {
@@ -124,26 +117,23 @@
                             "name": "Germany",
                             "units": [
                                 { "type": "HeavyLandUnit", "quantity": 1 },
-                                { "type": "HeavyAirUnit", "quantity": 1 },
-                                { "type": "HeavySeaUnit", "quantity": 1 }
+                                { "type": "MediumAirUnit", "quantity": 1 },
+                                { "type": "LightSeaUnit", "quantity": 3 }
+                                
                             ]
                         },
                         {
                             "name": "America",
                             "units": [
-                                { "type": "LightLandUnit", "quantity": 1 },
-                                { "type": "LightAirUnit", "quantity": 1 },
-                                { "type": "LightSeaUnit", "quantity": 1 }
+                                { "type": "MediumLandUnit", "quantity": 1 },
+                                { "type": "MediumAirUnit", "quantity": 1 },
+                                { "type": "HeavySeaUnit", "quantity": 1 },
+                                { "type": "MediumSeaUnit", "quantity": 2 }
+                                
+                                
                             ]
                         }
                     ],
-                    "unitsToTransport": [
-                        {
-                            "name": "Germany",
-                            "units": []
-                        }
-                    ],
-
                     "unitsToRelocate": [
                         {
                             "name": "Germany",
@@ -161,6 +151,16 @@
                                 {
                                     "type": "sea",
                                     "index": 0,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 1,
+                                    "destination": "0,2"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 2,
                                     "destination": "2,2"
                                 }
                             ]
@@ -182,6 +182,16 @@
                                     "type": "sea",
                                     "index": 0,
                                     "destination": "2,2"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 1,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 2,
+                                    "destination": "0,2"
                                 }
                             ]
                         }
@@ -231,13 +241,13 @@
                     ]
                 },
                 {
-                    "WarState": "MiddleStage",
+                    "WarState": "EarlyStage",
                     "turnNumber": 2,
                     "mobilization": {
                         "countries": [
                             {
                                 "name": "Germany",
-                                "mobilization": "TotalMobilization"
+                                "mobilization": "WarEconomy"
                             },
                             {
                                 "name": "America",
@@ -250,6 +260,45 @@
                             {
                                 "name": "Germany",
                                 "research": "industry",
+                                "points" : 500
+                            },
+                            {
+                                "name": "America",
+                                "research": "industry",
+                                "points" : 300
+                            }]
+                    },
+                    "unitsToPurchase": [
+                        
+                    ],
+                    "unitsToRelocate": [
+                        
+                    ],
+
+                    "strategies": [
+                        
+                    ]
+                },
+                {
+                    "WarState": "MiddleStage",
+                    "turnNumber": 3,
+                    "mobilization": {
+                        "countries": [
+                            {
+                                "name": "Germany",
+                                "mobilization": "WarEconomy"
+                            },
+                            {
+                                "name": "America",
+                                "mobilization": "TotalMobilization"
+                            }
+                        ]
+                    },
+                    "research" : {
+                        "countries": [
+                            {
+                                "name": "Germany",
+                                "research": "propoganda",
                                 "points" : 100
                             },
                             {
@@ -262,27 +311,24 @@
                         {
                             "name": "Germany",
                             "units": [
-                                { "type": "HeavyLandUnit", "quantity": 1 },
-                                { "type": "HeavyAirUnit", "quantity": 1 },
-                                { "type": "HeavySeaUnit", "quantity": 1 }
+                                { "type": "MediumLandUnit", "quantity": 3 },
+                                { "type": "MediumAirUnit", "quantity": 3 },
+                                { "type": "MediumSeaUnit", "quantity": 3 }
+                                
                             ]
                         },
                         {
                             "name": "America",
                             "units": [
-                                { "type": "LightLandUnit", "quantity": 1 },
-                                { "type": "LightAirUnit", "quantity": 1 },
-                                { "type": "LightSeaUnit", "quantity": 1 }
+                                { "type": "MediumLandUnit", "quantity": 3 },
+                                { "type": "HeavyAirUnit", "quantity": 3 },
+                                { "type": "LightSeaUnit", "quantity": 3 }
+                    
+                                
+                                
                             ]
                         }
                     ],
-                    "unitsToTransport": [
-                        {
-                            "name": "Germany",
-                            "units": []
-                        }
-                    ],
-
                     "unitsToRelocate": [
                         {
                             "name": "Germany",
@@ -293,13 +339,43 @@
                                     "destination": "0,0"
                                 },
                                 {
+                                    "type": "land",
+                                    "index": 2,
+                                    "destination": "1,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 3,
+                                    "destination": "2,2"
+                                },
+                                {
                                     "type": "air",
                                     "index": 1,
+                                    "destination": "0,0"
+                                },
+                                {
+                                    "type": "air",
+                                    "index": 2,
+                                    "destination": "1,1"
+                                },
+                                {
+                                    "type": "air",
+                                    "index": 3,
+                                    "destination": "2,2"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 3,
+                                    "destination": "0,0"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 4,
                                     "destination": "1,1"
                                 },
                                 {
                                     "type": "sea",
-                                    "index": 1,
+                                    "index": 5,
                                     "destination": "2,2"
                                 }
                             ]
@@ -313,13 +389,43 @@
                                     "destination": "0,0"
                                 },
                                 {
+                                    "type": "land",
+                                    "index": 2,
+                                    "destination": "1,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 3,
+                                    "destination": "2,2"
+                                },
+                                {
                                     "type": "air",
                                     "index": 1,
+                                    "destination": "0,0"
+                                },
+                                {
+                                    "type": "air",
+                                    "index": 2,
+                                    "destination": "1,1"
+                                },
+                                {
+                                    "type": "air",
+                                    "index": 3,
+                                    "destination": "2,2"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 3,
+                                    "destination": "0,0"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 4,
                                     "destination": "1,1"
                                 },
                                 {
                                     "type": "sea",
-                                    "index": 1,
+                                    "index": 5,
                                     "destination": "2,2"
                                 }
                             ]
@@ -331,12 +437,12 @@
                             "name": "Germany",
                             "strategies": [
                                 {
-                                    "strategy": "Attack",
+                                    "strategy": "Counter",
                                     "theatre": "0,0",
                                     "target": "America"
                                 },
                                 {
-                                    "strategy": "Counter",
+                                    "strategy": "Plan",
                                     "theatre": "1,1",
                                     "target": "America"
                                 },
@@ -361,7 +467,7 @@
                                     "target": "Germany"
                                 },
                                 {
-                                    "strategy": "Counter",
+                                    "strategy": "Attack",
                                     "theatre": "2,2",
                                     "target": "Germany"
                                 }
@@ -370,8 +476,8 @@
                     ]
                 },
                 {
-                    "WarState": "LateStage",
-                    "turnNumber": 3,
+                    "WarState": "MiddleStage",
+                    "turnNumber": 4,
                     "mobilization": {
                         "countries": [
                             {
@@ -388,19 +494,76 @@
                         "countries": [
                             {
                                 "name": "Germany",
-                                "research": "industry",
-                                "points" : 100
+                                "research": "propoganda",
+                                "points" : 300
                             },
                             {
                                 "name": "America",
                                 "research": "industry",
-                                "points" : 100
+                                "points" : 300
                             }]
                     },
-                    "unitsToPurchase": [],
-                    "unitsToTransport": [],
-
-                    "unitsToRelocate": [],
+                    "unitsToPurchase": [
+                        {
+                            "name": "Germany",
+                            "units": [
+                                { "type": "HeavyLandUnit", "quantity": 2 },
+                                { "type": "HeavySeaUnit", "quantity": 1 }
+                                
+                            ]
+                        },
+                        {
+                            "name": "America",
+                            "units": [
+                                { "type": "HeavyLandUnit", "quantity": 1 },
+                                { "type": "HeavySeaUnit", "quantity": 2 }
+                                
+                                
+                            ]
+                        }
+                    ],
+                    "unitsToRelocate": [
+                        {
+                            "name": "Germany",
+                            "movements": [
+                                {
+                                    "type": "land",
+                                    "index": 4,
+                                    "destination": "1,0"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 5,
+                                    "destination": "2,0"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 6,
+                                    "destination": "2,1"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "America",
+                            "movements": [
+                                {
+                                    "type": "land",
+                                    "index": 4,
+                                    "destination": "1,0"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 6,
+                                    "destination": "2,0"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 7,
+                                    "destination": "2,1"
+                                }
+                            ]
+                        }
+                    ],
 
                     "strategies": [
                         {
@@ -412,13 +575,23 @@
                                     "target": "America"
                                 },
                                 {
-                                    "strategy": "Attack",
+                                    "strategy": "Counter",
                                     "theatre": "1,1",
                                     "target": "America"
                                 },
                                 {
-                                    "strategy": "Attack",
+                                    "strategy": "Plan",
                                     "theatre": "2,2",
+                                    "target": "America"
+                                },
+                                {
+                                    "strategy": "Plan",
+                                    "theatre": "1,0",
+                                    "target": "America"
+                                },
+                                {
+                                    "strategy": "Counter",
+                                    "theatre": "2,1",
                                     "target": "America"
                                 }
                             ]
@@ -427,7 +600,7 @@
                             "name": "America",
                             "strategies": [
                                 {
-                                    "strategy": "Attack",
+                                    "strategy": "Plan",
                                     "theatre": "0,0",
                                     "target": "Germany"
                                 },
@@ -437,8 +610,95 @@
                                     "target": "Germany"
                                 },
                                 {
-                                    "strategy": "Attack",
+                                    "strategy": "Counter",
                                     "theatre": "2,2",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "1,0",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Plan",
+                                    "theatre": "2,1",
+                                    "target": "Germany"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "WarState": "LateStage",
+                    "turnNumber": 5,
+                    "mobilization": {
+                        "countries": [
+                            {
+                                "name": "Germany",
+                                "mobilization": "PartialMobilization"
+                            },
+                            {
+                                "name": "America",
+                                "mobilization": "PartialMobilization"
+                            }
+                        ]
+                    },
+                    "research" : {
+                        "countries": [
+                            {
+                                "name": "Germany",
+                                "research": "industry",
+                                "points" : 500
+                            },
+                            {
+                                "name": "America",
+                                "research": "industry",
+                                "points" : 500
+                            }]
+                    },
+                    "unitsToPurchase": [
+                        
+                    ],
+                    "unitsToRelocate": [
+                        {
+                            "name": "Germany",
+                            "movements": [
+                                {
+                                    "type": "sea",
+                                    "index": 6,
+                                    "destination": "0,0"
+                                }
+                            ]
+                        }
+                    ],
+
+                    "strategies": [
+                        {
+                            "name": "Germany",
+                            "strategies": [
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "0,1",
+                                    "target": "America"
+                                },
+                                {
+                                    "strategy": "Counter",
+                                    "theatre": "0,2",
+                                    "target": "America"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "America",
+                            "strategies": [
+                                {
+                                    "strategy": "Plan",
+                                    "theatre": "0,1",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "0,2",
                                     "target": "Germany"
                                 }
                             ]

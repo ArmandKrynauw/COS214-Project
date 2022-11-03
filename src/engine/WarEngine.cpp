@@ -79,7 +79,6 @@ void WarEngine::loadAlliances(const json &data) {
 void WarEngine::loadWarFactors(const json& data){
     loadEscalation(data["WarState"]);
     loadMobilization(data["mobilization"]);
-    loadResearch(data["research"]);
 }
 
 
@@ -105,8 +104,11 @@ void WarEngine::loadEscalation(const json &data) {
 }
 
 void WarEngine::loadBattleDay(const json& data){
-    generateCountryResources(data["countries"],data["alliances"]);
     loadWarFactors(data["rounds"][dayCounter]);
+    generateCountryResources(data["countries"],data["alliances"]);
+    loadResearch(data["rounds"][dayCounter]["research"]);
+    
+
     purchaseUnits(data["rounds"][dayCounter]["unitsToPurchase"]);
     relocateUnits(data["rounds"][dayCounter]["unitsToRelocate"]);
     assignStrategies(data["rounds"][dayCounter]["strategies"]);
@@ -122,6 +124,7 @@ void WarEngine::generateCountryResources(const json& counts,const json& alls){
     int sum = 0;
     if(alliances.size()==0)
     {
+        std::cout<<"Country Resources: "<<std::endl;
         for (json c: counts) {
             sum = 0;
 
@@ -131,6 +134,7 @@ void WarEngine::generateCountryResources(const json& counts,const json& alls){
              }
             }
             countries[c["name"].get<std::string>()]->generateResources(sum);
+            std::cout<<c["name"].get<std::string>()<<": "<<countries[c["name"]]->getResourceCount()<<std::endl;
          }
     }
     else
@@ -220,10 +224,14 @@ void WarEngine::relocateUnits(const json &data) {
 }
 
 void WarEngine::transportUnit(Theatre *destination, const std::string &country, const std::string &type, const int &index) {
+   
     Theatre *oldHome = ((Unit *) countries[country]->getEntity(type, index))->getTheatre();
-    destination->addEntity(country, countries[country]->getEntity(type, index));
     if (oldHome) {
-        oldHome->removeEntity(country, type, ((Unit *) countries[country]->getEntity(type, index))->getId());
+         //std::cout<<"Old: "<<oldHome->getName()<<" "<<((Unit *) countries[country]->getEntity(type, index))->getName()<<std::endl;
+        destination->addEntity(country,oldHome->removeEntity(country, type, ((Unit *) countries[country]->getEntity(type, index))->getId()));
+    }
+    else{
+        destination->addEntity(country,((Unit *) countries[country]->getEntity(type, index)));
     }
 }
 

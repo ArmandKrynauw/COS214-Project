@@ -127,7 +127,7 @@ void Client::runSimulation() {
     int end = chosenSimulation["duration"];
     for (json roundData: chosenSimulation["rounds"][currentDay]) {
         if (currentDay != end) {
-            std::cout << "Battle " << currentDay + 1 << " commencing... " << std::endl;
+            std::cout << "Day " << currentDay + 1 << " commencing... " << std::endl;
             json result = runNextDay();
             json deaths = result["casualities"];
             printDayResults();

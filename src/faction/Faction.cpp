@@ -4,7 +4,7 @@ Faction::Faction(std::string name) {
     this->name = name;
     this->id = uuid::generate();
 
-    int nums[3] = {0,0,0};
+    int nums[2] = {0,0};
     for(int i : nums){
         research.push_back(i);
     }

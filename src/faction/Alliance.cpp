@@ -62,7 +62,7 @@ int Alliance::getResearch(int i){
 }
 
 void Alliance::resetResearch(int index){
-    research[index] -= 1000;
+    research[index] -= 500;
 }
 
 // int Alliance::getAttackPower(Theatre *theatre) {

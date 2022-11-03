@@ -52,7 +52,7 @@ void Country::setResearch(int researchPoints,std::string category){
 
         alliance->setResearch(researchPoints,category);
 
-        if(alliance->getResearch(0)>=1000)
+        if(alliance->getResearch(0)>=500)
         {
             alliance->resetResearch(0);
             for(Faction * m : alliance->getMembers()){
@@ -60,7 +60,7 @@ void Country::setResearch(int researchPoints,std::string category){
             }
             
         }
-        if(alliance->getResearch(1)>=1000)
+        if(alliance->getResearch(1)>=500)
         {
             alliance->resetResearch(1);
             for(Faction * m : alliance->getMembers()){
@@ -73,12 +73,12 @@ void Country::setResearch(int researchPoints,std::string category){
 
     Faction::setResearch(researchPoints,category);
 
-    if(getResearch(0)>=1000)
+    if(getResearch(0)>=500)
     {
         resetResearch(0);
         setBaseResourceCount(getBaseResourceCount() * 1.2);
     }
-    if(getResearch(1)>=1000)
+    if(getResearch(1)>=500)
     {
         resetResearch(1);
         setMorale(getMorale() * 1.2);
@@ -92,7 +92,7 @@ int Country::getResearch(int i){
 }
 
 void Country::resetResearch(int index){
-    research[index] -= 1000;
+    research[index] -= 500;
 }
 
 

@@ -107,19 +107,28 @@ void Theatre::battle() {
     if (strategies.size() > 1) {
         //std::cout<<getName()<<" has a battle."<<std::endl;
         while (it != strategies.end()) {
-            std::string attacker = it->first;                   //America
-            std::string defendant = it->second->getTarget();    //Germany
-            WarStrategy *strategy = it->second;
-            float attackModifier = strategy->executeStrategy(strategies[defendant]);
-            float defendModifier = strategies[defendant]->executeStrategy(strategies[attacker]);
+            if(it->second && strategies[it->second->getTarget()]){
+                std::string attacker = it->first;                   //America
+                std::string defendant = it->second->getTarget();    //Germany
+                WarStrategy *strategy = it->second;
+                float attackModifier = 1;
+                float defendModifier = 1;
+                
+                if(strategy){
+                    attackModifier = strategy->executeStrategy(strategies[defendant]);
+                }
+                if(strategies[defendant]){
+                    defendModifier = strategies[defendant]->executeStrategy(strategies[attacker]);
+                } 
 
-            for (int i = 0; i < limit; i++) {
-                if (zones[attacker][i]->getUnitCount() > 0 && zones[defendant][i]->getUnitCount() > 0) {
-                    int attackFinal = zones[attacker][i]->getTotalDamage() * attackModifier;
-                    int defendFinal = zones[defendant][i]->getTotalDamage() * defendModifier;
-                    zones[attacker][i]->takeDamage(defendFinal);  // defender deals damage
+                for (int i = 0; i < limit; i++) {
+                    if (zones[attacker][i]->getUnitCount() > 0 && zones[defendant][i]->getUnitCount() > 0) {
+                        int attackFinal = zones[attacker][i]->getTotalDamage() * attackModifier;
+                        int defendFinal = zones[defendant][i]->getTotalDamage() * defendModifier;
+                        zones[attacker][i]->takeDamage(defendFinal);  // defender deals damage
 
-                    //zones[defendant][i]->takeDamage(attackFinal);  // attacker deals damage
+                        //zones[defendant][i]->takeDamage(attackFinal);  // attacker deals damage
+                    }
                 }
             }
             it++;

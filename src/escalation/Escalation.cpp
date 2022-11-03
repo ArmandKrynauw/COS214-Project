@@ -19,7 +19,7 @@ Escalation *Escalation::checkStageOfWar(std::string stage) {
         }
 
     }
-    return NULL;
+    return this;
 }
 
 Escalation::~Escalation() {

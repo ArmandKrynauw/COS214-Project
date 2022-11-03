@@ -173,7 +173,7 @@ bool Country::checkForArmedForces(){
 json Country::getListOfUnits() {
     json data = json{
             {"name",  name},
-            {"units", json::array()}
+            {"theatres", json::array()}
     };
     json units;
 
@@ -193,8 +193,8 @@ json Country::getListOfUnits() {
 
     json::iterator theatreIt = units.begin();
     for (; theatreIt != units.end(); ++theatreIt) {
-        data["units"].push_back(json{
-                {"theatre", theatreIt.key()},
+        data["theatres"].push_back(json{
+                {"name", theatreIt.key()},
                 {"units",   theatreIt.value()}
         });
     }

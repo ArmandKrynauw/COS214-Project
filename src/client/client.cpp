@@ -135,8 +135,11 @@ void Client::runSimulation() {
             std::cout << "Battle " << currentRound + 1 << " commencing... " << std::endl;
             json result = runNextRound();
             json deaths = result["casualities"];
-            // printRoundResults();
-            std::cout << WarEngine::instance()->getTheatreUnits().dump(2) << std::endl;
+            printRoundResults();
+            // std::cout << WarEngine::instance()->getTheatreUnits().dump(2) << std::endl;
+            // WarEngine::instance()->getTheatreUnits();
+            // std::cout << WarEngine::instance()->clearCasualties().dump(2) << std::endl;
+            //  WarEngine::instance()->clearCasualties();
             //pass data to GUI
             std::cout << "Press any key to continue...";
             std::string input;
@@ -152,8 +155,8 @@ void Client::printRoundResults() {
     json data = WarEngine::instance()->getTheatreUnits();
     for (json country: data) {
         std::cout << country["name"].get<std::string>() << ": " << std::endl;
-        for (json theatre: country["units"]) {
-            std::cout << "\t" << theatre["theatre"].get<std::string>() << ": " << std::endl;
+        for (json theatre: country["theatres"]) {
+            std::cout << "\t" << theatre["name"].get<std::string>() << ": " << std::endl;
             for (json unit: theatre["units"]) {
                 printUnit(unit);
             }
@@ -164,7 +167,7 @@ void Client::printRoundResults() {
 
 void Client::printUnit(const json &unit) {
     std::cout << "\t\t" << "Name: " << unit["name"].get<std::string>() << " Type: " << unit["type"].get<std::string>()
-              << " Hp: " << unit["hp"] << std::endl;
+              << " Current HP: " << unit["currentHP"] << std::endl;
 }
 
 // ======================================================================================

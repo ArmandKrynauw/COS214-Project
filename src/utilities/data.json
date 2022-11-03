@@ -154,9 +154,9 @@
         "data": [
             {
                 "name": "Germany",
-                "units": [
+                "theatres": [
                     {
-                        "theatre": "Sicily",
+                        "name": "Sicily",
                         "coordinates": "0-0",
                         "units": [
                             {
@@ -250,9 +250,9 @@
         "data": [
             {
                 "name": "Germany",
-                "units": [
+                "theatres": [
                     {
-                        "theatre": "Sicily",
+                        "name": "Sicily",
                         "coordinates": "0-0",
                         "units": [
                             {

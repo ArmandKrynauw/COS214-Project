@@ -425,11 +425,67 @@ json WarEngine::getRoundResults() {
 }
 
 json WarEngine::clearCasualties() {
-    std::unordered_map<std::string, Country *>::iterator it;
-    for (it = countries.begin(); it != countries.end(); ++it) {
-        it->second->removeCasualties();
+    json data = getTheatreUnits();
+
+    for (int i = 0; i != data.size();) {
+        json units = data[i]["units"];
+
+        for (int j = 0; j < units.size(); j++) {
+            // if (units[j]["currentHP"] != 0) {
+            //     units.erase(units.begin() + j);
+            // }
+            // for (int k = 0; k < )
+
+            if (units[j]["units"].size() != 0) {
+                units.erase(units.begin() + j);
+            } else {
+                j++;
+            }
+        }
+
+        if (data[i]["units"].size() == 0) {
+            data.erase(data.begin() + i);
+        } else {
+            i++;
+        }
+
     }
-    return json{};
+    // auto it = data.begin(); 
+    // for (; it != data.end();) {
+    //     // json units = data[i]["units"];
+
+    //     // for (int j = 0; j < units.size(); j++) {
+    //     //     if (units[j]["currentHP"] != 0) {
+    //     //         units.erase(units.begin() + j);
+    //     //     }
+    //     // }
+
+    //     std::cout << (*it)["name"] << std::endl;
+    //     std::cout << (*it)["units"].size() << std::endl;
+    //     if ((*it)["units"].size() == 0) {
+    //         it = data.erase(it);
+    //     } else {
+    //         ++it;
+    //     }
+
+    // }
+
+    // for (json& country : data) {
+    //     json units = country["units"];
+
+    //     for (int i = 0; i < units.size(); i++) {
+    //         if (units[i]["currentHP"] != 0) {
+    //             units.erase(units.begin() + i);
+    //         }
+    //     }
+    // }
+
+    // std::unordered_map<std::string, Country *>::iterator it;
+    // for (it = countries.begin(); it != countries.end(); ++it) {
+    //     it->second->removeCasualties();
+    // }
+
+    return data;
 }
 
 
@@ -496,11 +552,12 @@ json WarEngine::getStats(){
     return json{{"engine", getEngineStats()},
                 {"countries", getCountryStats()},
                 {"alliances", getAllianceStats()},
+                {"theatreUnits", getTheatreUnits()},
                 {"overallUnits", getOverallUnits()},
                 {"theatres" , getTheatreStats()}};
 }
 
-json WarEngine::getEngineStats(){
+json WarEngine::getEngineStats() {
     std::string stage;
     if(warStage->getState() == "EarlyStage"){
         stage = "Early Stage";
@@ -517,7 +574,7 @@ json WarEngine::getEngineStats(){
                  {"numberOfAlliances", alliances.size()}};
 }
 
-json WarEngine::getCountryStats(){
+json WarEngine::getCountryStats() {
     json array;
     std::unordered_map<std::string, Country *>::iterator it = countries.begin();
     while(it != countries.end()){
@@ -530,7 +587,7 @@ json WarEngine::getCountryStats(){
     return json{{"data" , array}};
 }
 
-json WarEngine::getAllianceStats(){
+json WarEngine::getAllianceStats() {
 
     json array;
     std::unordered_map<std::string, Alliance *>::iterator it = alliances.begin();
@@ -543,7 +600,7 @@ json WarEngine::getAllianceStats(){
     return json{{"data" , array}};
 }
 
-json WarEngine::getOverallUnits(){
+json WarEngine::getOverallUnits() {
     json array;
     std::unordered_map<std::string, Country *>::iterator it = countries.begin();
 
@@ -556,7 +613,7 @@ json WarEngine::getOverallUnits(){
     return json{{"data" , array}};
 }
 
-json WarEngine::getTheatreStats(){
+json WarEngine::getTheatreStats() {
     json data = json::array();
     
     for (int i = 0; i < theatreSize; i++) {
@@ -585,8 +642,8 @@ json WarEngine::getTheatreUnits() {
     // Get list of units for each country
     for (it = countries.begin(); it != countries.end(); ++it) {
         json j = it->second->getListOfUnits();
-        for (json& unit : j["units"]) {
-            unit["coordinates"] = coordinates[unit["theatre"]];
+        for (json& theatre : j["theatres"]) {
+            theatre["coordinates"] = coordinates[theatre["name"]];
         }
         data.push_back(j);
     }

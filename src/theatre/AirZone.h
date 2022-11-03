@@ -14,6 +14,11 @@ private:
 public:
     AirZone(std::string name);
 
+    /*
+     * Provides functionality to get the type of zone
+     * @return string : the type of zone
+     */
+
     std::string getType() override;
 
     virtual ~AirZone();

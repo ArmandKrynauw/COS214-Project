@@ -14,6 +14,11 @@ private:
 public:
     SeaZone(std::string name);
 
+    /*
+     * Provides functionality to get the type of zone
+     * @return string : the type of zone
+     */
+
     virtual std::string getType() override;
 
     virtual ~SeaZone();

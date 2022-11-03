@@ -10,7 +10,7 @@ WarEngine *WarEngine::instance() {
 }
 
 WarEngine::WarEngine() {
-    roundCounter = 0;
+    dayCounter = 0;
     srand(1);
     warStage = new EarlyStage("pre-war");
     unitFactories["land"] = new LandUnitFactory();
@@ -76,13 +76,47 @@ void WarEngine::loadAlliances(const json &data) {
 // ============================================================================
 // SIMULATION HELPER FUNCTIONS
 // ============================================================================
-void WarEngine::checkMobilization(const json& data) {
-    roundCounter++;
+void WarEngine::loadWarFactors(const json& data){
+    loadEscalation(data["WarState"]);
+    loadMobilization(data["mobilization"]);
+    loadResearch(data["research"]);
+}
+
+
+void WarEngine::loadMobilization(const json& data) {
     for (json country: data["countries"]) {
             countries[country["name"].get<std::string>()]->checkMobilization(warStage->getState(), country["mobilization"].get<std::string>()); 
     }
 }
 
+void WarEngine::loadResearch(const json& data){
+    for(json country : data["countries"]){
+        countries[country["name"].get<std::string>()]->setResearch(country["points"].get<int>(),country["research"].get<std::string>());
+    }
+}
+
+void WarEngine::loadEscalation(const json &data) {
+
+    std::string oldStage = warStage->getState();
+    warStage = warStage->checkStageOfWar(data.get<std::string>());
+    if (oldStage != warStage->getState()) {
+        std::cout << "=============== NEW WAR PHASE: " << warStage->getState() << " ===============" << std::endl;
+    }
+}
+
+void WarEngine::loadBattleDay(const json& data){
+    generateCountryResources(data["countries"],data["alliances"]);
+    loadWarFactors(data["rounds"][dayCounter]);
+    purchaseUnits(data["rounds"][dayCounter]["unitsToPurchase"]);
+    relocateUnits(data["rounds"][dayCounter]["unitsToRelocate"]);
+    assignStrategies(data["rounds"][dayCounter]["strategies"]);
+}
+
+void WarEngine::goBack(){
+    if(dayCounter != 0){
+        dayCounter--;
+    }
+}
 
 void WarEngine::generateCountryResources(const json& counts,const json& alls){
     int sum = 0;
@@ -220,85 +254,15 @@ void WarEngine::assignStrategies(const json &data) {
     //viewStrategies();
 }
 
-void WarEngine::checkEscalation(const json &data) {
 
-    std::string oldStage = warStage->getState();
-    warStage = warStage->checkStageOfWar(data.get<std::string>());
-    if (oldStage != warStage->getState()) {
-        std::cout << "=============== NEW WAR PHASE: " << warStage->getState() << " ===============" << std::endl;
-    }
-}
 
 // ============================================================================
 // MAIN WAR FUNCTIONS
 // ============================================================================
 
-void WarEngine::startSimulation(json war) {
-    // turnCounter = 1;
-    // player1Turn = true;
-    // bool warInProgress = true;
 
-    // // Round
-    // while(warInProgress) {
-    //     // Phase 1
-    //     for(int i = 0; i < 2; i++) {
-    //         int player = player1Turn ? 1 : 2;
-    //         std::cout << "\033[1;" << 32 + player << "mFaction: " << player
-    //                   << std::endl
-    //                   << "Turn: " << turnCounter << std::endl;
-    //         displayResources();
-    //         buyUnits();
-    //         displayUnits();
-    //         placeTroops();
-    //         printMap();
-    //         // std::cout<<"\033[1;32"<< 32 +
-    //         // player<<"m======================================"<<std::endl;
-    //         // std::cout<<std::endl;
-    //         player1Turn = player1Turn ? false : true;
-    //         std::cout << std::endl;
-    //     }
 
-    //     // Phase 2
-    //     chooseStrategies();
-    //     // viewStrategies();
 
-    //     // Phase 3
-    //     CommenceBattle();
-    //     CommenceBattle();
-    //     CommenceBattle();
-    //     printMap();
-
-    //     // Switch Order of players taking turns for fairness
-    //     player1Turn = player1Turn ? false : true;
-    //     // To end while loop for testing
-    //     warInProgress = false;
-    //     // SAVE STATE HERE
-    //     turnCounter++;
-    // }
-}
-
-// void WarEngine::displayResources() {
-//     int resources = player1Turn ? factions[0]->getResourceCount()
-//                                 : factions[1]->getResourceCount();
-//     std::string factionName =
-//             player1Turn ? factions[0]->getName() : factions[1]->getName();
-//     std::cout << factionName << " Resources: " << resources << std::endl;
-//     // std::cout<<std::endl;
-// }
-
-void WarEngine::buyUnits() {
-
-}
-
-void WarEngine::displayUnits() {
-
-    std::cout << "Germany" << " Troops:" << std::endl;
-    std::cout << countries["Germany"]->getListOfUnits() << std::endl;
-
-    std::cout << "America" << " Troops:" << std::endl;
-    std::cout << countries["America"]->getListOfUnits() << std::endl;
-
-}
 
 /**
  * @brief Add 'parent' to unit to know which theatre its in
@@ -417,6 +381,7 @@ void WarEngine::CommenceBattle() {
             theatres[i][j]->battle();
         }
     }
+    dayCounter++;
 }
 
 json WarEngine::getRoundResults() {
@@ -425,11 +390,67 @@ json WarEngine::getRoundResults() {
 }
 
 json WarEngine::clearCasualties() {
-    std::unordered_map<std::string, Country *>::iterator it;
-    for (it = countries.begin(); it != countries.end(); ++it) {
-        it->second->removeCasualties();
+    json data = getTheatreUnits();
+
+    for (int i = 0; i != data.size();) {
+        json units = data[i]["units"];
+
+        for (int j = 0; j < units.size(); j++) {
+            // if (units[j]["currentHP"] != 0) {
+            //     units.erase(units.begin() + j);
+            // }
+            // for (int k = 0; k < )
+
+            if (units[j]["units"].size() != 0) {
+                units.erase(units.begin() + j);
+            } else {
+                j++;
+            }
+        }
+
+        if (data[i]["units"].size() == 0) {
+            data.erase(data.begin() + i);
+        } else {
+            i++;
+        }
+
     }
-    return json{};
+    // auto it = data.begin(); 
+    // for (; it != data.end();) {
+    //     // json units = data[i]["units"];
+
+    //     // for (int j = 0; j < units.size(); j++) {
+    //     //     if (units[j]["currentHP"] != 0) {
+    //     //         units.erase(units.begin() + j);
+    //     //     }
+    //     // }
+
+    //     std::cout << (*it)["name"] << std::endl;
+    //     std::cout << (*it)["units"].size() << std::endl;
+    //     if ((*it)["units"].size() == 0) {
+    //         it = data.erase(it);
+    //     } else {
+    //         ++it;
+    //     }
+
+    // }
+
+    // for (json& country : data) {
+    //     json units = country["units"];
+
+    //     for (int i = 0; i < units.size(); i++) {
+    //         if (units[i]["currentHP"] != 0) {
+    //             units.erase(units.begin() + i);
+    //         }
+    //     }
+    // }
+
+    // std::unordered_map<std::string, Country *>::iterator it;
+    // for (it = countries.begin(); it != countries.end(); ++it) {
+    //     it->second->removeCasualties();
+    // }
+
+    return data;
 }
 
 
@@ -496,11 +517,12 @@ json WarEngine::getStats(){
     return json{{"engine", getEngineStats()},
                 {"countries", getCountryStats()},
                 {"alliances", getAllianceStats()},
+                {"theatreUnits", getTheatreUnits()},
                 {"overallUnits", getOverallUnits()},
                 {"theatres" , getTheatreStats()}};
 }
 
-json WarEngine::getEngineStats(){
+json WarEngine::getEngineStats() {
     std::string stage;
     if(warStage->getState() == "EarlyStage"){
         stage = "Early Stage";
@@ -512,12 +534,12 @@ json WarEngine::getEngineStats(){
     }
     return json {{"stage" , stage},
                  {"duration", warDuration},
-                 {"day", roundCounter},
+                 {"day", dayCounter},
                  {"numberOfCountries", countries.size()},
                  {"numberOfAlliances", alliances.size()}};
 }
 
-json WarEngine::getCountryStats(){
+json WarEngine::getCountryStats() {
     json array;
     std::unordered_map<std::string, Country *>::iterator it = countries.begin();
     while(it != countries.end()){
@@ -530,7 +552,7 @@ json WarEngine::getCountryStats(){
     return json{{"data" , array}};
 }
 
-json WarEngine::getAllianceStats(){
+json WarEngine::getAllianceStats() {
 
     json array;
     std::unordered_map<std::string, Alliance *>::iterator it = alliances.begin();
@@ -543,7 +565,7 @@ json WarEngine::getAllianceStats(){
     return json{{"data" , array}};
 }
 
-json WarEngine::getOverallUnits(){
+json WarEngine::getOverallUnits() {
     json array;
     std::unordered_map<std::string, Country *>::iterator it = countries.begin();
 
@@ -556,7 +578,7 @@ json WarEngine::getOverallUnits(){
     return json{{"data" , array}};
 }
 
-json WarEngine::getTheatreStats(){
+json WarEngine::getTheatreStats() {
     json data = json::array();
     
     for (int i = 0; i < theatreSize; i++) {
@@ -585,8 +607,8 @@ json WarEngine::getTheatreUnits() {
     // Get list of units for each country
     for (it = countries.begin(); it != countries.end(); ++it) {
         json j = it->second->getListOfUnits();
-        for (json& unit : j["units"]) {
-            unit["coordinates"] = coordinates[unit["theatre"]];
+        for (json& theatre : j["theatres"]) {
+            theatre["coordinates"] = coordinates[theatre["name"]];
         }
         data.push_back(j);
     }

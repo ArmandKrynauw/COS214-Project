@@ -38,7 +38,7 @@ private:
             countryUnitNames;
     std::unordered_map<std::string, UnitFactory *> unitFactories;
 
-    int roundCounter;
+    int dayCounter;
     bool player1Turn;
     int warDuration;
 
@@ -88,11 +88,41 @@ public:
      *
      * @param simulation JSON array containing Alliance objects
      */
+
     void loadAlliances(const json &data);
+    /**
+     * 
+     * 
+     * @param data JSON data of current day
+     */
+    void loadWarFactors(const json& data);
 
-    void checkMobilization(const json& data);
+    void loadMobilization(const json& data);
+    /**
+     * Provide functionality to check and handle research for countries
+     * 
+     * @param data Research object which contains countries that want to research
+     */
+    void loadResearch(const json& data);
+    /**
+     * Provide functionality to check and handle escaltion of war
+     * 
+     * @param data JSON 'research' data to be loaded and applied to the War Engine
+     */
+    void loadEscalation(const json& data);
 
-
+    /**
+     * Load necessary data to display a battle day
+     * 
+     * @param data JSON object of chosen Simulation
+     */
+    void loadBattleDay(const json& data);
+    /**
+     * Provide functionality too decrement roundCounter. 
+     * This is to ensure that when the client goes back a day, the engine is aware.
+     * 
+     */
+    void goBack();
     /**
      * Provides functionality for Countries to purchase units. This method
      * expects a JSON array of objects. Each object requires the name of the
@@ -187,7 +217,7 @@ public:
 
     
 
-    void checkEscalation(const json &data);
+    
 
     // ====================== MAIN WAR FUNCTIONS ======================
 

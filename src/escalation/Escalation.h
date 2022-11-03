@@ -13,16 +13,15 @@ class Escalation {
 protected:
     std::string state;
 public:
+    
+    Escalation(std::string stage);
     /**
      * Provides functionality to check if current escalation level allows
      *  country to change to a certain mobilization level.
      * @return bool : returns true if mobilization allowed
     */
-    Escalation(std::string stage);
 
     Escalation *checkStageOfWar(std::string stage);
-
-    virtual bool mobilizationCheck(std::string mobilization) = 0;
 
     /**
      * Specifies what state the current state is

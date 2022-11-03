@@ -90,7 +90,17 @@ public:
     */
     Entity *removeEntity(std::string faction, std::string type, std::string id);
 
+    /*
+     * Provides functionality to get the name of the theatre
+     * @return string : the name of the Theatre
+     */
+
     std::string getName();
+
+    /*
+     * Provides functionality to get the id of the theatre
+     * @return string : the id of the theatre
+     */
 
     std::string getId() const;
 
@@ -127,9 +137,31 @@ public:
      */
     void printTheatre();
 
+    /*
+     * Provides functionality to check whether a faction is in the theatre
+     * @param factionName The name of the faction to check as a string
+     * @return bool : returns true if faction is in theatre,else false
+     */
+
     bool checkForFaction(std::string factionName);
 
+    /*
+     * Provides functionality to display the strategies that each faction currently executes
+     */
+
     void printStrategies();
+
+    /*
+     * Provides functionality to return a json object containing data of the theatre
+     * @param row : Y coordinate to be displayed
+     * @param col : x coordinate to be displayed
+     * @return json : json object of the following format:
+     * {
+     *   {"name", getName()},
+         {"coordinates", coordinates},
+         {"data", data}
+         }
+     */
 
     json toJSON(int row, int col);
 

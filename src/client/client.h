@@ -15,12 +15,11 @@ private:
     std::vector<json> simulations;
     json chosenSimulation;
     int currentDay;
-    bool battleDayState;
+    bool beforeBattle;
 
 public:
     static Client* instance();
     void runTerminalMode();
-    void runGUIMode();
     void runTest();
 
     // =================== WAR ENGINE CONTROL FUNCTIONS ===================
@@ -28,10 +27,6 @@ public:
     json loadDayResults();
     json loadPreviousDay();
     json selectSimulation(int index);
-
-    // Depreciated!! Needs to be merged into loadNextRound
-    // Ask Armand before removing
-    json runNextDay();
 
     // =================== JSON UTILITY FUNCTIONS ===================
 

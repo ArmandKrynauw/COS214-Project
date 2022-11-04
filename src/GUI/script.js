@@ -2,22 +2,25 @@ var ws;
 // let buttonCounter = 0;
 let nextIndex = 0;
 let Nations = new Array();
-let BattleIndex = 0;
 let loadBattle = true;
 let team4 = false;
 let leftSide = true;
 let rightSide = true;
+let selectBattle = true;
 var data;
+let click = -3;
+let maxIndex = 8;
 
 /**
  * If prewar is tue then the game is in prewar phase else it is in the postwar phase
  */
 let preWar = true;
 
-// get values from url:../index.html?battleIndex=0
+/**
+ * Get the get paramaters from the url
+ */
 const urlParams = new URLSearchParams(window.location.search);
 const battleIndex = urlParams.get("battleIndex");
-console.log(battleIndex);
 
 /**
  * Json format to send to warsocket
@@ -48,12 +51,16 @@ connectWarSocket = () => {
   };
   ws.onmessage = function (ev) {
     data = JSON.parse(ev.data);
+    // console.log(data);
     if (data.hasOwnProperty("error")) {
       console.log("Error: " + data.error);
     } else {
       if (loadBattle) {
         initialiseBattle(data);
         loadBattle = false;
+        $(`.nextRound`).text(`Initialize`);
+      } else if (selectBattle) {
+        selectBattle = false;
       } else {
         data = data;
         updateUI(data);
@@ -77,20 +84,31 @@ sendMessage = (message) => {
 connectWarSocket();
 
 $(`.nextRound`).click(() => {
+  if (maxIndex < click) {
+    $(`#State`).text(`The battle is over`);
+    return;
+  }
+  click++;
   if (loadBattle) {
     request.command = "getAvailableSimulations";
+    sendMessage(JSON.stringify(request));
+  } else if (!loadBattle && selectBattle) {
+    request.command = "selectSimulation";
+    request.param = battleIndex;
+    $(`.nextRound`).text("Load Scenario");
     sendMessage(JSON.stringify(request));
   } else {
     if (preWar) {
       //set command that is sent
-      request.command = "loadNextDay";
+      $(`.nextRound`).text("Load Battle   ");
+      request.command = "loadNextBattleDay";
       sendMessage(JSON.stringify(request));
+      nextIndex++;
     } else {
       //set the command that is sent
-      request.command = "loadRoundResults";
+      request.command = "loadDayResults";
       sendMessage(JSON.stringify(request));
-      $(`.nextRound`).text("Next  Round");
-      nextIndex++;
+      $(`.nextRound`).text("Display results");
     }
     preWar = !preWar;
   }
@@ -105,25 +123,16 @@ updateUI = (data) => {
     }
   }
 
-  $(`.Casualties0`).click(() => {
-    $(`.cau0List`).toggleClass(`hide`);
-  });
-
-  $(`.Casualties1`).click(() => {
-    $(`.cau1List`).toggleClass(`hide`);
-  });
-
+  /**
+   *This will set the resources of each country
+   *1st param = countries index 2nd is the left or right side of screen 3rd is data
+   */
+  setResources(0, 0, data);
+  setResources(1, 1, data);
   /**
    * this function is to simulate the next day in the battle it get data from the war engine object
    */
-  const maxIndex = data.engine.duration;
-  if (nextIndex < maxIndex) {
-    nextIndex;
-    $(`#Day`).text(`Day: ${nextIndex}`);
-  } else {
-    $(`#State`).text(`Game Over you dubm nonce 😲`);
-  }
-
+  // maxIndex = data.engine.duration;
   $(`#Day`).text(`Day: ${nextIndex}`);
 
   /**
@@ -208,28 +217,29 @@ updateUI = (data) => {
     /**
      * @stage3 this function adds the units to the modal
      */
-    const theatreUnits = data.theatreUnits.data;
+    const theatreUnits = data.theatreUnits;
     theatreUnits.forEach((theatreUnit) => {
-      console.log(theatreUnit);
-      console.log(theatreUnit.theatres);
-      if (theatreUnit.theatres[0].coordinates == id) {
-        const units = theatreUnit.theatres[0].units;
-        units.forEach((unit) => {
-          let type;
-          if (unit.type === "land") {
-            type = `<i class="fa-solid fa-person-rifle"></i>`;
-          } else if (unit.type === "air") {
-            type = `<i class="fa-solid fa-jet-fighter"></i>`;
-          } else {
-            type = `<i class="fa-solid fa-ship"></i>`;
-          }
-          $(`.${theatreUnit.name}`).append(
-            `<li class="list-group-item">${type} ${unit.name} ${Math.round(
-              (unit.currentHP / unit.initialHP) * 100
-            )}%</li>`
-          );
-        });
-      }
+      const individualTheatres = theatreUnit.theatres;
+      individualTheatres.forEach((individualTheatre) => {
+        if (individualTheatre.coordinates == id) {
+          const units = individualTheatre.units;
+          units.forEach((unit) => {
+            let type;
+            if (unit.type === "land") {
+              type = `<i class="fa-solid fa-person-rifle"></i>`;
+            } else if (unit.type === "air") {
+              type = `<i class="fa-solid fa-jet-fighter"></i>`;
+            } else {
+              type = `<i class="fa-solid fa-ship"></i>`;
+            }
+            $(`.${theatreUnit.name}`).append(
+              `<li class="list-group-item">${type} ${unit.name} ${Math.round(
+                (unit.currentHP / unit.initialHP) * 100
+              )}%</li>`
+            );
+          });
+        }
+      });
     });
   };
 
@@ -283,9 +293,11 @@ updateUI = (data) => {
         switchflag(0, 2);
         // CHANGE THISSSSSSSSSSSSSSSSSSS
         displayUnits(1, 0, overallUnits);
+        setResources(3, 0, data);
       } else {
         switchflag(0, 0);
         displayUnits(0, 0, overallUnits);
+        setResources(0, 0, data);
       }
       leftSide = !leftSide;
     }
@@ -297,9 +309,11 @@ updateUI = (data) => {
         switchflag(1, 3);
         // CHANGE THISSSSSSSSSSSSSSSSSSS
         displayUnits(0, 1, overallUnits);
+        setResources(3, 1, data);
       } else {
         switchflag(1, 1);
         displayUnits(1, 1, overallUnits);
+        setResources(1, 1, data);
       }
       rightSide = !rightSide;
     }
@@ -319,42 +333,50 @@ updateUI = (data) => {
       );
     });
   });
-  /**
-   * These next few functions are there to dispaly the information on the units and 2 countries that are fighting
-   */
-  showLeftTroops = () => {
-    $(`.list0`).toggleClass("hide");
-  };
-
-  showLeftAllies = () => {
-    $(`.Allies0List`).toggleClass("hide");
-  };
-
-  showRightTroops = () => {
-    $(`.list1`).toggleClass("hide");
-  };
-
-  showRightAllies = () => {
-    $(`.Allies1List`).toggleClass("hide");
-  };
-
-  /**
-   * this function shows the map
-   */
-  $(`.MapBTN`).click(() => {
-    $(`.fightingMap`).toggleClass("hide");
-  });
 };
+/**
+ * Here is all the click Events
+ */
+$(`.Casualties0`).click(() => {
+  $(`.cau0List`).toggleClass(`hide`);
+});
+
+$(`.Casualties1`).click(() => {
+  $(`.cau1List`).toggleClass(`hide`);
+});
+/**
+ * These next few functions are there to dispaly the information on the units and 2 countries that are fighting
+ */
+showLeftTroops = () => {
+  $(`.list0`).toggleClass("hide");
+};
+
+showLeftAllies = () => {
+  $(`.Allies0List`).toggleClass("hide");
+};
+
+showRightTroops = () => {
+  $(`.list1`).toggleClass("hide");
+};
+
+showRightAllies = () => {
+  $(`.Allies1List`).toggleClass("hide");
+};
+
+/**
+ * this function shows the map
+ */
+$(`.MapBTN`).click(() => {
+  $(`.fightingMap`).toggleClass("hide");
+});
 
 /**
  * This function will initialise the battle
  */
 initialiseBattle = (data) => {
-  // console.log(data);
   BattleIndex = 0;
   data = data[BattleIndex];
   data.countries.forEach((country) => {
-    // console.log(country);
     Nations.push(country.name);
   });
   $(`#BattleName`).text(data.name);
@@ -412,10 +434,8 @@ switchflag = (side, country) => {
  */
 displayCasualties = (data, country, side) => {
   country = Nations[country];
-  $(`.cau${side}List`).empty();
   const casualties = data.casualties.data;
   casualties.forEach((casualty) => {
-    console.log(casualty.name + " " + country);
     if (casualty.name == country) {
       const theatres = casualty.theatres;
       theatres.forEach((theatre) => {
@@ -430,7 +450,8 @@ displayCasualties = (data, country, side) => {
             type = `<i class="fa-solid fa-ship"></i>`;
           }
           $(`.cau${side}List`).append(
-            `<li class="list-group-item">${type}  ${unit.name} ${theatre.coordinates}</li>`
+            `<li class="list-group-item">${type}  ${unit.name} <br>
+            <i class="fa-solid fa-location-pin"></i>    ${theatre.name}</li>`
           );
         });
       });
@@ -439,276 +460,27 @@ displayCasualties = (data, country, side) => {
 };
 
 /**
- * Temporary json file to display the data
+ * this function will show the current nations resources
  */
-// const data = {
-//   engine: {
-//     stage: "Early Stage",
-//     duration: 4,
-//     day: 1,
-//     numberOfCountries: 2,
-//     numberOfAlliances: 2,
-//   },
-//   countries: {
-//     data: [
-//       {
-//         name: "Germany",
-//         resources: 50,
-//         totalUnits: 10,
-//       },
-//       {
-//         name: "America",
-//         resources: 60,
-//         totalUnits: 5,
-//       },
-//       {
-//         name: "France",
-//         resources: 40,
-//         totalUnits: 15,
-//       },
-//       {
-//         name: "Russia",
-//         resources: 45,
-//         totalUnits: 18,
-//       },
-//     ],
-//   },
-//   alliances: {
-//     data: [
-//       {
-//         name: "Allies",
-//         countries: ["America", "France"],
-//       },
-//       {
-//         name: "Central European Powers",
-//         countries: ["Germany", "Russia"],
-//       },
-//     ],
-//   },
-//   theatres: {
-//     data: [
-//       {
-//         name: "Sicily",
-//         coordinates: "0-0",
-//         data: [
-//           {
-//             name: "Germany",
-//             landPower: 100,
-//             seaPower: 20,
-//             airPower: 40,
-//           },
-//         ],
-//       },
-//       {
-//         name: "Tunisia",
-//         coordinates: "0-1",
-//         data: [
-//           {
-//             name: "Germany",
-//             landPower: 100,
-//             seaPower: 20,
-//             airPower: 40,
-//           },
-//           {
-//             name: "America",
-//             landPower: 120,
-//             seaPower: 30,
-//             airPower: 20,
-//           },
-//           {
-//             name: "Russia",
-//             landPower: 100,
-//             seaPower: 20,
-//             airPower: 40,
-//           },
-//           {
-//             name: "France",
-//             landPower: 120,
-//             seaPower: 30,
-//             airPower: 20,
-//           },
-//         ],
-//       },
-//       {
-//         name: "Normandy",
-//         coordinates: "0-2",
-//         data: [],
-//       },
-//       {
-//         name: "Netherlands",
-//         coordinates: "1-0",
-//         data: [],
-//       },
-//       {
-//         name: "Belgium",
-//         coordinates: "1-1",
-//         data: [
-//           {
-//             name: "Germany",
-//             landPower: 100,
-//             seaPower: 20,
-//             airPower: 40,
-//           },
-//           {
-//             name: "America",
-//             landPower: 120,
-//             seaPower: 30,
-//             airPower: 20,
-//           },
-//         ],
-//       },
-//       {
-//         name: "Ruhr",
-//         coordinates: "1-2",
-//         data: [],
-//       },
-//       {
-//         name: "Paris",
-//         coordinates: "2-0",
-//         data: [
-//           {
-//             name: "Germany",
-//             landPower: 100,
-//             seaPower: 20,
-//             airPower: 40,
-//           },
-//         ],
-//       },
-//       {
-//         name: "Alsace-Lorraine",
-//         coordinates: "2-1",
-//         data: [],
-//       },
-//       {
-//         name: "Italy",
-//         coordinates: "2-2",
-//         data: [
-//           {
-//             name: "America",
-//             landPower: 120,
-//             seaPower: 30,
-//             airPower: 20,
-//           },
-//         ],
-//       },
-//     ],
-//   },
-//   theatreUnits: {
-//     data: [
-//       {
-//         name: "Germany",
-//         units: [
-//           {
-//             theatre: "Sicily",
-//             coordinates: "0-0",
-//             units: [
-//               {
-//                 name: "Foot Soldier",
-//                 type: "land",
-//                 initialHP: 50,
-//                 currentHP: 10,
-//                 damage: 5,
-//               },
-//               {
-//                 name: "Luftwaffe A400M",
-//                 type: "air",
-//                 initialHP: 100,
-//                 currentHP: 50,
-//                 damage: 20,
-//               },
-//             ],
-//           },
-//         ],
-//       },
-//       {
-//         name: "America",
-//         units: [
-//           {
-//             theatre: "Italy",
-//             coordinates: "2-2",
-//             units: [
-//               {
-//                 name: "Foot Soldier",
-//                 type: "land",
-//                 initialHP: 50,
-//                 currentHP: 10,
-//                 damage: 5,
-//               },
-//               {
-//                 name: "C-17",
-//                 type: "air",
-//                 initialHP: 100,
-//                 currentHP: 50,
-//                 damage: 20,
-//               },
-//             ],
-//           },
-//         ],
-//       },
-//     ],
-//   },
-//   overallUnits: {
-//     data: [
-//       {
-//         name: "Germany",
-//         units: [
-//           {
-//             name: "Foot Soldier",
-//             type: "land",
-//             initialHP: 50,
-//             currentHP: 10,
-//             damage: 5,
-//           },
-//           {
-//             name: "Luftwaffe A400M",
-//             type: "air",
-//             initialHP: 100,
-//             currentHP: 50,
-//             damage: 20,
-//           },
-//         ],
-//       },
-//       {
-//         name: "America",
-//         units: [
-//           {
-//             name: "Foot Soldier",
-//             type: "land",
-//             initialHP: 50,
-//             currentHP: 10,
-//             damage: 5,
-//           },
-//           {
-//             name: "C-17",
-//             type: "air",
-//             initialHP: 100,
-//             currentHP: 50,
-//             damage: 20,
-//           },
-//         ],
-//       },
-//     ],
-//   },
-//   casualties: {
-//     data: [
-//       {
-//         name: "Germany",
-//         units: [
-//           {
-//             theatre: "Sicily",
-//             coordinates: "0-0",
-//             units: [
-//               {
-//                 name: "Foot Soldier",
-//                 type: "land",
-//                 initialHP: 50,
-//                 currentHP: 0,
-//                 damage: 5,
-//               },
-//             ],
-//           },
-//         ],
-//       },
-//     ],
-//   },
-// };
+setResources = (index, side, data) => {
+  const resources = data.countries.data[index].resources;
+  $(`.Res${side}`).empty();
+  $(`.Res${side}`).html(
+    `<i class="fa-solid fa-money-bill-wave"></i> Resources: ${resources}`
+  );
+};
+
+/**
+ * set the countrys current strategy
+ */
+setStrategy = (index, side, data) => {
+  const strategy = data.countries.data[index].strategy;
+  $(`.Str${side}`).empty();
+  $(`.Str${side}`).html(
+    `<i class="fa-solid fa-swords"></i> Strategy: ${strategy}`
+  );
+};
+
+$(`#BattleName`).click(() => {
+  window.location.href = "./splashPage/splash.html";
+});

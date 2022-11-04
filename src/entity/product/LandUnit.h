@@ -18,7 +18,7 @@ public:
 
     virtual Entity *clone() override = 0;
 
-    ~LandUnit();
+    virtual ~LandUnit();
 };
 
 #endif

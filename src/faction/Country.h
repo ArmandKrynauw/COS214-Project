@@ -118,6 +118,7 @@ public:
     virtual void makeDecision() override;
 
     virtual void chooseStrategy() override;
+    virtual void clearCasualties() override;
 
     void printUnits();
 

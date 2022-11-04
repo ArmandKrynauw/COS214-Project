@@ -1,7 +1,6 @@
 #include "WarSocket.h"
-#include "client.h"
 
-WarSocket::WarSocket() { }
+WarSocket::WarSocket() {}
 
 void WarSocket::listen() {
     struct mg_mgr mgr;  // Event manager
@@ -13,15 +12,48 @@ void WarSocket::listen() {
     mg_mgr_free(&mgr);
 }
 
-void WarSocket::sendMessage(struct mg_connection *c, json data) {
+void WarSocket::sendMessage(struct mg_connection* c, json data) {
     std::string dump = data.dump();
-    int size = dump.size();
-    const char *str = dump.c_str();
-    mg_ws_send(c, str, size, WEBSOCKET_OP_TEXT);
+    mg_ws_send(c, dump.c_str(), dump.size(), WEBSOCKET_OP_TEXT);
 }
 
 bool WarSocket::checkMessage(char* message, std::string compare) {
     return strcmp(message, compare.c_str()) == 0;
+}
+
+json WarSocket::validateMessage(struct mg_connection* c, const char* message) {
+    json data;
+
+    try {
+        data = json::parse(message);
+    } catch (json::exception& e) {
+        json error = {
+            {"error", "Could not parse JSON"},
+            {"code", "parse_error"}
+        };
+        sendMessage(c, error);
+        return json{};
+    }
+
+    try {
+        if (!data.contains("command")) {
+            throw WarException("No command was sent", "invalid_command");
+        }
+
+        if(data["command"] == "selectSimulation") {
+            if (!data.contains("param")) {
+                throw WarException("No param was sent", "invalid_param");
+            }
+            if (!data["param"].is_number_integer()) {
+                throw WarException("Param is not an integer", "invalid_param");
+            }
+        }
+    } catch (WarException& e) {
+        sendMessage(c, e.getJSON());
+        return json{};
+    }
+
+    return data;
 }
 
 void WarSocket::WSHandler(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
@@ -35,57 +67,41 @@ void WarSocket::WSHandler(struct mg_connection *c, int ev, void *ev_data, void *
             mg_http_reply(c, 200, "", "{\"result\": %d}\n", 123);
         }
     } else if (ev == MG_EV_WS_MSG) {
-        // Got websocket frame. Received data is wm->data. Echo it back!
-        struct mg_ws_message *wm = (struct mg_ws_message *) ev_data;
-        //Parse json data recieved
-        struct mg_str json = mg_str(wm->data.ptr);
-        //Get command
-        char *command = mg_json_get_str(json, "$.command");
+        struct mg_ws_message* wm = (struct mg_ws_message *) ev_data;
+        json data = validateMessage(c, wm->data.ptr);
 
-        
+        if (data.is_null()) {
+            return;
+        }
+
         // ================================== API Cases ================================== 
-        //check to see if correct data was given
-        if(command){
-            std::cout << command << std::endl;
-            try {
-                if (checkMessage(command, "loadNextBattleDay")) {
-                    sendMessage(c, Client::instance()->loadNextBattleDay());
-                }
-                else if (checkMessage(command, "loadDayResults")) {
-                    sendMessage(c, Client::instance()->loadDayResults());
-                }
-                else if (checkMessage(command, "getAvailableSimulations")) {
-                    sendMessage(c, Client::instance()->getAvailableSimulations());
-                }
-                else if (checkMessage(command, "selectSimulation")) {
-                    //Wanted to check if param was provided but if is isn't, d is initialized to 0 which is a valid input
-                    //Will have to figure it out
-                    double d;
-                    mg_json_get_num(json, "$.param", &d);
-                    int param = (int) d;
-                    std::cout << "Param: " << param << std::endl;
-                    sendMessage(c, Client::instance()->selectSimulation(param));
-                }
-                else{
-                    //A command was given that does not exist
-                    std::cout << "Error: Invalid command " << command << std::endl;
-                    const char *str = "{\"error\": \"Invalid command\"}";
-                    mg_ws_send(c, str, strlen(str), WEBSOCKET_OP_TEXT);
-                }
-            } catch (WarException& e) {
-                std::cout << "Error: The War Engine Died" << std::endl;
-                const char *str = e.getJSON().dump().c_str();
+
+        std::string command = data["command"];
+        std::cout << command << std::endl;
+
+        try {
+            if (command == "loadNextBattleDay") {
+                sendMessage(c, Client::instance()->loadNextBattleDay());
+            }
+            else if (command == "loadDayResults") {
+                sendMessage(c, Client::instance()->loadDayResults());
+            }
+            else if (command == "getAvailableSimulations") {
+                sendMessage(c, Client::instance()->getAvailableSimulations());
+            }
+            else if (command == "selectSimulation") {
+                sendMessage(c, Client::instance()->selectSimulation(data["param"]));
+            }
+            else{
+                std::cout << "Error: Invalid Command - " << command << std::endl;
+                const char *str = "{\"error\": \"Invalid command\", \"code\": \"invalid_command\"}";
                 mg_ws_send(c, str, strlen(str), WEBSOCKET_OP_TEXT);
             }
-        }
-        else{
-            //Non valid json was sent to the warengine
-            //Might want to use sendMessage funtion, don't know how to create json type string
-            //This works
-            std::cout << "Error: Check JSON data" << std::endl;
-            const char *str = "{\"error\": \"Check JSON data\"}";
-            mg_ws_send(c, str, strlen(str), WEBSOCKET_OP_TEXT);
+        } catch (WarException& e) {
+            std::cout << "Error: Exception in War Engine" << std::endl;
+            std::string dump = e.getJSON().dump();
+            std::cout << dump << std::endl;
+            mg_ws_send(c, dump.c_str(), dump.size(), WEBSOCKET_OP_TEXT);
         }
     }
-    (void) fn_data;
 }

@@ -8,7 +8,7 @@
 Client::Client() {
     loadSimulations("utilities/simulations.json");
     currentDay = 0;
-    beforeBattle = false;
+    beforeBattle = true;
 }
 
 Client* Client::instance() {
@@ -37,8 +37,14 @@ void Client::runTest() {
 }
 
 json Client::loadNextBattleDay() {
+    if (chosenSimulation.is_null()) {
+        throw WarException("Load a simulation before loading next battle day", "load_simulation");
+    } 
+    if (chosenSimulation.contains("duration") && currentDay == chosenSimulation["duration"]) {
+        throw WarException("End of simulation reached", "simulation_finished");
+    }
     if (!beforeBattle) {
-        throw WarException("Load battle day results before loading next day.", "load_day_results");
+        throw WarException("Load battle day results before loading next battle day", "load_day_results");
     }
 
     WarEngine::instance()->loadNextBattleDay(chosenSimulation["days"][currentDay++]);
@@ -48,7 +54,7 @@ json Client::loadNextBattleDay() {
 
 json Client::loadDayResults() {
     if (beforeBattle) {
-        throw WarException("Load next battle day before loading day results.", "load_next_day");
+        throw WarException("Load next battle day before loading day results", "load_next_day");
     }
 
     WarEngine::instance()->commenceBattle();

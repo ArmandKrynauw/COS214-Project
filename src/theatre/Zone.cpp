@@ -36,12 +36,11 @@ int Zone::getTotalDamage() {
 }
 
 void Zone::takeDamage(int damage) {
+    std::mt19937 engine;
     int divisor = getDamageDivisor();
     int hit = damage / divisor;
-    //std::cout<<hit<<std::endl;
-    //std::cout<<divisor<<std::endl;
     for (int i = 0; i < divisor; i++) {
-        int random = (rand() % entities.size());
+        int random = (engine() % entities.size());
         if (entities[random]->takeDamage(hit)) {
             entities.erase(entities.begin() + random);
         }

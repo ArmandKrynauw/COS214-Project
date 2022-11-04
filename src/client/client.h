@@ -15,6 +15,7 @@ private:
     std::vector<json> simulations;
     json chosenSimulation;
     int currentDay;
+    bool battleDayState;
 
 public:
     static Client* instance();
@@ -23,7 +24,7 @@ public:
     void runTest();
 
     // =================== WAR ENGINE CONTROL FUNCTIONS ===================
-    json loadNextDay();
+    json loadNextBattleDay();
     json loadDayResults();
     json loadPreviousDay();
     json selectSimulation(int index);

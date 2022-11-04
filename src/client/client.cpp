@@ -40,54 +40,50 @@ void Client::runGUIMode() {
 // WAR ENGINE CONTROL FUNCTIONS
 // ======================================================================================
 
-void Client::runTest(){
+void Client::runTest() {
     selectSimulation(0);
 }
 
-json Client::loadNextDay() {
-    std::ifstream file("utilities/data.json");
-    if (!file) {
-        throw WarException("file-not-found");
+json Client::loadNextBattleDay() {
+    if (battleDayState) {
+        throw WarException("Load battle day results before loading next day.", "load_day_results");
     }
-    return json::parse(file);
+
+    WarEngine::instance()->loadNextBattleDay(chosenSimulation["days"][currentDay++]);
+    battleDayState = true;
+    return WarEngine::instance()->getStats();
 }
 
 json Client::loadDayResults() {
-    std::ifstream file("utilities/data.json");
-    if (!file) {
-        throw WarException("file-not-found");
+    if (!battleDayState) {
+        throw WarException("Load next battle day before loading day results.", "load_next_day");
     }
-    return json::parse(file);
+
+    WarEngine::instance()->commenceBattle();
+    battleDayState = false;
+    return WarEngine::instance()->getStats();
 }
 
 json Client::loadPreviousDay() {
-    std::ifstream file("utilities/data.json");
-    if (!file) {
-        throw WarException("file-not-found");
-    }
-    currentDay--;
-    WarEngine::instance()->goBack();
-    return json::parse(file);
+    return WarEngine::instance()->getStats();
 }
 
 json Client::selectSimulation(int index) {
     if (index < 0 || index >= simulations.size()) {
-        throw WarException("out-of-bounds");
+        throw WarException("Not a valid simulation.","out-of-bounds");
     }
 
+    currentDay = 0;
+    battleDayState = false;
     WarEngine::instance()->loadSimulation(simulations[index]);
-    WarEngine::instance()->loadTheatres(simulations[index]["theatres"]);
     chosenSimulation = simulations[index];
-
-    // Don't ask why
-    return loadPreviousDay();
+    return WarEngine::instance()->getStats();
 }
 
 // Depreciated
 json Client::runNextDay() {
-        WarEngine::instance()->loadBattleDay(chosenSimulation);
-        WarEngine::instance()->CommenceBattle();
-        currentDay++;
+        loadNextBattleDay();
+        loadDayResults();
         return WarEngine::instance()->getRoundResults();
 }
 

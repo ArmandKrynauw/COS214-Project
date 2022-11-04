@@ -47,31 +47,34 @@ void WarSocket::WSHandler(struct mg_connection *c, int ev, void *ev_data, void *
         //check to see if correct data was given
         if(command){
             std::cout << command << std::endl;
-            if (checkMessage(command, "loadNextDay")) {
-                sendMessage(c, Client::instance()->loadNextDay());
-            }
-            else if (checkMessage(command, "loadRoundResults")) {
-                sendMessage(c, Client::instance()->loadDayResults());
-            }
-            else if (checkMessage(command, "getAvailableSimulations")) {
-                sendMessage(c, Client::instance()->getAvailableSimulations());
-            }
-            else if (checkMessage(command, "runNextDay")) {
-                sendMessage(c, Client::instance()->runNextDay());
-            }
-            else if (checkMessage(command, "selectSimulation")) {
-                //Wanted to check if param was provided but if is isn't, d is initialized to 0 which is a valid input
-                //Will have to figure it out
-                double d;
-                mg_json_get_num(json, "$.param", &d);
-                int param = (int) d;
-                std::cout << "Param: " << param << std::endl;
-                sendMessage(c, Client::instance()->selectSimulation(param));
-            }
-            else{
-                //A command was given that does not exist
-                std::cout << "Error: Invalid command " << command << std::endl;
-                const char *str = "{\"error\": \"Invalid command\"}";
+            try {
+                if (checkMessage(command, "loadNextBattleDay")) {
+                    sendMessage(c, Client::instance()->loadNextBattleDay());
+                }
+                else if (checkMessage(command, "loadDayResults")) {
+                    sendMessage(c, Client::instance()->loadDayResults());
+                }
+                else if (checkMessage(command, "getAvailableSimulations")) {
+                    sendMessage(c, Client::instance()->getAvailableSimulations());
+                }
+                else if (checkMessage(command, "selectSimulation")) {
+                    //Wanted to check if param was provided but if is isn't, d is initialized to 0 which is a valid input
+                    //Will have to figure it out
+                    double d;
+                    mg_json_get_num(json, "$.param", &d);
+                    int param = (int) d;
+                    std::cout << "Param: " << param << std::endl;
+                    sendMessage(c, Client::instance()->selectSimulation(param));
+                }
+                else{
+                    //A command was given that does not exist
+                    std::cout << "Error: Invalid command " << command << std::endl;
+                    const char *str = "{\"error\": \"Invalid command\"}";
+                    mg_ws_send(c, str, strlen(str), WEBSOCKET_OP_TEXT);
+                }
+            } catch (WarException& e) {
+                std::cout << "Error: The War Engine Died" << std::endl;
+                const char *str = e.getJSON().dump().c_str();
                 mg_ws_send(c, str, strlen(str), WEBSOCKET_OP_TEXT);
             }
         }

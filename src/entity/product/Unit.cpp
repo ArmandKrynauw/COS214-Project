@@ -52,6 +52,7 @@ json Unit::toJSON() const {
             {"currentHP", HP},
             {"damage",  damage},
             {"theatre", (theatre) ? theatre->getName() : "None"},
+            {"id", id}
     };
 }
 

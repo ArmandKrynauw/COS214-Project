@@ -723,15 +723,15 @@
                     "name": "Germany",
                     "countryCode": "GER",
                     "units": [
-                        { "HeavyAirUnit": "Luftwaffe A400M" },
-                        { "HeavyLandUnit": "Leopard 2A7" },
-                        { "HeavySeaUnit": "Type 212 Submarine" },
-                        { "LightAirUnit": "CH-53G" },
-                        { "LightLandUnit": "Foot Soldier" },
-                        { "LightSeaUnit": "Baden-Württemberg class" },
-                        { "MediumAirUnit": "Eurofighter Typhoon" },
-                        { "MediumLandUnit": "BMP-3" },
-                        { "MediumSeaUnit": "Braunschweig class" }
+                        { "HeavyAirUnit": "Heinkel He-111 group" },
+                        { "HeavyLandUnit": "Panzer Division [1940]" },
+                        { "HeavySeaUnit": "Scharnorst Class" },
+                        { "LightAirUnit": "Dornier DO-217 group" },
+                        { "LightLandUnit": "Infanterie Division" },
+                        { "LightSeaUnit": "U-VIIC" },
+                        { "MediumAirUnit": "BF-109 group" },
+                        { "MediumLandUnit": "Panzer Division [1938]" },
+                        { "MediumSeaUnit": "Admiral Hipper class" }
                     ],
                     "baseResourceCount": 800
                 },
@@ -739,15 +739,15 @@
                     "name": "United Kingdom",
                     "countryCode": "ENG",
                     "units": [
-                        { "HeavyAirUnit": "C-17" },
-                        { "HeavyLandUnit": "M1 Abrams" },
-                        { "HeavySeaUnit": "USS Nebraska (SSBN-739)" },
-                        { "LightAirUnit": "F-22A Raptors" },
-                        { "LightLandUnit": "Foot Soldier" },
-                        { "LightSeaUnit": "Cruiser" },
-                        { "MediumAirUnit": "A-10" },
-                        { "MediumLandUnit": "HMMWV" },
-                        { "MediumSeaUnit": "Destroyer" }
+                        { "HeavyAirUnit": "Whitley bomber group" },
+                        { "HeavyLandUnit": "Royal Armoured Division" },
+                        { "HeavySeaUnit": "Nelson class" },
+                        { "LightAirUnit": "Hurricane group" },
+                        { "LightLandUnit": "Light Infantry Division" },
+                        { "LightSeaUnit": "Hunt-class" },
+                        { "MediumAirUnit": "SpitFire group" },
+                        { "MediumLandUnit": "Mechanized Division" },
+                        { "MediumSeaUnit": "Belfast class" }
                     ],
                     "baseResourceCount": 600
                 },
@@ -755,15 +755,15 @@
                     "name": "France",
                     "countryCode": "FRA",
                     "units": [
-                        { "HeavyAirUnit": "Luftwaffe A400M" },
-                        { "HeavyLandUnit": "Leopard 2A7" },
-                        { "HeavySeaUnit": "Type 212 Submarine" },
-                        { "LightAirUnit": "CH-53G" },
-                        { "LightLandUnit": "Foot Soldier" },
-                        { "LightSeaUnit": "Baden-Württemberg class" },
-                        { "MediumAirUnit": "Eurofighter Typhoon" },
-                        { "MediumLandUnit": "BMP-3" },
-                        { "MediumSeaUnit": "Braunschweig class" }
+                        { "HeavyAirUnit": "MB 21O Bomber" },
+                        { "HeavyLandUnit": "Général de brigade" },
+                        { "HeavySeaUnit": "Dunkerque-class" },
+                        { "LightAirUnit": "Bloch MB.151 fighter group" },
+                        { "LightLandUnit": "Division d'Infanterie" },
+                        { "LightSeaUnit": "Adroit-class" },
+                        { "MediumAirUnit": "D.520 fighter group" },
+                        { "MediumLandUnit": "Corps d'Armée" },
+                        { "MediumSeaUnit": "Saint-Louis class" }
                     ],
                     "baseResourceCount": 400
                 },
@@ -771,15 +771,15 @@
                     "name": "Italy",
                     "countryCode": "ITA",
                     "units": [
-                        { "HeavyAirUnit": "Luftwaffe A400M" },
-                        { "HeavyLandUnit": "Leopard 2A7" },
-                        { "HeavySeaUnit": "Type 212 Submarine" },
-                        { "LightAirUnit": "CH-53G" },
-                        { "LightLandUnit": "Foot Soldier" },
-                        { "LightSeaUnit": "Baden-Württemberg class" },
-                        { "MediumAirUnit": "Eurofighter Typhoon" },
-                        { "MediumLandUnit": "BMP-3" },
-                        { "MediumSeaUnit": "Braunschweig class" }
+                        { "HeavyAirUnit": "Caproni Ca.311 group" },
+                        { "HeavyLandUnit": "Divisione alpina" },
+                        { "HeavySeaUnit": "Littorio class" },
+                        { "LightAirUnit": "Fiat C.R.42 Falco group" },
+                        { "LightLandUnit": "Reggimento Bersaglieri" },
+                        { "LightSeaUnit": "Soldati class" },
+                        { "MediumAirUnit": "Macchi C.200 group" },
+                        { "MediumLandUnit": "Divisione di fanteria" },
+                        { "MediumSeaUnit": "Trento class" }
                     ],
                     "baseResourceCount": 200
                 }

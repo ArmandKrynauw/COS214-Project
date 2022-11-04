@@ -1,7 +1,7 @@
 {
     "Wars": [
         {
-            "WarTitle": "Western Front [1943]",
+            "WarTitle": "Germany Vs America [2020]",
             "duration": 5,
             "theatres": [
                 { "name": "Sicily", "seaZone": true, "resourceCount": 10 },
@@ -492,7 +492,7 @@
                                 },
                                 {
                                     "type": "sea",
-                                    "index": 6,
+                                    "index": 5,
                                     "destination": "2,1"
                                 }
                             ]
@@ -618,7 +618,7 @@
                             "movements": [
                                 {
                                     "type": "sea",
-                                    "index": 6,
+                                    "index": 5,
                                     "destination": "0,0"
                                 }
                             ]

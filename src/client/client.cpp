@@ -83,7 +83,7 @@ json Client::selectSimulation(int index) {
 // Depreciated
 json Client::runNextDay() {
         loadNextBattleDay();
-        loadDayResults();
+        std::cout<<loadDayResults()["casualties"].dump(1)<<std::endl;
         return WarEngine::instance()->getRoundResults();
 }
 
@@ -125,13 +125,13 @@ json Client::getAvailableSimulations() {
 void Client::runSimulation() {
     currentDay = 0;
     int end = chosenSimulation["duration"];
-    for (json roundData: chosenSimulation["rounds"][currentDay]) {
+    for (json roundData: chosenSimulation["days"][currentDay]) {
         if (currentDay != end) {
             std::cout << "Day " << currentDay + 1 << " commencing... " << std::endl;
             json result = runNextDay();
-            json deaths = result["casualities"];
-            // printRoundResults();
-            std::cout << WarEngine::instance()->getStats().dump(1) << std::endl;
+            //json deaths = result["casualties"];
+            printDayResults();
+            //std::cout << WarEngine::instance()->clearCasualties().dump(1) << std::endl;
             // WarEngine::instance()->clearCasualties();
             // std::cout << WarEngine::instance()->clearCasualties().dump(2) << std::endl;
             //  WarEngine::instance()->clearCasualties();

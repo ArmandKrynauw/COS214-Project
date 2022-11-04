@@ -5,6 +5,7 @@ Entity::Entity() {}
 Entity::Entity(std::string name, std::string type) {
     this->name = name;
     this->type = type;
+    this->id = uuid::generate();
 }
 
 Entity::~Entity() {}

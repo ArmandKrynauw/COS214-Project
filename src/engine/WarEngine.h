@@ -181,10 +181,6 @@ public:
     */
     json getTheatreUnits();
 
-   
-    
-    json getCasualties();
-
     /**
      * @brief Convert json object to string vector
      *

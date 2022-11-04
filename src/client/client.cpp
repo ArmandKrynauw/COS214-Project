@@ -135,7 +135,7 @@ void Client::runSimulation() {
             json result = runNextDay();
             json deaths = result["casualities"];
             // printRoundResults();
-            std::cout << WarEngine::instance()->clearCasualties().dump(2) << std::endl;
+            std::cout << WarEngine::instance()->getStats().dump(1) << std::endl;
             // WarEngine::instance()->clearCasualties();
             // std::cout << WarEngine::instance()->clearCasualties().dump(2) << std::endl;
             //  WarEngine::instance()->clearCasualties();

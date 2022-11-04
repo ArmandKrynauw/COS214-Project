@@ -429,11 +429,13 @@ json WarEngine::clearCasualties() {
 
     std::unordered_map<std::string, Country*>::iterator it;
     for (it = countries.begin(); it != countries.end(); it++) {
-        std::cout << "Jake" << std::endl;
         it->second->clearCasualties();
     }
 
-    return data;
+    return json{
+        {"data", data}
+    };
+        
 }
 
 
@@ -496,13 +498,16 @@ void WarEngine::viewStrategies() {
 // JSON UTILITY FUNCTIONS
 // ============================================================================
 
-json WarEngine::getStats(){
-    return json{{"engine", getEngineStats()},
-                {"countries", getCountryStats()},
-                {"alliances", getAllianceStats()},
-                {"theatreUnits", getTheatreUnits()},
-                {"overallUnits", getOverallUnits()},
-                {"theatres" , getTheatreStats()}};
+json WarEngine::getStats() {
+    return json{
+        {"engine", getEngineStats()},
+        {"countries", getCountryStats()},
+        {"alliances", getAllianceStats()},
+        {"theatreUnits", getTheatreUnits()},
+        {"overallUnits", getOverallUnits()},
+        {"theatres", getTheatreStats()},
+        {"casualties", clearCasualties()}
+    };
 }
 
 json WarEngine::getEngineStats() {
@@ -523,7 +528,8 @@ json WarEngine::getEngineStats() {
 }
 
 json WarEngine::getCountryStats() {
-    json array;
+    json array = json::array();
+
     std::unordered_map<std::string, Country *>::iterator it = countries.begin();
     while(it != countries.end()){
         array.push_back(json{{"name", it->first},
@@ -536,8 +542,8 @@ json WarEngine::getCountryStats() {
 }
 
 json WarEngine::getAllianceStats() {
+    json array = json::array();
 
-    json array;
     std::unordered_map<std::string, Alliance *>::iterator it = alliances.begin();
     while(it != alliances.end()){
         array.push_back(json{{"name", it->first},
@@ -549,7 +555,7 @@ json WarEngine::getAllianceStats() {
 }
 
 json WarEngine::getOverallUnits() {
-    json array;
+    json array = json::array();
     std::unordered_map<std::string, Country *>::iterator it = countries.begin();
 
     while(it != countries.end()){
@@ -574,7 +580,7 @@ json WarEngine::getTheatreStats() {
 }
 
 json WarEngine::getTheatreUnits() {
-    json data;
+    json data = json::array();
     std::unordered_map<std::string, std::string> coordinates;
 
     // Derive coordinates for each Theatre

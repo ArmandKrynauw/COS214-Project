@@ -51,7 +51,7 @@ json Unit::toJSON() const {
             {"initialHP", initialHP},
             {"currentHP", HP},
             {"damage",  damage},
-            {"theatre", (theatre) ? theatre->getName() : "None"}
+            {"theatre", (theatre) ? theatre->getName() : "None"},
     };
 }
 

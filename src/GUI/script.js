@@ -1,20 +1,18 @@
 var ws;
-// let buttonCounter = 0;
 let nextIndex = 0;
 let Nations = new Array();
 let loadBattle = true;
 let team4 = false;
-let leftSide = true;
-let rightSide = true;
+let leftSide = false;
+let rightSide = false;
 let selectBattle = true;
 var data;
-let click = -3;
 let maxIndex = 8;
 
 /**
  * If prewar is tue then the game is in prewar phase else it is in the postwar phase
  */
-let preWar = true;
+var preWar = true;
 
 /**
  * Get the get paramaters from the url
@@ -51,7 +49,6 @@ connectWarSocket = () => {
   };
   ws.onmessage = function (ev) {
     data = JSON.parse(ev.data);
-    // console.log(data);
     if (data.hasOwnProperty("error")) {
       console.log("Error: " + data.error);
     } else {
@@ -83,37 +80,40 @@ sendMessage = (message) => {
 
 connectWarSocket();
 
+var click = 0;
 $(`.nextRound`).click(() => {
-  if (maxIndex < click) {
-    $(`#State`).text(`The battle is over`);
-    return;
-  }
-  click++;
-  if (loadBattle) {
+  if (click == 0) {
     request.command = "getAvailableSimulations";
     sendMessage(JSON.stringify(request));
-  } else if (!loadBattle && selectBattle) {
+  } else if (click == 1) {
     request.command = "selectSimulation";
+    console.log(battleIndex);
     request.param = battleIndex;
-    $(`.nextRound`).text("Load Scenario");
+    console.log(request);
     sendMessage(JSON.stringify(request));
-  } else {
+    $(`.nextRound`).text("Load Battle   ");
+  } else if (click > 1 && click < 12) {
     if (preWar) {
-      //set command that is sent
-      $(`.nextRound`).text("Load Battle   ");
       request.command = "loadNextBattleDay";
+      $(`.nextRound`).text("Display results");
       sendMessage(JSON.stringify(request));
-      nextIndex++;
     } else {
-      //set the command that is sent
       request.command = "loadDayResults";
       sendMessage(JSON.stringify(request));
-      $(`.nextRound`).text("Display results");
+      $(`.nextRound`).text("Load Battle   ");
+      nextIndex++;
     }
     preWar = !preWar;
+  } else {
+    $(`.nextRound`).hide();
+    $(`#State`).text(`The battle is over`);
   }
+  click++;
 });
 updateUI = (data) => {
+  // console.log(preWar);
+  // console.log(data.casualties);
+  // console.log("-------");
   /**
    * Clear the theatres
    */
@@ -133,7 +133,7 @@ updateUI = (data) => {
    * this function is to simulate the next day in the battle it get data from the war engine object
    */
   // maxIndex = data.engine.duration;
-  $(`#Day`).text(`Day: ${nextIndex}`);
+  $(`#Day`).text(`Day: ${nextIndex + 1}`);
 
   /**
    * this function is to set the state of the battle
@@ -197,18 +197,30 @@ updateUI = (data) => {
       <div class="card niceCards" style="width: 18rem">
           <img
             class="card-img-top img1"
-            src="./media/images/${theatreData.name}.png"
+            src="./media/images/${theatreData.name.replace(" ", "")}.png"
             alt="Card image cap"
           />
           <div class="card-body head">
             <h5 class="card-title NameTheatre">${theatreData.name}</h5>
           </div>
           <div class="card-body">
-            <p class="SeaPower"><i class="fa-solid fa-ship"></i>  SeaPower: ${theatreData.seaPower}</p>
-            <p class="AirPower"><i class="fa-solid fa-jet-fighter"></i>  AirPower: ${theatreData.airPower}</p>
-            <p class="LandPower"><i class="fa-solid fa-person-rifle"></i>  LandPower: ${theatreData.landPower}</p>
-            <p class="UnitsShow" onclick="showUnitsModal('${theatreData.name}')"> <i class="fa-solid fa-truck-plane"></i>  Units  <i class="fa-solid fa-chevron-down"></i></p>
-            <ul class="list-group list-group-flush ${theatreData.name} hide "></ul>
+            <p class="SeaPower"><i class="fa-solid fa-ship"></i>  SeaPower: ${
+              theatreData.seaPower
+            }</p>
+            <p class="AirPower"><i class="fa-solid fa-jet-fighter"></i>  AirPower: ${
+              theatreData.airPower
+            }</p>
+            <p class="LandPower"><i class="fa-solid fa-person-rifle"></i>  LandPower: ${
+              theatreData.landPower
+            }</p>
+            <p class="UnitsShow" onclick="showUnitsModal('${theatreData.name.replace(
+              " ",
+              ""
+            )}')"> <i class="fa-solid fa-truck-plane"></i>  Units  <i class="fa-solid fa-chevron-down"></i></p>
+            <ul class="list-group list-group-flush ${theatreData.name.replace(
+              " ",
+              ""
+            )} hide "></ul>
             </div>
         </div>
       `;
@@ -232,7 +244,7 @@ updateUI = (data) => {
             } else {
               type = `<i class="fa-solid fa-ship"></i>`;
             }
-            $(`.${theatreUnit.name}`).append(
+            $(`.${theatreUnit.name.replace(" ", "")}`).append(
               `<li class="list-group-item">${type} ${unit.name} ${Math.round(
                 (unit.currentHP / unit.initialHP) * 100
               )}%</li>`
@@ -249,11 +261,6 @@ updateUI = (data) => {
   showUnitsModal = (name) => {
     $(`.${name}`).toggleClass("hide");
   };
-  /**
-   * Casualties
-   */
-  displayCasualties(data, 0, 0);
-  displayCasualties(data, 1, 1);
 
   /**
    *
@@ -281,58 +288,65 @@ updateUI = (data) => {
   };
 
   /*--------Overall work---------*/
-  const overallUnits = data.overallUnits.data;
-  displayUnits(0, 0, overallUnits);
-  displayUnits(1, 1, overallUnits);
-  /**
-   * SwitchNations Functions
-   */
-  $(`.img0`).click(() => {
-    if (team4) {
-      if (leftSide) {
-        switchflag(0, 2);
-        // CHANGE THISSSSSSSSSSSSSSSSSSS
-        displayUnits(1, 0, overallUnits);
-        setResources(3, 0, data);
-      } else {
-        switchflag(0, 0);
-        displayUnits(0, 0, overallUnits);
-        setResources(0, 0, data);
-      }
-      leftSide = !leftSide;
-    }
-  });
 
-  $(`.img1`).click(() => {
-    if (team4) {
-      if (rightSide) {
-        switchflag(1, 3);
-        // CHANGE THISSSSSSSSSSSSSSSSSSS
-        displayUnits(0, 1, overallUnits);
-        setResources(3, 1, data);
-      } else {
-        switchflag(1, 1);
-        displayUnits(1, 1, overallUnits);
-        setResources(1, 1, data);
-      }
-      rightSide = !rightSide;
+  if (team4) {
+    if (leftSide) {
+      switchflag(0, 2);
+      // CHANGE THISSSSSSSSSSSSSSSSSSS
+      displayUnits(2, 0, data);
+      setResources(2, 0, data);
+      displayCasualties(data, 2, 0);
+    } else {
+      switchflag(0, 0);
+      displayUnits(0, 0, data);
+      setResources(0, 0, data);
+      displayCasualties(data, 0, 0);
     }
-  });
+
+    if (rightSide) {
+      switchflag(1, 3);
+      // CHANGE THISSSSSSSSSSSSSSSSSSS
+      displayUnits(3, 1, data);
+      setResources(3, 1, data);
+      displayCasualties(data, 3, 1);
+    } else {
+      switchflag(1, 1);
+      displayUnits(1, 1, data);
+      setResources(1, 1, data);
+      displayCasualties(data, 1, 1);
+    }
+  } else {
+    switchflag(0, 0);
+    displayUnits(0, 0, data);
+    setResources(0, 0, data);
+    displayCasualties(data, 0, 0);
+
+    switchflag(1, 1);
+    displayUnits(1, 1, data);
+    setResources(1, 1, data);
+    displayCasualties(data, 1, 1);
+  }
 
   /*--------Allies---------*/
   /**
    * this function adds the allies to the allies section
    */
-  const allies = data.alliances.data;
-
-  allies.forEach((ally, i = 0) => {
-    const countries = ally.countries;
-    countries.forEach((country) => {
-      $(`.Allies${i}List`).append(
-        `<li class="list-group-item"><i class="fa-solid fa-font-awesome"></i>  ${country}</li>`
+  if (team4) {
+    const allies = data.alliances.data;
+    $(`.Allies0List`).empty();
+    $(`.Allies1List`).empty();
+    allies[0].countries.forEach((country) => {
+      $(`.Allies0List`).append(
+        `<li class="list-group-item"><i class="fa-regular fa-flag"></i> ${country}</li>`
       );
     });
-  });
+
+    allies[1].countries.forEach((country) => {
+      $(`.Allies1List`).append(
+        `<li class="list-group-item"><i class="fa-regular fa-flag"></i> ${country}</li>`
+      );
+    });
+  }
 };
 /**
  * Here is all the click Events
@@ -371,14 +385,61 @@ $(`.MapBTN`).click(() => {
 });
 
 /**
+ * This click changes  the sides of the battle
+ */
+
+$(`.img0`).click(() => {
+  if (team4) {
+    if (!leftSide) {
+      switchflag(0, 2);
+      // CHANGE THISSSSSSSSSSSSSSSSSSS
+      displayUnits(2, 0, data);
+      setResources(2, 0, data);
+      displayCasualties(data, 2, 0);
+    } else {
+      switchflag(0, 0);
+      displayUnits(0, 0, data);
+      setResources(0, 0, data);
+      displayCasualties(data, 0, 0);
+    }
+    leftSide = !leftSide;
+  }
+});
+
+$(`.img1`).click(() => {
+  if (team4) {
+    if (!rightSide) {
+      switchflag(1, 3);
+      // CHANGE THISSSSSSSSSSSSSSSSSSS
+      displayUnits(3, 1, data);
+      setResources(3, 1, data);
+      displayCasualties(data, 3, 1);
+    } else {
+      switchflag(1, 1);
+      displayUnits(1, 1, data);
+      setResources(1, 1, data);
+      displayCasualties(data, 1, 1);
+    }
+    rightSide = !rightSide;
+  }
+});
+
+/**
  * This function will initialise the battle
  */
 initialiseBattle = (data) => {
-  BattleIndex = 0;
-  data = data[BattleIndex];
-  data.countries.forEach((country) => {
-    Nations.push(country.name);
-  });
+  data = data[battleIndex];
+  const countries = data.countries;
+  if (countries.length == 4) {
+    Nations.push(countries[0].name);
+    Nations.push(countries[1].name);
+    Nations.push(countries[3].name);
+    Nations.push(countries[2].name);
+  } else {
+    data.countries.forEach((country) => {
+      Nations.push(country.name);
+    });
+  }
   $(`#BattleName`).text(data.name);
 
   if (Nations.length == 2) {
@@ -387,11 +448,13 @@ initialiseBattle = (data) => {
     team4 = true;
   }
 
+  // console.log(Nations);
+
   /**
    * set the image flags of each nation
    */
-  $(`.img0`).attr("src", `./media/images/${Nations[0]}.png`);
-  $(`.img1`).attr("src", `./media/images/${Nations[1]}.png`);
+  $(`.img0`).attr("src", `./media/images/${Nations[0].replace(" ", "")}.png`);
+  $(`.img1`).attr("src", `./media/images/${Nations[1].replace(" ", "")}.png`);
   $(`.Name0`).text(`${Nations[0]}`);
   $(`.Name1`).text(`${Nations[1]}`);
 };
@@ -400,7 +463,14 @@ initialiseBattle = (data) => {
  * Function to display all the UNITS currenlty fighting to the screen according to their index
  */
 displayUnits = (index, side, overallUnits) => {
+  overallUnits = data.overallUnits.data;
   $(`.list${side}`).empty();
+  for (let i = 0; i < overallUnits.length; i++) {
+    if (Nations[index] == overallUnits[i].name) {
+      index = i;
+      break;
+    }
+  }
   units = overallUnits[index].units;
   units.forEach((unit) => {
     let type;
@@ -411,14 +481,14 @@ displayUnits = (index, side, overallUnits) => {
     } else {
       type = `<i class="fa-solid fa-ship"></i>`;
     }
-    let percentage = Math.round((unit.currentHP / unit.initialHP) * 100);
+    // let percentage = Math.round((unit.currentHP / unit.initialHP) * 100);
     $(`.list${side}`).append(
-      // `<li class="list-group-item">${type}  ${unit.name}  ${Math.round(
-      //   (unit.currentHP / unit.initialHP) * 100
-      // )}%</li>`
-      `<div class="list-group-item progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:${percentage}%">
-      ${type}  ${unit.name} ${percentage}%
-      </div>`
+      `<li class="list-group-item">${type}  ${unit.name}  ${Math.round(
+        (unit.currentHP / unit.initialHP) * 100
+      )}%</li>`
+      // `<div class="list-group-item progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:${percentage}%">
+      // ${type}  ${unit.name} ${percentage}%
+      // </div>`
     );
   });
 };
@@ -427,7 +497,10 @@ displayUnits = (index, side, overallUnits) => {
  * this faunction will switch the flags of the nations and change their name
  */
 switchflag = (side, country) => {
-  $(`.img${side}`).attr("src", `./media/images/${Nations[country]}.png`);
+  $(`.img${side}`).attr(
+    "src",
+    `./media/images/${Nations[country].replace(" ", "")}.png`
+  );
   $(`.Name${side}`).text(`${Nations[country]}`);
 };
 
@@ -437,10 +510,12 @@ switchflag = (side, country) => {
  * group
  */
 displayCasualties = (data, country, side) => {
-  country = Nations[country];
+  // console.log(data.casualties);
   const casualties = data.casualties.data;
+  $(`.cau${side}List`).empty();
+  country = Nations[country].replace(" ", "");
   casualties.forEach((casualty) => {
-    if (casualty.name == country) {
+    if (casualty.name.replace(" ", "") == country) {
       const theatres = casualty.theatres;
       theatres.forEach((theatre) => {
         const units = theatre.units;

@@ -1,10 +1,21 @@
 #include "SupportCompany.h"
 
-SupportCompany::SupportCompany(Entity *entity) : Entity() {
+SupportCompany::SupportCompany(Entity* entity) {
     this->entity = entity;
 }
 
-int SupportCompany::getDamage() { entity->getDamage(); }
+std::string SupportCompany::getType() const{
+    return entity->getType();
+}
+
+std::string SupportCompany::getId() const{
+    return entity->getId();
+}
+
+
+int SupportCompany::getDamage() { 
+    return entity->getDamage(); 
+}
 
 int SupportCompany::getHP() {
     return entity->getHP();
@@ -41,4 +52,31 @@ nlohmann::json SupportCompany::toJSON() const {
 SupportCompany::~SupportCompany() {
     delete entity;
 }
+
+// std::string SupportCompany::getName(){
+//    return entity->getName();
+// }
+
+
+
+nlohmann::json SupportCompany::unitToJSON() const{
+    return entity->unitToJSON();
+}
+
+Theatre* SupportCompany::getTheatre(){
+    return entity->getTheatre();
+}
+
+void SupportCompany::setHP(int hp){
+    return entity->setHP(hp);
+}
+
+void SupportCompany::setDamage(int damage){
+    return entity->setDamage(damage);
+}
+
+
+
+
+
 

@@ -14,7 +14,7 @@ std::string Entity::getId() const {
     return id;
 }
 
-std::string Entity::getName() const {
+std::string Entity::getName() {
     return name;
 }
 
@@ -27,3 +27,21 @@ std::string Entity::getType() const {
 }
 
 void Entity::clearCasualties() {}
+
+void Entity::setDamage(int damage) {
+    
+}
+
+Theatre* Entity::getTheatre(){
+
+}
+
+ void Entity::setHP(int hp){
+
+ }
+
+
+
+
+
+

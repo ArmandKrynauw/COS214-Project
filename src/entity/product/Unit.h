@@ -12,6 +12,9 @@ protected:
     int initialHP;
 
 public:
+
+    Unit();
+
     Unit(std::string name, std::string type, int HP, int damage, int value);
     
     /**
@@ -30,6 +33,13 @@ public:
      * @return int : value of Unit
     */
 
+    std::string getName();
+
+     /**
+     * Provides functionality to return the Theatre the Unit is stored in
+     * @return Theatre* : Theatre Unit is stored in
+    */
+
     virtual int getValue() const override;
 
      /**
@@ -37,12 +47,7 @@ public:
      * @return string : name of Unit
     */
 
-    std::string getName() const;
-
-     /**
-     * Provides functionality to return the Theatre the Unit is stored in
-     * @return Theatre* : Theatre Unit is stored in
-    */
+    
 
     Theatre *getTheatre();
 

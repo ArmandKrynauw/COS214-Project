@@ -137,7 +137,7 @@ public:
      *
      * @throws WarException if Country or Type is not found
      */
-    Unit *generateUnit(const std::string &country, const std::string &type);
+    Entity *generateUnit(const std::string &country, const std::string &type, const std::string &special);
 
     /**
      * This method will be called each round before the simulation proceeds to

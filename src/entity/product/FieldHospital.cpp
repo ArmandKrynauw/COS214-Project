@@ -1,7 +1,7 @@
 #include "FieldHospital.h"
 
-FieldHospital::FieldHospital(Entity *entity) : SupportCompany(entity) {
-
+FieldHospital::FieldHospital(Entity* entity) : SupportCompany(entity) {
+    entity->setName(entity->getName() + "-FH");
 }
 
 int FieldHospital::getDamage() {
@@ -9,9 +9,12 @@ int FieldHospital::getDamage() {
 }
 
 int FieldHospital::getHP() {
-    return SupportCompany::getHP() * 1.25;
+    return entity->getHP() * 1.25;
 }
 
+std::string FieldHospital::getName(){
+    return entity->getName();
+}
 
 FieldHospital::~FieldHospital() {
 

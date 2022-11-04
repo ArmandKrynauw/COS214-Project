@@ -19,7 +19,7 @@ class Country : public Faction {
 private:
     std::unordered_map<std::string, ArmedForce *> armedForces;
     Mobilization* mobilization;
-
+    
 
 
 public:

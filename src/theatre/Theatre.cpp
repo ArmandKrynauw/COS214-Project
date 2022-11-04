@@ -68,34 +68,25 @@ void Theatre::addEntity(std::string faction, Entity *entity) {
 }
 
 Entity *Theatre::removeEntity(std::string faction, std::string type, std::string id) {
+    std::cout<<"here1";
+    
     if (!zones.count(faction)) {
         throw WarException("Faction not found.");
     }
 
     Entity *entity = NULL;
     std::vector<Zone *> factionZones = zones[faction];
-
+    std::cout<<"here1";
     for (int i = 0; i < factionZones.size(); i++) {
         if (factionZones[i]->getType() == type) {
             entity = factionZones[i]->removeEntity(id);
             break;
         }
     }
-
+    std::cout<<"here";
     if (!entity) {
         throw WarException("Entity not found.");
     }
-
-    // TODO: Check if Faction has any Units left in the Theatre
-    // after a Unit has been removed. If it doesn't then remove the Faction
-    // and its zones from the Theatre.
-
-    // bool removeFaction = true;
-    // for (int i = 0; i < factionZones.size(); i++) {
-    //     if (factionZones[i]-size() > 0) {
-
-    //     }
-    // }
 
     entity->setTheatre(NULL);
     return entity;

@@ -22,19 +22,23 @@ public:
 
     virtual int getHP() = 0;
 
-    std::string getName() const;
-
-    std::string getType() const;
-
-    std::string getId() const;
+    virtual std::string getName() ;
 
     virtual int getValue() const = 0;
 
+    virtual std::string getType() const;
+
+    virtual std::string getId() const;
+
     void setName(std::string name);
+
+    virtual Theatre *getTheatre();
 
     virtual bool takeDamage(int damage) = 0;
 
     virtual int getUnitCount() const = 0;
+
+    virtual void setDamage(int damage);
 
     virtual void print() = 0;
 
@@ -47,6 +51,9 @@ public:
     virtual nlohmann::json toJSON() const = 0;
 
     virtual nlohmann::json unitToJSON() const = 0;
+
+    virtual void setHP(int hp);
+
 
     virtual ~Entity();
 };

@@ -3,12 +3,12 @@
 
 #include "Entity.h"
 
-
 class SupportCompany : public Entity {
 protected:
-    Entity *entity;
+    Entity * entity;
 public:
-    SupportCompany(Entity *entity);
+    SupportCompany(Entity * entity);
+    
 
     /**
      * Provides functionality to return the damage of the entity 
@@ -22,7 +22,20 @@ public:
      */
 
     virtual int getHP() override;
-    /**
+    
+    virtual std::string getType() const override;
+
+    virtual std::string getId() const override;
+
+     /**
+     * Provides functionality to return the entity's name 
+     * @return string : result of entity's getName()
+     */
+
+     virtual std::string getName() = 0;
+     
+
+     /**
      * Provides functionality to return the value of the entity
      * @return int : value
      */
@@ -30,6 +43,24 @@ public:
     int getValue() const override;
 
     /**
+     * Provides functionality to call the entity's getTheatre()
+     * @return result of entity's getTheatre
+     */
+
+
+    virtual Theatre * getTheatre() override;
+
+    /**
+     * Provides functionality to call the entity's setTheatre()
+     * @param theatre Param to be passed into entity's setTheatre
+     */
+
+    void setTheatre(Theatre *theatre) override;
+
+    void setHP(int HP);
+
+    void setDamage(int damage);
+        /**
      * Provides functionality to reduce the entity's hp by taking damage
      * @param damage Damage used to reduce entity's hp
      * @return bool : check whether entity is dead -> entity hp ==0
@@ -40,21 +71,12 @@ public:
      * Provides functionality to call the entity's getUnitCount()
      * @return int : result of entity's getUnitCount()
      */
-
     int getUnitCount() const override;
-
     /**
      * Provides functionality to call the entity's print()
      */
-
     void print() override;
 
-    /**
-     * Provides functionality to call the entity's setTheatre()
-     * @param theatre Param to be passed into entity's setTheatre
-     */
-
-    void setTheatre(Theatre *theatre) override;
     /**
      * Provides functionality to call the entity's clone()
      */
@@ -66,6 +88,14 @@ public:
      */
 
     nlohmann::json toJSON() const override;
+    /**
+     * Provides functionality to call the entity's unitToJSON()
+     * @return json : result of entity's unitToJson()
+     */
+
+    virtual nlohmann::json unitToJSON() const override;
+
+
 
     virtual ~SupportCompany();
 };

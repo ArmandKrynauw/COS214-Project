@@ -1,5 +1,8 @@
 #include "ArmedForce.h"
 
+#include "SupportCompany.h"
+#include "Engineers.h"
+
 using json = nlohmann::json;
 
 ArmedForce::ArmedForce(std::string name, std::string type)

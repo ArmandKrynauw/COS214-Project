@@ -91,7 +91,7 @@
                         {
                             "name": "America",
                             "units": [
-                                { "type": "MediumLandUnit", "quantity": 1 },
+                                { "type": "MediumLandUnit", "quantity": 1},
                                 { "type": "MediumAirUnit", "quantity": 1 },
                                 { "type": "HeavySeaUnit", "quantity": 1 },
                                 { "type": "MediumSeaUnit", "quantity": 2 }
@@ -810,7 +810,7 @@
                         {
                             "name": "Germany",
                             "units": [
-                                { "type": "MediumLandUnit", "quantity": 2 },
+                                { "type": "MediumLandUnit", "quantity": 2 , "special" : "engineers"},
                                 { "type": "MediumAirUnit", "quantity": 1 },
                                 { "type": "MediumSeaUnit", "quantity": 1 }
                             ]
@@ -824,7 +824,7 @@
                         {
                             "name": "United Kingdom",
                             "units": [
-                                { "type": "MediumLandUnit", "quantity": 1 },
+                                { "type": "MediumLandUnit", "quantity": 1 , "special" : "fieldHospital"},
                                 { "type": "HeavyAirUnit", "quantity": 1 },
                                 { "type": "HeavySeaUnit", "quantity": 1 }
                             ]

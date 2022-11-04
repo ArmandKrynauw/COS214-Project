@@ -6,7 +6,7 @@
 
 class FieldHospital : public SupportCompany {
 public:
-    FieldHospital(Entity *entity);
+    FieldHospital(Entity* entity);
     /**
      * Provides functionality to return the entity's damage
      * @return int : damage
@@ -22,6 +22,14 @@ public:
     int getHP() override;
 
     virtual ~FieldHospital();
+
+    /**
+     * Provides functionality to return the entity's name abbreviated with -FH
+     * @return string : result of entity's getName() + -FH
+     */
+
+    std::string getName() override;
+
 };
 
 #endif  // FIELDHOSPITAL_H

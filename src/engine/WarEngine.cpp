@@ -4,6 +4,10 @@
 
 #include "../faction/Country.h"
 
+#include "../entity/product/Engineers.h"
+
+#include "../entity/product/FieldHospital.h"
+
 WarEngine *WarEngine::instance() {
     static WarEngine warEngine;
     return &warEngine;
@@ -223,16 +227,22 @@ void WarEngine::purchaseUnits(const json &data) {
     for (json country: data) {
         for (json unit: country["units"]) {
             for (int i = 0; i < unit["quantity"]; i++) {
-                countries[country["name"]]->addEntity(generateUnit(country["name"], unit["type"]));
+
+                std::string special = "";
+                if(unit.contains("special")){
+                    special = unit["special"];
+                }
+                
+                countries[country["name"]]->addEntity(generateUnit(country["name"], unit["type"], special));
             }
         }
     }
 }
-
-Unit *WarEngine::generateUnit(const std::string &country, const std::string &type) {
+Entity* WarEngine::generateUnit(const std::string &country, const std::string &type, const std::string &special) {
     // TODO: Add check to make sure country and unit type exists
     std::string unitName = countryUnitNames[country][type];
-    Unit *unit = NULL;
+    Entity *unit = NULL;
+    
 
     if (type == "HeavyLandUnit") {
         unit = unitFactories["land"]->createHeavyUnit(unitName);
@@ -258,6 +268,14 @@ Unit *WarEngine::generateUnit(const std::string &country, const std::string &typ
         throw WarException("Could not generate Unit.", "malformed_request");
     }
 
+    // SupportCompany* Support = new SupportCompany(unit);
+
+    if(special == "engineers"){
+        return new Engineers(unit);
+    }
+    else if(special == "fieldHospital"){
+        return new FieldHospital(unit);
+    }
     return unit;
 }
 
@@ -288,13 +306,13 @@ void WarEngine::relocateUnits(const json &data) {
 
 void WarEngine::transportUnit(Theatre *destination, const std::string &country, const std::string &type, const int &index) {
    
-    Theatre *oldHome = ((Unit *) countries[country]->getEntity(type, index))->getTheatre();
+    Theatre *oldHome = ((Unit*)countries[country]->getEntity(type, index))->getTheatre();
     if (oldHome) {
          //std::cout<<"Old: "<<oldHome->getName()<<" "<<((Unit *) countries[country]->getEntity(type, index))->getName()<<std::endl;
-        destination->addEntity(country,oldHome->removeEntity(country, type, ((Unit *) countries[country]->getEntity(type, index))->getId()));
+        destination->addEntity(country,oldHome->removeEntity(country, type,  countries[country]->getEntity(type, index)->getId()) );
     }
     else{
-        destination->addEntity(country,((Unit *) countries[country]->getEntity(type, index)));
+        destination->addEntity(country, ((Unit*)countries[country]->getEntity(type, index)));
     }
 }
 

@@ -4,9 +4,11 @@
 #include "SupportCompany.h"
 
 
+
 class Engineers : public SupportCompany {
+    
 public:
-    Engineers(Entity *entity);
+    Engineers(Entity * unit);
     /**
      * Provides functionality to calculate the result of the entity's Damage *1.25 
      * @return int : damage
@@ -18,6 +20,13 @@ public:
      */
 
     int getHP() override;
+
+    /**
+     * Provides functionality to return the entity's name abbreviated with -EG 
+     * @return string : result of entity's getName() + -EG
+     */
+
+    virtual std::string getName() override;
 
     virtual ~Engineers();
 };

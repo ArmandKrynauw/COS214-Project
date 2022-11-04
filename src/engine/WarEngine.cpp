@@ -10,8 +10,10 @@ WarEngine *WarEngine::instance() {
 }
 
 WarEngine::WarEngine() {
+    std::mt19937 engine;
+    engine.seed(1);
+
     dayCounter = 0;
-    srand(1);
     warStage = new EarlyStage("pre-war");
     unitFactories["land"] = new LandUnitFactory();
     unitFactories["sea"] = new SeaUnitFactory();
@@ -33,18 +35,24 @@ void WarEngine::loadTheatres(const json& data){
 
 void WarEngine::loadSimulation(const json &simulation) {
     if (!simulation.contains("countries")) {
-        throw WarException("Malformed JSON object, countries not found.",
-                           "malformed_countries");
+        throw WarException("Malformed JSON object, countries not found.", "malformed_countries");
     }
     
-    loadCountries(simulation["countries"]);
-
-    if (simulation.contains("alliances")) {
-        loadAlliances(simulation["alliances"]);
+    if (!simulation.contains("alliances")) {
+        throw WarException("Malformed JSON object, alliances not found.", "malformed_alliances");
     }
 
+    if (!simulation.contains("theatres")) {
+        throw WarException("Malformed JSON object, theatres not found.", "malformed_theatres");
+    }
+
+    loadAlliances(simulation["alliances"]);
+    loadCountries(simulation["countries"]);
+    loadTheatres(simulation["theatres"]);
     warDuration = simulation["duration"];
 }
+
+    
 
 void WarEngine::loadCountries(const json &data) {
     for (json c: data) {
@@ -103,56 +111,54 @@ void WarEngine::loadEscalation(const json &data) {
     }
 }
 
-void WarEngine::loadBattleDay(const json& data){
-    loadWarFactors(data["rounds"][dayCounter]);
-    generateCountryResources(data["countries"],data["alliances"]);
-    loadResearch(data["rounds"][dayCounter]["research"]);
-    
-
-    purchaseUnits(data["rounds"][dayCounter]["unitsToPurchase"]);
-    relocateUnits(data["rounds"][dayCounter]["unitsToRelocate"]);
-    assignStrategies(data["rounds"][dayCounter]["strategies"]);
+void WarEngine::loadNextBattleDay(const json& data) {
+    dayCounter = data["turnNumber"];
+    loadWarFactors(data);
+    generateCountryResources();
+    loadResearch(data["research"]);
+    purchaseUnits(data["unitsToPurchase"]);
+    relocateUnits(data["unitsToRelocate"]);
+    assignStrategies(data["strategies"]);
 }
 
-void WarEngine::goBack(){
-    if(dayCounter != 0){
-        dayCounter--;
-    }
-}
-
-void WarEngine::generateCountryResources(const json& counts,const json& alls){
-    int sum = 0;
-    if(alliances.size()==0)
+void WarEngine::generateCountryResources() {
+    if(alliances.size() == 0)
     {
         std::cout<<"Country Resources: "<<std::endl;
-        for (json c: counts) {
-            sum = 0;
+        std::unordered_map<std::string, Country *>::iterator it = countries.begin();
+        while(it != countries.end()){
+            int sum = 0;
 
             for (int i = 0; i < theatreSize; i++) { 
               for (int j = 0; j < theatreSize; j++) { 
-               sum += theatres[i][j]->getResource(c["name"].get<std::string>());
+               sum += theatres[i][j]->getResource(it->first);
              }
             }
-            countries[c["name"].get<std::string>()]->generateResources(sum);
-            std::cout<<c["name"].get<std::string>()<<": "<<countries[c["name"]]->getResourceCount()<<std::endl;
+            countries[it->first]->generateResources(sum);
+            std::cout<<it->first<<": "<<countries[it->first]->getResourceCount()<<std::endl;
+            it++;
          }
     }
     else
     {
-          for (json a: alls) {
+          std::unordered_map<std::string, Alliance *>::iterator allianceIt = alliances.begin();
+          while(allianceIt != alliances.end()){
             //std::cout<<"Name: "<<a["name"]<<": "<<std::endl;
-           sum = 0;
+           int sum = 0;
 
             for (int i = 0; i < theatreSize; i++) { 
               for (int j = 0; j < theatreSize; j++) { 
-                for (json country: a["countries"]) {
-                    sum += theatres[i][j]->getResource(country.get<std::string>());
+                std::unordered_map<std::string, Country *>::iterator countryIt = countries.begin();
+                while(countryIt != countries.end()){
+                    sum += theatres[i][j]->getResource(countryIt->first);
+                    countryIt++;
                     //std::cout<<theatres[i][j]->getName()<<" "<<sum<<std::endl;
                 }
              }
             }
-            alliances[a["name"].get<std::string>()]->generateResources(sum);
-            alliances[a["name"].get<std::string>()]->printResources();
+            alliances[allianceIt->first]->generateResources(sum);
+            alliances[allianceIt->first]->printResources();
+            allianceIt++;
          }
     }
 }
@@ -272,9 +278,6 @@ void WarEngine::assignStrategies(const json &data) {
 // ============================================================================
 
 
-
-
-
 /**
  * @brief Add 'parent' to unit to know which theatre its in
  *  Need to make function to remove unit from a theatre when its moved parent
@@ -386,13 +389,12 @@ void WarEngine::chooseStrategies() {
     // }
 }
 
-void WarEngine::CommenceBattle() {
+void WarEngine::commenceBattle() {
     for (int i = 0; i < theatreSize; i++) {
         for (int j = 0; j < theatreSize; j++) {
             theatres[i][j]->battle();
         }
     }
-    dayCounter++;
 }
 
 json WarEngine::getRoundResults() {
@@ -437,7 +439,6 @@ json WarEngine::clearCasualties() {
     };
         
 }
-
 
 WarEngine::~WarEngine() {
     for (int i = 0; i < theatreSize; i++) {
@@ -501,12 +502,12 @@ void WarEngine::viewStrategies() {
 json WarEngine::getStats() {
     return json{
         {"engine", getEngineStats()},
+        {"casualties", clearCasualties()},
         {"countries", getCountryStats()},
         {"alliances", getAllianceStats()},
         {"theatreUnits", getTheatreUnits()},
         {"overallUnits", getOverallUnits()},
-        {"theatres", getTheatreStats()},
-        {"casualties", clearCasualties()}
+        {"theatres", getTheatreStats()}
     };
 }
 

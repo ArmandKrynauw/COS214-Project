@@ -116,13 +116,7 @@ public:
      * 
      * @param data JSON object of chosen Simulation
      */
-    void loadBattleDay(const json& data);
-    /**
-     * Provide functionality too decrement roundCounter. 
-     * This is to ensure that when the client goes back a day, the engine is aware.
-     * 
-     */
-    void goBack();
+    void loadNextBattleDay(const json& data);
     /**
      * Provides functionality for Countries to purchase units. This method
      * expects a JSON array of objects. Each object requires the name of the
@@ -157,7 +151,7 @@ public:
      * This method will be called each round before the simulation proceeds to
      * the purchase Unit phase.
     */
-    void generateCountryResources(const json& c,const json& a);
+    void generateCountryResources();
 
 
 
@@ -247,7 +241,7 @@ public:
      * @brief Commence all battles in active theatres
      *
      */
-    void CommenceBattle();
+    void commenceBattle();
 
     json clearCasualties();
 

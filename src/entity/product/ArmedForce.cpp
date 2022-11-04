@@ -49,8 +49,8 @@ int ArmedForce::getHP() {
 }
 
 bool ArmedForce::takeDamage(int damage) {
-    // TODO: Needs discussing on what happens if Entities die
-    int index = rand() % entities.size();
+    std::mt19937 engine;
+    int index = engine() % entities.size();
     entities[index]->takeDamage(damage);
     return entities[index]->getHP();
 }

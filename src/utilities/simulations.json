@@ -11,11 +11,7 @@
                 { "name": "Belgium", "seaZone": true, "resourceCount": 15 },
                 { "name": "Ruhr", "seaZone": true, "resourceCount": 20 },
                 { "name": "Paris", "seaZone": true, "resourceCount": 20 },
-                {
-                    "name": "Alsace-Lorraine",
-                    "seaZone": true,
-                    "resourceCount": 10
-                },
+                { "name": "Alsace-Lorraine", "seaZone": true, "resourceCount": 10},
                 { "name": "Italy", "seaZone": true, "resourceCount": 20 }
             ],
             "countries": [
@@ -50,42 +46,10 @@
                         { "MediumSeaUnit": "Destroyer" }
                     ],
                     "baseResourceCount": 1000
-                },
-                {
-                    "name": "France",
-                    "countryCode": "FRA",
-                    "units": [
-                        { "HeavyAirUnit": "Luftwaffe A400M" },
-                        { "HeavyLandUnit": "Leopard 2A7" },
-                        { "HeavySeaUnit": "Type 212 Submarine" },
-                        { "LightAirUnit": "CH-53G" },
-                        { "LightLandUnit": "Foot Soldier" },
-                        { "LightSeaUnit": "Baden-Württemberg class" },
-                        { "MediumAirUnit": "Eurofighter Typhoon" },
-                        { "MediumLandUnit": "BMP-3" },
-                        { "MediumSeaUnit": "Braunschweig class" }
-                    ],
-                    "baseResourceCount": 1000
-                },
-                {
-                    "name": "Russia",
-                    "countryCode": "RUS",
-                    "units": [
-                        { "HeavyAirUnit": "Luftwaffe A400M" },
-                        { "HeavyLandUnit": "Leopard 2A7" },
-                        { "HeavySeaUnit": "Type 212 Submarine" },
-                        { "LightAirUnit": "CH-53G" },
-                        { "LightLandUnit": "Foot Soldier" },
-                        { "LightSeaUnit": "Baden-Württemberg class" },
-                        { "MediumAirUnit": "Eurofighter Typhoon" },
-                        { "MediumLandUnit": "BMP-3" },
-                        { "MediumSeaUnit": "Braunschweig class" }
-                    ],
-                    "baseResourceCount": 1000
                 }
             ],
             "alliances": [],
-            "rounds": [
+            "days": [
                 {
                     "WarState": "EarlyStage",
                     "turnNumber": 1,
@@ -794,7 +758,7 @@
                     "countries": ["Germany", "Italy"]
                 }
             ],
-            "rounds": [
+            "days": [
                 {
                     "WarState": "EarlyStage",
                     "turnNumber": 1,

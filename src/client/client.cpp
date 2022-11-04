@@ -6,11 +6,9 @@
 #include <iostream>
 
 Client::Client() {
-    try {
-        loadSimulations("utilities/simulations.json");
-    } catch (WarException &e) {
-        std::cout << e.what() << std::endl;
-    }
+    loadSimulations("utilities/simulations.json");
+    currentDay = 0;
+    beforeBattle = false;
 }
 
 Client* Client::instance() {
@@ -30,12 +28,6 @@ void Client::runTerminalMode() {
     runSimulation();
 }
 
-void Client::runGUIMode() {
-    selectSimulation(0);
-    // WarEngine::instance()->checkEscalation(chosenSimulation["rounds"][0]["WarState"]);
-    // WarEngine::instance()->purchaseUnits(chosenSimulation["rounds"][0]["unitsToPurchase"]);
-}
-
 // ======================================================================================
 // WAR ENGINE CONTROL FUNCTIONS
 // ======================================================================================
@@ -45,22 +37,22 @@ void Client::runTest() {
 }
 
 json Client::loadNextBattleDay() {
-    if (battleDayState) {
+    if (!beforeBattle) {
         throw WarException("Load battle day results before loading next day.", "load_day_results");
     }
 
     WarEngine::instance()->loadNextBattleDay(chosenSimulation["days"][currentDay++]);
-    battleDayState = true;
+    beforeBattle = false;
     return WarEngine::instance()->getStats();
 }
 
 json Client::loadDayResults() {
-    if (!battleDayState) {
+    if (beforeBattle) {
         throw WarException("Load next battle day before loading day results.", "load_next_day");
     }
 
     WarEngine::instance()->commenceBattle();
-    battleDayState = false;
+    beforeBattle = true;
     return WarEngine::instance()->getStats();
 }
 
@@ -73,18 +65,14 @@ json Client::selectSimulation(int index) {
         throw WarException("Not a valid simulation.","out-of-bounds");
     }
 
-    currentDay = 0;
-    battleDayState = false;
+    WarEngine::instance()->reset();
     WarEngine::instance()->loadSimulation(simulations[index]);
-    chosenSimulation = simulations[index];
-    return WarEngine::instance()->getStats();
-}
 
-// Depreciated
-json Client::runNextDay() {
-        loadNextBattleDay();
-        std::cout<<loadDayResults()["casualties"].dump(1)<<std::endl;
-        return WarEngine::instance()->getRoundResults();
+    currentDay = 0;
+    beforeBattle = true;
+    chosenSimulation = simulations[index];
+
+    return WarEngine::instance()->getStats();
 }
 
 // ======================================================================================
@@ -128,8 +116,9 @@ void Client::runSimulation() {
     for (json roundData: chosenSimulation["days"][currentDay]) {
         if (currentDay != end) {
             std::cout << "Day " << currentDay + 1 << " commencing... " << std::endl;
-            json result = runNextDay();
             //json deaths = result["casualties"];
+            loadNextBattleDay();
+            loadDayResults();
             printDayResults();
             //std::cout << WarEngine::instance()->clearCasualties().dump(1) << std::endl;
             // WarEngine::instance()->clearCasualties();
@@ -170,7 +159,6 @@ void Client::printUnit(const json &unit) {
 // GUI MODE FUNCTIONS
 // ======================================================================================
 
-
 // ======================================================================================
 // UTILITY FUNCTIONS
 // ======================================================================================
@@ -179,7 +167,7 @@ void Client::loadSimulations(std::string filePath) {
     std::ifstream file(filePath);
 
     if (!file) {
-        throw WarException("file-not-found");
+        throw WarException("File containing simulations not found.", "file-not-found");
     }
 
     json data = json::parse(file);

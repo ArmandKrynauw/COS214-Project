@@ -30,37 +30,29 @@ private:
     int theatreSize;
 
     Escalation *warStage;
-    // Depreciated!!!!
-    std::vector<Faction *> factions;
 
-    std::unordered_map<std::string,
-            std::unordered_map<std::string, std::string>>
-            countryUnitNames;
+    std::unordered_map<std::string, std::unordered_map<std::string, std::string>> countryUnitNames;
     std::unordered_map<std::string, UnitFactory *> unitFactories;
 
     int dayCounter;
-    bool player1Turn;
     int warDuration;
 
 
     // =============== Utility Functions ===============
-    void printMap();
 
     std::string toLower(std::string &str) const;
 
     // =============== Singleton ===============
     WarEngine();
-
     WarEngine(WarEngine &);
-
     WarEngine &operator=(WarEngine &);
-
     ~WarEngine();
 
 public:
     static WarEngine *instance();
 
     // ====================== LOAD SIMULATIONS ======================
+    void reset();
 
     void loadTheatres(const json& theatres);
     /**
@@ -70,7 +62,7 @@ public:
      *
      * @param simulation JSON object containing simulation
      */
-    void loadSimulation(const json &simulation);
+    void loadSimulation(const json &data);
 
     /**
      * Provides functionality to load country objects from a JSON array.
@@ -176,14 +168,6 @@ public:
     json getTheatreUnits();
 
     /**
-     * @brief Convert json object to string vector
-     *
-     * @param array A json object to be converted
-     * @return std::vector<std::string>
-     */
-    std::vector<std::string> setToString(json array);
-
-    /**
      * @brief Convert JSON object to pair of int
      * 
      * @param data location of unit in json format
@@ -202,40 +186,9 @@ public:
     void transportUnit(Theatre *destination, const std::string &country, const std::string &type, const int &index);
 
     void assignStrategies(const json &data);
-
-   
-
-    
-
     
 
     // ====================== MAIN WAR FUNCTIONS ======================
-
-    void startSimulation(json war);
-
-    /**
-     * @brief Display Faction Resources
-     *
-     */
-    void displayResources();
-
-    /**
-     * @brief Allow Faction to Buy Units
-     *
-     */
-    void buyUnits();
-
-    /**
-     * @brief Allow Factions to transport troops to theatres
-     *
-     */
-    void placeTroops();
-
-    /**
-     * @brief Allow Factions to select Strategies for theatres
-     *
-     */
-    void chooseStrategies();
 
     /**
      * @brief Commence all battles in active theatres
@@ -245,18 +198,9 @@ public:
 
     json clearCasualties();
 
-    json getRoundResults();
-
     // ====================== UTILITY FUNCTIONS ======================
-    void debug();
 
     void viewStrategies();
-
-    void displayUnits();
-
-    void displayUnitMenu();
-    
-    Theatre* getTheatre();
 };
 
 #endif  // WARENGINE_H

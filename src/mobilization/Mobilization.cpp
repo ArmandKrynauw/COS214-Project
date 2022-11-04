@@ -11,7 +11,7 @@ Mobilization::~Mobilization() {
 }
 
 Mobilization *  Mobilization::checkWarState(std::string warState, std::string newMobilization){
-    if(warState == "pre-war"){
+    if(warState == "Initial Stage"){
         return this;
     }
     else if(warState == "EarlyStage"){

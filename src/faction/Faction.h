@@ -6,6 +6,9 @@
 
 #include "../utilities/WarException.h"
 #include "../utilities/uuid.h"
+#include "../utilities/json.hpp"
+
+using json = nlohmann::json;
 
 class Alliance;
 
@@ -118,6 +121,8 @@ public:
     virtual void chooseStrategy() = 0;
 
     virtual void clearCasualties() = 0;
+
+   
 
     virtual ~Faction();
 };

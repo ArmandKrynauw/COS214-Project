@@ -662,7 +662,7 @@
         },
         {
             "WarTitle": "Battle of France [1940]",
-            "duration": 3,
+            "duration": 5,
             "theatres": [
                 { "name": "Sicily", "seaZone": true, "resourceCount": 40 },
                 {
@@ -694,7 +694,7 @@
                         { "LightLandUnit": "Infanterie Division" },
                         { "LightSeaUnit": "U-VIIC" },
                         { "MediumAirUnit": "BF-109 group" },
-                        { "MediumLandUnit": "Panzer Division [1938]" },
+                        { "MediumLandUnit": "Infanterie-Division (motorisiert)" },
                         { "MediumSeaUnit": "Admiral Hipper class" }
                     ],
                     "baseResourceCount": 800
@@ -1403,6 +1403,584 @@
                             "strategies": [
                                 {
                                     "strategy": "Attack",
+                                    "theatre": "0,0",
+                                    "target": "United Kingdom"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "2,2",
+                                    "target": "United Kingdom"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "WarState": "MiddleStage",
+                    "turnNumber": 4,
+                    "mobilization": {
+                        "countries": [
+                            {
+                                "name": "United Kingdom",
+                                "mobilization": "PartialMobilization"
+                            },
+                            {
+                                "name": "France",
+                                "mobilization": "WarEconomy"
+                            },
+                            {
+                                "name": "Italy",
+                                "mobilization": "WarEconomy"
+                            },
+                            {
+                                "name": "Germany",
+                                "mobilization": "TotalMobilization"
+                            }
+                        ]
+                    },
+                    "research": {
+                        "countries": [
+                            {
+                                "name": "Germany",
+                                "research": "industry",
+                                "points": 280
+                            },
+                            {
+                                "name": "United Kingdom",
+                                "research": "industry",
+                                "points": 300
+                            },
+                            {
+                                "name": "France",
+                                "research": "industry",
+                                "points": 200
+                            },
+                            {
+                                "name": "Italy",
+                                "research": "industry",
+                                "points": 50
+                            }
+                        ]
+                    },
+                    "unitsToPurchase": [
+                        {
+                            "name": "Germany",
+                            "units": [
+                                { "type": "MediumAirUnit", "quantity": 3 },
+                                { "type": "HeavyLandUnit", "quantity": 10 }
+                            ]
+                        },
+                        {
+                            "name": "Italy",
+                            "units": [{ "type": "HeavySeaUnit", "quantity": 3 },
+                                      { "type": "HeavyAirUnit", "quantity": 2 }]
+                        },
+                        {
+                            "name": "United Kingdom",
+                            "units": [{ "type": "LightLandUnit", "quantity": 2 }]
+                        },
+                        {
+                            "name": "France",
+                            "units": [
+                                { "type": "HeavyLandUnit", "quantity": 3 }
+                            ]
+                        }
+                    ],
+                    "unitsToRelocate": [
+                        {
+                            "name": "Germany",
+                            "movements": [
+                                {
+                                    "type": "air",
+                                    "index": 4,
+                                    "destination": "2,0"
+                                },
+                                {
+                                    "type": "air",
+                                    "index": 5,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "air",
+                                    "index": 6,
+                                    "destination": "2,0"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 9,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 10,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 11,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 12,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 13,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 14,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 15,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 16,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 17,
+                                    "destination": "2,0"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 18,
+                                    "destination": "2,0"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Italy",
+                            "movements": [
+                                {
+                                    "type": "sea",
+                                    "index": 2,
+                                    "destination": "0,0"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 3,
+                                    "destination": "0,0"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 4,
+                                    "destination": "0,0"
+                                },
+                                {
+                                    "type": "air",
+                                    "index": 1,
+                                    "destination": "2,2"
+                                },
+                                {
+                                    "type": "air",
+                                    "index": 2,
+                                    "destination": "0,0"
+                                }
+                            ]
+                            
+                        },
+                        {
+                            "name": "United Kingdom",
+                            "movements": [
+                                {
+                                    "type": "land",
+                                    "index": 1,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 2,
+                                    "destination": "2,0"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 0,
+                                    "destination": "0,0"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 2,
+                                    "destination": "0,0"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "France",
+                            "movements": [
+                                {
+                                    "type": "land",
+                                    "index": 4,
+                                    "destination": "1,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 5,
+                                    "destination": "2,0"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 6,
+                                    "destination": "0,1"
+                                }
+                            ]
+                        }
+                    ],
+
+                    "strategies": [
+                        {
+                            "name": "Germany",
+                            "strategies": [
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "0,1",
+                                    "target": "France"
+                                },
+                                {
+                                    "strategy": "Counter",
+                                    "theatre": "1,2",
+                                    "target": "United Kingdom"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "2,0",
+                                    "target": "France"
+                                },
+                                {
+                                    "strategy": "Plan",
+                                    "theatre": "1,1",
+                                    "target": "France"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "United Kingdom",
+                            "strategies": [
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "2,0",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "1,2",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "2,2",
+                                    "target": "Italy"
+                                },
+                                {
+                                    "strategy": "Plan",
+                                    "theatre": "0,0",
+                                    "target": "Italy"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "France",
+                            "strategies": [
+                                {
+                                    "strategy": "Plan",
+                                    "theatre": "2,0",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Plan",
+                                    "theatre": "0,1",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "1,1",
+                                    "target": "Germany" 
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Italy",
+                            "strategies": [
+                                {
+                                    "strategy": "Plan",
+                                    "theatre": "0,0",
+                                    "target": "United Kingdom"
+                                },
+                                {
+                                    "strategy": "Plan",
+                                    "theatre": "2,2",
+                                    "target": "United Kingdom"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "WarState": "LateStage",
+                    "turnNumber": 5,
+                    "mobilization": {
+                        "countries": [
+                            {
+                                "name": "United Kingdom",
+                                "mobilization": "PartialMobilization"
+                            },
+                            {
+                                "name": "France",
+                                "mobilization": "PartialMobilization"
+                            },
+                            {
+                                "name": "Italy",
+                                "mobilization": "WarEconomy"
+                            },
+                            {
+                                "name": "Germany",
+                                "mobilization": "TotalMobilization"
+                            }
+                        ]
+                    },
+                    "research": {
+                        "countries": [
+                            {
+                                "name": "Germany",
+                                "research": "propaganda",
+                                "points": 300
+                            },
+                            {
+                                "name": "United Kingdom",
+                                "research": "industry",
+                                "points": 200
+                            },
+                            {
+                                "name": "France",
+                                "research": "propaganda",
+                                "points": 200
+                            },
+                            {
+                                "name": "Italy",
+                                "research": "propaganda",
+                                "points": 100
+                            }
+                        ]
+                    },
+                    "unitsToPurchase": [
+                        {
+                            "name": "Germany",
+                            "units": [
+                                { "type": "MediumLandUnit", "quantity": 15 }
+                            ]
+                        },
+                        {
+                            "name": "United Kingdom",
+                            "units": [
+                                { "type": "HeavySeaUnit", "quantity": 2 }
+                            ]
+                        }
+                    ],
+                    "unitsToRelocate": [
+                        {
+                            "name": "Germany",
+                            "movements": [
+                                {
+                                    "type": "land",
+                                    "index": 19,
+                                    "destination": "2,0"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 20,
+                                    "destination": "2,0"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 21,
+                                    "destination": "2,0"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 22,
+                                    "destination": "2,0"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 23,
+                                    "destination": "2,0"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 24,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 25,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 26,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 27,
+                                    "destination": "2,0"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 28,
+                                    "destination": "2,0"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 29,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 30,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 31,
+                                    "destination": "0,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 32,
+                                    "destination": "1,1"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 33,
+                                    "destination": "1,1"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "United Kingdom",
+                            "movements": [
+                                {
+                                    "type": "land",
+                                    "index": 0,
+                                    "destination": "Flee"
+                                },
+                                {
+                                    "type": "air",
+                                    "index": 1,
+                                    "destination": "Flee"
+                                },
+                                {
+                                    "type": "land",
+                                    "index": 1,
+                                    "destination": "Flee"
+                                },
+                                {
+                                    "type": "air",
+                                    "index": 0,
+                                    "destination": "Flee"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 3,
+                                    "destination": "0,0"
+                                },
+                                {
+                                    "type": "sea",
+                                    "index": 4,
+                                    "destination": "0,0"
+                                }
+                            ]
+                        }
+                    ],
+
+                    "strategies": [
+                        {
+                            "name": "Germany",
+                            "strategies": [
+                                {
+                                    "strategy": "Counter",
+                                    "theatre": "0,1",
+                                    "target": "France"
+                                },
+                                {
+                                    "strategy": "Counter",
+                                    "theatre": "1,2",
+                                    "target": "United Kingdom"
+                                },
+                                {
+                                    "strategy": "Counter",
+                                    "theatre": "2,0",
+                                    "target": "France"
+                                },
+                                {
+                                    "strategy": "Plan",
+                                    "theatre": "1,1",
+                                    "target": "France"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "United Kingdom",
+                            "strategies": [
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "2,0",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "1,2",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Counter",
+                                    "theatre": "2,2",
+                                    "target": "Italy"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "0,0",
+                                    "target": "Italy"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "France",
+                            "strategies": [
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "2,0",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "0,1",
+                                    "target": "Germany"
+                                },
+                                {
+                                    "strategy": "Attack",
+                                    "theatre": "1,1",
+                                    "target": "Germany" 
+                                }
+                            ]
+                        },
+
+
+                        
+                        {
+                            "name": "Italy",
+                            "strategies": [
+                                {
+                                    "strategy": "Plan",
                                     "theatre": "0,0",
                                     "target": "United Kingdom"
                                 },

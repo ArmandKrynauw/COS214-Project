@@ -78,8 +78,7 @@ public:
     // virtual int getAttackPower(Theatre *theatre) override;
 
 
-
-    json toJSON();
+    json toJSON() ;
 
     /**
      * Provides functionality to view the resources of each country in the alliance throught the terminal

@@ -232,3 +232,6 @@ bool Country::inAlliance(){
     return (alliance) ? true : false;
 }
 
+
+
+

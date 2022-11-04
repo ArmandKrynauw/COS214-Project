@@ -411,10 +411,14 @@ displayUnits = (index, side, overallUnits) => {
     } else {
       type = `<i class="fa-solid fa-ship"></i>`;
     }
+    let percentage = Math.round((unit.currentHP / unit.initialHP) * 100);
     $(`.list${side}`).append(
-      `<li class="list-group-item">${type}  ${unit.name}  ${Math.round(
-        (unit.currentHP / unit.initialHP) * 100
-      )}%</li>`
+      // `<li class="list-group-item">${type}  ${unit.name}  ${Math.round(
+      //   (unit.currentHP / unit.initialHP) * 100
+      // )}%</li>`
+      `<div class="list-group-item progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:${percentage}%">
+      ${type}  ${unit.name} ${percentage}%
+      </div>`
     );
   });
 };

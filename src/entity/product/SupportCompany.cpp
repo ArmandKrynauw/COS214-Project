@@ -12,13 +12,16 @@ std::string SupportCompany::getId() const{
     return entity->getId();
 }
 
-
-int SupportCompany::getDamage() { 
+int SupportCompany::getDamage() const { 
     return entity->getDamage(); 
 }
 
-int SupportCompany::getHP() {
+int SupportCompany::getHP() const {
     return entity->getHP();
+}
+
+int SupportCompany::getInitialHP() const {
+    return entity->getInitialHP();
 }
 
 int SupportCompany::getValue() const {
@@ -46,37 +49,40 @@ Entity *SupportCompany::clone() {
 }
 
 nlohmann::json SupportCompany::toJSON() const {
+    return json{
+            {"name", getName()},
+            {"type", getType()},
+            {"initialHP", getInitialHP()},
+            {"currentHP", getHP()},
+            {"damage",  getDamage()},
+            {"theatre", (entity->getTheatre()) ? entity->getTheatre()->getName() : "Evacuated"},
+            {"id", getId()}
+    };
     return entity->toJSON();
+}
+
+nlohmann::json SupportCompany::unitToJSON() const {
+    return json{
+            {"name",    getName()},
+            {"type",    getType()},
+            {"initialHP",  getInitialHP()},
+            {"damage",  getDamage()},
+            {"currentHP", getHP()}
+    };
 }
 
 SupportCompany::~SupportCompany() {
     delete entity;
 }
 
-// std::string SupportCompany::getName(){
-//    return entity->getName();
-// }
-
-
-
-nlohmann::json SupportCompany::unitToJSON() const{
-    return entity->unitToJSON();
-}
-
-Theatre* SupportCompany::getTheatre(){
+Theatre* SupportCompany::getTheatre() {
     return entity->getTheatre();
 }
 
-void SupportCompany::setHP(int hp){
+void SupportCompany::setHP(int hp) {
     return entity->setHP(hp);
 }
 
-void SupportCompany::setDamage(int damage){
+void SupportCompany::setDamage(int damage) {
     return entity->setDamage(damage);
 }
-
-
-
-
-
-

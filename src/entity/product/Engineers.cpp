@@ -1,21 +1,13 @@
 #include "Engineers.h"
 
-Engineers::Engineers(Entity* entity) : SupportCompany(entity) {
-    //entity->setName(entity->getName() + "-EG");
-}
+Engineers::Engineers(Entity* entity) : SupportCompany(entity) { }
 
-int Engineers::getDamage() {
+int Engineers::getDamage() const {
     return SupportCompany::getDamage() * 1.25;
 }
 
-int Engineers::getHP() {
-    return SupportCompany::getHP();
-}
-
-std::string Engineers::getName(){
+std::string Engineers::getName() const {
     return entity->getName() + "-EG";
 }
 
-Engineers::~Engineers() {
-
-}
+Engineers::~Engineers() { }

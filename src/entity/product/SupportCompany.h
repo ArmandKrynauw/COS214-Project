@@ -5,56 +5,48 @@
 
 class SupportCompany : public Entity {
 protected:
-    Entity * entity;
+    Entity* entity;
 public:
     SupportCompany(Entity * entity);
     
-
     /**
      * Provides functionality to return the damage of the entity 
      * @return int : damage
      */
+    virtual int getDamage() const override;
 
-    virtual int getDamage() override;
     /**
      * Provides functionality to return the hp of the entity
      * @return int : HP
      */
-
-    virtual int getHP() override;
+    virtual int getHP() const override;
+    virtual int getInitialHP() const override;
     
-    virtual std::string getType() const override;
-
-    virtual std::string getId() const override;
-
      /**
      * Provides functionality to return the entity's name 
      * @return string : result of entity's getName()
      */
+    virtual std::string getName() const override = 0;
 
-     virtual std::string getName() = 0;
-     
+    virtual std::string getType() const override;
+    virtual std::string getId() const override;
 
      /**
      * Provides functionality to return the value of the entity
      * @return int : value
      */
-
     int getValue() const override;
 
     /**
      * Provides functionality to call the entity's getTheatre()
      * @return result of entity's getTheatre
      */
-
-
     virtual Theatre * getTheatre() override;
 
     /**
      * Provides functionality to call the entity's setTheatre()
      * @param theatre Param to be passed into entity's setTheatre
      */
-
     void setTheatre(Theatre *theatre) override;
 
     void setHP(int HP);

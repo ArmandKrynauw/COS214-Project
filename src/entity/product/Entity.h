@@ -15,14 +15,12 @@ protected:
 
 public:
     Entity();
-
     Entity(std::string name, std::string type);
 
-    virtual int getDamage() = 0;
-
-    virtual int getHP() = 0;
-
-    virtual std::string getName() ;
+    virtual std::string getName() const;
+    virtual int getDamage() const = 0;
+    virtual int getHP() const = 0;
+    virtual int getInitialHP() const = 0;
 
     virtual int getValue() const = 0;
 
@@ -32,7 +30,7 @@ public:
 
     void setName(std::string name);
 
-    virtual Theatre *getTheatre();
+    virtual Theatre* getTheatre();
 
     virtual bool takeDamage(int damage) = 0;
 
@@ -46,14 +44,13 @@ public:
 
     virtual void clearCasualties();
 
-    virtual Entity *clone() = 0;
+    virtual Entity* clone() = 0;
 
     virtual nlohmann::json toJSON() const = 0;
 
     virtual nlohmann::json unitToJSON() const = 0;
 
     virtual void setHP(int hp);
-
 
     virtual ~Entity();
 };

@@ -29,7 +29,7 @@ void ArmedForce::remove(Entity *entity) {
     }
 }
 
-int ArmedForce::getDamage() {
+int ArmedForce::getDamage() const {
     int damage = 0;
     std::vector<Entity *>::const_iterator it;
 
@@ -40,7 +40,7 @@ int ArmedForce::getDamage() {
     return damage;
 }
 
-int ArmedForce::getHP() {
+int ArmedForce::getHP() const {
     int HP = 0;
     std::vector<Entity *>::const_iterator it;
 
@@ -49,6 +49,17 @@ int ArmedForce::getHP() {
     }
 
     return HP;
+}
+
+int ArmedForce::getInitialHP() const {
+    int initialHP = 0;
+    std::vector<Entity *>::const_iterator it;
+
+    for (it = entities.begin(); it != entities.end(); ++it) {
+        initialHP += (*it)->getHP();
+    }
+
+    return initialHP;
 }
 
 bool ArmedForce::takeDamage(int damage) {

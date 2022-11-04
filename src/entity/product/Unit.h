@@ -21,19 +21,19 @@ public:
      * Provides functionality to return the current damage of the Unit
      * @return int : Damage of Unit
     */
-    virtual int getDamage() override;
+    virtual int getDamage() const override;
     /**
      * Provides functionality to return the current HP of the Unit
      * @return int : HP of Unit
     */
 
-    virtual int getHP() override;
+    virtual int getHP() const override;
      /**
      * Provides functionality to return the value  of the Unit
      * @return int : value of Unit
     */
 
-    std::string getName();
+    virtual int getInitialHP() const override;
 
      /**
      * Provides functionality to return the Theatre the Unit is stored in

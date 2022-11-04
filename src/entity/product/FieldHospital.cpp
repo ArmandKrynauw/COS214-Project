@@ -1,21 +1,13 @@
 #include "FieldHospital.h"
 
-FieldHospital::FieldHospital(Entity* entity) : SupportCompany(entity) {
-    entity->setName(entity->getName() + "-FH");
+FieldHospital::FieldHospital(Entity* entity) : SupportCompany(entity) { }
+
+bool FieldHospital::takeDamage(int damage) {
+    return SupportCompany::takeDamage(damage * 0.75);
 }
 
-int FieldHospital::getDamage() {
-    return SupportCompany::getDamage();
+std::string FieldHospital::getName() const {
+    return entity->getName() + "-FH";
 }
 
-int FieldHospital::getHP() {
-    return entity->getHP() * 1.25;
-}
-
-std::string FieldHospital::getName(){
-    return entity->getName();
-}
-
-FieldHospital::~FieldHospital() {
-
-}
+FieldHospital::~FieldHospital() { }

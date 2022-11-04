@@ -2,16 +2,20 @@
 
 using json = nlohmann::json;
 
-Unit::Unit(){}
+Unit::Unit() {}
 
 Unit::Unit(std::string name, std::string type, int HP, int damage, int value)
         : Entity(name, type), HP(HP), damage(damage), value(value), theatre(NULL) ,initialHP(HP){}
 
-int Unit::getHP() {
+int Unit::getHP() const {
     return HP;
 }
 
-int Unit::getDamage() {
+int Unit::getInitialHP() const {
+    return initialHP;
+}
+
+int Unit::getDamage() const {
     return damage;
 }
 
@@ -66,10 +70,6 @@ json Unit::unitToJSON() const {
             {"damage",  damage},
             {"currentHP", HP}
     };
-}
-
-std::string Unit::getName() {
-    return name;
 }
 
 Theatre *Unit::getTheatre() {

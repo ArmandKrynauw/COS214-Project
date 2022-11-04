@@ -26,9 +26,9 @@ public:
      *
      * @return Total damage
      */
-    virtual int getDamage() override;
-
-    virtual int getHP() override;
+    virtual int getDamage() const override;
+    virtual int getHP() const override;
+    virtual int getInitialHP() const;
 
     virtual bool takeDamage(int damage) override;
 

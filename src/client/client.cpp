@@ -40,6 +40,10 @@ void Client::runGUIMode() {
 // WAR ENGINE CONTROL FUNCTIONS
 // ======================================================================================
 
+void Client::runTest(){
+    selectSimulation(0);
+}
+
 json Client::loadNextDay() {
     std::ifstream file("utilities/data.json");
     if (!file) {

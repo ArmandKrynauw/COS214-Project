@@ -265,6 +265,8 @@ public:
     void displayUnits();
 
     void displayUnitMenu();
+    
+    Theatre* getTheatre();
 };
 
 #endif  // WARENGINE_H

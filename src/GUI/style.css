@@ -20,6 +20,7 @@
   font-weight: 500;
   border: 0 !important;
 }
+
 .Info {
   width: 100%;
   background-color: var(--darkgray);
@@ -71,6 +72,9 @@
   background-image: url("./media/images/map.png");
   height: 100vh !important;
   background-color: var(--lightgray);
+  background-position: fixed;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 #enemyLeft {
@@ -99,12 +103,14 @@ body {
 }
 
 img {
-  height: 200px;
+  height: 200px !important;
+  width: 360px !important;
 }
 
 .card {
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
+  width: 360px !important;
 }
 
 .card img {
@@ -133,7 +139,7 @@ img {
 }
 
 ul {
-  background-color: var(--medgray) !important;
+  /* background-color: var(--medgray) !important; */
   margin-bottom: 20px !important;
 }
 

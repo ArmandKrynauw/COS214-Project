@@ -117,6 +117,8 @@ public:
 
     virtual void chooseStrategy() = 0;
 
+    virtual void clearCasualties() = 0;
+
     virtual ~Faction();
 };
 

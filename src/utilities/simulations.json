@@ -11,7 +11,11 @@
                 { "name": "Belgium", "seaZone": true, "resourceCount": 15 },
                 { "name": "Ruhr", "seaZone": true, "resourceCount": 20 },
                 { "name": "Paris", "seaZone": true, "resourceCount": 20 },
-                { "name": "Alsace-Lorraine", "seaZone": true, "resourceCount": 10 },
+                {
+                    "name": "Alsace-Lorraine",
+                    "seaZone": true,
+                    "resourceCount": 10
+                },
                 { "name": "Italy", "seaZone": true, "resourceCount": 20 }
             ],
             "countries": [
@@ -80,9 +84,7 @@
                     "baseResourceCount": 1000
                 }
             ],
-        "alliances": [
-                
-            ],
+            "alliances": [],
             "rounds": [
                 {
                     "WarState": "EarlyStage",
@@ -99,18 +101,19 @@
                             }
                         ]
                     },
-                    "research" : {
+                    "research": {
                         "countries": [
                             {
                                 "name": "Germany",
                                 "research": "industry",
-                                "points" : 50
+                                "points": 50
                             },
                             {
                                 "name": "America",
                                 "research": "industry",
-                                "points" : 50
-                            }]
+                                "points": 50
+                            }
+                        ]
                     },
                     "unitsToPurchase": [
                         {
@@ -119,7 +122,6 @@
                                 { "type": "HeavyLandUnit", "quantity": 1 },
                                 { "type": "MediumAirUnit", "quantity": 1 },
                                 { "type": "LightSeaUnit", "quantity": 3 }
-                                
                             ]
                         },
                         {
@@ -129,8 +131,6 @@
                                 { "type": "MediumAirUnit", "quantity": 1 },
                                 { "type": "HeavySeaUnit", "quantity": 1 },
                                 { "type": "MediumSeaUnit", "quantity": 2 }
-                                
-                                
                             ]
                         }
                     ],
@@ -255,29 +255,24 @@
                             }
                         ]
                     },
-                    "research" : {
+                    "research": {
                         "countries": [
                             {
                                 "name": "Germany",
                                 "research": "industry",
-                                "points" : 500
+                                "points": 500
                             },
                             {
                                 "name": "America",
                                 "research": "industry",
-                                "points" : 300
-                            }]
+                                "points": 300
+                            }
+                        ]
                     },
-                    "unitsToPurchase": [
-                        
-                    ],
-                    "unitsToRelocate": [
-                        
-                    ],
+                    "unitsToPurchase": [],
+                    "unitsToRelocate": [],
 
-                    "strategies": [
-                        
-                    ]
+                    "strategies": []
                 },
                 {
                     "WarState": "MiddleStage",
@@ -294,18 +289,19 @@
                             }
                         ]
                     },
-                    "research" : {
+                    "research": {
                         "countries": [
                             {
                                 "name": "Germany",
-                                "research": "propoganda",
-                                "points" : 100
+                                "research": "propaganda",
+                                "points": 100
                             },
                             {
                                 "name": "America",
                                 "research": "industry",
-                                "points" : 100
-                            }]
+                                "points": 100
+                            }
+                        ]
                     },
                     "unitsToPurchase": [
                         {
@@ -314,7 +310,6 @@
                                 { "type": "MediumLandUnit", "quantity": 3 },
                                 { "type": "MediumAirUnit", "quantity": 3 },
                                 { "type": "MediumSeaUnit", "quantity": 3 }
-                                
                             ]
                         },
                         {
@@ -323,9 +318,6 @@
                                 { "type": "MediumLandUnit", "quantity": 3 },
                                 { "type": "HeavyAirUnit", "quantity": 3 },
                                 { "type": "LightSeaUnit", "quantity": 3 }
-                    
-                                
-                                
                             ]
                         }
                     ],
@@ -490,18 +482,19 @@
                             }
                         ]
                     },
-                    "research" : {
+                    "research": {
                         "countries": [
                             {
                                 "name": "Germany",
                                 "research": "propoganda",
-                                "points" : 300
+                                "points": 300
                             },
                             {
                                 "name": "America",
                                 "research": "industry",
-                                "points" : 300
-                            }]
+                                "points": 300
+                            }
+                        ]
                     },
                     "unitsToPurchase": [
                         {
@@ -509,7 +502,6 @@
                             "units": [
                                 { "type": "HeavyLandUnit", "quantity": 2 },
                                 { "type": "HeavySeaUnit", "quantity": 1 }
-                                
                             ]
                         },
                         {
@@ -517,8 +509,6 @@
                             "units": [
                                 { "type": "HeavyLandUnit", "quantity": 1 },
                                 { "type": "HeavySeaUnit", "quantity": 2 }
-                                
-                                
                             ]
                         }
                     ],
@@ -548,7 +538,7 @@
                             "movements": [
                                 {
                                     "type": "land",
-                                    "index": 4,
+                                    "index": 3,
                                     "destination": "1,0"
                                 },
                                 {
@@ -643,22 +633,21 @@
                             }
                         ]
                     },
-                    "research" : {
+                    "research": {
                         "countries": [
                             {
                                 "name": "Germany",
                                 "research": "industry",
-                                "points" : 500
+                                "points": 500
                             },
                             {
                                 "name": "America",
                                 "research": "industry",
-                                "points" : 500
-                            }]
+                                "points": 500
+                            }
+                        ]
                     },
-                    "unitsToPurchase": [
-                        
-                    ],
+                    "unitsToPurchase": [],
                     "unitsToRelocate": [
                         {
                             "name": "Germany",
@@ -712,13 +701,21 @@
             "duration": 3,
             "theatres": [
                 { "name": "Sicily", "seaZone": true, "resourceCount": 40 },
-                { "name": "Pas de calais", "seaZone": true, "resourceCount": 60 },
+                {
+                    "name": "Pas de calais",
+                    "seaZone": true,
+                    "resourceCount": 60
+                },
                 { "name": "Normandy", "seaZone": true, "resourceCount": 40 },
                 { "name": "Netherlands", "seaZone": true, "resourceCount": 35 },
                 { "name": "Belgium", "seaZone": true, "resourceCount": 25 },
                 { "name": "Ruhr", "seaZone": true, "resourceCount": 70 },
-                { "name": "Paris", "seaZone": true, "resourceCount":70 },
-                { "name": "Alsace-Lorraine", "seaZone": true, "resourceCount": 40 },
+                { "name": "Paris", "seaZone": true, "resourceCount": 70 },
+                {
+                    "name": "Alsace-Lorraine",
+                    "seaZone": true,
+                    "resourceCount": 40
+                },
                 { "name": "Rome", "seaZone": true, "resourceCount": 50 }
             ],
             "countries": [
@@ -726,15 +723,15 @@
                     "name": "Germany",
                     "countryCode": "GER",
                     "units": [
-                        { "HeavyAirUnit": "Luftwaffe A400M" },
-                        { "HeavyLandUnit": "Leopard 2A7" },
-                        { "HeavySeaUnit": "Type 212 Submarine" },
-                        { "LightAirUnit": "CH-53G" },
-                        { "LightLandUnit": "Foot Soldier" },
-                        { "LightSeaUnit": "Baden-Württemberg class" },
-                        { "MediumAirUnit": "Eurofighter Typhoon" },
-                        { "MediumLandUnit": "BMP-3" },
-                        { "MediumSeaUnit": "Braunschweig class" }
+                        { "HeavyAirUnit": "Heinkel He-111 group" },
+                        { "HeavyLandUnit": "Panzer Division [1940]" },
+                        { "HeavySeaUnit": "Scharnorst Class" },
+                        { "LightAirUnit": "Dornier DO-217 group" },
+                        { "LightLandUnit": "Infanterie Division" },
+                        { "LightSeaUnit": "U-VIIC" },
+                        { "MediumAirUnit": "BF-109 group" },
+                        { "MediumLandUnit": "Panzer Division [1938]" },
+                        { "MediumSeaUnit": "Admiral Hipper class" }
                     ],
                     "baseResourceCount": 800
                 },
@@ -742,15 +739,15 @@
                     "name": "United Kingdom",
                     "countryCode": "ENG",
                     "units": [
-                        { "HeavyAirUnit": "C-17" },
-                        { "HeavyLandUnit": "M1 Abrams" },
-                        { "HeavySeaUnit": "USS Nebraska (SSBN-739)" },
-                        { "LightAirUnit": "F-22A Raptors" },
-                        { "LightLandUnit": "Foot Soldier" },
-                        { "LightSeaUnit": "Cruiser" },
-                        { "MediumAirUnit": "A-10" },
-                        { "MediumLandUnit": "HMMWV" },
-                        { "MediumSeaUnit": "Destroyer" }
+                        { "HeavyAirUnit": "Whitley bomber group" },
+                        { "HeavyLandUnit": "Royal Armoured Division" },
+                        { "HeavySeaUnit": "Nelson class" },
+                        { "LightAirUnit": "Hurricane group" },
+                        { "LightLandUnit": "Light Infantry Division" },
+                        { "LightSeaUnit": "Hunt-class" },
+                        { "MediumAirUnit": "SpitFire group" },
+                        { "MediumLandUnit": "Mechanized Division" },
+                        { "MediumSeaUnit": "Belfast class" }
                     ],
                     "baseResourceCount": 600
                 },
@@ -758,15 +755,15 @@
                     "name": "France",
                     "countryCode": "FRA",
                     "units": [
-                        { "HeavyAirUnit": "Luftwaffe A400M" },
-                        { "HeavyLandUnit": "Leopard 2A7" },
-                        { "HeavySeaUnit": "Type 212 Submarine" },
-                        { "LightAirUnit": "CH-53G" },
-                        { "LightLandUnit": "Foot Soldier" },
-                        { "LightSeaUnit": "Baden-Württemberg class" },
-                        { "MediumAirUnit": "Eurofighter Typhoon" },
-                        { "MediumLandUnit": "BMP-3" },
-                        { "MediumSeaUnit": "Braunschweig class" }
+                        { "HeavyAirUnit": "MB 21O Bomber" },
+                        { "HeavyLandUnit": "Général de brigade" },
+                        { "HeavySeaUnit": "Dunkerque-class" },
+                        { "LightAirUnit": "Bloch MB.151 fighter group" },
+                        { "LightLandUnit": "Division d'Infanterie" },
+                        { "LightSeaUnit": "Adroit-class" },
+                        { "MediumAirUnit": "D.520 fighter group" },
+                        { "MediumLandUnit": "Corps d'Armée" },
+                        { "MediumSeaUnit": "Saint-Louis class" }
                     ],
                     "baseResourceCount": 400
                 },
@@ -774,20 +771,20 @@
                     "name": "Italy",
                     "countryCode": "ITA",
                     "units": [
-                        { "HeavyAirUnit": "Luftwaffe A400M" },
-                        { "HeavyLandUnit": "Leopard 2A7" },
-                        { "HeavySeaUnit": "Type 212 Submarine" },
-                        { "LightAirUnit": "CH-53G" },
-                        { "LightLandUnit": "Foot Soldier" },
-                        { "LightSeaUnit": "Baden-Württemberg class" },
-                        { "MediumAirUnit": "Eurofighter Typhoon" },
-                        { "MediumLandUnit": "BMP-3" },
-                        { "MediumSeaUnit": "Braunschweig class" }
+                        { "HeavyAirUnit": "Caproni Ca.311 group" },
+                        { "HeavyLandUnit": "Divisione alpina" },
+                        { "HeavySeaUnit": "Littorio class" },
+                        { "LightAirUnit": "Fiat C.R.42 Falco group" },
+                        { "LightLandUnit": "Reggimento Bersaglieri" },
+                        { "LightSeaUnit": "Soldati class" },
+                        { "MediumAirUnit": "Macchi C.200 group" },
+                        { "MediumLandUnit": "Divisione di fanteria" },
+                        { "MediumSeaUnit": "Trento class" }
                     ],
                     "baseResourceCount": 200
                 }
             ],
-        "alliances": [
+            "alliances": [
                 {
                     "name": "Allies",
                     "countries": ["United Kingdom", "France"]
@@ -796,10 +793,8 @@
                     "name": "Axis",
                     "countries": ["Germany", "Italy"]
                 }
-            
-                
             ],
-            "rounds" : [
+            "rounds": [
                 {
                     "WarState": "EarlyStage",
                     "turnNumber": 1,
@@ -822,29 +817,28 @@
                                 "mobilization": "PartialMobilization"
                             }
                         ]
-                            
                     },
-                    "research" : {
+                    "research": {
                         "countries": [
                             {
                                 "name": "Germany",
                                 "research": "industry",
-                                "points" : 80
+                                "points": 80
                             },
                             {
                                 "name": "Italy",
                                 "research": "industry",
-                                "points" : 10
+                                "points": 10
                             },
                             {
                                 "name": "United Kingdom",
                                 "research": "industry",
-                                "points" : 40
+                                "points": 40
                             },
                             {
                                 "name": "France",
                                 "research": "industry",
-                                "points" : 20
+                                "points": 20
                             }
                         ]
                     },
@@ -875,7 +869,7 @@
                             "name": "France",
                             "units": [
                                 { "type": "MediumLandUnit", "quantity": 1 },
-                                { "type": "MediumAirUnit", "quantity": 1 } 
+                                { "type": "MediumAirUnit", "quantity": 1 }
                             ]
                         }
                     ],
@@ -1007,24 +1001,23 @@
                                 "mobilization": "PartialMobilization"
                             }
                         ]
-                            
                     },
-                    "research" : {
+                    "research": {
                         "countries": [
                             {
                                 "name": "Germany",
                                 "research": "industry",
-                                "points" : 40
+                                "points": 40
                             },
                             {
                                 "name": "United Kingdom",
                                 "research": "industry",
-                                "points" : 50
+                                "points": 50
                             },
                             {
                                 "name": "France",
                                 "research": "industry",
-                                "points" : 20
+                                "points": 20
                             }
                         ]
                     },
@@ -1055,7 +1048,7 @@
                             "units": [
                                 { "type": "HeavyLandUnit", "quantity": 1 },
                                 { "type": "HeavySeaUnit", "quantity": 1 },
-                                { "type": "HeavyAirUnit", "quantity": 1 } 
+                                { "type": "HeavyAirUnit", "quantity": 1 }
                             ]
                         }
                     ],
@@ -1108,7 +1101,6 @@
                                     "index": 0,
                                     "destination": "2,2"
                                 }
-                            
                             ]
                         },
                         {
@@ -1238,29 +1230,28 @@
                                 "mobilization": "PartialMobilization"
                             }
                         ]
-                            
                     },
-                    "research" : {
+                    "research": {
                         "countries": [
                             {
                                 "name": "Germany",
                                 "research": "industry",
-                                "points" : 100
+                                "points": 100
                             },
                             {
                                 "name": "United Kingdom",
                                 "research": "industry",
-                                "points" : 100
+                                "points": 100
                             },
                             {
                                 "name": "France",
                                 "research": "industry",
-                                "points" : 80
+                                "points": 80
                             },
                             {
                                 "name": "Italy",
                                 "research": "industry",
-                                "points" : 80
+                                "points": 80
                             }
                         ]
                     },
@@ -1274,22 +1265,18 @@
                         },
                         {
                             "name": "Italy",
-                            "units": [
-                                { "type": "LightSeaUnit", "quantity": 2 }
-                            ]
+                            "units": [{ "type": "LightSeaUnit", "quantity": 2 }]
                         },
                         {
                             "name": "United Kingdom",
-                            "units": [
-                                { "type": "HeavyAirUnit", "quantity": 2 }
-                            ]
+                            "units": [{ "type": "HeavyAirUnit", "quantity": 2 }]
                         },
                         {
                             "name": "France",
                             "units": [
                                 { "type": "MediumLandUnit", "quantity": 2 },
                                 { "type": "LightLandUnit", "quantity": 1 },
-                                { "type": "HeavyAirUnit", "quantity": 1 } 
+                                { "type": "HeavyAirUnit", "quantity": 1 }
                             ]
                         }
                     ],

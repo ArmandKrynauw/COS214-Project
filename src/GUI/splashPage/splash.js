@@ -89,7 +89,7 @@ $(document).ready(function () {
       console.log(countryImagasArray1);
       console.log(countryImagasArray2);
 
-      // create the html for the battle
+      // create the html for the battles and append to battlesList
       if (countryImagasArray1.length == 2) {
         $("<button></button>", {
           id: index,

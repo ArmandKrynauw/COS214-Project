@@ -47,7 +47,13 @@ void Alliance::chooseStrategy() {
     }
 }
 
-    std::vector<Faction*> Alliance::getMembers(){
+void Alliance::clearCasualties() {
+    for (Faction* faction : members) {
+        faction->clearCasualties();
+    }
+}
+
+std::vector<Faction*> Alliance::getMembers(){
         return members;
     }
 

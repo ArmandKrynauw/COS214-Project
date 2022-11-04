@@ -145,7 +145,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=Project
+CMAKE_PROJECT_NAME:STATIC=UnitTest
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -229,6 +229,12 @@ Project_BINARY_DIR:STATIC=/mnt/d/Documents/University of Pretoria/OneDrive - Uni
 
 //Value Computed by CMake
 Project_SOURCE_DIR:STATIC=/mnt/d/Documents/University of Pretoria/OneDrive - University of Pretoria/BSc Computer Science/Year 2/Second Semester/COS 214/Practicles/Project/COS214-Project/Test
+
+//Value Computed by CMake
+UnitTest_BINARY_DIR:STATIC=/mnt/d/Documents/University of Pretoria/OneDrive - University of Pretoria/BSc Computer Science/Year 2/Second Semester/COS 214/Practicles/Project/COS214-Project/Test
+
+//Value Computed by CMake
+UnitTest_SOURCE_DIR:STATIC=/mnt/d/Documents/University of Pretoria/OneDrive - University of Pretoria/BSc Computer Science/Year 2/Second Semester/COS 214/Practicles/Project/COS214-Project/Test
 
 
 ########################

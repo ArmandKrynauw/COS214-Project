@@ -20,6 +20,7 @@ public:
     static Client* instance();
     void runTerminalMode();
     void runGUIMode();
+    void runTest();
 
     // =================== WAR ENGINE CONTROL FUNCTIONS ===================
     json loadNextDay();

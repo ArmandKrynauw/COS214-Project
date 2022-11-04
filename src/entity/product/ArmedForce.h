@@ -38,6 +38,8 @@ public:
 
     virtual void setTheatre(Theatre *theatre) override;
 
+    virtual void clearCasualties() override;
+
     virtual Entity *clone() override;
 
     virtual nlohmann::json toJSON() const override;

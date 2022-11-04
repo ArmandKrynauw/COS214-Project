@@ -146,6 +146,13 @@ void Country::chooseStrategy() {
     // }
 }
 
+void Country::clearCasualties() {
+    std::unordered_map<std::string, ArmedForce *>::iterator it;
+    for (it = armedForces.begin(); it != armedForces.end(); ++it) {
+        it->second->clearCasualties();
+    }
+}
+
 void Country::printUnits() {
     // int counter = 1;
 
@@ -203,14 +210,6 @@ json Country::getListOfUnits() {
 }
 
 json Country::removeCasualties() {
-    std::unordered_map<std::string, ArmedForce *>::iterator it;
-    for (it = armedForces.begin(); it != armedForces.end(); ++it) {
-        for (Entity* e: it->second->getEntities()) {
-            if (e->getHP() == 0) {
-                it->second->remove(e);
-            }
-        }
-    }
     return json {};
 }
 

@@ -1,7 +1,7 @@
 # Thanks to Job Vranish (https://spin.atomicobject.com/2016/08/26/makefile-c-projects/)
  
 TARGET_EXEC := main
-CXX := g++ -std=c++17
+CXX := g++ -w -std=c++17
 BUILD_DIR := ./build
 SRC_DIRS :=  ./escalation ./mobilization ./utilities ./faction ./engine ./entity ./theatre ./zone-factory ./war-strategy ./client
 

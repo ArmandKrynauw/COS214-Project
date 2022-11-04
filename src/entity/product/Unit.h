@@ -118,6 +118,7 @@ public:
     */
 
     virtual nlohmann::json unitToJSON() const override;
+
     /**
      * Provides functionality to destruct current unit
     */

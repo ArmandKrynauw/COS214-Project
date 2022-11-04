@@ -18,7 +18,7 @@ public:
 
     virtual Entity *clone() = 0;
 
-    ~SeaUnit();
+    virtual ~SeaUnit();
 };
 
 #endif

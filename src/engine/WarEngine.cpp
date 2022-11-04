@@ -403,65 +403,39 @@ json WarEngine::getRoundResults() {
 json WarEngine::clearCasualties() {
     json data = getTheatreUnits();
 
-    for (int i = 0; i != data.size();) {
-        json units = data[i]["units"];
+    for (int i = 0; i < data.size(); i++) {
+        json& country = data[i];
+        
+        for (int j = 0; j < country["theatres"].size(); j++) {
+            json& theatre = country["theatres"][j];
 
-        for (int j = 0; j < units.size(); j++) {
-            // if (units[j]["currentHP"] != 0) {
-            //     units.erase(units.begin() + j);
-            // }
-            // for (int k = 0; k < )
+            for (int k = 0; k < theatre["units"].size(); k++) {
+                json& unit = theatre["units"][k];
 
-            if (units[j]["units"].size() != 0) {
-                units.erase(units.begin() + j);
-            } else {
-                j++;
+                if (unit["currentHP"] != 0) {
+                    theatre["units"].erase(theatre["units"].begin() + k--);
+                }
+            }
+
+            if (theatre["units"].size() == 0) {
+                country["theatres"].erase(country["theatres"].begin() + j--);
             }
         }
 
-        if (data[i]["units"].size() == 0) {
-            data.erase(data.begin() + i);
-        } else {
-            i++;
+        if (country["theatres"].size() == 0) {
+            data.erase(data.begin() + i--);
         }
-
     }
-    // auto it = data.begin(); 
-    // for (; it != data.end();) {
-    //     // json units = data[i]["units"];
 
-    //     // for (int j = 0; j < units.size(); j++) {
-    //     //     if (units[j]["currentHP"] != 0) {
-    //     //         units.erase(units.begin() + j);
-    //     //     }
-    //     // }
+    std::unordered_map<std::string, Country*>::iterator it;
+    for (it = countries.begin(); it != countries.end(); it++) {
+        it->second->clearCasualties();
+    }
 
-    //     std::cout << (*it)["name"] << std::endl;
-    //     std::cout << (*it)["units"].size() << std::endl;
-    //     if ((*it)["units"].size() == 0) {
-    //         it = data.erase(it);
-    //     } else {
-    //         ++it;
-    //     }
-
-    // }
-
-    // for (json& country : data) {
-    //     json units = country["units"];
-
-    //     for (int i = 0; i < units.size(); i++) {
-    //         if (units[i]["currentHP"] != 0) {
-    //             units.erase(units.begin() + i);
-    //         }
-    //     }
-    // }
-
-    // std::unordered_map<std::string, Country *>::iterator it;
-    // for (it = countries.begin(); it != countries.end(); ++it) {
-    //     it->second->removeCasualties();
-    // }
-
-    return data;
+    return json{
+        {"data", data}
+    };
+        
 }
 
 
@@ -524,13 +498,16 @@ void WarEngine::viewStrategies() {
 // JSON UTILITY FUNCTIONS
 // ============================================================================
 
-json WarEngine::getStats(){
-    return json{{"engine", getEngineStats()},
-                {"countries", getCountryStats()},
-                {"alliances", getAllianceStats()},
-                {"theatreUnits", getTheatreUnits()},
-                {"overallUnits", getOverallUnits()},
-                {"theatres" , getTheatreStats()}};
+json WarEngine::getStats() {
+    return json{
+        {"engine", getEngineStats()},
+        {"countries", getCountryStats()},
+        {"alliances", getAllianceStats()},
+        {"theatreUnits", getTheatreUnits()},
+        {"overallUnits", getOverallUnits()},
+        {"theatres", getTheatreStats()},
+        {"casualties", clearCasualties()}
+    };
 }
 
 json WarEngine::getEngineStats() {
@@ -551,7 +528,8 @@ json WarEngine::getEngineStats() {
 }
 
 json WarEngine::getCountryStats() {
-    json array;
+    json array = json::array();
+
     std::unordered_map<std::string, Country *>::iterator it = countries.begin();
     while(it != countries.end()){
         array.push_back(json{{"name", it->first},
@@ -564,8 +542,8 @@ json WarEngine::getCountryStats() {
 }
 
 json WarEngine::getAllianceStats() {
+    json array = json::array();
 
-    json array;
     std::unordered_map<std::string, Alliance *>::iterator it = alliances.begin();
     while(it != alliances.end()){
         array.push_back(json{{"name", it->first},
@@ -577,7 +555,7 @@ json WarEngine::getAllianceStats() {
 }
 
 json WarEngine::getOverallUnits() {
-    json array;
+    json array = json::array();
     std::unordered_map<std::string, Country *>::iterator it = countries.begin();
 
     while(it != countries.end()){
@@ -602,7 +580,7 @@ json WarEngine::getTheatreStats() {
 }
 
 json WarEngine::getTheatreUnits() {
-    json data;
+    json data = json::array();
     std::unordered_map<std::string, std::string> coordinates;
 
     // Derive coordinates for each Theatre
@@ -646,4 +624,9 @@ std::pair<int, int> WarEngine::getLocation(const json &data) {
     ss2 >> destination.first;
     ss3 >> destination.second;
     return destination;
+}
+
+Theatre* WarEngine::getTheatre(){
+    std::cout << theatres[0][0]->getName();
+    return theatres[0][0];
 }

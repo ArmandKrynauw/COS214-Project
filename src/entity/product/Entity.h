@@ -40,6 +40,8 @@ public:
 
     virtual void setTheatre(Theatre *theatre) = 0;
 
+    virtual void clearCasualties();
+
     virtual Entity *clone() = 0;
 
     virtual nlohmann::json toJSON() const = 0;

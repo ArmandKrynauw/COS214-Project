@@ -181,10 +181,6 @@ public:
     */
     json getTheatreUnits();
 
-   
-    
-    json getCasualties();
-
     /**
      * @brief Convert json object to string vector
      *
@@ -265,6 +261,8 @@ public:
     void displayUnits();
 
     void displayUnitMenu();
+    
+    Theatre* getTheatre();
 };
 
 #endif  // WARENGINE_H

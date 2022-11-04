@@ -117,6 +117,8 @@ void Client::runSimulation() {
         if (currentDay != end) {
             std::cout << "Day " << currentDay + 1 << " commencing... " << std::endl;
             //json deaths = result["casualties"];
+            loadNextBattleDay();
+            loadDayResults();
             printDayResults();
             //std::cout << WarEngine::instance()->clearCasualties().dump(1) << std::endl;
             // WarEngine::instance()->clearCasualties();

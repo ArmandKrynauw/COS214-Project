@@ -64,6 +64,7 @@ void WarEngine::reset() {
 
 void WarEngine::loadTheatres(const json& data) {
     theatreSize = pow(data.size(), 0.5);
+    
     theatres = new Theatre **[theatreSize];
 
     for (int i = 0; i < theatreSize; i++) {
@@ -96,6 +97,7 @@ void WarEngine::loadSimulation(const json &data) {
     loadAlliances(data["alliances"]);
     loadTheatres(data["theatres"]);
     warDuration = data["duration"];
+    warStage = new EarlyStage("Initial Stage");
 }
 
 void WarEngine::loadCountries(const json &data) {
@@ -148,18 +150,15 @@ void WarEngine::loadResearch(const json& data) {
 
 // TODO: If time, change to produce JSON
 void WarEngine::loadEscalation(const json &data) {
-    std::string oldStage;
-
+    std::string oldStage = "";
+    Escalation* newWarStage = NULL;
     if (warStage) {
         oldStage = warStage->getState();
-        Escalation* newWarStage = warStage->checkStageOfWar(data);
+        newWarStage = warStage->checkStageOfWar(data);
         delete warStage;
         warStage = newWarStage;
-    } else {
-        warStage = new EarlyStage("EarlyStage");
     }
-
-    if (oldStage != warStage->getState()) {
+    if (warStage && newWarStage && oldStage != newWarStage->getState()) {
         std::cout << "=============== NEW WAR PHASE: " << warStage->getState() << " ===============" << std::endl;
     }
 }
@@ -269,12 +268,18 @@ void WarEngine::relocateUnits(const json &data) {
     int cnt = 0;
     for (json country: data) {
         for (json unit: country["movements"]) {
-            std::pair<int, int> destination = getLocation(unit["destination"]);
-            std::string name = (countries[country["name"]]->inAlliance()) ? 
-                                countries[country["name"]]->getAlliance()->getName() : country["name"].get<std::string>();
+            if(unit["destination"].get<std::string>() != "Flee"){
+                std::pair<int, int> destination = getLocation(unit["destination"]);
+                std::string name = (countries[country["name"]]->inAlliance()) ? 
+                                    countries[country["name"]]->getAlliance()->getName() : country["name"].get<std::string>();
 
-            transportUnit(theatres[destination.first][destination.second], name,
-                          unit["type"].get<std::string>(), unit["index"].get<int>());
+                transportUnit(theatres[destination.first][destination.second], name,
+                            unit["type"].get<std::string>(), unit["index"].get<int>());
+            } else {
+                std::string name = (countries[country["name"]]->inAlliance()) ? countries[country["name"]]->getAlliance()->getName() : country["name"].get<std::string>();
+                Theatre *oldHome = ((Unit *) countries[name]->getEntity(unit["type"].get<std::string>(), unit["index"].get<int>()))->getTheatre();
+                oldHome->removeEntity(name, unit["type"].get<std::string>(), ((Unit *) countries[name]->getEntity(unit["type"].get<std::string>(), unit["index"].get<int>()))->getId());
+            }
             cnt++;
         }
 
@@ -469,6 +474,7 @@ json WarEngine::getAllianceStats() {
 
     std::unordered_map<std::string, Alliance *>::iterator it = alliances.begin();
     while(it != alliances.end()){
+        
         array.push_back(json{{"name", it->first},
                              {"countries", it->second->toJSON()}});
         it++;

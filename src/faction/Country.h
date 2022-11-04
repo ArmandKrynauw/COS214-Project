@@ -145,6 +145,9 @@ public:
      * @return false Return if country is not in alliance
      */
     bool inAlliance();
+
+
+    
 };
 
 #endif  // COUNTRY_H

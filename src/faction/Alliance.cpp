@@ -82,7 +82,7 @@ void Alliance::resetResearch(int index){
 // }
 
 json Alliance::toJSON(){
-    json data;
+    json data = json::array();
     for(Faction * f : members){
         data.push_back(f->getName());
     }

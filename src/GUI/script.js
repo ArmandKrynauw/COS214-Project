@@ -111,6 +111,7 @@ $(`.nextRound`).click(() => {
   click++;
 });
 updateUI = (data) => {
+  // console.log(data.theatres.data);
   /**
    * Clear the theatres
    */
@@ -149,8 +150,15 @@ updateUI = (data) => {
     if (theatreData[0]) {
       theatreData.forEach((theatreData) => {
         // console.log(theatreData);
-        let str = `<div class="TheatreHead">${theatreData.name}</div>`;
-        $(`.area_${theatre.coordinates} > .data`).append(str);
+        if (
+          theatreData.airPower == 0 &&
+          theatreData.landPower == 0 &&
+          theatreData.seaPower == 0
+        ) {
+        } else {
+          let str = `<div class="TheatreHead">${theatreData.name}</div>`;
+          $(`.area_${theatre.coordinates} > .data`).append(str);
+        }
       });
     }
   });
@@ -190,17 +198,23 @@ updateUI = (data) => {
      * @stage2 loop through the theatres and find the correct theatre
      */
     loadIndex.forEach((theatreData) => {
-      const str = `
-      <div class="card niceCards" style="width: 18rem">
-          <img
+      if (
+        theatreData.airPower == 0 &&
+        theatreData.landPower == 0 &&
+        theatreData.seaPower == 0
+      ) {
+      } else {
+        const str = `
+        <div class="card niceCards" style="width: 18rem">
+        <img
             class="card-img-top img1"
             src="./media/images/${theatreData.name.replace(" ", "")}.png"
             alt="Card image cap"
-          />
-          <div class="card-body head">
+            />
+            <div class="card-body head">
             <h5 class="card-title NameTheatre">${theatreData.name}</h5>
-          </div>
-          <div class="card-body">
+            </div>
+            <div class="card-body">
             <p class="SeaPower"><i class="fa-solid fa-ship"></i>  SeaPower: ${
               theatreData.seaPower
             }</p>
@@ -214,18 +228,19 @@ updateUI = (data) => {
               " ",
               ""
             )}"><i class="fa-regular fa-map"></i> None </p>
-            <p class="UnitsShow" onclick="showUnitsModal('${theatreData.name.replace(
-              " ",
-              ""
-            )}')"> <i class="fa-solid fa-truck-plane"></i>  Units  <i class="fa-solid fa-chevron-down"></i></p>
-            <ul class="list-group list-group-flush ${theatreData.name.replace(
-              " ",
-              ""
-            )} hide "></ul>
-            </div>
-        </div>
-      `;
-      $(`.modal-content`).append(str);
+              <p class="UnitsShow" onclick="showUnitsModal('${theatreData.name.replace(
+                " ",
+                ""
+              )}')"> <i class="fa-solid fa-truck-plane"></i>  Units  <i class="fa-solid fa-chevron-down"></i></p>
+                <ul class="list-group list-group-flush ${theatreData.name.replace(
+                  " ",
+                  ""
+                )} hide "></ul>
+                  </div>
+                  </div>
+                  `;
+        $(`.modal-content`).append(str);
+      }
     });
     /**
      * @stage3 this function adds the units to the modal
@@ -271,7 +286,7 @@ updateUI = (data) => {
       NationTheatres.forEach((NationTheatre) => {
         const coords = NationTheatre.coordinates;
         if (coords == id) {
-          console.log(NationTheatre);
+          // console.log(NationTheatre);
           $(`.Strat${NationData.replace(" ", "")}`).html(
             `<i class="fa-regular fa-map"></i> ${NationTheatre.strategy} <br> <i class="fa-solid fa-bullseye"></i>  ${NationTheatre.target}`
           );
@@ -635,7 +650,7 @@ setMobANDRes = (index, side, data) => {
     }
   });
   const mobilization = data.mobilization.data;
-  console.log(mobilization);
+  // console.log(mobilization);
   mobilization.forEach((indvMob) => {
     if (indvMob.name.replace(" ", "") == Nations[index].replace(" ", "")) {
       $(`.Mob${side}`).empty();

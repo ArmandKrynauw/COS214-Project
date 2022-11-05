@@ -122,7 +122,7 @@ public:
 
     virtual void clearCasualties() = 0;
 
-   
+    virtual std::string getMobilization();
 
     virtual ~Faction();
 };

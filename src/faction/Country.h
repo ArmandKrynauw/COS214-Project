@@ -25,6 +25,10 @@ private:
 public:
     Country(std::string name);
 
+    void joinAlliance(Alliance * a);
+
+    void leaveAlliance();
+    
     /**
      * Provides functionality to change the mobilization state of the country
      * @return void
@@ -146,8 +150,11 @@ public:
      */
     bool inAlliance();
 
+    virtual std::string getMobilization() override;
 
-    
+    json researchToJSON();
+
+    virtual ~Country();
 };
 
 #endif  // COUNTRY_H

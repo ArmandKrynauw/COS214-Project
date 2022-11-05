@@ -1,5 +1,6 @@
 #include "Faction.h"
 
+#include "../mobilization/Mobilization.h"
 Faction::Faction(std::string name) {
     this->name = name;
     this->id = uuid::generate();
@@ -46,7 +47,7 @@ int Faction::getBaseResourceCount(){
     return baseResourceCount;
 }
 
-Faction::~Faction(){}
+
 
 int Faction::getMorale(){
     return this->morale;
@@ -56,5 +57,11 @@ void Faction::setMorale(int morale)
 {
     this->morale = morale;
 }
+
+std::string Faction::getMobilization(){
+    return mobilization->getState();
+}
+
+Faction::~Faction(){}
 
 

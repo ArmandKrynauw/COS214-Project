@@ -8,12 +8,14 @@ Alliance::Alliance(std::string name) : Faction(name) {
 
 void Alliance::addCountry(Country *country) {
     members.push_back(country);
+    country->joinAlliance(this);
 }
 
 void Alliance::removeCountry(Country *country) {
     int counter = 0;
     for (Faction *p: members) {
         if (p->getName() == country->getName()) {
+            ((Country*)members[counter])->leaveAlliance();
             members.erase(members.begin() + counter);
             break;
         }
@@ -95,3 +97,5 @@ void Alliance::printResources(){
         std::cout<<"\t"<<f->getName()<<": "<<((Country*)f)->getResourceCount()<<std::endl;
     }
 }
+
+Alliance::~Alliance(){}

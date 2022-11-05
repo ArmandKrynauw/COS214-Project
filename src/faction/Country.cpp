@@ -43,7 +43,7 @@ void Country::setBaseResourceCount(int baseResourceCount) {
 void Country::setResearch(int researchPoints,std::string category){
 
     if(!((resourceCount - researchPoints) > 0)){
-        throw WarException("Insuffcient-Resources");
+        throw WarException("Insufficient-Resources");
     }
 
     this->resourceCount -= researchPoints;
@@ -228,11 +228,42 @@ json Country::allUnitsToJSON(){
     return array;
 }
 
+void Country::joinAlliance(Alliance * a){
+    alliance = a;
+}
+
+void Country::leaveAlliance(){
+    alliance = NULL;
+}
+
+
 bool Country::inAlliance(){
     return (alliance) ? true : false;
 }
 
 
+std::string Country::getMobilization(){
+    return mobilization->getState();
+}
+
+json Country::researchToJSON(){
+    int industry = 0;
+    int propaganda = 0;
+    if(inAlliance()){
+        industry = alliance->getResearch(0);
+        propaganda = alliance->getResearch(1);
+    }
+    else{
+        industry = getResearch(0);
+        propaganda = getResearch(1);
+    }
+    return json{{"name", name},
+                {"industryCurrent", industry},
+                {"propagandaCurrent", propaganda},
+                {"researchGoal", 500}};
+}
+
+Country::~Country(){}
 
 
 

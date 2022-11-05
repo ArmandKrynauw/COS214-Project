@@ -14,16 +14,22 @@ Mobilization *  Mobilization::checkWarState(std::string warState, std::string ne
     if(warState == "Initial Stage"){
         return this;
     }
+
+    if(state == "CivilianEconomy" && newMobilization == "CivilianEconomy"){
+        return this;
+    }
+    
     else if(warState == "EarlyStage"){
             if(newMobilization == "TotalMobilization"){
                 return this;
             }
             if(newMobilization == "PartialMobilization"){
-                return  new PartialMobilization("PartialMobilization");
+                return new PartialMobilization("PartialMobilization");
             }
             else if(newMobilization == "WarEconomy"){
                 return new WarEconomy("WarEconomy");
             }
+            
         
     }
     else if(warState == "MiddleStage"){

@@ -120,12 +120,13 @@ json Client::getAvailableSimulations() {
 void Client::runSimulation() {
     currentDay = 0;
     int end = chosenSimulation["duration"];
+    std::cout<<WarEngine::instance()->getStats().dump(4)<<std::endl;
     for (json roundData: chosenSimulation["days"][currentDay]) {
         if (currentDay != end) {
             std::cout << "Day " << currentDay + 1 << " commencing... " << std::endl;
             //json deaths = result["casualties"];
             loadNextBattleDay();
-            //std::cout<<WarEngine::instance()->getStats().dump(4)<<std::endl;
+            std::cout<<WarEngine::instance()->getStats().dump(4)<<std::endl;
             loadDayResults();
             printDayResults();
             //std::cout << WarEngine::instance()->clearCasualties().dump(1) << std::endl;

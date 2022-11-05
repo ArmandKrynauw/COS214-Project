@@ -85,6 +85,8 @@ public:
      * 
      */
     void printResources();
+
+    virtual ~Alliance();
 };
 
 #endif  // ALLIANCE_H

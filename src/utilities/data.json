@@ -281,5 +281,23 @@
                 ]
             }
         ]
+    },
+    "mobilization" : {
+        "data" : [
+            {
+                "name" : "Germany",
+                "mobilization" : "PartialMobilization"
+            }
+        ]
+    },
+    "research" : {
+        "data" : [
+            {
+                "name" : "Germany",
+                "industryCurrent" : 250,
+                "propagandaCurrent" : 200,
+                "researchGoal" : 500
+            }
+        ]
     }
 }

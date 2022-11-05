@@ -159,6 +159,8 @@ public:
     json getOverallUnits();
     json getTheatreStats();
     json getStrategies();
+    json getMobilization();
+    json getResearch();
     /**
      * Provides functionality to generate a JSON array of the current Unit
      * states for each Country sorted by Theatre.

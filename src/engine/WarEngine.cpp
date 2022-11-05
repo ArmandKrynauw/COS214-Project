@@ -114,7 +114,7 @@ void WarEngine::loadCountries(const json &data) {
         }
 
         country->setBaseResourceCount(c["baseResourceCount"]);
-        country->setMobilization("PartialMobilization");
+        country->setMobilization("CivilianEconomy");
         countries[c["name"]] = country;
     }
 }
@@ -238,6 +238,7 @@ void WarEngine::purchaseUnits(const json &data) {
         }
     }
 }
+
 Entity* WarEngine::generateUnit(const std::string &country, const std::string &type, const std::string &special) {
     // TODO: Add check to make sure country and unit type exists
     std::string unitName = countryUnitNames[country][type];
@@ -288,15 +289,11 @@ void WarEngine::relocateUnits(const json &data) {
         for (json unit: country["movements"]) {
             if(unit["destination"].get<std::string>() != "Flee"){
                 std::pair<int, int> destination = getLocation(unit["destination"]);
-                std::string name = (countries[country["name"]]->inAlliance()) ? 
-                                    countries[country["name"]]->getAlliance()->getName() : country["name"].get<std::string>();
-
-                transportUnit(theatres[destination.first][destination.second], name,
-                            unit["type"].get<std::string>(), unit["index"].get<int>());
+                transportUnit(theatres[destination.first][destination.second], country["name"],unit["type"], unit["index"]);
             } else {
-                std::string name = (countries[country["name"]]->inAlliance()) ? countries[country["name"]]->getAlliance()->getName() : country["name"].get<std::string>();
-                Theatre *oldHome = ((Unit *) countries[name]->getEntity(unit["type"].get<std::string>(), unit["index"].get<int>()))->getTheatre();
-                oldHome->removeEntity(name, unit["type"].get<std::string>(), ((Unit *) countries[name]->getEntity(unit["type"].get<std::string>(), unit["index"].get<int>()))->getId());
+                std::string name = country["name"];
+                Theatre *oldHome = ((Unit *) countries[name]->getEntity(unit["type"], unit["index"]))->getTheatre();
+                oldHome->removeEntity(name, unit["type"], ((Unit *) countries[name]->getEntity(unit["type"], unit["index"]))->getId());
             }
             cnt++;
         }
@@ -448,7 +445,9 @@ json WarEngine::getStats() {
         {"theatreUnits", getTheatreUnits()},
         {"overallUnits", getOverallUnits()},
         {"theatres", getTheatreStats()},
-        {"strategies" , getStrategies()}
+        {"strategies" , getStrategies()},
+        {"mobilization", getMobilization()},
+        {"research", getResearch()}
     };
 }
 
@@ -576,6 +575,38 @@ json WarEngine::getStrategies(){
     }
        
     
+    return json{{"data", data}};
+}
+
+json WarEngine::getMobilization(){
+    json data = json::array();
+    std::unordered_map<std::string,Country*>::iterator it = countries.begin();
+    while(it != countries.end()){
+        std::string m = it->second->getMobilization();
+        if(m == "PartialMobilization"){
+            m = "Partial";
+        } else if(m == "TotalMobilization"){
+            m = "Total";
+        } else if(m == "WarEconomy"){
+            m = "War Economy";
+        } else if(m == "CivilianEconomy"){
+            m = "Civilian Economy";
+        }
+        data.push_back(json{{"name", it->first},
+                            {"mobilization", m}});
+        it++;
+    }
+    return json{{"data",data}};
+}
+
+json WarEngine::getResearch(){
+    json data = json::array();
+    std::unordered_map<std::string,Country *>::iterator it = countries.begin();
+    while(it != countries.end()){
+        data.push_back(it->second->researchToJSON());
+        it++;
+    }
+
     return json{{"data", data}};
 }
 

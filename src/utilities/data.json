@@ -267,5 +267,19 @@
                 ]
             }
         ]
+    },
+    "strategies" : {
+        "data" : [
+            {
+                "country" : "Germany",
+                "theatres" : [
+                    {
+                        "name" : "Sicily",
+                        "coordinates" :"0-0",
+                        "strategy" : "Attack"
+                    }
+                ]
+            }
+        ]
     }
 }

@@ -111,9 +111,6 @@ $(`.nextRound`).click(() => {
   click++;
 });
 updateUI = (data) => {
-  // console.log(preWar);
-  // console.log(data.casualties);
-  // console.log("-------");
   /**
    * Clear the theatres
    */
@@ -213,6 +210,10 @@ updateUI = (data) => {
             <p class="LandPower"><i class="fa-solid fa-person-rifle"></i>  LandPower: ${
               theatreData.landPower
             }</p>
+            <p class="Strat${theatreData.name.replace(
+              " ",
+              ""
+            )}"><i class="fa-regular fa-map"></i> None </p>
             <p class="UnitsShow" onclick="showUnitsModal('${theatreData.name.replace(
               " ",
               ""
@@ -260,6 +261,23 @@ updateUI = (data) => {
         }
       });
     });
+    /**
+     * This will add the stratery to the card of the country
+     */
+    const strats = data.strategies.data;
+    strats.forEach((strat) => {
+      const NationData = strat.country;
+      const NationTheatres = strat.theatres;
+      NationTheatres.forEach((NationTheatre) => {
+        const coords = NationTheatre.coordinates;
+        if (coords == id) {
+          console.log(NationTheatre);
+          $(`.Strat${NationData.replace(" ", "")}`).html(
+            `<i class="fa-regular fa-map"></i> ${NationTheatre.strategy} <br> <i class="fa-solid fa-bullseye"></i>  ${NationTheatre.target}`
+          );
+        }
+      });
+    });
   };
 
   /**
@@ -303,11 +321,13 @@ updateUI = (data) => {
       displayUnits(2, 0, data);
       setResources(2, 0, data);
       displayCasualties(data, 2, 0);
+      setMobANDRes(2, 0, data);
     } else {
       switchflag(0, 0);
       displayUnits(0, 0, data);
       setResources(0, 0, data);
       displayCasualties(data, 0, 0);
+      setMobANDRes(0, 0, data);
     }
 
     if (rightSide) {
@@ -316,22 +336,26 @@ updateUI = (data) => {
       displayUnits(3, 1, data);
       setResources(3, 1, data);
       displayCasualties(data, 3, 1);
+      setMobANDRes(3, 1, data);
     } else {
       switchflag(1, 1);
       displayUnits(1, 1, data);
       setResources(1, 1, data);
       displayCasualties(data, 1, 1);
+      setMobANDRes(1, 1, data);
     }
   } else {
     switchflag(0, 0);
     displayUnits(0, 0, data);
     setResources(0, 0, data);
     displayCasualties(data, 0, 0);
+    setMobANDRes(0, 0, data);
 
     switchflag(1, 1);
     displayUnits(1, 1, data);
     setResources(1, 1, data);
     displayCasualties(data, 1, 1);
+    setMobANDRes(1, 1, data);
   }
 
   /*--------Allies---------*/
@@ -391,6 +415,14 @@ $(`.MapBTN`).click(() => {
   $(`.fightingMap`).toggleClass("hide");
 });
 
+showLeftRes = () => {
+  $(`.listRes0`).toggleClass("hide");
+};
+
+showRightRes = () => {
+  $(`.listRes1`).toggleClass("hide");
+};
+
 /**
  * This click changes  the sides of the battle
  */
@@ -399,15 +431,16 @@ $(`.img0`).click(() => {
   if (team4) {
     if (!leftSide) {
       switchflag(0, 2);
-      // CHANGE THISSSSSSSSSSSSSSSSSSS
       displayUnits(2, 0, data);
       setResources(2, 0, data);
       displayCasualties(data, 2, 0);
+      setMobANDRes(2, 0, data);
     } else {
       switchflag(0, 0);
       displayUnits(0, 0, data);
       setResources(0, 0, data);
       displayCasualties(data, 0, 0);
+      setMobANDRes(0, 0, data);
     }
     leftSide = !leftSide;
   }
@@ -417,15 +450,16 @@ $(`.img1`).click(() => {
   if (team4) {
     if (!rightSide) {
       switchflag(1, 3);
-      // CHANGE THISSSSSSSSSSSSSSSSSSS
       displayUnits(3, 1, data);
       setResources(3, 1, data);
       displayCasualties(data, 3, 1);
+      setMobANDRes(3, 1, data);
     } else {
       switchflag(1, 1);
       displayUnits(1, 1, data);
       setResources(1, 1, data);
       displayCasualties(data, 1, 1);
+      setMobANDRes(1, 1, data);
     }
     rightSide = !rightSide;
   }
@@ -571,3 +605,31 @@ setStrategy = (index, side, data) => {
 $(`#BattleName`).click(() => {
   window.location.href = "./splashPage/splash.html";
 });
+
+/**
+ * Set Mobilization AND Research loops through the countries and check if the index is matching the current country
+ */
+setMobANDRes = (index, side, data) => {
+  const research = data.research.data;
+  research.forEach((indvRes) => {
+    if (indvRes.name.replace(" ", "") == Nations[index].replace(" ", "")) {
+      $(`.listRes${side}`).empty();
+      $(`.listRes${side}`).append(
+        `<li class="list-group-item"><i class="fa-solid fa-coins"></i> Industry: ${indvRes.industryCurrent}</li>`
+      );
+      $(`.listRes${side}`).append(
+        `<li class="list-group-item"><i class="fa-solid fa-volume-high"></i> Propeganda: ${indvRes.propagandaCurrent}</li>`
+      );
+    }
+  });
+  const mobilization = data.mobilization.data;
+  console.log(mobilization);
+  mobilization.forEach((indvMob) => {
+    if (indvMob.name.replace(" ", "") == Nations[index].replace(" ", "")) {
+      $(`.Mob${side}`).empty();
+      $(`.Mob${side}`).html(
+        `<i class="fa-solid fa-person-walking"></i> Mobilization: ${indvMob.mobilization}`
+      );
+    }
+  });
+};

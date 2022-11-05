@@ -52,8 +52,15 @@ public:
     static WarEngine *instance();
 
     // ====================== LOAD SIMULATIONS ======================
+    
     void reset();
-
+    /**
+     * Provides functionality to load theatre objects from a JSON array.
+     * The objects consist of a Theatre name, boolean field to specify if there is water in the theatre area
+     * and a resource count. (e.g. { "name": "Sicily", "seaZone": true, "resourceCount": 10 })
+     * 
+     * @param theatres JSON array containing theatres 
+     */
     void loadTheatres(const json& theatres);
     /**
      * Provides functionality to load the initial war simulation setup from
@@ -62,12 +69,23 @@ public:
      *
      * @param simulation JSON object containing simulation
      */
-    void loadSimulation(const json &data);
+    void loadSimulation(const json &simulation);
 
     /**
      * Provides functionality to load country objects from a JSON array.
      * The objects consist of a Country's name, unit names, and base resource
-     * count.
+     * count.(e.g.  {"name": "Germany", "countryCode": "GER",
+                    "units": [
+                        { "HeavyAirUnit": "Luftwaffe A400M" },
+                        { "HeavyLandUnit": "Leopard 2A7" },
+                        { "HeavySeaUnit": "Type 212 Submarine" },
+                        { "LightAirUnit": "CH-53G" },
+                        { "LightLandUnit": "Foot Soldier" },
+                        { "LightSeaUnit": "Baden-Württemberg class" },
+                        { "MediumAirUnit": "Eurofighter Typhoon" },
+                        { "MediumLandUnit": "BMP-3" },
+                        { "MediumSeaUnit": "Braunschweig class" }
+                    ],"baseResourceCount": 1000})
      *
      * @param data JSON array containing country objects
      */
@@ -76,30 +94,42 @@ public:
     /**
      * Provides functionality to load Alliance objects from a JSON array.
      * The objects consist of an Alliance's name and an array containing all
-     * the names of Countries in the Alliance.h
+     * the names of Countries in the Alliance. 
+     * (e.g. {"name": "Allies","countries": ["America", "France"]})
      *
      * @param simulation JSON array containing Alliance objects
      */
-
     void loadAlliances(const json &data);
     /**
+     * Provides functionality to load Escalation and Mobilization 
+     * for each country for the current war day.
      * 
-     * 
-     * @param data JSON data of current day
+     * @param data JSON Object of current war day
      */
     void loadWarFactors(const json& data);
-
+    /**
+     * Provides functionality to load new mobilization levels per country from a JSON array.
+     * Each object in the array consists of the country name and the new mobilization level.
+     * (e.g. {"name": "Germany", "mobilization": "PartialMobilization"})
+     * 
+     * @param data JSON Object containing a JSON array of countries and their respective new mobilization levels
+     */
     void loadMobilization(const json& data);
     /**
-     * Provide functionality to check and handle research for countries
+     * Provides functionality to add new Research for each country from a JSON array
+     * Each object in the array has a country name, the category they want to research and 
+     * the amount of resources they want to spend.
+     * (e.g. {"name": "Germany","research": "industry","points": 50})
      * 
-     * @param data Research object which contains countries that want to research
+     * @param data JSON object containing a countries JSON array
      */
     void loadResearch(const json& data);
     /**
-     * Provide functionality to check and handle escaltion of war
-     * 
-     * @param data JSON 'research' data to be loaded and applied to the War Engine
+     * Provides functionality to load a new Escalation stage for the current war day using the warState property.
+     * The stages may be "EarlyStage", "MiddleStage" or "LateStage".
+     * (e.g. "WarState": "EarlyStage")
+     *
+     * @param data JSON property 
      */
     void loadEscalation(const json& data);
 
@@ -113,53 +143,122 @@ public:
      * Provides functionality for Countries to purchase units. This method
      * expects a JSON array of objects. Each object requires the name of the
      * Country and an array of units to purchase.
+     * (e.g. {"name": "Germany","units": []})
      *
      * @param data JSON array containing units to purchase for each Country
      * @throws WarException if request was malformed
      * @throws WarException if Country does not have sufficient resources
      */
     void purchaseUnits(const json &data);
-
     /**
-     * @brief Provides functionality for Countries to relocate troops to different
-     * theatres.
-     * 
+     * Provides functionality to move units per country to different theatres from a JSON array.
+     * Each object in the array has a country name and a JSON array of movements. Each movement
+     * consists of the type of troop, the coordinates of a theatre in "row,column" format and the
+     * index of the unit in the countries vector.
+     * (e.g. {"name": "Germany"," movements": [{"type": "land", "index": 0,"destination": "1,0"}]})
+     *
      * @param data JSON array containing units to move and their destinations
      * @throws WarException if request was malformed
      */
     void relocateUnits(const json &data);
-
     /**
-     * Provides functionality to generate Units for specific Countries.
+     * Provides functionality to transport a unit out of a theatre and into a new theatre or from the home 
+     * country to a theatre.
+     * 
+     * @param destination The final destination of the unit
+     * @param country The country that created the unit
+     * @param type The type of unit: (e.g. land, sea or air)
+     * @param id  The index of the unit in country vector
+     */
+    void transportUnit(Theatre *destination, const std::string &country, const std::string &type, const int &index);
+    /**
+     * Provides functionality to generate Entities for specific Countries.
      *
      * @param country Name of Country
      * @param type Type of Unit to create (e.g. HeavyLandUnit)
-     *
+     * @param special A field that is filled if a unit has the "special" property 
+     * where then the entity is decorated as Engineers or FieldHospital
+     *  (e.g. { "type": "HeavyLandUnit", "quantity": 1 })
+     *  (e.g. { "type": "MediumLandUnit", "quantity": 2 , "special" : "engineers"})
+     * 
      * @throws WarException if Country or Type is not found
      */
     Entity *generateUnit(const std::string &country, const std::string &type, const std::string &special);
 
     /**
-     * This method will be called each round before the simulation proceeds to
-     * the purchase Unit phase.
+     * Provides functionality generateResources for each country. Each theatre has resources and
+     * depending on a countries control in said theatres, a percentage of resources is given to that country. 
+     * For each theatre this is added to the countries resources. For alliances all countries extra resources
+     * are shared equally among all countries in the alliance. This function is called before each new War Day takes place.
     */
     void generateCountryResources();
+
+    /**
+     * Provides functionality to assign strategies to theatres from a JSON array.
+     * Each object in the array has a country name and a strategies JSON array. Each object
+     * in the strategies array has a Strategy (e.g. Attack) and a theatre represent as coordinates 
+     * (e.g. 0,0 for Sicily) and a target country the strategy is applied to (e.g. Germany).
+     * (e.g. {"name": "United Kingdom", "strategies": [{"strategy": "Attack", "theatre": "0,0", "target": "Germany"}]})
+     * 
+     * @param data JSON array of countries and their strategies
+     */
+    void assignStrategies(const json &data);
 
 
 
     // ====================== JSON UTILITIES ======================
     /**
-     * This method calls all the stats getters to generate on big stats object
+     * General function to return current state of Engine in JSON
+     * @return json All statistics in JSON
     */
-    //Complete
     json getStats();
+    /**
+     * Get the Engine statistics 
+     * 
+     * @return json Statistics in JSON
+     */
     json getEngineStats();
+    /**
+     * Get the Country statistics 
+     * 
+     * @return json Statistics in JSON
+     */
     json getCountryStats();
+    /**
+     * Get the Alliance statistics 
+     * 
+     * @return json Statistics in JSON
+     */
     json getAllianceStats();
+    /**
+     * Get all unit statistics 
+     * 
+     * @return json Statistics in JSON
+     */
     json getOverallUnits();
+    /**
+     * Get the Theatre statistics 
+     * 
+     * @return json Statistics in JSON
+     */
     json getTheatreStats();
+    /**
+     * Get the Strategies statistics 
+     * 
+     * @return json Statistics in JSON
+     */
     json getStrategies();
+    /**
+     * Get the Mobilization statistics 
+     * 
+     * @return json Statistics in JSON
+     */
     json getMobilization();
+    /**
+     * Get the Research statistics 
+     * 
+     * @return json Statistics in JSON
+     */
     json getResearch();
     /**
      * Provides functionality to generate a JSON array of the current Unit
@@ -170,31 +269,19 @@ public:
     json getTheatreUnits();
 
     /**
-     * @brief Convert JSON object to pair of int
+     * Provides functionality to convert coordinates of a theatre
+     * to an int pair.(e.g. 0,0 converted to std::pair<int,int>(0,0))
      * 
-     * @param data location of unit in json format
-     * @return std::pair<int,int> 
+     * @param data Location of theatre in JSON
+     * @return std::pair<int,int> Location in std::pair<row,column> format
      */
     std::pair<int, int> getLocation(const json &data);
 
-    /**
-     * @brief Transport a unit between to theatres or home base and a theatre
-     * 
-     * @param destination The final destination of the unit
-     * @param country The country the unit fights for
-     * @param type The type of unit being land, sea or air
-     * @param id  The index of the unit in the list to move
-     */
-    void transportUnit(Theatre *destination, const std::string &country, const std::string &type, const int &index);
-
-    void assignStrategies(const json &data);
-    
 
     // ====================== MAIN WAR FUNCTIONS ======================
 
     /**
-     * @brief Commence all battles in active theatres
-     *
+     * Provides functionality to initiate a battle in all theatres
      */
     void commenceBattle();
 
@@ -202,6 +289,10 @@ public:
 
     // ====================== UTILITY FUNCTIONS ======================
 
+    /**
+     * Helper function to view strategies for a theatre per country
+     * 
+     */
     void viewStrategies();
 
     // ====================== TESTING FUNCTIONS ======================

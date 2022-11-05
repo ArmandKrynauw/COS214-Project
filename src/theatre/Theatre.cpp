@@ -195,7 +195,6 @@ void Theatre::printStrategies() {
     //std::cout<<std::endl;
 }
 
-
 int Theatre::getResource(std::string Faction) {
     return (checkForFaction(Faction)) ?  this->resource * calculateControl(Faction) : 0;   
 }

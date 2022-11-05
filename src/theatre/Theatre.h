@@ -162,17 +162,12 @@ public:
     void printStrategies();
 
     /*
-     * Provides functionality to return a json object containing data of the theatre
-     * @param row : Y coordinate to be displayed
-     * @param col : x coordinate to be displayed
-     * @return json : json object of the following format:
-     * {
-     *   {"name", getName()},
-         {"coordinates", coordinates},
-         {"data", data}
-         }
-     */
-
+    * Provides functionality to return a json object containing data of the theatre
+    * @param row : Y coordinate to be displayed
+    * @param col : x coordinate to be displayed
+    * @return json : json object of the following format:
+    * 
+    */
     json toJSON(int row, int col);
 
     std::string getStrategy(std::string factionName);

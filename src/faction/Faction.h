@@ -11,9 +11,7 @@
 using json = nlohmann::json;
 
 class Alliance;
-
 class Theatre;
-
 class Mobilization;
 
 class Faction {
@@ -31,18 +29,13 @@ protected:
 public:
     Faction(std::string name);
 
-    std::string getName();
-
-
+    std::string getName() const;
 
     std::string getId() const;
 
     bool equals(Faction *faction) const;
 
     void setName(std::string name);
-
-
-    
     /**
      * Set the Morale object
      * 
@@ -97,28 +90,12 @@ public:
      * @return int Return morale value
      */
     int getMorale();
-    
-
-    /**
-     * This method is used to sum all the attack power of a faction for a
-     * specific theatre.
-     *
-     * @param theatre Theatre to sum attack power for
-     * @return Sum of attack power
-     */
-    // virtual int getAttackPower(Theatre *theatre) = 0;
-
 
     /**
      * This method is used to determine wether a Faction is a Country or an
      * Alliance
      */
     virtual Alliance *getAlliance() = 0;
-
-    // Turn
-    virtual void makeDecision() = 0;
-
-    virtual void chooseStrategy() = 0;
 
     virtual void clearCasualties() = 0;
 

@@ -2,7 +2,12 @@
 #include "WarEconomy.h"
 #include "TotalMobilization.h"
 #include "PartialMobilization.h"
+
 Mobilization::Mobilization(std::string state){
+    this->state = state;
+}
+
+void Mobilization::setState(std::string state){
     this->state = state;
 }
 
@@ -10,7 +15,7 @@ Mobilization::~Mobilization() {
 
 }
 
-Mobilization *  Mobilization::checkWarState(std::string warState, std::string newMobilization){
+Mobilization*  Mobilization::checkWarState(std::string warState, std::string newMobilization) {
     if(warState == "Initial Stage"){
         return this;
     }
@@ -29,8 +34,6 @@ Mobilization *  Mobilization::checkWarState(std::string warState, std::string ne
             else if(newMobilization == "WarEconomy"){
                 return new WarEconomy("WarEconomy");
             }
-            
-        
     }
     else if(warState == "MiddleStage"){
         if(newMobilization == "PartialMobilization"){
@@ -55,17 +58,11 @@ Mobilization *  Mobilization::checkWarState(std::string warState, std::string ne
             }
             else if(this->state == "TotalMobilization" && newMobilization == "TotalMobilization"){
                 return this;
-            }
-
-            
+            } 
     }
     else{
         throw WarException("mobilization-not-found");
     }
-    return new PartialMobilization("PartialMobilization");
-    
-}
 
-void Mobilization::setState(std::string state){
-    this->state = state;
+    return new PartialMobilization("PartialMobilization");
 }

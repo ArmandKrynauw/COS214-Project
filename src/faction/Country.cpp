@@ -5,8 +5,6 @@
 #include "../theatre/Theatre.h"
 #include "../faction/Alliance.h"
 
-using json = nlohmann::json;
-
 Country::Country(std::string name) : Faction(name) {
     armedForces["land"] = new ArmedForce("Army", "land");
     armedForces["sea"] = new ArmedForce("Navy", "sea");
@@ -17,12 +15,11 @@ Country::Country(std::string name) : Faction(name) {
     resourceCount = 0;
 }
 
-void Country::setMobilization(std::string mobilization)
-{
+void Country::setMobilization(std::string mobilization) {
     this->mobilization->setState(mobilization);
 }
 
-void Country::checkMobilization(std::string warState, std::string newMobilization){
+void Country::checkMobilization(std::string warState, std::string newMobilization) {
     this->mobilization = this->mobilization->checkWarState(warState,newMobilization);
 }
 
@@ -40,7 +37,7 @@ void Country::setBaseResourceCount(int baseResourceCount) {
     this->baseResourceCount = baseResourceCount;
 }
 
-void Country::setResearch(int researchPoints,std::string category){
+void Country::setResearch(int researchPoints,std::string category) {
 
     if(!((resourceCount - researchPoints) > 0)){
         throw WarException("Insufficient-Resources");
@@ -86,23 +83,15 @@ void Country::setResearch(int researchPoints,std::string category){
     
 }
 
-
-int Country::getResearch(int i){
+int Country::getResearch(int i) {
     return research[i];
 }
 
-void Country::resetResearch(int index){
+void Country::resetResearch(int index) {
     research[index] -= 500;
 }
 
-
-// int Country::getAttackPower(Theatre *theatre) {
-//     // Search through theatres that country is battling
-//     // Sum attack power of army in that specific theatre
-//     return 10;
-// }
-
-Alliance *Country::getAlliance() {
+Alliance * Country::getAlliance() {
     return alliance;
 }
 
@@ -128,24 +117,6 @@ Entity *Country::getEntity(const std::string &type, const int &index) {
     return armedForces[type]->getEntity(index);
 }
 
-// Buy Troops and Place where necessary
-void Country::makeDecision() {}
-
-// TUI prompts user to choose strategy for each theatre
-void Country::chooseStrategy() {
-    std::cout << this->getName() << " choosing strategies" << std::endl;
-
-    // Need to Notify TUI that we need user input
-    // Receive input and assign strategy for each theatre - input validation TUI
-    // side? Thinking of using a mediator
-
-    // for(Theatre * t : theatres)
-    // {
-    //     std::string input = someNotifyFunction();
-    //     t->setStrategy(input);
-    // }
-}
-
 void Country::clearCasualties() {
     std::unordered_map<std::string, ArmedForce *>::iterator it;
     for (it = armedForces.begin(); it != armedForces.end(); ++it) {
@@ -153,17 +124,7 @@ void Country::clearCasualties() {
     }
 }
 
-void Country::printUnits() {
-    // int counter = 1;
-
-    // for(Unit * u : units){
-    //     std::cout<<counter<<". "<<u->getName()<<std::endl;
-    //     counter++;
-    // }
-    // std::cout<<std::endl;
-}
-
-int Country::getEntityCount(){
+int Country::getEntityCount() {
     int count = 0;
     std::unordered_map<std::string, ArmedForce *>::iterator it;
     for (it = armedForces.begin(); it != armedForces.end(); ++it) {
@@ -172,9 +133,10 @@ int Country::getEntityCount(){
     return count;
 }
 
-bool Country::checkForArmedForces(){
+bool Country::checkForArmedForces() {
     return (armedForces["land"]->getUnitCount() == 0 && armedForces["air"]->getUnitCount() == 0 && armedForces["sea"]->getUnitCount() == 0) ? false : true;
 }
+
 // ==================JSON HELPER FUNCTIONS===========
 
 json Country::getListOfUnits() {
@@ -209,11 +171,7 @@ json Country::getListOfUnits() {
     return data;
 }
 
-json Country::removeCasualties() {
-    return json {};
-}
-
-json Country::allUnitsToJSON(){
+json Country::allUnitsToJSON() {
     if(!checkForArmedForces()){
         return json::array();   
     }
@@ -228,25 +186,23 @@ json Country::allUnitsToJSON(){
     return array;
 }
 
-void Country::joinAlliance(Alliance * a){
+void Country::joinAlliance(Alliance * a) {
     alliance = a;
 }
 
-void Country::leaveAlliance(){
+void Country::leaveAlliance() {
     alliance = NULL;
 }
 
-
-bool Country::inAlliance(){
+bool Country::inAlliance() {
     return (alliance) ? true : false;
 }
 
-
-std::string Country::getMobilization(){
+std::string Country::getMobilization() {
     return mobilization->getState();
 }
 
-json Country::researchToJSON(){
+json Country::researchToJSON() {
     int industry = 0;
     int propaganda = 0;
     if(inAlliance()){
@@ -263,7 +219,5 @@ json Country::researchToJSON(){
                 {"researchGoal", 500}};
 }
 
-Country::~Country(){}
-
-
+Country::~Country() {}
 

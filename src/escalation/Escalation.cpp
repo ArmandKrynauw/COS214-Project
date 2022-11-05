@@ -8,7 +8,7 @@ Escalation::Escalation(std::string stage) {
 }
 
 Escalation * Escalation::checkStageOfWar(std::string stage) {
-    if(stage=="Initial Stage"){
+    if(stage == "Initial Stage"){
         return new EarlyStage(stage);
     } 
     
@@ -22,6 +22,4 @@ Escalation * Escalation::checkStageOfWar(std::string stage) {
     }
 }
 
-Escalation::~Escalation() {
-
-}
+Escalation::~Escalation() { }

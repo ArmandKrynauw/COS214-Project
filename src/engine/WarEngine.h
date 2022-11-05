@@ -107,9 +107,9 @@ class WarEngine {
      * is water in the theatre area and a resource count. (e.g. { "name":
      * "Sicily", "seaZone": true, "resourceCount": 10 })
      *
-     * @param theatres JSON array containing theatres
+     * @param data JSON array containing theatres
      */
-    void loadTheatres(const json& theatres);
+    void loadTheatres(const json& data);
 
     /**
      * Provides functionality to load the initial war simulation setup from
@@ -118,7 +118,7 @@ class WarEngine {
      *
      * @param simulation JSON object containing simulation
      */
-    void loadSimulation(const json& simulation);
+    void loadSimulation(const json& data);
 
     /**
      * Provides functionality to load country objects from a JSON array.

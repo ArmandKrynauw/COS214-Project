@@ -6,8 +6,4 @@ std::string LateStage::getState() {
     return state;
 }
 
-
 LateStage::~LateStage() {}
-
-
-

@@ -166,10 +166,9 @@ public:
 
     bool checkForFaction(std::string factionName);
 
-    /*
+    /**
      * Provides functionality to display the strategies that each faction currently executes
      */
-
     void printStrategies();
 
     /**
@@ -181,6 +180,7 @@ public:
     * 
     */
     json toJSON(int row, int col);
+
     /**
      * Provides functionality to return the strategy for a given faction in string format.
      * (e.g. If AttackStrategy object then return "Attack Strategy")
@@ -189,6 +189,7 @@ public:
      * @return std::string Return string format of strategy
      */
     std::string getStrategy(std::string factionName);
+
     /**
      * Provides functionality to check if a faction has given a strategy for the theatre.
      * 
@@ -197,6 +198,7 @@ public:
      * @return false Return if faction does not have a strategy
      */
     bool checkForStrategy(std::string name);
+    
     /**
      * Provides functionality to provide the target for the strategy in the theatre
      * for the passed in faction.

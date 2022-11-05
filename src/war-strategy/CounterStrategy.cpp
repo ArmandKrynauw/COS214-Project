@@ -6,14 +6,11 @@ CounterStrategy::CounterStrategy(std::string target) : WarStrategy(target) {
     this->type = "Counter";
 }
 
-float CounterStrategy::executeStrategy(WarStrategy *strat) {
-    AttackStrategy *test = dynamic_cast<AttackStrategy *> (strat);
-    if (test != nullptr && strat->getPlanned()) {
+float CounterStrategy::executeStrategy(WarStrategy* strat) {
+    if (strat && strat->getType() == "Attack" && strat->getPlanned()){
         return 2.8;
-    } else {
-        return 0.7;
     }
+    return 0.7;
 }
 
-CounterStrategy::~CounterStrategy() {
-}
+CounterStrategy::~CounterStrategy() { }

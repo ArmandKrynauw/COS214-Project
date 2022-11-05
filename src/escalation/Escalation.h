@@ -22,13 +22,10 @@ public:
     */
 
     Escalation *checkStageOfWar(std::string stage);
-
     /**
      * Specifies what state the current state is
      * @return string : The current state
     */
-
-
     virtual std::string getState() = 0;
 
     virtual ~Escalation();

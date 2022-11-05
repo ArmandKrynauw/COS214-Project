@@ -296,7 +296,6 @@ void WarEngine::loadResearch(const json& data) {
 
 void WarEngine::generateCountryResources() {
     if(alliances.size() == 0) {
-        std::cout << "Country Resources: " << std::endl;
         std::unordered_map<std::string, Country*>::iterator it =
             countries.begin();
         while(it != countries.end()) {
@@ -308,15 +307,12 @@ void WarEngine::generateCountryResources() {
                 }
             }
             countries[it->first]->generateResources(sum);
-            std::cout << it->first << ": "
-                      << countries[it->first]->getResourceCount() << std::endl;
             it++;
         }
     } else {
         std::unordered_map<std::string, Alliance*>::iterator allianceIt =
             alliances.begin();
         while(allianceIt != alliances.end()) {
-            // std::cout<<"Name: "<<a["name"]<<": "<<std::endl;
             int sum = 0;
 
             for(int i = 0; i < theatreSize; i++) {
@@ -326,13 +322,10 @@ void WarEngine::generateCountryResources() {
                     while(countryIt != countries.end()) {
                         sum += theatres[i][j]->getResource(countryIt->first);
                         countryIt++;
-                        // std::cout<<theatres[i][j]->getName()<<"
-                        // "<<sum<<std::endl;
                     }
                 }
             }
             alliances[allianceIt->first]->generateResources(sum);
-            alliances[allianceIt->first]->printResources();
             allianceIt++;
         }
     }

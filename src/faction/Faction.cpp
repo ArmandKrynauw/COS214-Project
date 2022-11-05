@@ -1,6 +1,6 @@
 #include "Faction.h"
-
 #include "../mobilization/Mobilization.h"
+
 Faction::Faction(std::string name) {
     this->name = name;
     this->id = uuid::generate();
@@ -11,7 +11,7 @@ Faction::Faction(std::string name) {
     }
 }
 
-std::string Faction::getName() {
+std::string Faction::getName() const{
     return name;
 }
 
@@ -27,8 +27,7 @@ void Faction::setName(std::string name) {
     this->name = name;
 }
 
- void Faction::setResearch(int researchPoints,std::string category)
- {
+void Faction::setResearch(int researchPoints,std::string category) {
     if(category == "industry"){
         research[0] += researchPoints;
     }
@@ -47,21 +46,16 @@ int Faction::getBaseResourceCount(){
     return baseResourceCount;
 }
 
-
-
-int Faction::getMorale(){
+int Faction::getMorale() {
     return this->morale;
 }
 
-void Faction::setMorale(int morale)
-{
+void Faction::setMorale(int morale) {
     this->morale = morale;
 }
 
-std::string Faction::getMobilization(){
+std::string Faction::getMobilization() {
     return mobilization->getState();
 }
 
-Faction::~Faction(){}
-
-
+Faction::~Faction() {}

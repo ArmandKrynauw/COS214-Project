@@ -19,27 +19,23 @@ class Country : public Faction {
 private:
     std::unordered_map<std::string, ArmedForce *> armedForces;
     Mobilization* mobilization;
-    
-
 
 public:
     Country(std::string name);
 
-    void joinAlliance(Alliance * a);
+    void joinAlliance(Alliance* a);
 
     void leaveAlliance();
     
     /**
      * Provides functionality to change the mobilization state of the country
-     * @return void
      */
+    void setMobilization(std::string mobilization);
 
-    void  setMobilization(std::string mobilization);
     /**
      * Provides functionality to check whether country is allowed to change mobilization state
      * Will change mobilization state if allowed
      */
-
     void checkMobilization(std::string warState, std::string newMobilization);
 
     /**
@@ -48,23 +44,27 @@ public:
      * current mobilization and morale of a Faction.
      */
     virtual void generateResources(int theatreResource) override;
+
     /**
      * Provides functionality to get the resource count of country
+     * 
      * @return int : The resource Count of the country
-     **/
+     */
     int getResourceCount();
 
     void setBaseResourceCount(int baseResourceCount);
+
     /**
      * Provides functionality to invest research points into research for the country
+     * 
      * @param researchPoints The amount of points to invest into research
      * @param category The category to invest the research points in
      */
-
     virtual void setResearch(int researchPoints,std::string category);
 
     /**
      * Provides functionality to get research points of a category
+     * 
      * @param i The index of the research category
      * @return Research points of current category
      */
@@ -73,12 +73,11 @@ public:
 
      /**
      * Provides functionality to reduce the research points with 1000
+     * 
      * @param index The index of the category for which to reduce the
      * research points
      */
-
     virtual void resetResearch(int index) override;
-    // virtual int getAttackPower(Theatre *theatre) override;
 
     /**
      * Provides functionality determine whether a Faction is an Alliance
@@ -115,20 +114,12 @@ public:
      * on specific Entities in order to transport them between theatres.
      *
      * @param
-     *
      */
-    Entity *getEntity(const std::string &type, const int &index);
+    Entity* getEntity(const std::string &type, const int &index);
 
-    virtual void makeDecision() override;
-
-    virtual void chooseStrategy() override;
     virtual void clearCasualties() override;
 
-    void printUnits();
-
     json getListOfUnits();
-
-    json removeCasualties();
 
     int getEntityCount();
 

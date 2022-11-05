@@ -9,14 +9,13 @@ class TotalMobilization;
 
 class Mobilization {
     protected:
-
     std::string state;
 
     public:
-
         Mobilization(std::string state);
 
         Mobilization * checkWarState(std::string warState, std::string newMobilization);
+
         /**
         * Provides the industryModifier of this state as a percentage
         * @return float : The industryModifier for this state.
@@ -39,7 +38,6 @@ class Mobilization {
         * Provides functionality to set the state of the current object
         * @param state The state of the object
         */
-
         void setState(std::string state);
 
         virtual ~Mobilization();

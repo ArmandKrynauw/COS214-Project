@@ -1,9 +1,6 @@
 #include "PartialMobilization.h"
 
-PartialMobilization::PartialMobilization(std::string state) : Mobilization(state){
-
-}
-
+PartialMobilization::PartialMobilization(std::string state) : Mobilization(state){ }
 
 std::string PartialMobilization::getState() {
     return state;

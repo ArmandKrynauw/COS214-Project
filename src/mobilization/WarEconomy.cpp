@@ -1,8 +1,6 @@
 #include "WarEconomy.h"
 
-WarEconomy::WarEconomy(std::string state) : Mobilization(state){
-
-}
+WarEconomy::WarEconomy(std::string state) : Mobilization(state) { }
 
 std::string WarEconomy::getState() {
     return state;
@@ -16,7 +14,4 @@ int WarEconomy::getNationalMoraleTick() {
     return -2;
 }
 
-
-WarEconomy::~WarEconomy() {
-
-}
+WarEconomy::~WarEconomy() { }

@@ -229,7 +229,7 @@ float Theatre::calculateControl(std::string Faction) {
     return final / limit;
 }
 
-float Theatre::checkOpposition(std::string faction){
+float Theatre::checkOpposition(std::string faction) {
     if(!zones.count(faction)){
        throw WarException("faction-not-found");
     }

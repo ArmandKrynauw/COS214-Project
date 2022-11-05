@@ -201,6 +201,7 @@ public:
      * (e.g. {"name": "United Kingdom", "strategies": [{"strategy": "Attack", "theatre": "0,0", "target": "Germany"}]})
      * 
      * @param data JSON array of countries and their strategies
+     * @throws WarException if the strategy is not found
      */
     void assignStrategies(const json &data);
 

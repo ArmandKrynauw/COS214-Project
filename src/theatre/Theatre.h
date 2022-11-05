@@ -53,9 +53,10 @@ private:
 
 
     /**
-     * Provides functionality to get the percentage control of a faction in this threatre
+     * Provides functionality to get the percentage control of a faction in this theatre
+     * 
      * @param faction Name of the faction whose percentage control needs to be returned
-     * @return The percentage as a float : i.e 0.45
+     * @return The percentage as a float (e.g. 0.45)
      * 
      */
 
@@ -63,9 +64,9 @@ private:
 
     /**
      * Provides functionality to get the percentage control that all other factions have in this theatre
-     * @param faction Name of the faction whose opposition we want to check
-     * @return The percentage as a float : i.e 0.45
      * 
+     * @param faction Name of the faction whose opposition we want to check
+     * @return The percentage as a float (e.g. 0.45)
      */
 
     float checkOpposition(std::string faction);
@@ -73,7 +74,13 @@ private:
 
 public:
 
-
+    /**
+     * Provides functionality to create a Theatre object.
+     * 
+     * @param name Name of theatre (e.g. Sicily)
+     * @param seaZone If the theatre has ocean access (e.g. true)
+     * @param resource Resources that a theatre provides to countries (e.g. 40)
+     */
     Theatre(std::string name, bool seaZone, int resource);
 
     /**
@@ -100,23 +107,25 @@ public:
     */
     Entity *removeEntity(std::string faction, std::string type, std::string id);
 
-    /*
+    /**
      * Provides functionality to get the name of the theatre
-     * @return string : the name of the Theatre
+     * 
+     * @return string Name of the Theatre
      */
 
     std::string getName();
 
-    /*
-     * Provides functionality to get the id of the theatre
-     * @return string : the id of the theatre
+    /**
+     * Provides functionality to get the unique uuid of the theatre
+     * 
+     * @return string Id of theatre
      */
 
     std::string getId() const;
 
     /**
      * Provides functionality to change the War Strategy for a specific Faction
-     * for the next round of the war.
+     * for the next day of the war.
      * 
      * @param faction Name of the faction whose Strategy has to be changed
      * @param strategy The new Strategy
@@ -132,10 +141,10 @@ public:
     void battle();
 
     /**
-     * Provides functionality to get the amount of resources a faction earns of the resource pool of a threatre
-     * @param faction Name of the faction whose resources portion needs to be returned
-     * @return The resources portion of the specified faction for this threatre 
+     * Provides functionality to get percentage of resources a faction will receive. 
      * 
+     * @param faction Name of the faction whose resources portion needs to be returned
+     * @return Portion of resource given to the faction 
      */
 
     int getResource(std::string faction);
@@ -147,10 +156,12 @@ public:
      */
     void printTheatre();
 
-    /*
-     * Provides functionality to check whether a faction is in the theatre
+    /**
+     * Provides functionality to check whether a faction is in the theatre.
+     * 
      * @param factionName The name of the faction to check as a string
-     * @return bool : returns true if faction is in theatre,else false
+     * @return true Return if faction is in theatre
+     * @return false Return if faction is not in theatre
      */
 
     bool checkForFaction(std::string factionName);
@@ -161,19 +172,37 @@ public:
 
     void printStrategies();
 
-    /*
+    /**
     * Provides functionality to return a json object containing data of the theatre
-    * @param row : Y coordinate to be displayed
-    * @param col : x coordinate to be displayed
-    * @return json : json object of the following format:
+    * 
+    * @param row Row index of theatre in array
+    * @param col Column index of theatre in array
+    * @return json JSON Object
     * 
     */
     json toJSON(int row, int col);
-
+    /**
+     * Provides functionality to return the strategy for a given faction in string format.
+     * (e.g. If AttackStrategy object then return "Attack Strategy")
+     * 
+     * @param factionName Name of faction to get strategy
+     * @return std::string Return string format of strategy
+     */
     std::string getStrategy(std::string factionName);
-
+    /**
+     * Provides functionality to check if a faction has given a strategy for the theatre.
+     * 
+     * @param name Check if faction with this name has a strategy
+     * @return true Return if faction has a strategy
+     * @return false Return if faction does not have a strategy
+     */
     bool checkForStrategy(std::string name);
-
+    /**
+     * Provides functionality to provide the target for the strategy in the theatre
+     * for the passed in faction.
+     * 
+     * @param factionName Name of a faction
+    */
     std::string getTarget(std::string factionName);
 
     virtual ~Theatre();

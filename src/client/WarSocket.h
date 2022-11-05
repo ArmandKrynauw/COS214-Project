@@ -1,7 +1,7 @@
 #ifndef WARSOCKET_H
 #define WARSOCKET_H
 
-#include "mongoose.h"
+#include "../utilities/mongoose.h"
 #include "../engine/WarEngine.h"
 #include "../utilities/json.hpp"
 #include "client.h"

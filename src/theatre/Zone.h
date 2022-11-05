@@ -21,8 +21,8 @@ public:
     Zone(std::string name);
 
     /**
-     * Provides functionality to get the total damage of the entity in zone
-     * @return int : TotalDamage of units in zone
+     * Provides functionality to get the total damage of all the entities in the 
+     * @return  TotalDamage of units in zone
     */
 
     int getTotalDamage();
@@ -37,35 +37,35 @@ public:
      /**
      * Provides functionality to remove an entity from the zone
      * @param id Id of the entity to be removed from the zone as a string
-     * @return Entity* : pointer to the entity that was removed
+     * @return  pointer to the entity that was removed
      */
 
     Entity *removeEntity(std::string id);
 
     /**
      * Provides functionality to get the name of the zone
-     * @return string : Name of zone
+     * @return  Name of zone
      */
 
     std::string getName() const;
 
     /**
      * Provides functionality to get the number of entities in the zone
-     * @return int : Number of entities in the zone
+     * @return  Number of entities in the zone
      */
 
     int getUnitCount() const;
 
     /**
      * Provides functionality to get all the entities in the zone
-     * @return vector<Entity *> : a vector containing all the entities
+     * @return   vector containing all the entities
      */
 
     std::vector<Entity *> getEntities();
 
     /**
      * Provides functionality to get the type of the zone
-     * @return string : Type of the zone
+     * @return Type of the zone
      */
 
     virtual std::string getType() = 0;
@@ -83,7 +83,7 @@ public:
 private:
     /**
      * Provides functionality to get the divisor used in takeDamage()
-     * @return int : Divisor to be used in takeDamage()
+     * @return Divisor to be used in takeDamage()
      */
     virtual int getDamageDivisor() = 0;
 

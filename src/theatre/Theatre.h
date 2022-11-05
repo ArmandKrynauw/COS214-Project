@@ -61,6 +61,16 @@ private:
 
     float calculateControl(std::string faction);
 
+    /**
+     * Provides functionality to get the percentage control that all other factions have in this theatre
+     * @param faction Name of the faction whose opposition we want to check
+     * @return The percentage as a float : i.e 0.45
+     * 
+     */
+
+    float checkOpposition(std::string faction);
+
+
 public:
 
 

@@ -56,6 +56,11 @@ void Theatre::addEntity(std::string faction, Entity *entity) {
         addFaction(faction);
     }
 
+    float num = checkOpposition(faction);
+
+    entity->takeDamage(entity->getHP()*0.1*num);
+    // std::cout <<name << ": "<< entity->getName()<< " "<< num << std::endl;
+
     std::vector<Zone *> factionZones = zones[faction];
 
     for (int i = 0; i < factionZones.size(); i++) {
@@ -221,6 +226,40 @@ float Theatre::calculateControl(std::string Faction) {
         
     }
 
+    //std::cout<<"Theatre: "<<name<<" Faction: "<<Faction<<": "<<final/limit<<std::endl;
+    return final / limit;
+}
+
+float Theatre::checkOpposition(std::string faction){
+    if(!zones.count(faction)){
+       throw WarException("faction-not-found");
+    }
+
+    float ourSum = 0.0;
+    float theirSum = 0.0;
+    float totalSum = 0.0;
+    float final = 0.0;
+    for (int i = 0; i < limit; i++) {
+        totalSum = 0;
+        theirSum = 0;
+        
+        ourSum = zones[faction][i]->getTotalDamage();
+        std::unordered_map<std::string, std::vector<Zone *>>::iterator it = zones.begin();
+
+        while (it != zones.end()) {
+            totalSum += it->second[i]->getTotalDamage();
+            it++;
+        }
+        theirSum = totalSum - ourSum;
+        // std::cout << "Theirsum "<<theirSum << std::endl;
+
+        
+        if(totalSum != 0){
+            theirSum = theirSum/totalSum;
+        }
+        final += theirSum;
+        
+    }
     //std::cout<<"Theatre: "<<name<<" Faction: "<<Faction<<": "<<final/limit<<std::endl;
     return final / limit;
 }

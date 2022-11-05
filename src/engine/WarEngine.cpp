@@ -447,7 +447,8 @@ json WarEngine::getStats() {
         {"alliances", getAllianceStats()},
         {"theatreUnits", getTheatreUnits()},
         {"overallUnits", getOverallUnits()},
-        {"theatres", getTheatreStats()}
+        {"theatres", getTheatreStats()},
+        {"strategies" , getStrategies()}
     };
 }
 
@@ -550,6 +551,32 @@ json WarEngine::getTheatreUnits() {
     }
 
     return data;
+}
+
+json WarEngine::getStrategies(){
+    json data = json::array();
+    std::string countryName = "";
+    std::unordered_map<std::string,Country *>::iterator it = countries.begin();
+    while(it != countries.end()){
+        countryName = it->first;
+        json theatre = json::array();
+        for (int i = 0; i < theatreSize; i++) {
+            for (int j = 0; j < theatreSize; j++) {
+                if(theatres[i][j]->checkForFaction(countryName) && theatres[i][j]->checkForStrategy(countryName)){
+                    theatre.push_back(json{{"name", theatres[i][j]->getName()},
+                                        {"coordinates", std::to_string(i) + "-" + std::to_string(j)},
+                                        {"strategy" , theatres[i][j]->getStrategy(countryName)},
+                                        {"target", theatres[i][j]->getTarget(countryName)}});
+                }
+            }
+        }
+        data.push_back(json{{"country" , countryName},
+                            {"theatres", theatre}});
+         it++;
+    }
+       
+    
+    return json{{"data", data}};
 }
 
 std::pair<int, int> WarEngine::getLocation(const json &data) {

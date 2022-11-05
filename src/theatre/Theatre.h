@@ -165,6 +165,12 @@ public:
 
     json toJSON(int row, int col);
 
+    std::string getStrategy(std::string factionName);
+
+    bool checkForStrategy(std::string name);
+
+    std::string getTarget(std::string factionName);
+
     virtual ~Theatre();
 };
 

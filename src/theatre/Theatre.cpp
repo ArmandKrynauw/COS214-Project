@@ -252,3 +252,24 @@ json Theatre::toJSON(int row, int col){
                 {"coordinates", coordinates},
                 {"data", data}};
 }
+
+std::string Theatre::getStrategy(std::string factionName){
+   std::string type = strategies[factionName]->getType();
+    if(type == "Attack"){
+        return "Attack Strategy";
+    } else if(type == "Counter"){
+        return "Counter Strategy";
+    } else if(type == "Plan"){
+        return "Plan Strategy";
+    } else{
+        throw WarException("strategy-not-found");
+    }
+}
+
+bool Theatre::checkForStrategy(std::string name){
+    return (strategies[name]) ? true : false;
+}
+
+std::string Theatre::getTarget(std::string factionName){
+    return strategies[factionName]->getTarget();
+}

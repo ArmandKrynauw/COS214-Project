@@ -612,13 +612,25 @@ $(`#BattleName`).click(() => {
 setMobANDRes = (index, side, data) => {
   const research = data.research.data;
   research.forEach((indvRes) => {
+    let percentageIndustry = Math.round((indvRes.industryCurrent / 500) * 100);
+    let percentagePropaganda = Math.round(
+      (indvRes.propagandaCurrent / 500) * 100
+    );
     if (indvRes.name.replace(" ", "") == Nations[index].replace(" ", "")) {
       $(`.listRes${side}`).empty();
       $(`.listRes${side}`).append(
-        `<li class="list-group-item"><i class="fa-solid fa-coins"></i> Industry: ${indvRes.industryCurrent}</li>`
+        // `<li class="list-group-item"><i class="fa-solid fa-coins"></i> Industry: ${percentageIndustry}</li>`
+        `<div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
+            role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:${percentageIndustry}%">
+            <i class="fa-solid fa-coins"></i> Industry
+          </div>`
       );
       $(`.listRes${side}`).append(
-        `<li class="list-group-item"><i class="fa-solid fa-volume-high"></i> Propeganda: ${indvRes.propagandaCurrent}</li>`
+        // `<li class="list-group-item"><i class="fa-solid fa-volume-high"></i> Propeganda: ${percentagePropaganda}</li>`
+        `<div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
+            role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:${percentagePropaganda}%">
+            <i class="fa-solid fa-volume-high"></i> Propeganda
+          </div>`
       );
     }
   });

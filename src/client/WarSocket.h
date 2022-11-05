@@ -4,6 +4,7 @@
 #include "../utilities/mongoose.h"
 #include "../engine/WarEngine.h"
 #include "../utilities/json.hpp"
+#include "../war-commands/WarCommand.h"
 #include "client.h"
 #include <iostream>
 
@@ -43,7 +44,7 @@ public:
      * 
      * @return JSON object containing API command
     */
-    static json validateMessage(struct mg_connection* c, const char* message);
+    static WarCommand* generateWarCommand(struct mg_connection* c, const char* message);
 
     /**
      * Event handler function that defines connection's behavior.

@@ -139,6 +139,11 @@ runTests: ../src/build/theatre/Theatre.cpp.o
 runTests: ../src/build/theatre/Zone.cpp.o
 runTests: ../src/build/utilities/uuid.cpp.o
 runTests: ../src/build/utilities/WarException.cpp.o
+runTests: ../src/build/war-commands/LoadBattle.cpp.o
+runTests: ../src/build/war-commands/LoadNextDay.cpp.o
+runTests: ../src/build/war-commands/RetrieveSimulations.cpp.o
+runTests: ../src/build/war-commands/SelectSimulation.cpp.o
+runTests: ../src/build/war-commands/WarCommand.cpp.o
 runTests: ../src/build/war-strategy/AttackStrategy.cpp.o
 runTests: ../src/build/war-strategy/CounterStrategy.cpp.o
 runTests: ../src/build/war-strategy/PlanStrategy.cpp.o

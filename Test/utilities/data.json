@@ -267,5 +267,37 @@
                 ]
             }
         ]
+    },
+    "strategies" : {
+        "data" : [
+            {
+                "country" : "Germany",
+                "theatres" : [
+                    {
+                        "name" : "Sicily",
+                        "coordinates" :"0-0",
+                        "strategy" : "Attack"
+                    }
+                ]
+            }
+        ]
+    },
+    "mobilization" : {
+        "data" : [
+            {
+                "name" : "Germany",
+                "mobilization" : "PartialMobilization"
+            }
+        ]
+    },
+    "research" : {
+        "data" : [
+            {
+                "name" : "Germany",
+                "industryCurrent" : 250,
+                "propagandaCurrent" : 200,
+                "researchGoal" : 500
+            }
+        ]
     }
 }

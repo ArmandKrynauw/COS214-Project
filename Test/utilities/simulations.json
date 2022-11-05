@@ -1466,7 +1466,7 @@
                         {
                             "name": "Germany",
                             "units": [
-                                { "type": "MediumAirUnit", "quantity": 3 },
+                                { "type": "MediumAirUnit", "quantity": 2 },
                                 { "type": "HeavyLandUnit", "quantity": 10 }
                             ]
                         },
@@ -1499,11 +1499,6 @@
                                     "type": "air",
                                     "index": 5,
                                     "destination": "0,1"
-                                },
-                                {
-                                    "type": "air",
-                                    "index": 6,
-                                    "destination": "2,0"
                                 },
                                 {
                                     "type": "land",

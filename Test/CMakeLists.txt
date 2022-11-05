@@ -154,6 +154,14 @@ target_link_libraries(
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/build/utilities/uuid.cpp.o
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/build/utilities/WarException.cpp.o
 
+    #war-commands
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/build/war-commands/LoadBattle.cpp.o
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/build/war-commands/LoadNextDay.cpp.o
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/build/war-commands/RetrieveSimulations.cpp.o
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/build/war-commands/SelectSimulation.cpp.o
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/build/war-commands/WarCommand.cpp.o
+
+
     #war-strategy
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/build/war-strategy/AttackStrategy.cpp.o
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/build/war-strategy/CounterStrategy.cpp.o

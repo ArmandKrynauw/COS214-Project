@@ -5,7 +5,7 @@
 
 namespace {
 
-
+    //Testing Theatre.cpp    
 
     //Testing removeEntity in Theatre.cpp
     //Testing the remove of a faction that does not exist
@@ -46,6 +46,59 @@ namespace {
         EXPECT_EQ(t->removeEntity("Germany", "land", entity->getId())->getName(), entity->getName());
     }
 
+    //Testing changeStrategy for null strategy
+    TEST(ChangeFactionStrategy, TestChangeOfNULLStrategy){
+        try{
+            Theatre *t = WarEngine::instance()->TestTheatre();
+            t->changeStrategy("Germany", NULL);
+            FAIL();
+        }
+        catch(WarException &err){
+            EXPECT_EQ(err.what(), std::string("NULL Strategy"));
+        }
+        catch(...){
+            FAIL();
+        }
+    }
+
+    //Testing changeStrategy for valid strategy
+    TEST(ChangeFactionStrategy, TestChangeOfValidStrategy){
+        try{
+            PlanStrategy *s = new PlanStrategy("Test");
+            Theatre *t = WarEngine::instance()->TestTheatre();
+            t->changeStrategy("Germany", s);
+            SUCCEED();
+        }
+        catch(...){
+            FAIL();
+        }
+        
+    }
+
+    //Testing checkForFaction
+    TEST(ChangeFactionStrategy, TestCheckForValidFaction){
+        try{
+            Theatre *t = WarEngine::instance()->TestTheatre();
+            EXPECT_TRUE(t->checkForFaction("Germany"));
+        }
+        catch(...){
+            FAIL();
+        }
+    }
+
+
+    TEST(ChangeFactionStrategy, TestCheckForInValidFaction){
+        try{
+            Theatre *t = WarEngine::instance()->TestTheatre();
+            EXPECT_FALSE(t->checkForFaction("Invalid"));
+        }
+        catch(...){
+            FAIL();
+        }
+    }
+
+
+    //Testing Warengine
 
     //Testing generateUnit 
     //Testing the create of type that does not exist
@@ -72,7 +125,7 @@ namespace {
     //Testing loadNextBattleDay before battle day results 
     TEST(LoadNextBattleDay, TestLoadBeforeResult){
         try{
-            Client::instance()->loadNextBattleDay();
+            WarEngine::instance()->loadNextBattleDay();
             FAIL();
         }
         catch(WarException &err){
@@ -82,19 +135,4 @@ namespace {
             FAIL();
         }
     }
-
-    //Test loadNextBattleDay after battle day results
-    //TEST(LoadNextBattleDay, TestLoadAfterResult){
-    //    try{
-    //        Client::instance()->loadDayResults();
-    //        Client::instance()->loadNextBattleDay();
-    //        SUCCEED();
-    //    }
-    //    catch(...){
-    //        FAIL();
-    //    }
-    //}
-
-
-
 }

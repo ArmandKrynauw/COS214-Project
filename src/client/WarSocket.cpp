@@ -81,16 +81,19 @@ void WarSocket::WSHandler(struct mg_connection *c, int ev, void *ev_data, void *
 
         try {
             if (command == "loadNextBattleDay") {
-                sendMessage(c, Client::instance()->loadNextBattleDay());
+                WarEngine::instance()->loadNextBattleDay();
+                sendMessage(c, WarEngine::instance()->getStats());
             }
             else if (command == "loadDayResults") {
-                sendMessage(c, Client::instance()->loadDayResults());
+                WarEngine::instance()->loadBattleDayResults();
+                sendMessage(c, WarEngine::instance()->getStats());
             }
             else if (command == "getAvailableSimulations") {
-                sendMessage(c, Client::instance()->getAvailableSimulations());
+                sendMessage(c, WarEngine::instance()->getAvailableSimulations());
             }
             else if (command == "selectSimulation") {
-                sendMessage(c, Client::instance()->selectSimulation(data["param"]));
+                WarEngine::instance()->selectSimulation(data["param"]);
+                sendMessage(c, WarEngine::instance()->getStats());
             }
             else{
                 std::cout << "Error: Invalid Command - " << command << std::endl;

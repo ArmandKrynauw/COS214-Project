@@ -11,32 +11,10 @@
 using json = nlohmann::json;
 
 class Client {
-private:
-    std::vector<json> simulations;
-    json chosenSimulation;
-    int currentDay;
-    bool beforeBattle;
-
 public:
     static Client* instance();
     void runTerminalMode();
     void runTest();
-
-    // =================== WAR ENGINE CONTROL FUNCTIONS ===================
-    json loadNextBattleDay();
-    json loadDayResults();
-    json loadPreviousDay();
-    json selectSimulation(int index);
-
-    // =================== JSON UTILITY FUNCTIONS ===================
-
-    /**
-     * Returns a JSON array of strings. Each string is a name of a war
-     * simulation.
-     *
-     * @return Array of war simulation names
-    */
-    json getAvailableSimulations();
 
 private:
     // =============== Singleton ===============
@@ -49,9 +27,6 @@ private:
     void runSimulation();
     void printDayResults();
     void printUnit(const json &unit);
-
-    // =================== GUI MODE FUNCTIONS ==============
-
 
     // =================== UTILITY FUNCTIONS ===================
     void loadSimulations(std::string filePath);

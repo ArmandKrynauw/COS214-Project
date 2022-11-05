@@ -5,141 +5,56 @@
 #include <fstream>
 #include <iostream>
 
-Client::Client() {
-    loadSimulations("utilities/simulations.json");
-    currentDay = 0;
-    beforeBattle = true;
-}
+Client::Client() { }
 
 Client* Client::instance() {
     static Client client;
     return &client;
 }
 
-void Client::runTerminalMode() {
-    std::cout << "\033[1;32m==============SELECT SIMULATION===========\033[0m" << std::endl;
-    for (int i = 0; i < simulations.size(); i++) {
-        std::cout << i + 1 << ". " << simulations[i]["WarTitle"].get<std::string>() << std::endl;
-    }
-    std::cout << std::endl;
-    int choice = getIntegerInput("Select a simulation", 1, simulations.size()) - 1;
-    selectSimulation(choice);
-    std::cout << std::endl;
-    runSimulation();
-}
-
-// ======================================================================================
-// WAR ENGINE CONTROL FUNCTIONS
-// ======================================================================================
-
 void Client::runTest() {
-    selectSimulation(0);
-    loadNextBattleDay();
-}
-
-json Client::loadNextBattleDay() {
-    if (chosenSimulation.is_null()) {
-        throw WarException("Load a simulation before loading next battle day", "load_simulation");
-    } 
-    if (chosenSimulation.contains("duration") && currentDay == chosenSimulation["duration"]) {
-        throw WarException("End of simulation reached", "simulation_finished");
-    }
-    if (!beforeBattle) {
-        throw WarException("Load battle day results before loading next battle day", "load_day_results");
-    }
-
-    WarEngine::instance()->loadNextBattleDay(chosenSimulation["days"][currentDay++]);
-    beforeBattle = false;
-    return WarEngine::instance()->getStats();
-}
-
-json Client::loadDayResults() {
-    if (beforeBattle) {
-        throw WarException("Load next battle day before loading day results", "load_next_day");
-    }
-
-    WarEngine::instance()->commenceBattle();
-    beforeBattle = true;
-    return WarEngine::instance()->getStats();
-}
-
-json Client::loadPreviousDay() {
-    return WarEngine::instance()->getStats();
-}
-
-json Client::selectSimulation(int index) {
-    if (index < 0 || index >= simulations.size()) {
-        throw WarException("Not a valid simulation.","out-of-bounds");
-    }
-
-    WarEngine::instance()->reset();
-    WarEngine::instance()->loadSimulation(simulations[index]);
-
-    currentDay = 0;
-    beforeBattle = true;
-    chosenSimulation = simulations[index];
-
-    return WarEngine::instance()->getStats();
-}
-
-// ======================================================================================
-// JSON UTILITY FUNCTIONS
-// ======================================================================================
-
-json Client::getAvailableSimulations() {
-    json data;
-
-    for (json s : simulations) {
-        json j = json{
-            { "name", s["WarTitle"] },
-            { "countries", json::array() },
-            { "alliances", json::array() }
-        };
-
-        for (json c : s["countries"]) {
-            j["countries"].push_back({
-                { "name", c["name"] },
-                { "countryCode", c["countryCode"] },
-            });
-        }
-
-        for (json a : s["alliances"]) {
-            j["alliances"].push_back(a);
-        }
-
-        data.push_back(j);
-    }
-
-    return data;
+    WarEngine::instance()->selectSimulation(0);
+    WarEngine::instance()->loadNextBattleDay();
 }
 
 // ======================================================================================
 // TERMINAL MODE FUNCTIONS
 // ======================================================================================
 
+void Client::runTerminalMode() {
+    std::cout << "\033[1;32m==============SELECT SIMULATION===========\033[0m" << std::endl;
+    json simulations = WarEngine::instance()->getAvailableSimulations();
+    for (int i = 0; i < simulations.size(); i++) {
+        std::cout << i + 1 << ". " << simulations[i]["name"].get<std::string>() << std::endl;
+    }
+    std::cout << std::endl;
+    int choice = getIntegerInput("Select a simulation", 1, simulations.size()) - 1;
+    WarEngine::instance()->selectSimulation(choice);
+    std::cout << std::endl;
+    runSimulation();
+}
+
 void Client::runSimulation() {
-    currentDay = 0;
-    int end = chosenSimulation["duration"];
-    std::cout<<WarEngine::instance()->getStats().dump(4)<<std::endl;
-    for (json roundData: chosenSimulation["days"][currentDay]) {
-        if (currentDay != end) {
-            std::cout << "Day " << currentDay + 1 << " commencing... " << std::endl;
-            //json deaths = result["casualties"];
-            loadNextBattleDay();
-            std::cout<<WarEngine::instance()->getStats().dump(4)<<std::endl;
-            loadDayResults();
-            printDayResults();
-            //std::cout << WarEngine::instance()->clearCasualties().dump(1) << std::endl;
-            // WarEngine::instance()->clearCasualties();
-            // std::cout << WarEngine::instance()->clearCasualties().dump(2) << std::endl;
-            //  WarEngine::instance()->clearCasualties();
-            //pass data to GUI
-            std::cout << "Press any key to continue...";
-            std::string input;
-            std::cin >> input;
-            std::cout << std::endl;
-           
-        }
+    // std::cout<<WarEngine::instance()->getStats().dump(4)<<std::endl;
+
+    json stats = WarEngine::instance()->getStats();
+    while (stats["engine"]["day"].get<int>() != stats["engine"]["duration"].get<int>() - 1) {
+        stats = WarEngine::instance()->getStats();
+        std::cout << "Day " << stats["engine"]["day"].get<int>() + 1 << " commencing... " << std::endl;
+        //json deaths = result["casualties"];
+        WarEngine::instance()->loadNextBattleDay();
+        // std::cout<<WarEngine::instance()->getStats().dump(4)<<std::endl;
+        WarEngine::instance()->loadBattleDayResults();
+        printDayResults();
+        //std::cout << WarEngine::instance()->clearCasualties().dump(1) << std::endl;
+        // WarEngine::instance()->clearCasualties();
+        // std::cout << WarEngine::instance()->clearCasualties().dump(2) << std::endl;
+        //  WarEngine::instance()->clearCasualties();
+        //pass data to GUI
+        std::cout << "Press any key to continue...";
+        std::string input;
+        std::cin >> input;
+        std::cout << std::endl;
     }
 }
 
@@ -162,28 +77,6 @@ void Client::printDayResults() {
 void Client::printUnit(const json &unit) {
     std::cout << "\t\t" << "Name: " << unit["name"].get<std::string>() << " Type: " << unit["type"].get<std::string>()
               << " Current HP: " << unit["currentHP"] << std::endl;
-}
-
-// ======================================================================================
-// GUI MODE FUNCTIONS
-// ======================================================================================
-
-// ======================================================================================
-// UTILITY FUNCTIONS
-// ======================================================================================
-
-void Client::loadSimulations(std::string filePath) {
-    std::ifstream file(filePath);
-
-    if (!file) {
-        throw WarException("File containing simulations not found.", "file-not-found");
-    }
-
-    json data = json::parse(file);
-
-    for (json simulation: data["Wars"]) {
-        simulations.push_back(simulation);
-    }
 }
 
 // ======================================================================================

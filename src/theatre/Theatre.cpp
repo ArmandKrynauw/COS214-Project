@@ -68,7 +68,6 @@ void Theatre::addEntity(std::string faction, Entity *entity) {
 }
 
 Entity *Theatre::removeEntity(std::string faction, std::string type, std::string id) {
-    std::cout<<"here1";
     
     if (!zones.count(faction)) {
         throw WarException("Faction not found.");
@@ -76,14 +75,12 @@ Entity *Theatre::removeEntity(std::string faction, std::string type, std::string
 
     Entity *entity = NULL;
     std::vector<Zone *> factionZones = zones[faction];
-    std::cout<<"here1";
     for (int i = 0; i < factionZones.size(); i++) {
         if (factionZones[i]->getType() == type) {
             entity = factionZones[i]->removeEntity(id);
             break;
         }
     }
-    std::cout<<"here";
     if (!entity) {
         throw WarException("Entity not found.");
     }

@@ -201,6 +201,9 @@ public:
     // ====================== UTILITY FUNCTIONS ======================
 
     void viewStrategies();
+
+    // ====================== TESTING FUNCTIONS ======================
+    Theatre* TestTheatre();
 };
 
 #endif  // WARENGINE_H

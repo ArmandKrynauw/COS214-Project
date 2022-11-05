@@ -564,3 +564,7 @@ std::pair<int, int> WarEngine::getLocation(const json &data) {
     ss3 >> destination.second;
     return destination;
 }
+
+Theatre* WarEngine::TestTheatre(){
+    return theatres[0][0];
+}

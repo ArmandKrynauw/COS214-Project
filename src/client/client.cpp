@@ -34,6 +34,7 @@ void Client::runTerminalMode() {
 
 void Client::runTest() {
     selectSimulation(0);
+    loadNextBattleDay();
 }
 
 json Client::loadNextBattleDay() {

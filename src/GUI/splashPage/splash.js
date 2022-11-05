@@ -59,14 +59,18 @@ $(document).ready(function () {
   };
 
   connectWarSocket();
-  $(`body`).click(() => {
+  // $(`body`).click(() => {
+  //   request.command = "getAvailableSimulations";
+  //   sendMessage(JSON.stringify(request));
+  // });
+  openData = () => {
     request.command = "getAvailableSimulations";
     sendMessage(JSON.stringify(request));
-  });
+  };
 
   // display the data from socket in the html
   displaySimulation = (simulation) => {
-    console.log("heyy" + simulation);
+    // console.log("heyy" + simulation);
 
     simulation.forEach((element, index) => {
       let battleName = element.name;
@@ -86,8 +90,8 @@ $(document).ready(function () {
       countryImagasArray1 = countryImagasArray.splice(0, middleIndex);
       countryImagasArray2 = countryImagasArray.splice(-middleIndex);
 
-      console.log(countryImagasArray1);
-      console.log(countryImagasArray2);
+      // console.log(countryImagasArray1);
+      // console.log(countryImagasArray2);
 
       // create the html for the battles and append to battlesList
       if (countryImagasArray1.length == 2) {
@@ -165,4 +169,5 @@ $(document).ready(function () {
     let battleName = $(this).attr("id");
     window.location.href = "../index.html?battleIndex=" + battleName;
   });
+  window.setTimeout(openData, 500);
 });

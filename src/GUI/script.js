@@ -55,7 +55,6 @@ connectWarSocket = () => {
       if (loadBattle) {
         initialiseBattle(data);
         loadBattle = false;
-        $(`.nextRound`).text(`Initialize`);
       } else if (selectBattle) {
         selectBattle = false;
       } else {
@@ -80,22 +79,29 @@ sendMessage = (message) => {
 
 connectWarSocket();
 
+timerLoad2 = () => {
+  // second to execute
+  request.command = "selectSimulation";
+  request.param = parseInt(battleIndex);
+  sendMessage(JSON.stringify(request));
+  $(`.nextRound`).text("Load Battle   ");
+};
+
+timerLoad = () => {
+  // fisrt to execute
+  request.command = "getAvailableSimulations";
+  sendMessage(JSON.stringify(request));
+  window.setTimeout(timerLoad2, 500);
+};
+
+window.setTimeout(timerLoad, 500);
+
 var click = 0;
 $(`.nextRound`).click(() => {
-  if (click == 0) {
-    request.command = "getAvailableSimulations";
-    sendMessage(JSON.stringify(request));
-  } else if (click == 1) {
-    request.command = "selectSimulation";
-    console.log(battleIndex);
-    request.param = parseInt(battleIndex);
-    console.log(request);
-    sendMessage(JSON.stringify(request));
-    $(`.nextRound`).text("Load Battle   ");
-  } else if (click > 1 && click < 12) {
+  if (click < 10) {
     if (preWar) {
       request.command = "loadNextBattleDay";
-      $(`.nextRound`).text("Display results");
+      $(`.nextRound`).text("Display Results");
       sendMessage(JSON.stringify(request));
     } else {
       request.command = "loadDayResults";
@@ -267,10 +273,9 @@ updateUI = (data) => {
               // `<li class="list-group-item">${type} ${unit.name} ${Math.round(
               //   (unit.currentHP / unit.initialHP) * 100
               // )}%</li>`
-              `<div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
-                role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:${percentage}%">
-              ${type} ${unit.name} 
-              </div>`
+              `<li class="list-group-item">${type} ${unit.name}<div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
+                role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:${percentage}%">    
+              </div></li>`
             );
           });
         }
@@ -293,6 +298,10 @@ updateUI = (data) => {
         }
       });
     });
+
+    HideModal = () => {
+      modal.style.display = "none";
+    };
   };
 
   /**
@@ -542,10 +551,9 @@ displayUnits = (index, side, overallUnits) => {
       // `<li class="list-group-item">${type}  ${unit.name}  ${Math.round(
       //   (unit.currentHP / unit.initialHP) * 100
       // )}%</li>`
-      `<div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
+      `<li class="list-group-item">${type}  ${unit.name} <br> <div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
         role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:${percentage}%">
-      ${type} ${unit.name}
-      </div>`
+      </div></li>`
     );
   });
 };
@@ -635,17 +643,16 @@ setMobANDRes = (index, side, data) => {
       $(`.listRes${side}`).empty();
       $(`.listRes${side}`).append(
         // `<li class="list-group-item"><i class="fa-solid fa-coins"></i> Industry: ${percentageIndustry}</li>`
-        `<div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
+        `<li class="list-group-item"><i class="fa-solid fa-coins"></i> Industry <br> <div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
             role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:${percentageIndustry}%">
-            <i class="fa-solid fa-coins"></i> Industry
-          </div>`
+            
+          </div></li>`
       );
       $(`.listRes${side}`).append(
         // `<li class="list-group-item"><i class="fa-solid fa-volume-high"></i> Propeganda: ${percentagePropaganda}</li>`
-        `<div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
+        `<li class="list-group-item"><i class="fa-solid fa-volume-high"></i> Propaganda <br> <div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
             role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:${percentagePropaganda}%">
-            <i class="fa-solid fa-volume-high"></i> Propeganda
-          </div>`
+          </div></li>`
       );
     }
   });

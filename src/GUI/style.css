@@ -11,6 +11,22 @@
   letter-spacing: 5px;
   text-transform: uppercase;
   font-weight: 700; */
+#BattleName {
+  cursor: pointer;
+}
+#enemyLeft .progress-bar {
+  background-color: rgb(159, 69, 69);
+}
+
+#enemyRight .progress-bar {
+  /* background-color: var(--pink) !important; */
+}
+
+.progress-bar {
+  border-radius: 5px !important;
+  height: 10px !important;
+  padding: 0 !important;
+}
 
 * {
   color: var(--white);
@@ -34,6 +50,15 @@
 
 .hide {
   display: none !important;
+}
+
+.back {
+  position: absolute;
+  columns: var(--white);
+  z-index: 1;
+  font-size: 30px;
+  top: 3%;
+  left: 3%;
 }
 
 #BattleName {

@@ -36,15 +36,14 @@ public:
     virtual int getInitialHP() const override;
 
      /**
-     * Provides functionality to return the Theatre the Unit is stored in
-     * @return Theatre* : Theatre Unit is stored in
+     * Provides functionality to return the Value of the unit
+     * @return int : The value of the unit
     */
 
     virtual int getValue() const override;
-
-     /**
-     * Provides functionality to return the name  of the Unit
-     * @return string : name of Unit
+   /**
+     * Provides functionality to return the Theatre the Unit is stored in
+     * @return Theatre* : Theatre Unit is stored in
     */
 
     
@@ -81,10 +80,9 @@ public:
     virtual bool takeDamage(int damage) override;
 
     /**
-     * This is a magic function that produces voodoo magic
-     * Do not ask why this is here, it just is
-    */
-
+     * Provides functionality to return the unit Count of the Unit
+     * @return int : The unit count of the unit
+     */
     virtual int getUnitCount() const override;
 
     /**

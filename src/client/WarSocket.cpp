@@ -5,7 +5,6 @@
 #include "../war-commands/RetrieveSimulations.h"
 #include "../war-commands/SelectSimulation.h"
 
-
 WarSocket::WarSocket() {}
 
 void WarSocket::listen() {
@@ -29,6 +28,7 @@ bool WarSocket::checkMessage(char* message, std::string compare) {
 
 WarCommand* WarSocket::generateWarCommand(struct mg_connection* c, const char* message) {
     json data;
+    json error;
 
     try {
         data = json::parse(message);
@@ -60,16 +60,23 @@ WarCommand* WarSocket::generateWarCommand(struct mg_connection* c, const char* m
 
             return new SelectSimulation(data["param"]);
         }
+
+
+        std::cout << "Error: Invalid Command" << std::endl;
+        error = json{
+            {"error", "Invalid command was sent"},
+            {"code", "invalid_command"}
+        };
     } catch (json::exception& e) {
-        json error = {
+        error = json{
             {"error", "Could not parse JSON"},
             {"code", "parse_error"}
         };
-        sendMessage(c, error);
     } catch (WarException& e) {
-        sendMessage(c, e.getJSON());
+        error = e.getJSON();
     }
 
+    sendMessage(c, error);
     return NULL;
 }
 
@@ -88,11 +95,6 @@ void WarSocket::WSHandler(struct mg_connection *c, int ev, void *ev_data, void *
         WarCommand* command = generateWarCommand(c, wm->data.ptr);
 
         if (!command) {
-            std::cout << "Error: Invalid Command" << std::endl;
-            sendMessage(c, json{
-                {"error", "Invalid command was sent"},
-                {"code", "invalid_command"}
-            });
             return;
         }
 

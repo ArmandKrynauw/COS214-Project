@@ -117,7 +117,7 @@ void WarSocket::WSHandler(struct mg_connection *c, int ev, void *ev_data, void *
             command->execute();
             sendMessage(c, command->getResult());
         } catch (WarException& e) {
-            std::cout << "\033[1;31mException in War Engine\033[0m\n";
+            std::cout << "\033[1;31mException in War Engine ඞ\033[0m\n";
             std::cout << "\033[1;33m" << e.getJSON().dump() << "\033[0m\n";
             sendMessage(c, e.getJSON());
         }

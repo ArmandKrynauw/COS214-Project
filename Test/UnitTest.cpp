@@ -5,7 +5,7 @@
 
 namespace {
 
-    //Testing Theatre.cpp    
+    //============Testing Theatre============
 
     //Testing removeEntity in Theatre.cpp
     //Testing the remove of a faction that does not exist
@@ -64,7 +64,7 @@ namespace {
     //Testing changeStrategy for valid strategy
     TEST(ChangeFactionStrategy, TestChangeOfValidStrategy){
         try{
-            PlanStrategy *s = new PlanStrategy("Test");
+            AttackStrategy *s = new AttackStrategy("Test");
             Theatre *t = WarEngine::instance()->TestTheatre();
             t->changeStrategy("Germany", s);
             SUCCEED();
@@ -98,7 +98,7 @@ namespace {
     }
 
 
-    //Testing Warengine
+    //============Testing Warengine============
 
     //Testing generateUnit 
     //Testing the create of type that does not exist
@@ -124,19 +124,19 @@ namespace {
     TEST(GetSimulation, TestGetEngineStats){
         json data = WarEngine::instance()->getEngineStats();
         if(data["stage"] != "Early Stage"){
-            FAIL();
+            FAIL() << "stage";
         }
         if(data["duration"] != 5){
-            FAIL();
+            FAIL() << "duration";
         }
         if(data["day"] != 1){
-            FAIL();
+            FAIL() << "day";
         }
         if(data["numberOfCountries"] != 2){
-            FAIL();
+            FAIL() << "numberOfCountries";
         }
         if(data["numberOfAlliances"] != 0){
-            FAIL();
+            FAIL() << "numberOfAlliances";
         }
         SUCCEED();
     }
@@ -144,23 +144,23 @@ namespace {
     //Testing getCountryStats
     TEST(GetSimulation, TestGetCountryStats){
         json data = WarEngine::instance()->getCountryStats();
-        if(data["data"][0]["name"] != "Germany"){
-            FAIL();
+        if(data["data"][0]["name"] != "America"){
+            FAIL() << "Name of country 0";
         }
         if(data["data"][0]["resources"] != 40){
-            FAIL();
+            FAIL() << "Resource count for America";
         }
-        if(data["data"][0]["totalUnits"] != 3){
-            FAIL();
+        if(data["data"][0]["totalUnits"] != 5){
+            FAIL() << "Unit count for country America";
         }
-        if(data["data"][1]["name"] != "America"){
-            FAIL();
+        if(data["data"][1]["name"] != "Germany"){
+            FAIL() << "Name of country 1";
         }
         if(data["data"][1]["resources"] != 70){
-            FAIL();
+            FAIL() << "Resource count for country Germany";
         }
-        if(data["data"][1]["totalUnits"] != 4){
-            FAIL();
+        if(data["data"][1]["totalUnits"] != 5){
+            FAIL() << "Unit count for country Germany";
         }
         SUCCEED();
     }
@@ -168,12 +168,145 @@ namespace {
     //Testing getAllianceStats
     TEST(GetSimulation, TestGetAllianceStats){
         json data = WarEngine::instance()->getAllianceStats();
-        if(data["data"] != "null"){
-            FAIL();
+        if(data["data"].size() != 0){
+            FAIL() << "Alliance bigger that 0";
         }
         SUCCEED();
     }
 
+    //Testing getOverallUnits
+    TEST(GetSimulation, TestGetOverAllUnits){
+        json data = WarEngine::instance()->getOverallUnits();
+        std::string AmericaArr[5] = {"A-10", "USS Nebraska (SSBN-739)", "Destroyer", "Destroyer", "HMMWV"};
+        std::string GermanyArr[5] = {"Eurofighter Typhoon", "Baden-Württemberg class", "Baden-Württemberg class", "Baden-Württemberg class", "Leopard 2A7"};
+        for(int i = 0; i < data["data"][0]["units"].size(); i++){
+            if(data["data"][0]["units"][i]["name"] != AmericaArr[i]){
+                FAIL() << "America " << i;
+            }
+        }
+        for(int i = 0; i < data["data"][1]["units"].size(); i++){
+            if(data["data"][1]["units"][i]["name"] != GermanyArr[i]){
+                FAIL() << "Germany " << i;
+            }
+        }
+    }
+
+    //Testing getTheatreStats and check that simulations is correct on day 1
+    TEST(GetSimulation, TestGetTheatreStats){
+        json data = WarEngine::instance()->getTheatreStats();
+        //Testing that the right theatre names is in the correct coordinate
+        if(data["data"][0]["name"] != "Sicily"){
+            FAIL() << "Sicily 0";
+        }
+        if(data["data"][1]["name"] != "Tunisia"){
+            FAIL() << "Tunisia 1";
+        }
+        if(data["data"][2]["name"] != "Normandy"){
+            FAIL() << "Normandy 2";
+        }
+        if(data["data"][3]["name"] != "Netherlands"){
+            FAIL() << "Netherlands 3";
+        }
+        if(data["data"][4]["name"] != "Belgium"){
+            FAIL() << "Belgium 4";
+        }
+        if(data["data"][5]["name"] != "Ruhr"){
+            FAIL() << "Ruhr 5";
+        }
+        if(data["data"][6]["name"] != "Paris"){
+            FAIL() << "Paris 6";
+        }
+        if(data["data"][7]["name"] != "Alsace-Lorraine"){
+            FAIL() << "Alsace-Lorraine 7";
+        }
+        if(data["data"][8]["name"] != "Italy"){
+            FAIL() << "Italy 8";
+        }
+
+        //Testing the power of each country in theatre
+        //0-0
+        if(data["data"][0]["data"][0]["landPower"] != 10){
+            FAIL() << "America Power 0-0";
+        }
+        if(data["data"][0]["data"][1]["landPower"] != 20){
+            FAIL() << "Germany Power 0-0";
+        }
+        //0-1
+        if(data["data"][1]["data"][0]["seaPower"] != 10){
+            FAIL() << "America Power 0-1";
+        }
+        if(data["data"][1]["data"][1]["seaPower"] != 5){
+            FAIL() << "Germany Power 0-1";
+        }
+        //0-2
+        if(data["data"][2]["data"][0]["seaPower"] != 10){
+            FAIL() << "America Power 0-2";
+        }
+        if(data["data"][2]["data"][1]["seaPower"] != 5){
+            FAIL() << "Germany Power 0-2";
+        }
+        //1-0
+        if(data["data"][3]["data"].size() != 0){
+            FAIL() << "Netherlands data 1-0";
+        }
+        //1-1
+        if(data["data"][4]["data"][0]["airPower"] != 10){
+            FAIL() << "America Power 1-1";
+        }
+        if(data["data"][4]["data"][1]["airPower"] != 10){
+            FAIL() << "Germany Power 1-1";
+        }
+        //1-2
+        if(data["data"][5]["data"].size() != 0){
+            FAIL() << "Ruhr data 1-2";
+        }
+        //2-0
+        if(data["data"][6]["data"].size() != 0){
+            FAIL() << "Paris data 2-0";
+        }
+        //2-1
+        if(data["data"][7]["data"].size() != 0){
+            FAIL() << "Alsace data 2-1";
+        }
+        //2-2
+        if(data["data"][8]["data"][0]["seaPower"] != 20){
+            FAIL() << "America Power 2-2";
+        }
+        if(data["data"][8]["data"][1]["seaPower"] != 5){
+            FAIL() << "Germany Power 2-2";
+        }
+        SUCCEED();
+    }
+    
+    //Testing getStrategies
+    TEST(GetSimulation, TestGetStrategies){
+        json data = WarEngine::instance()->getStrategies();
+        //America
+        if(data["data"][0]["theatres"][0]["strategy"] != "Plan Strategy" ||
+            data["data"][0]["theatres"][1]["strategy"] != "Attack Strategy" || 
+            data["data"][0]["theatres"][2]["strategy"] != "Counter Strategy"){
+                FAIL() << "America strategies";
+        }
+        //Germany
+        if(data["data"][1]["theatres"][0]["strategy"] != "Attack Strategy" ||
+            data["data"][1]["theatres"][1]["strategy"] != "Counter Strategy" ||
+            data["data"][1]["theatres"][2]["strategy"] != "Plan Strategy"){
+                FAIL() << "Germany Strategies";
+        }
+        SUCCEED();
+    }
+
+    //Testing getMobilization
+    TEST(GetSimulation, TestGetMobilization){
+
+        json data = WarEngine::instance()->getMobilization();
+
+        if(data["data"][0]["mobilization"] != "Partial" || data["data"][1]["mobilization"] != "Partial"){
+            FAIL() << "Get Mobilization";
+        }
+
+
+    }
 
     //Testing loadNextBattleDay
     //Testing loadNextBattleDay before battle day results 

@@ -5,9 +5,10 @@ int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     Client::instance()->runTest();
 
-        json data = WarEngine::instance()->getCountryStats();
-        std::cout << data["data"][0]["totalUnits"] << std::endl;
-        //std::cout << data["data"][1]["resources"] <<std::endl;
+        //json data = WarEngine::instance()->getStrategies();
+        //std::cout << data["data"] << std::endl;
+        //std::cout << data["data"][0]["units"] <<std::endl;
+        //std::cout << data["data"][1]["units"] <<std::endl;
         //std::cout << data["day"] << std::endl;
         //std::cout << data["numberOfCountries"] << std::endl;
         //std::cout << data["numberOfAlliances"] << std::endl;

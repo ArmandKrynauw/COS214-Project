@@ -19,7 +19,6 @@ protected:
     std::string name;
     std::string id;
     int morale;
-    Mobilization *mobilization;
     Alliance* alliance;
     std::vector<int> research;
     int baseResourceCount;
@@ -98,8 +97,6 @@ public:
     virtual Alliance *getAlliance() = 0;
 
     virtual void clearCasualties() = 0;
-
-    virtual std::string getMobilization();
 
     virtual ~Faction();
 };

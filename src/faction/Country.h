@@ -141,7 +141,7 @@ public:
      */
     bool inAlliance();
 
-    virtual std::string getMobilization() override;
+    virtual std::string getMobilization();
 
     json researchToJSON();
 

@@ -54,8 +54,5 @@ void Faction::setMorale(int morale) {
     this->morale = morale;
 }
 
-std::string Faction::getMobilization() {
-    return mobilization->getState();
-}
 
 Faction::~Faction() {}

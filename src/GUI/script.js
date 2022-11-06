@@ -273,7 +273,9 @@ updateUI = (data) => {
               // `<li class="list-group-item">${type} ${unit.name} ${Math.round(
               //   (unit.currentHP / unit.initialHP) * 100
               // )}%</li>`
-              `<li class="list-group-item">${type} ${unit.name}<div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
+              `<li class="list-group-item">
+                <div>${type} ${unit.name}</div>
+                <div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
                 role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:${percentage}%">    
               </div></li>`
             );
@@ -551,7 +553,9 @@ displayUnits = (index, side, overallUnits) => {
       // `<li class="list-group-item">${type}  ${unit.name}  ${Math.round(
       //   (unit.currentHP / unit.initialHP) * 100
       // )}%</li>`
-      `<li class="list-group-item">${type}  ${unit.name} <br> <div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
+      `<li class="list-group-item">
+        <div>${type}  ${unit.name}</div>
+        <div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
         role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:${percentage}%">
       </div></li>`
     );
@@ -643,14 +647,19 @@ setMobANDRes = (index, side, data) => {
       $(`.listRes${side}`).empty();
       $(`.listRes${side}`).append(
         // `<li class="list-group-item"><i class="fa-solid fa-coins"></i> Industry: ${percentageIndustry}</li>`
-        `<li class="list-group-item"><i class="fa-solid fa-coins"></i> Industry <br> <div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
+        `<li class="list-group-item">
+          <i class="fa-solid fa-coins"></i> Industry 
+          <br> 
+          <div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
             role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:${percentageIndustry}%">
-            
           </div></li>`
       );
       $(`.listRes${side}`).append(
         // `<li class="list-group-item"><i class="fa-solid fa-volume-high"></i> Propeganda: ${percentagePropaganda}</li>`
-        `<li class="list-group-item"><i class="fa-solid fa-volume-high"></i> Propaganda <br> <div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
+        `<li class="list-group-item">
+          <i class="fa-solid fa-volume-high"></i> Propaganda 
+          <br> 
+          <div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
             role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:${percentagePropaganda}%">
           </div></li>`
       );

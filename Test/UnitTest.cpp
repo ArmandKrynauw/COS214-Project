@@ -114,10 +114,64 @@ namespace {
             FAIL();
         }
     }
-    //Testing the create of valid type
+    //Testing the create of valid unit type
     TEST(GenerateUnit, TestCreationOfValidUnit){
         Entity *entity = WarEngine::instance()->generateUnit("Germany", "LightLandUnit", "NA");
         EXPECT_EQ(entity->getType(), "land");
+    }
+
+    //Testing that the simulation is loaded in correctly
+    TEST(GetSimulation, TestGetEngineStats){
+        json data = WarEngine::instance()->getEngineStats();
+        if(data["stage"] != "Early Stage"){
+            FAIL();
+        }
+        if(data["duration"] != 5){
+            FAIL();
+        }
+        if(data["day"] != 1){
+            FAIL();
+        }
+        if(data["numberOfCountries"] != 2){
+            FAIL();
+        }
+        if(data["numberOfAlliances"] != 0){
+            FAIL();
+        }
+        SUCCEED();
+    }
+
+    //Testing getCountryStats
+    TEST(GetSimulation, TestGetCountryStats){
+        json data = WarEngine::instance()->getCountryStats();
+        if(data["data"][0]["name"] != "Germany"){
+            FAIL();
+        }
+        if(data["data"][0]["resources"] != 40){
+            FAIL();
+        }
+        if(data["data"][0]["totalUnits"] != 3){
+            FAIL();
+        }
+        if(data["data"][1]["name"] != "America"){
+            FAIL();
+        }
+        if(data["data"][1]["resources"] != 70){
+            FAIL();
+        }
+        if(data["data"][1]["totalUnits"] != 4){
+            FAIL();
+        }
+        SUCCEED();
+    }
+
+    //Testing getAllianceStats
+    TEST(GetSimulation, TestGetAllianceStats){
+        json data = WarEngine::instance()->getAllianceStats();
+        if(data["data"] != "null"){
+            FAIL();
+        }
+        SUCCEED();
     }
 
 

@@ -1,5 +1,6 @@
 #include "WarSocket.h"
 #include "../war-commands/LoadNextDay.h"
+#include "../war-commands/LoadPreviousDay.h"
 #include "../war-commands/LoadBattle.h"
 #include "../war-commands/RetrieveSimulations.h"
 #include "../war-commands/SelectSimulation.h"
@@ -36,8 +37,11 @@ WarCommand* WarSocket::generateWarCommand(struct mg_connection* c, const char* m
             throw WarException("No command was sent", "invalid_command");
         }
 
-        if (data["command"] == "loadNextBattleDay") {
+        if (data["command"] == "loadNextDay") {
             return new LoadNextDay();
+        }
+        if (data["command"] == "loadPreviousDay") {
+            return new LoadPreviousDay();
         }
         if (data["command"] == "loadDayResults") {
             return new LoadBattle();

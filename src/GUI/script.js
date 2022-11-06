@@ -100,7 +100,7 @@ var click = 0;
 $(`.nextRound`).click(() => {
   if (click < 10) {
     if (preWar) {
-      request.command = "loadNextBattleDay";
+      request.command = "loadNextDay";
       $(`.nextRound`).text("Display Results");
       sendMessage(JSON.stringify(request));
     } else {

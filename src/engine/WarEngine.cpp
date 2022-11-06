@@ -16,11 +16,12 @@ WarEngine::WarEngine() {
     engine.seed(1);
 
     currentDay = 0;
+    currentSimulation = -1;
     warStage = NULL;
     theatres = NULL;
     theatreSize = 0;
 
-    loadSimulations("utilities/simulations.json");
+    loadSimulations();
 }
 
 WarEngine::~WarEngine() {
@@ -69,6 +70,8 @@ void WarEngine::reset() {
     }
 
     countryUnitNames.clear();
+    currentSimulation = -1;
+    beforeBattle = true;
     currentDay = 0;
 }
 
@@ -76,8 +79,8 @@ void WarEngine::reset() {
 // STARTUP FUNCTIONS
 // ======================================================================================
 
-void WarEngine::loadSimulations(std::string filePath) {
-    std::ifstream file(filePath);
+void WarEngine::loadSimulations() {
+    std::ifstream file("utilities/simulations.json");
 
     if(!file) {
         throw WarException("File containing simulations not found",
@@ -130,7 +133,7 @@ void WarEngine::selectSimulation(int index) {
 
     currentDay = 0;
     beforeBattle = true;
-    chosenSimulation = simulations[index];
+    currentSimulation = index;
 }
 
 // ======================================================================================
@@ -138,13 +141,13 @@ void WarEngine::selectSimulation(int index) {
 // ======================================================================================
 
 void WarEngine::loadNextBattleDay() {
-    if(chosenSimulation.is_null()) {
+    if(currentSimulation == -1) {
         throw WarException("Load a simulation before loading next battle day",
                            "load_simulation");
     }
-    if(chosenSimulation.contains("duration") &&
-       currentDay == chosenSimulation["duration"]) {
-        throw WarException("End of simulation reached", "simulation_finished");
+    if(simulations[currentSimulation].contains("duration") &&
+       currentDay == simulations[currentSimulation]["duration"]) {
+        throw WarException("End of simulation reached", "no_next_day");
     }
     if(!beforeBattle) {
         throw WarException(
@@ -152,7 +155,7 @@ void WarEngine::loadNextBattleDay() {
             "load_day_results");
     }
 
-    json& data = chosenSimulation["days"][currentDay++];
+    json& data = simulations[currentSimulation]["days"][currentDay++];
 
     beforeBattle = false;
     currentDay = data["turnNumber"];
@@ -179,7 +182,25 @@ void WarEngine::loadBattleDayResults() {
     beforeBattle = true;
 }
 
-void WarEngine::loadPreviousBattleDay() {}
+void WarEngine::loadPreviousBattleDay() {
+    if (currentSimulation == -1) {
+        throw WarException("Load a simulation before loading previous battle day",
+                           "load_simulation");
+    }
+    if(simulations[currentSimulation].contains("duration") && currentDay == 0) {
+        throw WarException("At the beginning of simulation", "no_previous_day");
+    }
+
+    int day = --currentDay;
+    selectSimulation(currentSimulation);
+
+    for (int i = 0; i < day; i++) {
+        loadNextBattleDay();
+        if (i != day - 1) {
+            loadBattleDayResults();
+        }
+    }
+}
 
 void WarEngine::loadSpecificBattleDay(int index) {}
 
@@ -555,7 +576,7 @@ json WarEngine::getEngineStats() {
     }
 
     return json{{"stage", stage},
-                {"duration", chosenSimulation["duration"]},
+                {"duration", simulations[currentSimulation]["duration"]},
                 {"day", currentDay},
                 {"numberOfCountries", countries.size()},
                 {"numberOfAlliances", alliances.size()}};

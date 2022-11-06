@@ -34,7 +34,7 @@ class WarEngine {
     std::unordered_map<std::string, UnitFactory*> unitFactories;
 
     std::vector<json> simulations;
-    json chosenSimulation;
+    int currentSimulation;
     int currentDay;
     bool beforeBattle;
 
@@ -80,7 +80,7 @@ class WarEngine {
 
     // ====================== LOAD SIMULATIONS ======================
 
-    void loadSimulations(std::string filePath);
+    void loadSimulations();
 
 
     void selectSimulation(int index);

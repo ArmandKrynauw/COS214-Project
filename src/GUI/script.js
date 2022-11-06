@@ -162,7 +162,8 @@ updateUI = (data) => {
           theatreData.seaPower == 0
         ) {
         } else {
-          let str = `<div class="TheatreHead">${theatreData.name}</div>`;
+          // ✠
+          let str = `<div class="TheatreHead">🦒 ${theatreData.name}</div>`;
           $(`.area_${theatre.coordinates} > .data`).append(str);
         }
       });

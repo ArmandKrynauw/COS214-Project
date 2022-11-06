@@ -53,7 +53,7 @@ public:
      * 
      * @return JSON object containing API command
     */
-    static WarCommand* generateWarCommand(struct mg_connection* c, const char* message);
+    static void generateWarCommand(struct mg_connection* c, const char* message);
 
     /**
      * Event handler function that defines connection's behavior.
@@ -66,6 +66,7 @@ public:
     static void WSHandler(struct mg_connection* c, int ev, void *ev_data, void* fn_data);
 
 private:
+    static WarCommand* command;
     const char* s_listen_on = "ws://127.0.0.1:8000";
     const char* s_web_root = ".";
 

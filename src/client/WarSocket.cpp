@@ -6,7 +6,11 @@
 #include "../war-commands/SelectSimulation.h"
 #include "../war-commands/LoadDay.h"
 
-WarSocket::WarSocket() {}
+WarCommand* WarSocket::command = NULL;
+
+WarSocket::WarSocket() {
+    command = NULL;
+}
 
 void WarSocket::listen() {
     struct mg_mgr mgr;  // Event manager
@@ -37,7 +41,7 @@ void WarSocket::verifyParamater(const json& data) {
     }
 }
 
-WarCommand* WarSocket::generateWarCommand(struct mg_connection* c, const char* message) {
+void  WarSocket::generateWarCommand(struct mg_connection* c, const char* message) {
     json data;
     json error;
 
@@ -47,44 +51,47 @@ WarCommand* WarSocket::generateWarCommand(struct mg_connection* c, const char* m
         if (!data.contains("command")) {
             throw WarException("No command was sent", "invalid_command");
         }
-
-        if (data["command"] == "loadNextDay") {
-            return new LoadNextDay();
+        else if (data["command"] == "loadNextDay") {
+            command = new LoadNextDay();
         }
-        if (data["command"] == "loadPreviousDay") {
-            return new LoadPreviousDay();
+        else if (data["command"] == "loadPreviousDay") {
+            command = new LoadPreviousDay();
         }
-        if (data["command"] == "loadDayResults") {
-            return new LoadBattle();
+        else if (data["command"] == "loadDayResults") {
+            command = new LoadBattle();
         }
-        if (data["command"] == "getAvailableSimulations") {
-            return new RetrieveSimulations();
+        else if (data["command"] == "getAvailableSimulations") {
+            command = new RetrieveSimulations();
         }
-        if(data["command"] == "selectSimulation") {
+        else if(data["command"] == "selectSimulation") {
             verifyParamater(data);
-            return new SelectSimulation(data["param"]);
+            command = new SelectSimulation(data["param"]);
         }
-        if(data["command"] == "loadSpecificDay") {
+        else if(data["command"] == "loadSpecificDay") {
             verifyParamater(data);
-            return new LoadDay(data["param"]);
+            command = new LoadDay(data["param"]);
         }
-
-        std::cout << "\033[1;31mError: Invalid Command\033[0m" << std::endl;
-        error = json{
-            {"error", "Invalid command was sent"},
-            {"code", "invalid_command"}
-        };
+        else {
+            std::cout << "\033[1;31mError: Invalid Command\033[0m" << std::endl;
+            error = json{
+                {"error", "Invalid command was sent"},
+                {"code", "invalid_command"}
+            };
+        }
     } catch (json::exception& e) {
         error = json{
             {"error", "Could not parse JSON"},
             {"code", "parse_error"}
         };
+        command = NULL;
     } catch (WarException& e) {
         error = e.getJSON();
+        command = NULL;
     }
 
-    sendMessage(c, error);
-    return NULL;
+    if (!command) {
+        sendMessage(c, error);
+    }
 }
 
 void WarSocket::WSHandler(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
@@ -99,7 +106,7 @@ void WarSocket::WSHandler(struct mg_connection *c, int ev, void *ev_data, void *
         }
     } else if (ev == MG_EV_WS_MSG) {
         struct mg_ws_message* wm = (struct mg_ws_message *) ev_data;
-        WarCommand* command = generateWarCommand(c, wm->data.ptr);
+        generateWarCommand(c, wm->data.ptr);
 
         if (!command) {
             return;
@@ -116,5 +123,6 @@ void WarSocket::WSHandler(struct mg_connection *c, int ev, void *ev_data, void *
         }
 
         delete command;
+        command = NULL;
     }
 }

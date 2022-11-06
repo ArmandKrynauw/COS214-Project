@@ -5,6 +5,11 @@
   --pink: #ea80fc;
   --white: #fff;
 }
+
+body {
+  overflow: hidden;
+}
+
 /* font-family: Arial;
   font-size: 37px;
   line-height: 35px;
@@ -100,6 +105,8 @@
   background-position: fixed;
   background-repeat: no-repeat;
   background-size: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 #enemyLeft {
@@ -259,27 +266,32 @@ img {
   padding: 30px;
 }
 
-/* _____________________________________________________________________tooltips */
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
+/* _____________________________________________________________________scrollable */
+.card-body-list {
+  height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  margin: 0 10px;
 }
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--medgray);
 }
 
-.tooltip:hover .tooltiptext {
-  visibility: visible;
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--lightgray);
 }
+
+/* Handle on hover
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+} */
+/* overflow-x: hidden !important;
+  overflow-y: auto !important;
+} */

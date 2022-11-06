@@ -178,7 +178,7 @@ updateUI = (data) => {
         ) {
         } else {
           // ✠
-          let str = `<div class="TheatreHead">🦒 ${theatreData.name}</div>`;
+          let str = `<div class="TheatreHead"> ${theatreData.name}</div>`;
           $(`.area_${theatre.coordinates} > .data`).append(str);
         }
       });
@@ -236,7 +236,7 @@ updateUI = (data) => {
             <div class="card-body head">
             <h5 class="card-title NameTheatre">${theatreData.name}</h5>
             </div>
-            <div class="card-body">
+            <div class="card-body card-body-list">
             <p class="SeaPower"><i class="fa-solid fa-ship"></i>  SeaPower: ${
               theatreData.seaPower
             }</p>

@@ -6,7 +6,9 @@
 
 
 class Engineers : public SupportCompany {
-    
+private:
+    Engineers(const Engineers& engineers);
+
 public:
     Engineers(Entity* unit);
 
@@ -21,6 +23,8 @@ public:
      * @return string : result of entity's getName() + -EG
      */
     virtual std::string getName() const override;
+
+    virtual Entity* clone() override;
 
     virtual ~Engineers();
 };

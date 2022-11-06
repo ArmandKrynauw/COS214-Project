@@ -4,7 +4,9 @@
 #include "Unit.h"
 
 class LandUnit : public Unit {
-private:
+protected:
+    LandUnit(const LandUnit& LandUnit);
+
 public:
     LandUnit(std::string name, std::string type, int HP, int damage, int value);
 

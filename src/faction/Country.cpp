@@ -185,7 +185,7 @@ json Country::allUnitsToJSON() {
     std::unordered_map<std::string, ArmedForce *>::iterator it;
     for (it = armedForces.begin(); it != armedForces.end(); ++it) {
         for (Entity* e: it->second->getEntities()) {
-            array.push_back(e->unitToJSON());
+            array.push_back(e->toJSON());
         }
     }
     return array;
@@ -225,4 +225,3 @@ json Country::researchToJSON() {
 }
 
 Country::~Country() {}
-

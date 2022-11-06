@@ -5,6 +5,7 @@
 #include "../product/LandUnitMedium.h"
 
 LandUnitFactory::LandUnitFactory() {
+    
     type = "land";
 }
 

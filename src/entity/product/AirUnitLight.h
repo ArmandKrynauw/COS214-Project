@@ -4,11 +4,13 @@
 #include "AirUnit.h"
 
 class AirUnitLight : public AirUnit {
-public:
-    AirUnitLight(std::string name, std::string type, int HP, int damage,
-                 int value);
+protected:
+    AirUnitLight(const AirUnitLight& airUnitLight);
 
-    virtual Entity *clone() override;
+public:
+    AirUnitLight(std::string name, std::string type, int HP, int damage, int value);
+
+    virtual Entity* clone() override;
 
     ~AirUnitLight();
 };

@@ -4,11 +4,13 @@
 #include "LandUnit.h"
 
 class LandUnitLight : public LandUnit {
+protected:
+    LandUnitLight(const LandUnitLight& landUnitLight);
+
 public:
     LandUnitLight();
 
-    LandUnitLight(std::string name, std::string type, int HP, int damage,
-                  int value);
+    LandUnitLight(std::string name, std::string type, int HP, int damage, int value);
 
     virtual Entity *clone() override;
 

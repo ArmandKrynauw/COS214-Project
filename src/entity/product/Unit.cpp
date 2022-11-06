@@ -4,8 +4,16 @@ using json = nlohmann::json;
 
 Unit::Unit() {}
 
+Unit::Unit(const Unit& unit) : Entity(unit) {
+    this->damage = unit.damage;
+    this->HP = unit.HP;
+    this->initialHP = unit.initialHP;
+    this->value = unit.value;
+	this->theatre = unit.theatre;
+}
+
 Unit::Unit(std::string name, std::string type, int HP, int damage, int value)
-        : Entity(name, type), HP(HP), damage(damage), value(value), theatre(NULL) ,initialHP(HP){}
+        : Entity(name, type), HP(HP), damage(damage), value(value), theatre(NULL) ,initialHP(HP) {}
 
 int Unit::getHP() const {
     return HP;
@@ -40,15 +48,11 @@ int Unit::getUnitCount() const {
     return 1;
 }
 
-void Unit::print() {
-    std::cout << this->name + " HP: " + std::to_string(this->HP) +
-                 " Damage: " + std::to_string(this->damage)
-              << std::endl;
-}
-
 void Unit::setTheatre(Theatre *theatre) {
     this->theatre = theatre;
 }
+
+void Unit::clearCasualties() {}
 
 json Unit::toJSON() const {
     return json{
@@ -59,16 +63,6 @@ json Unit::toJSON() const {
             {"damage",  damage},
             {"theatre", (theatre) ? theatre->getName() : "Evacuated"},
             {"id", id}
-    };
-}
-
-json Unit::unitToJSON() const {
-    return json{
-            {"name",    name},
-            {"type",    type},
-            {"initialHP",  initialHP},
-            {"damage",  damage},
-            {"currentHP", HP}
     };
 }
 

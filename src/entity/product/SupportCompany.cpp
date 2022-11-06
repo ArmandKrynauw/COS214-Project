@@ -4,6 +4,10 @@ SupportCompany::SupportCompany(Entity* entity) {
     this->entity = entity;
 }
 
+SupportCompany::SupportCompany(const SupportCompany& supportCompany) {
+    this->entity = entity->clone();
+}
+
 std::string SupportCompany::getType() const{
     return entity->getType();
 }
@@ -36,16 +40,12 @@ int SupportCompany::getUnitCount() const {
     return entity->getUnitCount();
 }
 
-void SupportCompany::print() {
-    entity->print();
-}
-
 void SupportCompany::setTheatre(Theatre *theatre) {
     entity->setTheatre(theatre);
 }
 
-Entity *SupportCompany::clone() {
-    return entity->clone();
+void SupportCompany::clearCasualties() {
+    entity->clearCasualties();
 }
 
 nlohmann::json SupportCompany::toJSON() const {
@@ -59,16 +59,6 @@ nlohmann::json SupportCompany::toJSON() const {
             {"id", getId()}
     };
     return entity->toJSON();
-}
-
-nlohmann::json SupportCompany::unitToJSON() const {
-    return json{
-            {"name",    getName()},
-            {"type",    getType()},
-            {"initialHP",  getInitialHP()},
-            {"damage",  getDamage()},
-            {"currentHP", getHP()}
-    };
 }
 
 SupportCompany::~SupportCompany() {

@@ -8,4 +8,6 @@ Entity *SeaUnitHeavy::clone() {
     return new SeaUnitHeavy(*this);
 }
 
+SeaUnitHeavy::SeaUnitHeavy(const SeaUnitHeavy &seaUnitHeavy) : SeaUnit(seaUnitHeavy){}
+
 SeaUnitHeavy::~SeaUnitHeavy() {}

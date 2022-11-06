@@ -4,6 +4,8 @@
 #include "LandUnit.h"
 
 class LandUnitHeavy : public LandUnit {
+protected:
+    LandUnitHeavy(const LandUnitHeavy &landUnitHeavy);
 public:
     LandUnitHeavy();
 

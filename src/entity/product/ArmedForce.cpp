@@ -8,6 +8,12 @@ using json = nlohmann::json;
 ArmedForce::ArmedForce(std::string name, std::string type)
         : Entity(name, type) {}
 
+ArmedForce::ArmedForce(const ArmedForce& armedForce) : Entity(armedForce) {
+    for (Entity* entity : armedForce.entities) {
+        entities.push_back(entity->clone());
+    }
+}
+
 ArmedForce::~ArmedForce() {
     for (int i = 0; i < entities.size(); i++) {
         delete entities[i];
@@ -109,31 +115,15 @@ void ArmedForce::clearCasualties() {
     }
 }
 
-Entity *ArmedForce::clone() {}
+Entity *ArmedForce::clone() {
+    return new ArmedForce(*this);
+}
 
 json ArmedForce::toJSON() const {
     json data = json::array();
 
     for (int i = 0; i < entities.size(); i++) {
         json j = entities[i]->toJSON();
-
-        if (j.is_array()) {
-            for (json e: j) {
-                data.push_back(e);
-            }
-        } else {
-            data.push_back(j);
-        }
-    }
-
-    return data;
-}
-
-json ArmedForce::unitToJSON() const {
-    json data = json::array();
-
-    for (int i = 0; i < entities.size(); i++) {
-        json j = entities[i]->unitToJSON();
 
         if (j.is_array()) {
             for (json e: j) {
@@ -155,22 +145,10 @@ void ArmedForce::update() {
     // this->setDamage(damage);
 }
 
-void ArmedForce::print() {
-    std::vector<Entity *>::iterator it;
-
-    for (it = entities.begin(); it != entities.end(); it++) {
-        (*it)->print();
-    }
-}
-
-Entity *ArmedForce::operator[](int index) {
-    return entities[index];
-}
-
 Entity *ArmedForce::getEntity(int index) {
     return entities[index];
 }
 
-std::vector<Entity *> ArmedForce::getEntities() {
+std::vector<Entity*> ArmedForce::getEntities() {
     return entities;
 }

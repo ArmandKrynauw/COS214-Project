@@ -168,6 +168,10 @@ void WarEngine::loadNextBattleDay() {
 }
 
 void WarEngine::loadBattleDayResults() {
+    if(currentSimulation == -1) {
+        throw WarException("Load a simulation before loading next battle day",
+                           "load_simulation");
+    }
     if(beforeBattle) {
         throw WarException("Load next battle day before loading day results",
                            "load_next_day");
@@ -743,7 +747,7 @@ Theatre* WarEngine::TestTheatre() {
     return theatres[0][0];
 }
 
-Theatre * WarEngine::findTheatre(std::string theatreName){
+Theatre * WarEngine::findTheatre(std::string theatreName) {
     for(int i = 0; i < theatreSize; i++) {
         for(int j = 0; j < theatreSize; j++) {
             if(theatres[i][j]->getName() == theatreName){

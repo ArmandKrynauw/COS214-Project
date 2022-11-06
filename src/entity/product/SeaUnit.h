@@ -4,7 +4,9 @@
 #include "Unit.h"
 
 class SeaUnit : public Unit {
-private:
+protected:
+    SeaUnit(const SeaUnit& seaUnit);
+
 public:
     SeaUnit(std::string name, std::string type, int HP, int damage, int value);
 

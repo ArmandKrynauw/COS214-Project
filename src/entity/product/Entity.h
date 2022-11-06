@@ -13,8 +13,10 @@ protected:
     std::string id;
     std::string type;
 
-public:
     Entity();
+    Entity(const Entity& unit);
+
+public:
     Entity(std::string name, std::string type);
 
     virtual std::string getName() const;
@@ -87,11 +89,6 @@ public:
     */
     virtual void setDamage(int damage);
 
-     /**
-     * Provides functionality to display the unit's name, hp and damage
-    */
-    virtual void print() = 0;
-
     /**
      * Provides functionality to set the theatre pointer to a theatre
      * @param theatre The theatre that Unit will now point to
@@ -101,7 +98,7 @@ public:
     /**
      * Provides functionality to remove all entity's that have died
     */
-    virtual void clearCasualties();
+    virtual void clearCasualties() = 0;
 
     /**
      * Provides functionality to clone an existing unit
@@ -123,19 +120,6 @@ public:
         }
     */
     virtual nlohmann::json toJSON() const = 0;
-
-    /**
-     * Provides functionality to parse data of the unit into json
-     * @return json object of format:
-     * {
-            {"name",    name},
-            {"type",    type},
-            {"initialHP",  initialHP},
-            {"damage",  damage},
-            {"currentHP", HP}
-        }
-    */
-    virtual nlohmann::json unitToJSON() const = 0;
 
     /**
      * Provides functionality to set the HP of the unit

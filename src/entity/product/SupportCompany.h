@@ -6,6 +6,8 @@
 class SupportCompany : public Entity {
 protected:
     Entity* entity;
+    SupportCompany(const SupportCompany& supportCompany);
+
 public:
     SupportCompany(Entity * entity);
     
@@ -49,45 +51,32 @@ public:
      */
     void setTheatre(Theatre *theatre) override;
 
+    virtual void clearCasualties() override;
+
     void setHP(int HP);
 
     void setDamage(int damage);
-        /**
+
+    /**
      * Provides functionality to reduce the entity's hp by taking damage
      * @param damage Damage used to reduce entity's hp
      * @return bool : check whether entity is dead -> entity hp ==0
      */
-
     bool takeDamage(int damage) override;
+
     /**
      * Provides functionality to call the entity's getUnitCount()
      * @return int : result of entity's getUnitCount()
      */
     int getUnitCount() const override;
-    /**
-     * Provides functionality to call the entity's print()
-     */
-    void print() override;
 
-    /**
-     * Provides functionality to call the entity's clone()
-     */
+    virtual Entity *clone() = 0; 
 
-    Entity *clone() override;
     /**
      * Provides functionality to call the entity's toJSON()
      * @return json : Result of entity's toJSON()
      */
-
     nlohmann::json toJSON() const override;
-    /**
-     * Provides functionality to call the entity's unitToJSON()
-     * @return json : result of entity's unitToJson()
-     */
-
-    virtual nlohmann::json unitToJSON() const override;
-
-
 
     virtual ~SupportCompany();
 };

@@ -74,7 +74,7 @@ Temporary Items
 # ---- Planning ----
 .html
 *.lck
-*.bak_006d
+/Diagrams/*.vpp.bak_*
 
 
 
@@ -86,3 +86,4 @@ Diagrams/COS 214 Project.vpp.bak_015d
 Diagrams/COS 214 Project.vpp.bak_016d
 Diagrams/COS 214 Project.vpp.bak_017d
 .idea
+Doxygen

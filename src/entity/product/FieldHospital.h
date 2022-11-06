@@ -4,6 +4,9 @@
 #include "SupportCompany.h"
 
 class FieldHospital : public SupportCompany {
+private:
+    FieldHospital(const FieldHospital& fieldHospital);
+
 public:
     FieldHospital(Entity* entity);
 
@@ -15,8 +18,9 @@ public:
      */
     std::string getName() const override;
 
-    virtual ~FieldHospital();
+    virtual Entity* clone() override;
 
+    virtual ~FieldHospital();
 };
 
 #endif  // FIELDHOSPITAL_H

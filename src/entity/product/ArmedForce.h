@@ -9,6 +9,8 @@ class ArmedForce : public Entity {
 private:
     std::vector<Entity *> entities;
 
+    ArmedForce(const ArmedForce& armedForce);
+
 public:
     ArmedForce(std::string name, std::string type);
 
@@ -17,8 +19,6 @@ public:
     void add(Entity *entity);
 
     void remove(Entity *entity);
-
-    void print();
 
     /**
      * Calculates the total damage capability of this armed force by summing
@@ -44,11 +44,7 @@ public:
 
     virtual nlohmann::json toJSON() const override;
 
-    virtual nlohmann::json unitToJSON() const override;
-
     void update();
-
-    Entity *operator[](int index);
 
     Entity *getEntity(int index);
 

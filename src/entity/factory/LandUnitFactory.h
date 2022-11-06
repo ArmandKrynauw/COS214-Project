@@ -11,8 +11,8 @@ public:
      * @param name Name of new light land unit
      * @return Unit pointer to new light land unit object
     */
-
     virtual Unit *createLightUnit(std::string name) override;
+    
     /**
      * Provides functionality to create a new medium land unit
      * @param name Name of new medium land unit

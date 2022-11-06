@@ -4,6 +4,9 @@
 #include "AirUnit.h"
 
 class AirUnitMedium : public AirUnit {
+protected:
+    AirUnitMedium(const AirUnitMedium &airUnitMedium);
+
 public:
     AirUnitMedium(std::string name, std::string type, int HP, int damage,
                   int value);

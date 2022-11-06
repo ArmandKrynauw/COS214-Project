@@ -8,6 +8,12 @@ Entity::Entity(std::string name, std::string type) {
     this->id = uuid::generate();
 }
 
+Entity::Entity(const Entity& entity) {
+    this->name = entity.name;
+    this->type = entity.type;
+    this->id = uuid::generate();
+}
+
 Entity::~Entity() {}
 
 std::string Entity::getId() const {
@@ -26,16 +32,8 @@ std::string Entity::getType() const {
     return type;
 }
 
-void Entity::clearCasualties() {}
+void Entity::setDamage(int damage) { }
 
-void Entity::setDamage(int damage) {
-    
-}
+Theatre* Entity::getTheatre() { return NULL; }
 
-Theatre* Entity::getTheatre() {
-
-}
-
-void Entity::setHP(int hp) {
-
-}
+void Entity::setHP(int hp) { }

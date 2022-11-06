@@ -1,5 +1,5 @@
 #include "client.h"
-
+#include "../utilities/WarException.h"
 #include <limits.h>
 
 #include <fstream>
@@ -21,7 +21,7 @@ void Client::runTest() {
 // TERMINAL MODE FUNCTIONS
 // ======================================================================================
 
-void Client::runTerminalMode() {
+void Client::runDevMode() {
     std::cout << "\033[1;32m==============SELECT SIMULATION===========\033[0m" << std::endl;
     json simulations = WarEngine::instance()->getAvailableSimulations();
     for (int i = 0; i < simulations.size(); i++) {
@@ -43,20 +43,142 @@ void Client::runSimulation() {
         std::cout << "Day " << stats["engine"]["day"].get<int>() + 1 << " commencing... " << std::endl;
         //json deaths = result["casualties"];
         WarEngine::instance()->loadNextBattleDay();
-        // std::cout<<WarEngine::instance()->getStats().dump(4)<<std::endl;
+        json data = WarEngine::instance()->getOverallUnits();
+        //std::cout<<data.dump(1)<<std::endl;
+        displayUnits(data,stats["engine"]["day"]);
         WarEngine::instance()->loadBattleDayResults();
         printDayResults();
-        //std::cout << WarEngine::instance()->clearCasualties().dump(1) << std::endl;
-        // WarEngine::instance()->clearCasualties();
-        // std::cout << WarEngine::instance()->clearCasualties().dump(2) << std::endl;
-        //  WarEngine::instance()->clearCasualties();
-        //pass data to GUI
+        
         std::cout << "Press any key to continue...";
         std::string input;
         std::cin >> input;
         std::cout << std::endl;
     }
 }
+
+void Client::displayUnits(const json &data, int day){
+    std::cout<<"Would you like to tweak Day "<<day + 1<<"? (Yes/No)"<<std::endl;
+    std::string input = "";
+    std::cin >> input;
+    std::cin.clear();
+    input = toLower(input);
+    if(input == "no" || input == "n") { return; }
+    std::cout<<input;
+    while(true){
+        if(toLower(input) != "yes" && toLower(input) != "y" && toLower(input) != "n" && toLower(input) != "no"){
+        std::cout<<"\033[1;31mInvalid Entry\033[0m"<<std::endl;
+        std::cin >> input;
+        std::cin.clear();
+        }
+        else if(toLower(input) == "n" || toLower(input) == "no"){
+            return;
+        }
+        else{
+            break;
+        }
+    }
+    
+    std::cout<<"\033[1;34m==================DEV MODE=====================\033[0m"<<std::endl;
+    std::unordered_map<std::string,int> countries;
+    std::vector<std::string> countries2;
+    for(json country : data["data"]){
+        countries[country["name"]] = 0;
+        int counter = 1;
+        countries2.push_back(country["name"]);
+        std::cout<<country["name"].get<std::string>()<<": "<<std::endl;
+        for(json unit : country["units"]){
+            std::cout<<"\t"<<counter++<<". "<<unit["name"].get<std::string>()<<" - "<<unit["currentHP"].get<int>()<<"HP"<<std::endl;
+            countries[country["name"].get<std::string>()]  = counter-1;
+        }
+    }
+    std::vector<std::string> countries3 = countries2;
+    for(int i = 0; i < countries3.size(); i++){
+        countries3[i] = toLower(countries3[i]);
+    }
+
+    while(true){
+        std::cout<<"\033[1;34mEnter the Country Name or 0 to continue with war: \033[0m";
+        std::string countryName = "";
+        
+        std::cin >> countryName;
+        std::cin.clear();
+        if(countryName == "0"){
+            break;
+        }
+        if (!(std::find(countries3.begin(), countries3.end(), toLower(countryName)) != countries3.end())){
+            std::cout<<"\033[1;31mCountry does not exist\033[0m"<<std::endl;
+        }
+        else{
+            std::string input = "";
+            int pos = 0;
+            while(true){
+                std::cout<<"\033[1;34mEnter index of unit to move: \033[0m";
+                std::cin >> input;
+                std::cin.clear();
+                std::stringstream ss(input);
+                ss >> pos;
+                // std::cout<<countryName<<std::endl;
+                // std::cout<<countries[countryName]<<std::endl;
+                if(pos > countries[countryName] || pos <= 0){
+                    std::cout<<"\033[1;31mIndex does not exist\033[0m"<<std::endl;
+                }
+                else{
+                    std::string type = "";
+                    for(json country : data["data"]){
+                        if(country["name"] == countryName){
+                            type = country["units"][pos-1]["type"];
+                            break;
+                        }
+                    }
+                    std::string theatre = "";
+                    Theatre * destination = NULL;
+                    while(true){
+                        std::cout<<"\033[1;34mEnter name of theatre where unit must be transported to: \033[0m";
+                        std::cin >> theatre;
+                        std::cin.clear();
+                        destination = WarEngine::instance()->findTheatre(theatre);
+                        if(!destination){
+                            std::cout<<"\033[1;31mTheatre does not exist\033[0m"<<std::endl;
+                        }
+                        else{
+                            int cnt = 0;
+                            int cnt2 = 0;
+                            for(json country : data["data"]){
+                                if(country["name"].get<std::string>() == countryName){
+                                    for(json unit : country["units"]){
+                                        if(type == unit["type"].get<std::string>() && cnt2 != pos-1){
+                                            cnt++;
+                                        }
+                                        else if(type == unit["type"].get<std::string>() && cnt2 == pos-1){
+                                            break;
+                                        }
+                                        cnt2++;
+                                    }
+                                    break;
+                                }
+                            }
+                            
+                            try{
+                                WarEngine::instance()->transportUnit(destination,countryName,type,cnt);
+                            }
+                            catch(WarException &e){
+                                std::cout<<"\033[1;31m"<<e.getJSON().dump(1)<<std::endl;
+                            }
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+            
+        }
+    }
+    std::cout<<"\033[1;34m===============================================\033[0m"<<std::endl;
+}
+
+
+
+
 
 void Client::printDayResults() {
     //Remove Casualties 
@@ -97,6 +219,14 @@ int Client::getIntegerInput(std::string prompt, int rangeStart, int rangeEnd) {
     }
 
     return toInt(line);
+}
+
+std::string Client::toLower(std::string data){
+    std::string d = data;
+    for(int i = 0; i  <d.length();i++){
+        d[i] = std::tolower(data[i]);
+    }
+    return d;
 }
 
 bool Client::isDigit(const std::string &str) {

@@ -207,6 +207,10 @@ public:
     */
     std::string getTarget(std::string factionName);
 
+    /**
+     * Provides functionality to destroy a Theatre object
+     * 
+     */
     virtual ~Theatre();
 };
 

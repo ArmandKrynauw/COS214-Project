@@ -97,7 +97,8 @@ Alliance * Country::getAlliance() {
 
 void Country::addEntity(Entity *entity) {
     if (resourceCount - entity->getValue() < 0) {
-        throw WarException("Insufficient resources available.",
+        
+    throw WarException("Insufficient resources available.",
                            "insufficient_resources");
     }
     resourceCount -= entity->getValue();
@@ -135,6 +136,10 @@ int Country::getEntityCount() {
 
 bool Country::checkForArmedForces() {
     return (armedForces["land"]->getUnitCount() == 0 && armedForces["air"]->getUnitCount() == 0 && armedForces["sea"]->getUnitCount() == 0) ? false : true;
+}
+
+ArmedForce * Country::getArmedForce(std::string type){
+    return armedForces[type];
 }
 
 // ==================JSON HELPER FUNCTIONS===========

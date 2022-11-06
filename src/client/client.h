@@ -13,7 +13,7 @@ using json = nlohmann::json;
 class Client {
 public:
     static Client* instance();
-    void runTerminalMode();
+    void runDevMode();
     void runTest();
 
 private:
@@ -27,7 +27,8 @@ private:
     void runSimulation();
     void printDayResults();
     void printUnit(const json &unit);
-
+    void displayUnits(const json &data, int day);
+    
     // =================== UTILITY FUNCTIONS ===================
     void loadSimulations(std::string filePath);
 
@@ -35,6 +36,7 @@ private:
     int getIntegerInput(std::string prompt, int rangeStart, int rangeEnd);
     bool isDigit(const std::string &str);
     int toInt(const std::string &str);
+    std::string toLower(std::string data);
 };
 
 #endif  // CLIENT_H

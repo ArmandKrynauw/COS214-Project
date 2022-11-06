@@ -364,6 +364,8 @@ class WarEngine {
      */
     std::pair<int, int> getLocation(const json& data);
 
+    Theatre * findTheatre(std::string theatreName);
+
     // ====================== TESTING FUNCTIONS ======================
 
     Theatre* TestTheatre();

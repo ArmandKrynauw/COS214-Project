@@ -145,6 +145,8 @@ public:
 
     json researchToJSON();
 
+    ArmedForce * getArmedForce(std::string type);
+
     virtual ~Country();
 };
 

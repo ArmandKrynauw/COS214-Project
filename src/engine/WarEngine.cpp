@@ -457,16 +457,20 @@ void WarEngine::relocateUnits(const json& data) {
 
 void WarEngine::transportUnit(Theatre* destination, const std::string& country,
                               const std::string& type, const int& index) {
+
+    if (countries[country]->getArmedForce(type)->getUnitCount() - 1 < index || index < 0) {
+        throw WarException("Transportation Error","index-not-found");
+    }
     Theatre* oldHome =
         ((Unit*)countries[country]->getEntity(type, index))->getTheatre();
     if(oldHome) {
-        // std::cout<<"Old: "<<oldHome->getName()<<" "<<((Unit *)
-        // countries[country]->getEntity(type, index))->getName()<<std::endl;
+        
         destination->addEntity(
             country, oldHome->removeEntity(
                          country, type,
                          countries[country]->getEntity(type, index)->getId()));
     } else {
+        
         destination->addEntity(
             country, ((Unit*)countries[country]->getEntity(type, index)));
     }
@@ -737,4 +741,15 @@ json WarEngine::getResearch() {
 
 Theatre* WarEngine::TestTheatre() {
     return theatres[0][0];
+}
+
+Theatre * WarEngine::findTheatre(std::string theatreName){
+    for(int i = 0; i < theatreSize; i++) {
+        for(int j = 0; j < theatreSize; j++) {
+            if(theatres[i][j]->getName() == theatreName){
+                return theatres[i][j];
+            }
+        }
+    }
+    return NULL;
 }

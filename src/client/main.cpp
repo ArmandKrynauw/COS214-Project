@@ -8,7 +8,7 @@ int main(int argc, char **argv) {
         WarSocket* socket = new WarSocket();
         socket->listen();
     } else {
-        Client::instance()->runTerminalMode();
+        Client::instance()->runDevMode();
     }
 
     return 0;

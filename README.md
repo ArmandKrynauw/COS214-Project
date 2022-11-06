@@ -1,20 +1,102 @@
-# COS214-Project
+<h1 align="center"> COS 214 Project - War Simulator </h1>
 
+![image](https://drive.google.com/uc?id=1txR5ga_jksTh8s4Q_TpBRcZVCXeaTRQO)
 
-Description:
+# Contents
 
-//I like trains && Turtles
+- [Contents](#contents)
+- [Description](#description)
+- [Documentation](#documentation)
+- [Demo](#demo)
+- [Setup](#setup)
+- [Team](#team)
 
-Participants :
+# Description
 
-Francois Combrinck - u21729752 - (CenturionLC)
+# Documentation
 
-Armand Krynauw - u04868286 - (Armand Krynauw)
+[Project Report](https://docs.google.com/document/d/1SO2EWCa2MpqC4dWhszZaXsbHXWcP98rih0-Rxo4v2IA/)
 
-Jake Mileham - u21692492 - (SharkmanZA)
+[API Documentation](https://demo.hedgedoc.org/enrh8j-uSU6jJ3V8m6NHWw?both)
 
-Karel Olwage - u21555258 - (Klairgo)
+# Demo
 
-Carlie Van Wyk - u21672823 - (CarlieVanWyk)
+# Setup
 
-Carl de Witt - u21444928 - (CarlDeWitt)
+# Team 
+
+<table>
+    <tr><th>Member</th><th>Roles</th><th>Description</th></tr>
+    <tr>
+      <td align="center">
+	  	Armand Krynauw <br> u04868286 <br>
+		<img src="https://drive.google.com/uc?id=10EWX9n-1mTHSHxJwbsVRJLh1zBj6u7sp">
+	  </td>
+	  <td align="center">
+	  	Team Lead <br> Backend <br> Documentation
+	  </td>
+	  <td>
+	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	  </td>
+	</tr>
+    <tr>
+      <td align="center">
+	  	Jake Mileham <br> u21692492 <br>
+		<img src="https://drive.google.com/uc?id=17ee1L1ThuAZWEaC8YheOAk2PrI3T8dg4">
+	  </td>
+	  <td align="center">
+	  	Backend <br> The Goat <br> Tik Tok Enjoyer
+	  </td>
+	  <td>
+	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Likes turtles.
+	  </td>
+	</tr>
+    <tr>
+      <td align="center">
+	  	Francois Combrinck <br> u21729752 <br>
+		<img src="https://drive.google.com/uc?id=15OLe9jc7WAyrgjDbdJALzFucQA9dYx2Z">
+	  </td>
+	  <td align="center">
+	  	Backend <br> Research <br> Documentation <br> Diagrams
+	  </td>
+	  <td>
+	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Likes trains.
+	  </td>
+	</tr>
+    <tr>
+      <td align="center">
+	  	Karel Olwage <br> u21555258 <br>
+		<img src="https://drive.google.com/uc?id=1_zs5LACK3IMqbx_M2YwnO5VOxfZnkrSA">
+	  </td>
+	  <td align="center">
+	  	Backend <br> Tester <br> No Sleep
+	  </td>
+	  <td>
+	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	  </td>
+	</tr>
+    <tr>
+      <td align="center">
+	  	Carl de Witt <br> u21444928
+		<img src="https://drive.google.com/uc?id=1eD81d04quhUwDW4XN1HWiiFwfYBZg24H">
+	  </td>
+	  <td align="center">
+	  	Front End <br> Diagrams
+	  </td>
+	  <td>
+	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	  </td>
+	</tr>
+    <tr>
+      <td align="center">
+	  	Carlie Van Wyk <br> u21672823
+		<img src="https://drive.google.com/uc?id=11mzcBdUJcONE9QpbmVV0vKUfGxzKbjYH">
+	  </td>
+	  <td align="center">
+	  	Front End <br> Diagrams
+	  </td>
+	  <td>
+	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	  </td>
+	</tr>
+</table>

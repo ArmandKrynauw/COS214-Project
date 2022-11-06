@@ -159,6 +159,8 @@ target_link_libraries(
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/build/war-commands/LoadNextDay.cpp.o
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/build/war-commands/RetrieveSimulations.cpp.o
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/build/war-commands/SelectSimulation.cpp.o
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/build/war-commands/LoadPreviousDay.cpp.o
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/build/war-commands/LoadDay.cpp.o
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/build/war-commands/WarCommand.cpp.o
 
 

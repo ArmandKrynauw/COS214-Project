@@ -32,7 +32,7 @@ bool WarSocket::checkMessage(char* message, std::string compare) {
     return strcmp(message, compare.c_str()) == 0;
 }
 
-void WarSocket::verifyParamater(const json& data) {
+void WarSocket::verifyParameter(const json& data) {
     if (!data.contains("param")) {
         throw WarException("No param was sent", "invalid_param");
     }
@@ -64,11 +64,11 @@ void  WarSocket::generateWarCommand(struct mg_connection* c, const char* message
             command = new RetrieveSimulations();
         }
         else if(data["command"] == "selectSimulation") {
-            verifyParamater(data);
+            verifyParameter(data);
             command = new SelectSimulation(data["param"]);
         }
         else if(data["command"] == "loadSpecificDay") {
-            verifyParamater(data);
+            verifyParameter(data);
             command = new LoadDay(data["param"]);
         }
         else {

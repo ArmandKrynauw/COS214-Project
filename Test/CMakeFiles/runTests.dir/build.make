@@ -143,6 +143,8 @@ runTests: ../src/build/war-commands/LoadBattle.cpp.o
 runTests: ../src/build/war-commands/LoadNextDay.cpp.o
 runTests: ../src/build/war-commands/RetrieveSimulations.cpp.o
 runTests: ../src/build/war-commands/SelectSimulation.cpp.o
+runTests: ../src/build/war-commands/LoadPreviousDay.cpp.o
+runTests: ../src/build/war-commands/LoadDay.cpp.o
 runTests: ../src/build/war-commands/WarCommand.cpp.o
 runTests: ../src/build/war-strategy/AttackStrategy.cpp.o
 runTests: ../src/build/war-strategy/CounterStrategy.cpp.o

@@ -43,7 +43,7 @@ public:
      * @throws WarException if no paramater is contained
      * @throws WarException if paramater is not an integer
     */
-    static void verifyParamater(const json& data);
+    static void verifyParameter(const json& data);
 
     /**
      * Provides functionality to verify that a valid JSON message has been

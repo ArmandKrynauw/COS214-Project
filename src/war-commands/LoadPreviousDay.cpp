@@ -7,3 +7,7 @@ void LoadPreviousDay::execute() {
 	WarEngine::instance()->loadPreviousBattleDay();
 	result = WarEngine::instance()->getStats();
 }
+
+std::string LoadPreviousDay::getDescription() {
+	return "Load Previous Battle Day";
+}

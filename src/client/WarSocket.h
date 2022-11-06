@@ -37,6 +37,15 @@ public:
     static bool checkMessage(char* message, std::string compare);
 
     /**
+     * Verifies that a param field is set correctly in the JSON command object.
+     *
+     * @param data JSON object containing command
+     * @throws WarException if no paramater is contained
+     * @throws WarException if paramater is not an integer
+    */
+    static void verifyParamater(const json& data);
+
+    /**
      * Provides functionality to verify that a valid JSON message has been
      * received. Will also validate that message has the correct JSON structure.
      * Will return a JSON object if message is validated. Will return a null

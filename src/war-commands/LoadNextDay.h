@@ -7,6 +7,7 @@ class LoadNextDay : public WarCommand {
 	public:
 		LoadNextDay();
 		virtual void execute() override;
+		virtual std::string getDescription() override;
 };
 
 #endif // LOADDAYCOMMAND_H

@@ -7,6 +7,7 @@ class LoadPreviousDay : public WarCommand {
 	public:
 		LoadPreviousDay();
 		virtual void execute() override;
+		virtual std::string getDescription() override;
 };
 
 #endif // LOADPREVIOUSDAY_H

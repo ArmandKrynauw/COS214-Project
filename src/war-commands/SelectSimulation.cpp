@@ -7,3 +7,7 @@ void SelectSimulation::execute() {
 	WarEngine::instance()->selectSimulation(simulation);
 	result = WarEngine::instance()->getStats();
 }
+
+std::string SelectSimulation::getDescription() {
+	return "Select Simulation - " + std::to_string(simulation);
+}

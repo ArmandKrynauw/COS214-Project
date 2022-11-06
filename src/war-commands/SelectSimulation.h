@@ -7,6 +7,7 @@ class SelectSimulation : public WarCommand {
 	public:
 		SelectSimulation(int simulation);
 		virtual void execute() override;
+		virtual std::string getDescription() override;
 
 	private:
 		int simulation;

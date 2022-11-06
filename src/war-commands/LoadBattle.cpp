@@ -7,3 +7,7 @@ void LoadBattle::execute() {
 	WarEngine::instance()->loadBattleDayResults();
 	result = WarEngine::instance()->getStats();
 }
+
+std::string LoadBattle::getDescription() {
+	return "Load Battle Day Results";
+}

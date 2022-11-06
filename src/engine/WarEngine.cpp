@@ -202,7 +202,24 @@ void WarEngine::loadPreviousBattleDay() {
     }
 }
 
-void WarEngine::loadSpecificBattleDay(int index) {}
+void WarEngine::loadSpecificBattleDay(int index) {
+    if (currentSimulation == -1) {
+        throw WarException("Load a simulation before loading a specific battle day",
+                           "load_simulation");
+    }
+    if(index < 0 || index > simulations[currentSimulation]["duration"]) {
+        throw WarException("Not a valid battle day index", "out-of-bounds");
+    }
+
+    selectSimulation(currentSimulation);
+
+    for (int i = 0; i < index; i++) {
+        loadNextBattleDay();
+        if (i != index - 1) {
+            loadBattleDayResults();
+        }
+    }
+}
 
 // ======================================================================================
 // HELPER CONTROL FUNCTIONS
@@ -292,8 +309,8 @@ void WarEngine::loadEscalation(const json& data) {
         warStage = newWarStage;
     }
     if(warStage && newWarStage && oldStage != newWarStage->getState()) {
-        std::cout << "=============== NEW WAR PHASE: " << warStage->getState()
-                  << " ===============" << std::endl;
+        // std::cout << "=============== NEW WAR PHASE: " << warStage->getState()
+        //           << " ===============" << std::endl;
     }
 }
 

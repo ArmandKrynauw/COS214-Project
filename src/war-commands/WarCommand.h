@@ -6,9 +6,10 @@
 
 class WarCommand {
 	public:
-		virtual ~WarCommand();
 		virtual void execute() = 0;
+		virtual std::string getDescription() = 0;
 		nlohmann::json getResult() const;
+		virtual ~WarCommand();
 
 	protected:
 		nlohmann::json result;

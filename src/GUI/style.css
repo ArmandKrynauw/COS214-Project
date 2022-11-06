@@ -16,6 +16,10 @@ body {
   letter-spacing: 5px;
   text-transform: uppercase;
   font-weight: 700; */
+.card-body-list {
+  /* height: 400px !important; */
+}
+
 #BattleName {
   cursor: pointer;
 }
@@ -159,7 +163,7 @@ img {
   justify-content: center;
   align-items: center;
   font-family: Arial;
-  font-size: 37px;
+  font-size: 30px;
   line-height: 35px;
   letter-spacing: 5px;
   text-transform: uppercase;

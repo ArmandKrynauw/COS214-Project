@@ -8,6 +8,8 @@ let rightSide = false;
 let selectBattle = true;
 var data;
 let maxIndex = 8;
+var click = 0;
+var stop = false;
 
 /**
  * If prewar is tue then the game is in prewar phase else it is in the postwar phase
@@ -96,9 +98,20 @@ timerLoad = () => {
 
 window.setTimeout(timerLoad, 500);
 
-var click = 0;
+$(`.BackBTN`).click(() => {
+  preWar = false;
+  click--;
+  request.command = "loadPreviousDay";
+  sendMessage(JSON.stringify(request));
+  preWar = true;
+  // $(`.nextRound`).text("Reload Results");
+});
+
 $(`.nextRound`).click(() => {
-  if (click < 10) {
+  if (click < 6 && stop == false) {
+    if (click == 5) {
+      stop = true;
+    }
     if (preWar) {
       request.command = "loadNextDay";
       $(`.nextRound`).text("Display Results");
@@ -112,12 +125,14 @@ $(`.nextRound`).click(() => {
     preWar = !preWar;
   } else {
     $(`.nextRound`).hide();
+    $(`.BackBTN`).hide();
     $(`#State`).text(`The battle is over`);
   }
   click++;
 });
 updateUI = (data) => {
-  // console.log(data.theatres.data);
+  click = data.engine.day;
+  // console.log(data);
   /**
    * Clear the theatres
    */
@@ -137,7 +152,7 @@ updateUI = (data) => {
    * this function is to simulate the next day in the battle it get data from the war engine object
    */
   // maxIndex = data.engine.duration;
-  $(`#Day`).text(`Day: ${nextIndex + 1}`);
+  $(`#Day`).text(`Day: ${data.engine.day}`);
 
   /**
    * this function is to set the state of the battle

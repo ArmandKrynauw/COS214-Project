@@ -8,12 +8,12 @@
  */
 class AirZone : public Zone {
     private:
-       /**
-        * Provides functionality to get the divisor of a AirZone object
-        * This function is a primitive operation of the Zone Template Method Design Pattern.
-        * 
-        * @return int Divisor of a AirZone
-        */
+        /**
+         * Provides functionality to get the divisor of a AirZone object
+         * This function is a primitive operation of the Zone Template Method Design Pattern.
+         * 
+         * @return int Divisor of a AirZone
+         */
         virtual int getDamageDivisor() override;
     public:
         /**
@@ -23,10 +23,10 @@ class AirZone : public Zone {
          */
         AirZone(std::string name);
         /**
-        * Provides functionality to get the type of the zone
-        * 
-        * @return string Type of the zone
-        */
+         * Provides functionality to get the type of the zone
+         * 
+         * @return string Type of the zone
+         */
         std::string getType() override;
         /**
          * Provide functionality to destroy a AirZone object.

@@ -23,10 +23,10 @@ class LandZone : public Zone {
          */
         LandZone(std::string name);
         /**
-        * Provides functionality to get the type of the zone
-        * 
-        * @return string Type of the zone
-        */
+         * Provides functionality to get the type of the zone
+         * 
+         * @return string Type of the zone
+         */
         std::string getType() override;
         /**
          * Provide functionality to destroy a LandZone object.

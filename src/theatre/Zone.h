@@ -31,13 +31,13 @@ class Zone {
          * all entities in the zone.
          * 
          * @return Total damage of all entities in zone
-        */
+         */
         int getTotalDamage();
         /**
          * Provides functionality to add an entity to the zone
          * 
          * @param entity Entity pointer to be added to the entities vector
-        */
+         */
         void addEntity(Entity *entity);
         /**
          * Provides functionality to remove an entity from the zone
@@ -70,7 +70,7 @@ class Zone {
          * @return Type of the zone
          */
         virtual std::string getType() = 0;
-         /**
+        /**
          * Provide functionality to destroy a Zone object.
          */
         virtual ~Zone();

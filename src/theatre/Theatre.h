@@ -43,7 +43,7 @@ class Theatre {
          * will happen.
          * 
          * @param name Name of the Faction to be added
-        */
+         */
         void addFaction(std::string name);
         /**
          * Provides functionality to remove a Faction from a Theatre. The Factions's
@@ -52,7 +52,7 @@ class Theatre {
          * over in the current Theatre.
          * 
          * @param name Name of the Faction to be removed
-        */
+         */
         void removeFaction(std::string name);
         /**
          * Provides functionality to get the percentage control of a faction in this theatre
@@ -85,7 +85,7 @@ class Theatre {
          * 
          * @param faction Name of the faction to be added
          * @param unit Unit to be add to the Theatre
-        */
+         */
         void addEntity(std::string faction, Entity *unit);
         /**
          * Provides functionality to remove a specific Faction's Unit from a
@@ -98,7 +98,7 @@ class Theatre {
          *
          * @return The removed Unit
          * @throws WarException if index is out of bounds or if Unit is not found
-        */
+         */
         Entity *removeEntity(std::string faction, std::string type, std::string id);
         /**
          * Provides functionality to get the name of the theatre
@@ -118,14 +118,14 @@ class Theatre {
          * 
          * @param faction Name of the faction whose Strategy has to be changed
          * @param strategy The new Strategy
-        */
+         */
         void changeStrategy(std::string faction, WarStrategy *strategy);
         /**
          * Provides functionality to simulate battles taking place for each turn in
          * the war. All the Factions in the Theatre will be iterated through and
          * their Strategies will be executed against the opposing Factions in the
          * Theatre.
-        */
+         */
         void battle();
         /**
          * Provides functionality to get percentage of resources a faction will receive. 
@@ -152,13 +152,13 @@ class Theatre {
          */
         void printStrategies();
         /**
-        * Provides functionality to return a json object containing data of the theatre
-        * 
-        * @param row Row index of theatre in array
-        * @param col Column index of theatre in array
-        * @return json JSON Object
-        * 
-        */
+         * Provides functionality to return a json object containing data of the theatre
+         * 
+         * @param row Row index of theatre in array
+         * @param col Column index of theatre in array
+         * @return json JSON Object
+         * 
+         */
         json toJSON(int row, int col);
         /**
          * Provides functionality to return the strategy for a given faction in string format.
@@ -181,7 +181,7 @@ class Theatre {
          * for the passed in faction.
          * 
          * @param factionName Name of a faction
-        */
+         */
         std::string getTarget(std::string factionName);
         /**
          * Provides functionality to destroy a Theatre object

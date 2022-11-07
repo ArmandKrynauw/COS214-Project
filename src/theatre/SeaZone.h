@@ -23,10 +23,10 @@ class SeaZone : public Zone {
          */
         SeaZone(std::string name);
         /**
-        * Provides functionality to get the type of the zone
-        * 
-        * @return string Type of the zone
-        */
+         * Provides functionality to get the type of the zone
+         * 
+         * @return string Type of the zone
+         */
         virtual std::string getType() override;
         /**
          * Provide functionality to destroy a SeaZone object.

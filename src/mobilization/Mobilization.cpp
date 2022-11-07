@@ -11,9 +11,7 @@ void Mobilization::setState(std::string state){
     this->state = state;
 }
 
-Mobilization::~Mobilization() {
-
-}
+Mobilization::~Mobilization() {}
 
 Mobilization*  Mobilization::checkWarState(std::string warState, std::string newMobilization) {
     if(warState == "Initial Stage"){

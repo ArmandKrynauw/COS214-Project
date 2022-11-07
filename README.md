@@ -68,7 +68,7 @@
 		</a>
 	  </td>
 	  <td>	  	
-		Francois is a computer science student who is passionate about learning new things and solving difficult problems. He is constantly striving to improve his skills and knowledge so that he can be the best computer science student he can be. I like trains.
+		Francois is a computer science student who is passionate about learning new things and solving difficult problems. He is constantly striving to improve his skills and knowledge so that he can be the best computer science student he can be. He like trains.
 	  </td>
 	</tr>
     <tr>

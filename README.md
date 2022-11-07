@@ -21,6 +21,8 @@ Generic War Simulator providing a well-defined interface for simulations to be w
 
 [API Documentation](https://demo.hedgedoc.org/enrh8j-uSU6jJ3V8m6NHWw?both)
 
+[Doxygen Documentation](https://drive.google.com/file/d/1q-uM2htVxp-8KeQncFkuyCWmhxxETV5i/view?usp=sharing)
+
 # Demo
 [Video](https://drive.google.com/file/d/1Ixjq8G2NmfpDN7dlwqV4i4Tf9jgXuKQH/view?usp=share_link)
 

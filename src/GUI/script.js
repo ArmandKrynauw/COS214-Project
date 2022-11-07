@@ -26,12 +26,12 @@ var click = 0;
 var stop = false;
 
 /**
- * If prewar is tue then the game is in prewar phase else it is in the postwar phase
+ * If prewar is true then the game is in prewar phase else it is in the postwar phase
  */
 var preWar = true;
 
 /**
- * Get the get paramaters from the url
+ * Get the get parameters from the url
  */
 const urlParams = new URLSearchParams(window.location.search);
 const battleIndex = urlParams.get("battleIndex");
@@ -96,7 +96,7 @@ sendMessage = (message) => {
 connectWarSocket();
 
 /**
- * set the countrys current strategy
+ * set the country's current strategy
  */
 timerLoad2 = () => {
   request.command = "selectSimulation";
@@ -106,7 +106,7 @@ timerLoad2 = () => {
 };
 
 /**
- * Initialise the units for each country
+ * Initialize the units for each country
  */
 timerLoad = () => {
   request.command = "getAvailableSimulations";
@@ -165,8 +165,8 @@ endSim = () => {
   $(`#State`).text(`The battle is over`);
 };
 /**
- * This fucntion is used to update the UI
- * it recieves json data from the warsocket
+ * This function is used to update the UI
+ * it receives json data from the warsocket
  * and updates the UI accordingly to the data
  */
 updateUI = (data) => {
@@ -198,8 +198,8 @@ updateUI = (data) => {
   $(`#State`).text(data.engine.stage);
 
   /**
-   * This fucntion puts the representative theatres into the theatremap so that it can be disaplyed to the client
-   * @logic loop throught the json data and loop through each theathre then we loop through each threatre threatres data and place the name and info about the theatre in the
+   * This function puts the representative theatres into the theatre map so that it can be displayed to the client
+   * @logic loop through the json data and loop through each theatre then we loop through each theatre theatre data and place the name and info about the theatre in the
    * block
    */
   const theatres = data.theatres.data;
@@ -231,7 +231,7 @@ updateUI = (data) => {
   var span = document.getElementsByClassName("close")[0];
 
   /**
-   * this function opens the modal and displays the countries inside the current threatre nad the units that are inside of the threatre
+   * this function opens the modal and displays the countries inside the current theatre nad the units that are inside of the threatre
    * @stage1 open the modal with the correct data
    * @stage2 loop through the theatres and find the correct theatre
    * @stage3 loop through the theatre units and find the correct theatre
@@ -337,7 +337,7 @@ updateUI = (data) => {
       });
     });
     /**
-     * This will add the stratery to the card of the country
+     * This will add the strategy to the card of the country
      */
     const strats = data.strategies.data;
     strats.forEach((strat) => {
@@ -394,7 +394,7 @@ updateUI = (data) => {
   /*--------Overall work---------*/
   /**
    * This is used to update all the list data per country depending on the country selected
-   * team4 is used to check wheter there are alliances or not
+   * team4 is used to check whether there are alliances or not
    */
   if (team4) {
     if (leftSide) {
@@ -470,7 +470,7 @@ $(`.Casualties1`).click(() => {
   $(`.cau1List`).toggleClass(`hide`);
 });
 /**
- * These next few functions are there to dispaly the information on the units and 2 countries that are fighting
+ * These next few functions are there to display the information on the units and 2 countries that are fighting
  */
 showLeftTroops = () => {
   $(`.list0`).toggleClass("hide");
@@ -545,7 +545,7 @@ $(`.img1`).click(() => {
 });
 
 /**
- * This function will initialise the battle
+ * This function will initialize the battle
  */
 initialiseBattle = (data) => {
   data = data[battleIndex];
@@ -578,7 +578,7 @@ initialiseBattle = (data) => {
 };
 
 /**
- * Function to display all the UNITS currenlty fighting to the screen according to their index
+ * Function to display all the UNITS currently fighting to the screen according to their index
  */
 displayUnits = (index, side, overallUnits) => {
   overallUnits = data.overallUnits.data;
@@ -611,7 +611,7 @@ displayUnits = (index, side, overallUnits) => {
 };
 
 /**
- * this faunction will switch the flags of the nations and change their name
+ * this function will switch the flags of the nations and change their name
  */
 switchflag = (side, country) => {
   $(`.img${side}`).attr(
@@ -623,7 +623,7 @@ switchflag = (side, country) => {
 
 /**
  * This function loads in the casualties after each round
- * it takes all the countires current theatres and puts them into one
+ * it takes all the countries current theatres and puts them into one
  * group
  */
 displayCasualties = (data, country, side) => {
@@ -666,7 +666,7 @@ setResources = (index, side, data) => {
 };
 
 /**
- * set the countrys current strategy
+ * set the country's current strategy
  */
 setStrategy = (index, side, data) => {
   const strategy = data.countries.data[index].strategy;

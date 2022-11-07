@@ -1,3 +1,17 @@
+/**
+ * Variables to store data about the current round of data
+ * @ws - the websocket
+ * @data - the data from the websocket
+ * @Nations - the names of the nations
+ * @team4 - if there are 4 nations
+ * @battleIndex - the index of the battle
+ * @loadBattle - if the battle is loaded
+ * @selectBattle - if the battle is selected
+ * @leftSide - if you want to change the left side
+ * @rightSide - if you want to change the right side
+ * @click -keeps track of the days
+ * @stop - if the simulation is stopped
+ */
 var ws;
 let nextIndex = 0;
 let Nations = new Array();
@@ -81,16 +95,20 @@ sendMessage = (message) => {
 
 connectWarSocket();
 
+/**
+ * set the countrys current strategy
+ */
 timerLoad2 = () => {
-  // second to execute
   request.command = "selectSimulation";
   request.param = parseInt(battleIndex);
   sendMessage(JSON.stringify(request));
   $(`.nextRound`).text("Load Battle   ");
 };
 
+/**
+ * Initialise the units for each country
+ */
 timerLoad = () => {
-  // fisrt to execute
   request.command = "getAvailableSimulations";
   sendMessage(JSON.stringify(request));
   window.setTimeout(timerLoad2, 500);
@@ -98,21 +116,33 @@ timerLoad = () => {
 
 window.setTimeout(timerLoad, 500);
 
+/**
+ * call the memento function inside the warsocket
+ */
 $(`.BackBTN`).click(() => {
   preWar = false;
-  click--;
+  click = 0;
   request.command = "loadPreviousDay";
   sendMessage(JSON.stringify(request));
   preWar = true;
-  // $(`.nextRound`).text("Reload Results");
+  stop = false;
 });
 
+/**
+ * This click Function does all the work
+ * It will change the nations and the resources
+ * iT will call the right functions with the warsocket so that the right data
+ * will be displayed
+ */
 $(`.nextRound`).click(() => {
+  console.log(click + " " + stop);
   if (click < 6 && stop == false) {
-    if (click == 5) {
-      stop = true;
-    }
     if (preWar) {
+      if (click + 1 == 6) {
+        stop = true;
+        endSim();
+        return;
+      }
       request.command = "loadNextDay";
       $(`.nextRound`).text("Display Results");
       sendMessage(JSON.stringify(request));
@@ -124,15 +154,23 @@ $(`.nextRound`).click(() => {
     }
     preWar = !preWar;
   } else {
-    $(`.nextRound`).hide();
-    $(`.BackBTN`).hide();
-    $(`#State`).text(`The battle is over`);
+    endSim();
   }
   click++;
 });
+
+endSim = () => {
+  $(`.nextRound`).hide();
+  $(`.BackBTN`).hide();
+  $(`#State`).text(`The battle is over`);
+};
+/**
+ * This fucntion is used to update the UI
+ * it recieves json data from the warsocket
+ * and updates the UI accordingly to the data
+ */
 updateUI = (data) => {
   click = data.engine.day;
-  // console.log(data);
   /**
    * Clear the theatres
    */
@@ -177,7 +215,6 @@ updateUI = (data) => {
           theatreData.seaPower == 0
         ) {
         } else {
-          // ✠
           let str = `<div class="TheatreHead"> ${theatreData.name}</div>`;
           $(`.area_${theatre.coordinates} > .data`).append(str);
         }
@@ -355,11 +392,13 @@ updateUI = (data) => {
   };
 
   /*--------Overall work---------*/
-
+  /**
+   * This is used to update all the list data per country depending on the country selected
+   * team4 is used to check wheter there are alliances or not
+   */
   if (team4) {
     if (leftSide) {
       switchflag(0, 2);
-      // CHANGE THISSSSSSSSSSSSSSSSSSS
       displayUnits(2, 0, data);
       setResources(2, 0, data);
       displayCasualties(data, 2, 0);
@@ -374,7 +413,6 @@ updateUI = (data) => {
 
     if (rightSide) {
       switchflag(1, 3);
-      // CHANGE THISSSSSSSSSSSSSSSSSSS
       displayUnits(3, 1, data);
       setResources(3, 1, data);
       displayCasualties(data, 3, 1);
@@ -468,7 +506,6 @@ showRightRes = () => {
 /**
  * This click changes  the sides of the battle
  */
-
 $(`.img0`).click(() => {
   if (team4) {
     if (!leftSide) {
@@ -531,8 +568,6 @@ initialiseBattle = (data) => {
     team4 = true;
   }
 
-  // console.log(Nations);
-
   /**
    * set the image flags of each nation
    */
@@ -566,9 +601,6 @@ displayUnits = (index, side, overallUnits) => {
     }
     let percentage = Math.round((unit.currentHP / unit.initialHP) * 100);
     $(`.list${side}`).append(
-      // `<li class="list-group-item">${type}  ${unit.name}  ${Math.round(
-      //   (unit.currentHP / unit.initialHP) * 100
-      // )}%</li>`
       `<li class="list-group-item">
         <div>${type}  ${unit.name}</div>
         <div class=" mb-2 list-group-item progress-bar progress-bar-danger progress-bar-striped active" 
@@ -595,7 +627,6 @@ switchflag = (side, country) => {
  * group
  */
 displayCasualties = (data, country, side) => {
-  // console.log(data.casualties);
   const casualties = data.casualties.data;
   $(`.cau${side}List`).empty();
   country = Nations[country].replace(" ", "");
@@ -662,7 +693,6 @@ setMobANDRes = (index, side, data) => {
     if (indvRes.name.replace(" ", "") == Nations[index].replace(" ", "")) {
       $(`.listRes${side}`).empty();
       $(`.listRes${side}`).append(
-        // `<li class="list-group-item"><i class="fa-solid fa-coins"></i> Industry: ${percentageIndustry}</li>`
         `<li class="list-group-item">
           <i class="fa-solid fa-coins"></i> Industry 
           <br> 
@@ -671,7 +701,6 @@ setMobANDRes = (index, side, data) => {
           </div></li>`
       );
       $(`.listRes${side}`).append(
-        // `<li class="list-group-item"><i class="fa-solid fa-volume-high"></i> Propeganda: ${percentagePropaganda}</li>`
         `<li class="list-group-item">
           <i class="fa-solid fa-volume-high"></i> Propaganda 
           <br> 
@@ -682,7 +711,6 @@ setMobANDRes = (index, side, data) => {
     }
   });
   const mobilization = data.mobilization.data;
-  // console.log(mobilization);
   mobilization.forEach((indvMob) => {
     if (indvMob.name.replace(" ", "") == Nations[index].replace(" ", "")) {
       $(`.Mob${side}`).empty();

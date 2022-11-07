@@ -87,7 +87,7 @@ namespace {
         }
     }
 
-
+    //Testing checkForFaction with invalid faction
     TEST(ChangeFactionStrategy, TestCheckForInValidFaction){
         try{
             Theatre *t = WarEngine::instance()->TestTheatre();
@@ -115,6 +115,7 @@ namespace {
             FAIL();
         }
     }
+
     //Testing the create of valid unit type
     TEST(GenerateUnit, TestCreationOfValidUnit){
         Entity *entity = WarEngine::instance()->generateUnit("Germany", "LightLandUnit", "NA");
@@ -320,9 +321,6 @@ namespace {
             FAIL() << "Germany research";
         }
     }
-
-
-
 
     //Testing loadNextBattleDay
     //Testing loadNextBattleDay before battle day results 

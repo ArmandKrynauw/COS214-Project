@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Mobilization.h"
 /**
- * This class is a ConcreteState for the Mobilization State Design Pattern. This State modifies a countries
+ * This class is a ConcreteState for the Mobilization State Design Pattern Hierarchy. This State modifies a countries
  * resources by a factor of 0.6 and sets the morale to -2.
  */
 class WarEconomy : public Mobilization {

@@ -3,7 +3,7 @@
 
 #include <string>
 /**
- * This class is the AbstractState for the State Design Pattern. This State pattern provides countries with
+ * This class is the AbstractState for the WarStrategy State Design Pattern Hierarchy. This State pattern provides countries with
  * different strategies to use in theatres where each strategy has its advantages and disadvantages.
  */
 class WarStrategy {

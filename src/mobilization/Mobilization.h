@@ -8,7 +8,7 @@ class PartialMobilization;
 class TotalMobilization;
 
 /**
- * This class is the AbstractState for the Mobilization State Design Pattern. This State pattern modifies
+ * This class is the AbstractState for the Mobilization State Design Pattern Hierarchy. This State pattern modifies
  * countries' resources by an increase or decrease depending on the mobilization state of the country.
  */
 class Mobilization {

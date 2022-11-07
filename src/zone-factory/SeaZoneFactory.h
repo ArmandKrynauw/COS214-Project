@@ -4,7 +4,7 @@
 #include "ZoneFactory.h"
 #include "../theatre/SeaZone.h"
 /**
- * This class is a ConcreteCreator for the ZoneFactory Factory Method Design Pattern. This Creator
+ * This class is a ConcreteCreator for the ZoneFactory Factory Method Design Pattern Hierarchy. This Creator
  * creates SeaZone objects to house entities of type "sea".
  */
 class SeaZoneFactory : public ZoneFactory {

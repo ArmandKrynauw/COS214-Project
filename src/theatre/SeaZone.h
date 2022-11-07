@@ -3,7 +3,7 @@
 
 #include "Zone.h"
 /**
- * This class is a ConcreteClass of the Zone Template Method Design Pattern. This class is used to house entities
+ * This class is a ConcreteClass of the Zone Template Method Design Pattern Hierarchy. This class is used to house entities
  * of type "sea" and has a unique divisor of (unitCount / 2).
  */
 class SeaZone : public Zone {

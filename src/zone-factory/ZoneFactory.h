@@ -5,7 +5,7 @@
 
 #include "../theatre/Zone.h"
 /**
- * This is class is the AbstractCreator for the Factory Method Design Pattern. This pattern is
+ * This is class is the AbstractCreator for the ZoneFactory Factory Method Design Pattern Hierarchy. This pattern is
  * used to create different zones to be housed in theatres which is used for the 3 different types
  * of entities to fight being "land", "sea" or "air".
  */

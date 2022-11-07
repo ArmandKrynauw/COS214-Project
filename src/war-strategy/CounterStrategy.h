@@ -3,7 +3,7 @@
 
 #include "WarStrategy.h"
 /**
- * This class is a ConcreteState of the WarStrategy State Pattern. This state is used if a country wants
+ * This class is a ConcreteState of the WarStrategy State Pattern Hierarchy. This state is used if a country wants
  * to counter on a battle day. A country may have better damage when countering if the opposing country
  * has a planned attack strategy otherwise the country will provide less that usual damage.
  */

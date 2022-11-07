@@ -4,7 +4,7 @@
 #include "ZoneFactory.h"
 #include "../theatre/AirZone.h"
 /**
- * This class is a ConcreteCreator for the ZoneFactory Factory Method Design Pattern. This Creator
+ * This class is a ConcreteCreator for the ZoneFactory Factory Method Design Pattern Hierarchy. This Creator
  * creates AirZone objects to house entities of type "air".
  */
 class AirZoneFactory : public ZoneFactory {

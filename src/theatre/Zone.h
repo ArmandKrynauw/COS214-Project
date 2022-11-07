@@ -10,7 +10,7 @@
 
 class Entity;
 /**
- * This class is the AbstractClass in the Template Method Design Pattern. This pattern is used to house different
+ * This class is the AbstractClass for the Zone Template Method Design Pattern Hierarchy. This pattern is used to house different
  * types of entities being "land", "sea" or "air". Each different zone will have a different divisor dependant on
  * the type of entities it holds.
  */

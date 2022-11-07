@@ -3,7 +3,7 @@
 
 #include "WarStrategy.h"
 /**
- * This class is a ConcreteState of the WarStrategy State Pattern. This state is used if a country wants
+ * This class is a ConcreteState of the WarStrategy State Pattern Hierarchy. This state is used if a country wants
  * to attack on a battle day. If the current attack strategy was planned a country will have 1.5 times more damage else
  * the country will have the normal damage.
  */

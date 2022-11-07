@@ -53,9 +53,9 @@ public:
 
     virtual void clearCasualties() override;
 
-    void setHP(int HP);
+    void setHP(int HP) override;
 
-    void setDamage(int damage);
+    void setDamage(int damage) override;
 
     /**
      * Provides functionality to reduce the entity's hp by taking damage
@@ -70,7 +70,7 @@ public:
      */
     int getUnitCount() const override;
 
-    virtual Entity *clone() = 0; 
+    virtual Entity *clone() override = 0; 
 
     /**
      * Provides functionality to call the entity's toJSON()

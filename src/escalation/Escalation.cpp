@@ -11,15 +11,16 @@ Escalation * Escalation::checkStageOfWar(std::string stage) {
     if(stage == "Initial Stage"){
         return new EarlyStage(stage);
     } 
-    
     if (stage == "EarlyStage") {
         return new EarlyStage(stage);
     }
     if (stage == "MiddleStage") {
         return new MiddleStage();
-    } else if (stage == "LateStage") {
+    }
+    if (stage == "LateStage") {
         return new LateStage();
     }
+    return NULL;
 }
 
 Escalation::~Escalation() { }

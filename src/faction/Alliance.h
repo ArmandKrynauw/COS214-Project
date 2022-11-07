@@ -42,7 +42,7 @@ class Alliance : public Faction {
          * @param researchPoints Total resources to research
          * @param category Category to invest
          */
-        virtual void setResearch(int researchPoints, std::string category);
+        virtual void setResearch(int researchPoints, std::string category) override;
         /**
          * Provides functionality to get total research of a category
          * 

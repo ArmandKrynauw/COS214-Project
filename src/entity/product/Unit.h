@@ -45,7 +45,7 @@ public:
      * Provides functionality to return the Theatre the Unit is stored in
      * @return Theatre* : Theatre Unit is stored in
     */
-    Theatre *getTheatre();
+    Theatre *getTheatre() override;
 
     /**
      * Provides functionality to set the theatre pointer to a theatre
@@ -59,13 +59,13 @@ public:
      * Provides functionality to set the HP of the unit
      * @param HP The new HP that the unit will be set to
     */
-    void setHP(int HP);
+    void setHP(int HP) override;
 
     /**
      * Provides functionality to set the damage of the unit
      * @param damage The new damage that the unit will be set to
     */
-    void setDamage(int damage);
+    void setDamage(int damage) override;
 
     /**
      * Provides functionality to reduce hp by taking damage
@@ -85,7 +85,7 @@ public:
      * 
      * @return Entity pointer to new clone
     */
-    virtual Entity *clone() = 0;
+    virtual Entity *clone() override = 0;
 
     /**
      * Provides functionality to parse data of the unit into json

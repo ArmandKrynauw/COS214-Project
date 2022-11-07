@@ -302,7 +302,6 @@ void WarEngine::loadWarFactors(const json& data) {
     loadMobilization(data["mobilization"]);
 }
 
-// TODO: If time, change to produce JSON
 void WarEngine::loadEscalation(const json& data) {
     std::string oldStage = "";
     Escalation* newWarStage = NULL;
@@ -544,7 +543,6 @@ json WarEngine::clearCasualties() {
     return json{{"data", data}};
 }
 
-// TODO: If time, change to produce JSON
 void WarEngine::viewStrategies() {
     std::cout << "\033[1;32m=================TEST STRATS================="
               << std::endl;

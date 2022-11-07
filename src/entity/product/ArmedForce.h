@@ -28,7 +28,7 @@ public:
      */
     virtual int getDamage() const override;
     virtual int getHP() const override;
-    virtual int getInitialHP() const;
+    virtual int getInitialHP() const override;
 
     virtual bool takeDamage(int damage) override;
 

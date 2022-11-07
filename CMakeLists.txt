@@ -1,12 +1,14 @@
-cmake_minimum_required(VERSION 2.6)
-project(WarThunder)
- 
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/src/utilities/data.json DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/src/build/utilities)
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/src/utilities/simulations.json DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/src/build/utilities)
+cmake_minimum_required(VERSION 3.2)
+project(WarSimulator)
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF) 
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/src/utilities/simulations.json DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/build/utilities)
 
 add_custom_target(run ./main)
-add_custom_target(gui ./main gui)
+add_custom_target(dev ./main dev)
 
 file(GLOB client_source ${CMAKE_CURRENT_SOURCE_DIR}/src/client/*.cpp)
 file(GLOB client_header ${CMAKE_CURRENT_SOURCE_DIR}/src/client/*.h)

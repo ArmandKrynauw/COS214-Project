@@ -21,6 +21,33 @@
 # Demo
 
 # Setup
+## Prerequisites
+
+* CMake >= 3.2
+
+## Cloning
+```
+git clone 
+```
+## Building
+This project can be build using CMake:
+```
+mkdir build
+cd build
+cmake ..
+make
+```
+
+## Running
+For Web UI mode:
+```
+make run
+```
+
+For design mode:
+```
+make dev
+```
 
 # Team 
 
@@ -38,7 +65,7 @@
 		</a>
 	  </td>
 	  <td>
-	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	  	A 2nd year BSc Computer Science student at the University of Pretoria interested in the magical world of Mathematics, Statistics and Software Engineering ඞ.
 	  </td>
 	</tr>
     <tr>
@@ -67,8 +94,8 @@
 			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
 		</a>
 	  </td>
-	  <td>	  	
-		Francois is a computer science student who is passionate about learning new things and solving difficult problems. He is constantly striving to improve his skills and knowledge so that he can be the best computer science student he can be. He like trains.
+	  <td>
+		 A computer science student who is passionate about learning new things and solving difficult problems. He is constantly striving to improve his skills and knowledge so that he can be the best computer science student he can be. He likes trains.
 	  </td>
 	</tr>
     <tr>
@@ -89,10 +116,10 @@
     <tr>
       <td align="center">
 	  	Carl de Witt <br> u21444928
-		<img src="https://drive.google.com/drive/folders/1kpOzvf1ndIH5vZztdLhETL_au4FzB41D">
+		<img src="https://drive.google.com/uc?id=1eD81d04quhUwDW4XN1HWiiFwfYBZg24H">
 	  </td>
 	  <td align="center">
-	  	Front End <br> Diagrams<br> retired F1 Driver<br><br>
+	  	Frontend <br> Diagrams<br> retired F1 Driver<br><br>
 		<a href="https://github.com/CarlDeWitt">
 			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
 		</a>
@@ -107,13 +134,13 @@
 		<img src="https://drive.google.com/uc?id=11mzcBdUJcONE9QpbmVV0vKUfGxzKbjYH">
 	  </td>
 	  <td align="center">
-	  	Front End <br> Diagrams <br> PHP Expert <br><br>
+	  	Frontend <br> Diagrams <br> PHP Expert <br><br>
 		<a href="https://github.com/CarlieVanWyk">
 			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
 		</a>
 	  </td>
 	  <td>
-	  	I am a 2nd year student and am currently loving the BIS Multimedia degree at TUKS. I love working with people and seeing hard work pay off.
+	  	I am a 2nd year student and am currently loving the BIS Multimedia degree at TUKS. I love working with people and seeing hard work pay off.l
 	  </td>
 	</tr>
 </table>

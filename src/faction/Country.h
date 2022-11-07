@@ -87,7 +87,7 @@ class Country : public Faction {
          * @param researchPoints Total points to research
          * @param category Category to research
          */
-        virtual void setResearch(int researchPoints,std::string category);
+        virtual void setResearch(int researchPoints,std::string category) override;
         /**
          * Provides functionality to get current research of a category at
          * research[i]

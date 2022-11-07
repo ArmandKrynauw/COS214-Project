@@ -22,6 +22,16 @@
 
 using json = nlohmann::json;
 
+/**
+ * @brief Main control system for war simulations.
+ *
+ * Provides an easy-to-understand interface to process and parse war simulations
+ * written in JSON format. It generates well-structured JSON of war statistics
+ * which is used to populate the interactive user interface. It controls all the
+ * various different subsystems required for a functioning war simulation. The
+ * main subsystems include Theatres, Factions, Entities, War Escalation, Country
+ * Research and Country Mobilization.
+*/
 class WarEngine {
    private:
     std::unordered_map<std::string, Alliance*> alliances;
@@ -88,6 +98,7 @@ class WarEngine {
      * 
      */
     void loadSimulations();
+
     /**
      * Provides functionality to call loadSimulation() with a specific simulation
      * by using index to get at simulations[index] and parse into loadSimulation().
@@ -100,7 +111,7 @@ class WarEngine {
      * loaded into the engine. Also includes additional information about each
      * simulation like Countries and Alliances partaking in the simulation. See
      * https://demo.hedgedoc.org/enrh8j-uSU6jJ3V8m6NHWw#Available-Simulations
-     * 
+     *
      * @return JSON array containing available simulations
     */
     json getAvailableSimulations();
@@ -375,7 +386,14 @@ class WarEngine {
      */
     std::pair<int, int> getLocation(const json& data);
 
-    Theatre * findTheatre(std::string theatreName);
+    /**
+     * Searches through map of Theatres for a specific Theatre name and 
+     * returns the reference if found.
+     * 
+     * @param theatreName Name of theatre as a string
+     * @return Theatre reference if theatre is found else NULL
+     */
+    Theatre* findTheatre(std::string theatreName);
 
     // ====================== TESTING FUNCTIONS ======================
 

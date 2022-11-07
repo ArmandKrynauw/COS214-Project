@@ -4,7 +4,6 @@
 
 # Contents
 
-- [Contents](#contents)
 - [Description](#description)
 - [Documentation](#documentation)
 - [Demo](#demo)
@@ -33,7 +32,10 @@
 		<img src="https://drive.google.com/uc?id=10EWX9n-1mTHSHxJwbsVRJLh1zBj6u7sp">
 	  </td>
 	  <td align="center">
-	  	Team Lead <br> Backend <br> Documentation
+	  	Team Lead <br> Backend <br> Documentation <br><br>
+		<a href="https://github.com/ArmandKrynauw">
+			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
+		</a>
 	  </td>
 	  <td>
 	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -45,7 +47,10 @@
 		<img src="https://drive.google.com/uc?id=17ee1L1ThuAZWEaC8YheOAk2PrI3T8dg4">
 	  </td>
 	  <td align="center">
-	  	Backend <br> The Goat <br> Tik Tok Enjoyer
+	  	Backend <br> The Goat <br> Tik Tok Enjoyer <br><br>
+		<a href="https://github.com/SharkmanZA">
+			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
+		</a>
 	  </td>
 	  <td>
 	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Likes turtles.
@@ -57,7 +62,10 @@
 		<img src="https://drive.google.com/uc?id=15OLe9jc7WAyrgjDbdJALzFucQA9dYx2Z">
 	  </td>
 	  <td align="center">
-	  	Backend <br> Research <br> Documentation <br> Diagrams
+	  	Backend <br> Research <br> Documentation <br> Diagrams <br><br>
+		<a href="https://github.com/CenturionLC">
+			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
+		</a>
 	  </td>
 	  <td>
 	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Likes trains.
@@ -69,7 +77,10 @@
 		<img src="https://drive.google.com/uc?id=1_zs5LACK3IMqbx_M2YwnO5VOxfZnkrSA">
 	  </td>
 	  <td align="center">
-	  	Backend <br> Tester <br> No Sleep
+	  	Backend <br> Tester <br> No Sleep <br><br>
+		<a href="https://github.com/Klairgo">
+			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
+		</a>
 	  </td>
 	  <td>
 	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -81,7 +92,10 @@
 		<img src="https://drive.google.com/uc?id=1eD81d04quhUwDW4XN1HWiiFwfYBZg24H">
 	  </td>
 	  <td align="center">
-	  	Front End <br> Diagrams
+	  	Front End <br> Diagrams <br><br>
+		<a href="https://github.com/CarlDeWitt">
+			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
+		</a>
 	  </td>
 	  <td>
 	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -93,7 +107,10 @@
 		<img src="https://drive.google.com/uc?id=11mzcBdUJcONE9QpbmVV0vKUfGxzKbjYH">
 	  </td>
 	  <td align="center">
-	  	Front End <br> Diagrams
+	  	Front End <br> Diagrams <br><br>
+		<a href="https://github.com/CarlieVanWyk">
+			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
+		</a>
 	  </td>
 	  <td>
 	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.

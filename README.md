@@ -92,7 +92,7 @@
 		<img src="https://drive.google.com/drive/folders/1kpOzvf1ndIH5vZztdLhETL_au4FzB41D">
 	  </td>
 	  <td align="center">
-	  	Front End <br> Diagrams <br> Owns War Thunder<br> retired F1 Driver<br><br>
+	  	Front End <br> Diagrams<br> retired F1 Driver<br><br>
 		<a href="https://github.com/CarlDeWitt">
 			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
 		</a>
@@ -107,7 +107,7 @@
 		<img src="https://drive.google.com/uc?id=11mzcBdUJcONE9QpbmVV0vKUfGxzKbjYH">
 	  </td>
 	  <td align="center">
-	  	Front End <br> Diagrams <br><br>
+	  	Front End <br> Diagrams <br> PHP Expert <br><br>
 		<a href="https://github.com/CarlieVanWyk">
 			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
 		</a>

@@ -20,7 +20,7 @@ endif
 else (Back Btton or Battle Button)
 if(click Button) then (Back Button)
 :Call Memento;
-:load Memento Data;
+:Load Memento Data;
 else (Battle Button)
 :Call Engine;
 :Continue Battle;

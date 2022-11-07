@@ -8,31 +8,34 @@
 - [Documentation](#documentation)
 - [Demo](#demo)
 - [Setup](#setup)
-- [Test](#test)
+- [Tests](#tests)
 - [Team](#team)
 
 # Description
 
-Generic War Simulator providing a well-defined interface for simulations to be written, loaded, and run.
+Generic War Simulator providing a well-defined interface for simulations to be written, loaded, and run. A dynamic amount of different simulations can be run with varying specifications. These can be run to completion or through a design mode which allows the user to make tweaks as they step through the simulation. 
 
 # Documentation
 
-[Project Report](https://docs.google.com/document/d/1SO2EWCa2MpqC4dWhszZaXsbHXWcP98rih0-Rxo4v2IA/)
+[Report](https://docs.google.com/document/d/1SO2EWCa2MpqC4dWhszZaXsbHXWcP98rih0-Rxo4v2IA/)
 
 [API Documentation](https://demo.hedgedoc.org/enrh8j-uSU6jJ3V8m6NHWw?both)
 
+[Doxygen Documentation](https://drive.google.com/file/d/1q-uM2htVxp-8KeQncFkuyCWmhxxETV5i/view?usp=sharing)
+
 # Demo
+[Video](https://drive.google.com/file/d/1Ixjq8G2NmfpDN7dlwqV4i4Tf9jgXuKQH/view?usp=share_link)
 
 # Setup
-## Prerequisites
+### Prerequisites
 
 * CMake >= 3.2
 
-## Cloning
+### Cloning
 ```
-git clone 
+git clone https://github.com/ArmandKrynauw/COS214-Project
 ```
-## Building
+### Building
 This project can be build using CMake:
 ```
 mkdir build
@@ -41,25 +44,29 @@ cmake ..
 make
 ```
 
-## Running
+### Running
 For Web UI mode:
+1. Start the WarSocket
 ```
+cd build
 make run
 ```
+2. Launch the web interface
 * Go to src/GUI/splashPage/
 * Open splash.html
 
 For design mode:
 ```
+cd build
 make dev
 ```
 
-# Test
-## Prerequisites
+# Tests
+### Prerequisites
 * CMake >= 3.2
 * libgtest
 
-## Building
+### Building
 ```
 cd Test
 mkdir build
@@ -68,7 +75,7 @@ cmake ..
 make
 ```
 
-## Running
+### Running
 ```
 ./runTests
 ```

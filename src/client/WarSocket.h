@@ -1,12 +1,13 @@
 #ifndef WARSOCKET_H
 #define WARSOCKET_H
 
-#include "../utilities/mongoose.h"
+#include <iostream>
+
 #include "../engine/WarEngine.h"
 #include "../utilities/json.hpp"
+#include "../utilities/mongoose.h"
 #include "../war-commands/WarCommand.h"
-#include "client.h"
-#include <iostream>
+#include "Client.h"
 
 class WarSocket {
 public:

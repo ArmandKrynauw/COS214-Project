@@ -1,9 +1,11 @@
-#include "client.h"
-#include "../utilities/WarException.h"
+#include "Client.h"
+
 #include <limits.h>
 
 #include <fstream>
 #include <iostream>
+
+#include "../utilities/WarException.h"
 
 Client::Client() { }
 

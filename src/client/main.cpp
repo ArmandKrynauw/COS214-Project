@@ -1,4 +1,4 @@
-#include "../client/client.h"
+#include "../client/Client.h"
 #include "../engine/WarEngine.h"
 
 int main(int argc, char **argv) {

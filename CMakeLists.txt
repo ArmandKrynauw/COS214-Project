@@ -30,8 +30,8 @@ file(GLOB command_source ${CMAKE_CURRENT_SOURCE_DIR}/src/war-commands/*.cpp)
 file(GLOB command_header ${CMAKE_CURRENT_SOURCE_DIR}/src/war-commands/*.h)
 file(GLOB strategy_source ${CMAKE_CURRENT_SOURCE_DIR}/src/war-strategy/*.cpp)
 file(GLOB strategy_header ${CMAKE_CURRENT_SOURCE_DIR}/src/war-strategy/*.h)
-file(GLOB zone_source ${CMAKE_CURRENT_SOURCE_DIR}/src/zone-factory/*.cpp)
-file(GLOB zone_header ${CMAKE_CURRENT_SOURCE_DIR}/src/zone-factory/*.h)
+file(GLOB zone_source ${CMAKE_CURRENT_SOURCE_DIR}/src/theatre/zone-factory/*.cpp)
+file(GLOB zone_header ${CMAKE_CURRENT_SOURCE_DIR}/src/theatre/zone-factory/*.h)
  
 add_executable(main 
     ${client_source} ${client_header}

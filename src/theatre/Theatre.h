@@ -11,9 +11,9 @@
 #include "../war-strategy/PlanStrategy.h"
 #include "../war-strategy/CounterStrategy.h"
 #include "../war-strategy/AttackStrategy.h"
-#include "../zone-factory/AirZoneFactory.h"
-#include "../zone-factory/LandZoneFactory.h"
-#include "../zone-factory/SeaZoneFactory.h"
+#include "zone-factory/AirZoneFactory.h"
+#include "zone-factory/LandZoneFactory.h"
+#include "zone-factory/SeaZoneFactory.h"
 #include "Zone.h"
 #include <map>
 

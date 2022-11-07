@@ -30,8 +30,8 @@ file(GLOB command_source ${CMAKE_CURRENT_SOURCE_DIR}/../src/war-commands/*.cpp)
 file(GLOB command_header ${CMAKE_CURRENT_SOURCE_DIR}/../src/war-commands/*.h)
 file(GLOB strategy_source ${CMAKE_CURRENT_SOURCE_DIR}/../src/war-strategy/*.cpp)
 file(GLOB strategy_header ${CMAKE_CURRENT_SOURCE_DIR}/../src/war-strategy/*.h)
-file(GLOB zone_source ${CMAKE_CURRENT_SOURCE_DIR}/../src/zone-factory/*.cpp)
-file(GLOB zone_header ${CMAKE_CURRENT_SOURCE_DIR}/../src/zone-factory/*.h)
+file(GLOB zone_source ${CMAKE_CURRENT_SOURCE_DIR}/../src/theatre/zone-factory/*.cpp)
+file(GLOB zone_header ${CMAKE_CURRENT_SOURCE_DIR}/../src/theatre/zone-factory/*.h)
 
 #configure_file(utilities ${CMAKE_CURRENT_BINARY_DIR}/../src/utilities/simulations.json COPYONLY)
  
@@ -40,7 +40,7 @@ add_executable(runTests
     #Test files
     main.cpp 
     UnitTest.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../src/client/client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/client/Client.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/client/WarSocket.cpp
     #${client_source} ${client_header}
     ${engine_source} ${engine_header}

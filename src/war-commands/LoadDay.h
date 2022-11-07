@@ -4,19 +4,19 @@
 #include "WarCommand.h"
 
 class LoadDay : public WarCommand {
-	public:
-		LoadDay(int day);
-		
-		/**
-		 * Load a specific battle day of the current simulation running in
-		 * the War Engine.
-		*/
-		virtual void execute() override;
+   public:
+    LoadDay(int day);
 
-		virtual std::string getDescription() override;
+    /**
+     * Load a specific battle day of the current simulation running in
+     * the War Engine.
+     */
+    virtual void execute() override;
 
-	private:
-		int day;
+    virtual std::string getDescription() override;
+
+   private:
+    int day;
 };
 
-#endif // LOADDAY_H
+#endif  // LOADDAY_H

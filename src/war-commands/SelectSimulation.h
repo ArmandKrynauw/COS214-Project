@@ -4,18 +4,18 @@
 #include "WarCommand.h"
 
 class SelectSimulation : public WarCommand {
-	public:
-		SelectSimulation(int simulation);
+   public:
+    SelectSimulation(int simulation);
 
-		/**
-		 * Selects a specific simulation in the War Engine to be run.
-		*/
-		virtual void execute() override;
+    /**
+     * Selects a specific simulation in the War Engine to be run.
+     */
+    virtual void execute() override;
 
-		virtual std::string getDescription() override;
+    virtual std::string getDescription() override;
 
-	private:
-		int simulation;
+   private:
+    int simulation;
 };
 
-#endif // SELECTSIMULATION_H
+#endif  // SELECTSIMULATION_H

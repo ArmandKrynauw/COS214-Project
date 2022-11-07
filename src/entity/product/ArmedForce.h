@@ -6,19 +6,19 @@
 #include "Entity.h"
 
 class ArmedForce : public Entity {
-private:
-    std::vector<Entity *> entities;
+   private:
+    std::vector<Entity*> entities;
 
     ArmedForce(const ArmedForce& armedForce);
 
-public:
+   public:
     ArmedForce(std::string name, std::string type);
 
     ~ArmedForce();
 
-    void add(Entity *entity);
+    void add(Entity* entity);
 
-    void remove(Entity *entity);
+    void remove(Entity* entity);
 
     /**
      * Calculates the total damage capability of this armed force by summing
@@ -36,19 +36,19 @@ public:
 
     virtual int getValue() const override;
 
-    virtual void setTheatre(Theatre *theatre) override;
+    virtual void setTheatre(Theatre* theatre) override;
 
     virtual void clearCasualties() override;
 
-    virtual Entity *clone() override;
+    virtual Entity* clone() override;
 
     virtual nlohmann::json toJSON() const override;
 
     void update();
 
-    Entity *getEntity(int index);
+    Entity* getEntity(int index);
 
-    std::vector<Entity *> getEntities();
+    std::vector<Entity*> getEntities();
 };
 
 #endif  // ARMEDFORCE_H

@@ -4,15 +4,15 @@
 #include "Entity.h"
 
 class SupportCompany : public Entity {
-protected:
+   protected:
     Entity* entity;
     SupportCompany(const SupportCompany& supportCompany);
 
-public:
-    SupportCompany(Entity * entity);
-    
+   public:
+    SupportCompany(Entity* entity);
+
     /**
-     * Provides functionality to return the damage of the entity 
+     * Provides functionality to return the damage of the entity
      * @return int : damage
      */
     virtual int getDamage() const override;
@@ -23,9 +23,9 @@ public:
      */
     virtual int getHP() const override;
     virtual int getInitialHP() const override;
-    
-     /**
-     * Provides functionality to return the entity's name 
+
+    /**
+     * Provides functionality to return the entity's name
      * @return string : result of entity's getName()
      */
     virtual std::string getName() const override = 0;
@@ -33,7 +33,7 @@ public:
     virtual std::string getType() const override;
     virtual std::string getId() const override;
 
-     /**
+    /**
      * Provides functionality to return the value of the entity
      * @return int : value
      */
@@ -43,13 +43,13 @@ public:
      * Provides functionality to call the entity's getTheatre()
      * @return result of entity's getTheatre
      */
-    virtual Theatre * getTheatre() override;
+    virtual Theatre* getTheatre() override;
 
     /**
      * Provides functionality to call the entity's setTheatre()
      * @param theatre Param to be passed into entity's setTheatre
      */
-    void setTheatre(Theatre *theatre) override;
+    void setTheatre(Theatre* theatre) override;
 
     virtual void clearCasualties() override;
 
@@ -70,7 +70,7 @@ public:
      */
     int getUnitCount() const override;
 
-    virtual Entity *clone() override = 0; 
+    virtual Entity* clone() override = 0;
 
     /**
      * Provides functionality to call the entity's toJSON()

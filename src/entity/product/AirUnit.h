@@ -4,21 +4,21 @@
 #include "Unit.h"
 
 class AirUnit : public Unit {
-protected:
+   protected:
     AirUnit(const AirUnit& airUnit);
 
-public:
+   public:
     AirUnit(std::string name, std::string type, int HP, int damage, int value);
 
     void primitiveAttack();
 
-    void attack(Unit *unit);
+    void attack(Unit* unit);
 
     void primitiveDefend();
 
-    void defend(Unit *unit);
+    void defend(Unit* unit);
 
-    virtual Entity *clone() override = 0;
+    virtual Entity* clone() override = 0;
 
     virtual ~AirUnit();
 };

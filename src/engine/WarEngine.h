@@ -31,7 +31,7 @@ using json = nlohmann::json;
  * various different subsystems required for a functioning war simulation. The
  * main subsystems include Theatres, Factions, Entities, War Escalation, Country
  * Research and Country Mobilization.
-*/
+ */
 class WarEngine {
    private:
     std::unordered_map<std::string, Alliance*> alliances;
@@ -40,7 +40,9 @@ class WarEngine {
     Escalation* warStage;
     int theatreSize;
 
-    std::unordered_map<std::string, std::unordered_map<std::string, std::string>> countryUnitNames;
+    std::unordered_map<std::string,
+                       std::unordered_map<std::string, std::string>>
+        countryUnitNames;
     std::unordered_map<std::string, UnitFactory*> unitFactories;
 
     std::vector<json> simulations;
@@ -65,13 +67,14 @@ class WarEngine {
      *
      * @throws WarException if a simulation has not been loaded
      * @throws WarException if end of simulation has been reached
-     * @throws WarException if next battle is loaded before results are displayed
+     * @throws WarException if next battle is loaded before results are
+     * displayed
      */
     void loadNextBattleDay();
 
     /**
      * Provides functionality to initiate a battle in all theatres
-     * 
+     *
      * @throws WarException if results are loaded before battle day is loaded
      */
     void loadBattleDayResults();
@@ -79,13 +82,13 @@ class WarEngine {
     /**
      * Will revert the engine state back to the start of the previous battle
      * day. If the simulation is at the start then nothing will happen.
-    */
+     */
     void loadPreviousBattleDay();
 
     /**
      * Will load any specific battle day state. A pre-defined simulation
      * is needed for this method to function correctly.
-    */
+     */
     void loadSpecificBattleDay(int index);
 
     // ====================== LOAD SIMULATIONS ======================
@@ -95,14 +98,15 @@ class WarEngine {
      * into a vector of json objects.
      * @throws WarException If file containing simulations is not found
      * @throws WarException If json object cannot be parsed from file
-     * 
+     *
      */
     void loadSimulations();
 
     /**
-     * Provides functionality to call loadSimulation() with a specific simulation
-     * by using index to get at simulations[index] and parse into loadSimulation().
-     * 
+     * Provides functionality to call loadSimulation() with a specific
+     * simulation by using index to get at simulations[index] and parse into
+     * loadSimulation().
+     *
      * @param index The index of chose simulation in simulations vector
      */
     void selectSimulation(int index);
@@ -113,14 +117,14 @@ class WarEngine {
      * https://demo.hedgedoc.org/enrh8j-uSU6jJ3V8m6NHWw#Available-Simulations
      *
      * @return JSON array containing available simulations
-    */
+     */
     json getAvailableSimulations();
 
     /**
      * Provides functionality to clear all members in the War Engine. This
      * enables new simulations to be loaded or a simulation to be restarted
      * without the need to restart the whole engine.
-    */
+     */
     void reset();
 
     /**
@@ -387,9 +391,9 @@ class WarEngine {
     std::pair<int, int> getLocation(const json& data);
 
     /**
-     * Searches through map of Theatres for a specific Theatre name and 
+     * Searches through map of Theatres for a specific Theatre name and
      * returns the reference if found.
-     * 
+     *
      * @param theatreName Name of theatre as a string
      * @return Theatre reference if theatre is found else NULL
      */

@@ -4,10 +4,10 @@
 #include "SupportCompany.h"
 
 class FieldHospital : public SupportCompany {
-private:
+   private:
     FieldHospital(const FieldHospital& fieldHospital);
 
-public:
+   public:
     FieldHospital(Entity* entity);
 
     bool takeDamage(int damage) override;

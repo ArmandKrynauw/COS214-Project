@@ -4,13 +4,14 @@
 #include "SeaUnit.h"
 
 class SeaUnitLight : public SeaUnit {
-protected:
+   protected:
     SeaUnitLight(const SeaUnitLight& seaUnitLight);
 
-public:
-    SeaUnitLight(std::string name, std::string type, int HP, int damage, int value);
+   public:
+    SeaUnitLight(std::string name, std::string type, int HP, int damage,
+                 int value);
 
-    virtual Entity *clone() override;
+    virtual Entity* clone() override;
 
     ~SeaUnitLight();
 };

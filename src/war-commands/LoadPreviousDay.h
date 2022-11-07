@@ -4,16 +4,16 @@
 #include "WarCommand.h"
 
 class LoadPreviousDay : public WarCommand {
-	public:
-		LoadPreviousDay();
+   public:
+    LoadPreviousDay();
 
-		/**
-		 * Load the previous battle day of the current simulation running in
-		 * the War Engine.
-		*/
-		virtual void execute() override;
+    /**
+     * Load the previous battle day of the current simulation running in
+     * the War Engine.
+     */
+    virtual void execute() override;
 
-		virtual std::string getDescription() override;
+    virtual std::string getDescription() override;
 };
 
-#endif // LOADPREVIOUSDAY_H
+#endif  // LOADPREVIOUSDAY_H

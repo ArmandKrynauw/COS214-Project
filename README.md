@@ -92,7 +92,7 @@
 		<img src="https://drive.google.com/uc?id=1eD81d04quhUwDW4XN1HWiiFwfYBZg24H">
 	  </td>
 	  <td align="center">
-	  	Front End <br> Diagrams <br><br>
+	  	Front End <br> Diagrams <br> War Thunder Dev<br><br>
 		<a href="https://github.com/CarlDeWitt">
 			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
 		</a>

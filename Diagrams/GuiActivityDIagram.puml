@@ -1,0 +1,38 @@
+@startuml
+start
+:Select battle;
+if( valid Command) then ([true])
+:Execute Command;
+:loadData;
+:Initialize Battle;
+while( battle is not over) is ([true])
+:Update GUI;
+
+if(click Button) then (Map)
+:loadMap;
+:DisplayUnits on Map;
+:Loadinfo;
+if(click on theatre) then ([true])
+
+else ([false])
+endif
+
+else (Back Btton or Battle Button)
+if(click Button) then (Back Button)
+:Call Memento;
+:load Memento Data;
+else (Battle Button)
+:Call Engine;
+:Continue Battle;
+:Load Battle Info;
+endif
+
+endif
+:Increment Battle Day;
+endwhile
+end
+else ([false])
+end
+endif
+
+@enduml

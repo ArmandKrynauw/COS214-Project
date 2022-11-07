@@ -80,9 +80,20 @@ class WarEngine {
 
     // ====================== LOAD SIMULATIONS ======================
 
+    /**
+     * Provides functionality to load all simulations from JSON array
+     * into a vector of json objects.
+     * @throws WarException If file containing simulations is not found
+     * @throws WarException If json object cannot be parsed from file
+     * 
+     */
     void loadSimulations();
-
-
+    /**
+     * Provides functionality to call loadSimulation() with a specific simulation
+     * by using index to get at simulations[index] and parse into loadSimulation().
+     * 
+     * @param index The index of chose simulation in simulations vector
+     */
     void selectSimulation(int index);
 
     /** Provides functionality to get a list of available simulations to be

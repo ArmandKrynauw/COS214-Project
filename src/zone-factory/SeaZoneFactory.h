@@ -5,17 +5,19 @@
 #include "../theatre/SeaZone.h"
 
 class SeaZoneFactory : public ZoneFactory {
-private:
-public:
-    SeaZoneFactory();
-    /**
-     * Provides functionality to create a new sea Zone
-     * @param name Name of new sea Zone
-     * @return Zone pointer to new seaZone object
-    */
-    Zone *createZone(std::string ZoneName);
-
-    ~SeaZoneFactory();
+    public:
+        /**
+         * Provides functionality to construct a new SeaZoneFactory object
+         */
+        SeaZoneFactory();
+        /**
+         * Provides functionality to manufacture a new SeaZone
+        */
+        Zone *createZone(std::string ZoneName);
+        /**
+         * Provides functionality to destroy a SeaZoneFactory object
+         */
+        ~SeaZoneFactory();
 };
 
 #endif

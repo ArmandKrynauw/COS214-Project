@@ -1,0 +1,26 @@
+@startuml 
+skinparam ParticipantPadding 40
+
+actor Client
+participant WarEngine
+autonumber 1
+Client -> WarEngine : getStats() : json
+activate Client #add8e6
+activate WarEngine #add8e6
+
+	autonumber 1.1
+	WarEngine -> WarEngine : getEngineStats() : json
+	WarEngine -> WarEngine : clearCasualties() : json
+	WarEngine -> WarEngine : getCountryStats() : json
+	WarEngine -> WarEngine : getAllianceStats() : json
+	WarEngine -> WarEngine : getTheatreStats() : json
+	WarEngine -> WarEngine : getOverallUnits() : json
+	WarEngine -> WarEngine : getTheatreStats() : json
+	WarEngine -> WarEngine : getStrategies() : json
+	WarEngine -> WarEngine : getMobilization() : json
+	WarEngine -> WarEngine : getResearch() : json
+    WarEngine --> Client
+
+deactivate Client
+
+@enduml 

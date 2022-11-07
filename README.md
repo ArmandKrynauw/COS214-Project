@@ -89,16 +89,16 @@
     <tr>
       <td align="center">
 	  	Carl de Witt <br> u21444928
-		<img src="https://drive.google.com/uc?id=1eD81d04quhUwDW4XN1HWiiFwfYBZg24H">
+		<img src="https://drive.google.com/drive/folders/1kpOzvf1ndIH5vZztdLhETL_au4FzB41D">
 	  </td>
 	  <td align="center">
-	  	Front End <br> Diagrams <br><br>
+	  	Front End <br> Diagrams<br> retired F1 Driver<br><br>
 		<a href="https://github.com/CarlDeWitt">
 			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
 		</a>
 	  </td>
 	  <td>
-	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	  	I am a 2nd-year BIS Multimedia student at the University of Pretoria. I love full-stack development. My favourite language is PHP :0. I also love riding a bike.
 	  </td>
 	</tr>
     <tr>
@@ -107,13 +107,13 @@
 		<img src="https://drive.google.com/uc?id=11mzcBdUJcONE9QpbmVV0vKUfGxzKbjYH">
 	  </td>
 	  <td align="center">
-	  	Front End <br> Diagrams <br><br>
+	  	Front End <br> Diagrams <br> PHP Expert <br><br>
 		<a href="https://github.com/CarlieVanWyk">
 			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
 		</a>
 	  </td>
 	  <td>
-	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	  	I am a 2nd year student and am currently loving the BIS Multimedia degree at TUKS. I love working with people and seeing hard work pay off.
 	  </td>
 	</tr>
 </table>

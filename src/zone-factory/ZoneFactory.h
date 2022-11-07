@@ -6,18 +6,22 @@
 #include "../theatre/Zone.h"
 
 class ZoneFactory {
-private:
-    Zone *zone;
-public:
-    ZoneFactory();
+    private:
+        Zone *zone;
+    public:
         /**
-     * Provides functionality to create a new Zone
-     * @param name Name of new  Zone
-     * @return Zone pointer to new object
-    */
-    virtual Zone *createZone(std::string ZoneName) = 0;
-
-    ~ZoneFactory();
+         * Provides functionality to construct a new ZoneFactory object
+         * 
+         */
+        ZoneFactory();
+        /**
+         * Pure virtual function to be implemented in child classes.
+        */
+        virtual Zone *createZone(std::string ZoneName) = 0;
+        /**
+        * Provides functionality to destroy a ZoneFactory object
+        */
+        ~ZoneFactory();
 };
 
 

@@ -1,0 +1,100 @@
+@startuml 
+
+' actor GUI
+
+' participant "engine : WarEngine" as WarEngine
+
+' participant Country
+
+' ' participant Theatre
+
+' participant "warStage : Escalation" as escalation
+
+' participant Alliance
+
+
+' GUI -> WarEngine : loadNextBattleDay() : void
+
+' WarEngine -> WarEngine : loadWarFactors(data : json) : void
+
+' WarEngine -> WarEngine : loadEscalation(data : json) : void
+' group loadEscalation
+'     WarEngine -> escalation : getState() : std::string
+'     escalation --> WarEngine
+'     WarEngine -> escalation : checkStageOfWar(data : json) : Escalation *
+'     escalation --> WarEngine
+' end
+' WarEngine -> WarEngine : loadMobilization(data : json) : void
+' group loadMobilization
+'     loop For each Country
+'         WarEngine -> Country : checkMobilization(warStageState : std::string, mobilization : std::string) : void
+'     end
+' end
+' WarEngine -> WarEngine : generateCountryResources() : void
+
+' group generateCountryResources
+
+'     alt alliances == 0
+'         loop For each Country
+'             loop For each Theatre
+'                 WarEngine -> Theatre : getResource(countryName : std::string) : int
+'             end
+'             WarEngine -> Country : generateResources(sum : int) : void
+'         end
+'     else
+        
+'     end 
+' end
+
+actor Client
+
+participant WarEngine
+participant Theatre
+activate Client #add8e6
+autonumber 1
+Client -> WarEngine : getAvailableSimulations() : json
+WarEngine --> Client
+
+Client -> WarEngine : selectSimulation(index : int) 
+
+loop For Each Battle Day
+    Client -> WarEngine : loadNextBattleDay()
+    activate WarEngine #add8e6
+        autonumber 1.1
+        WarEngine -> WarEngine : loadWarFactors(data : json)
+
+        WarEngine -> WarEngine : loadEscalation(data : json)
+
+        WarEngine -> WarEngine : loadMobilization(data : json)
+
+        WarEngine -> WarEngine : generateCountryResources()
+
+        WarEngine -> WarEngine : loadResearch(data : json)
+
+        WarEngine -> WarEngine : purchaseUnits(data : json)
+
+        WarEngine -> WarEngine : relocateUnits(data : json)
+
+        WarEngine -> WarEngine : assignStrategies(data : json)
+        autonumber 2
+        Client -> WarEngine : getStats() : json
+        WarEngine --> Client
+    deactivate WarEngine
+
+    autonumber 3
+    Client -> WarEngine : loadBattleDayResults()
+    activate WarEngine #add8e6
+        loop For each Theatre
+            autonumber 3.1
+            WarEngine -> Theatre : battle()
+            activate Theatre #add8e6
+            deactivate Theatre #add8e6
+        end
+        autonumber 4
+    Client -> WarEngine : getStats() : json
+    WarEngine --> Client
+end
+deactivate WarEngine
+deactivate Client
+
+@enduml 

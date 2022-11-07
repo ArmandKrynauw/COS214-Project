@@ -5,18 +5,19 @@
 #include "../theatre/AirZone.h"
 
 class AirZoneFactory : public ZoneFactory {
-private:
-public:
-    AirZoneFactory();
-    /**
-     * Provides functionality to create a new air Zone
-     * @param name Name of new air Zone
-     * @return Zone pointer to new AirZone object
-    */
-
-    Zone *createZone(std::string ZoneName);
-
-    ~AirZoneFactory();
+    public:
+        /**
+         * Provides functionality to construct a new AirZoneFactory object
+         */
+        AirZoneFactory();
+        /**
+         * Provides functionality to manufacture a new AirZone
+        */
+        Zone *createZone(std::string ZoneName);
+        /**
+        * Provides functionality to destroy a AirZoneFactory object
+        */
+        ~AirZoneFactory();
 };
 
 #endif

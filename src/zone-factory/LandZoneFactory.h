@@ -5,17 +5,19 @@
 #include "../theatre/LandZone.h"
 
 class LandZoneFactory : public ZoneFactory {
-private:
-public:
-    LandZoneFactory();
-    /**
-     * Provides functionality to create a new land Zone
-     * @param name Name of new land Zone
-     * @return Zone pointer to new landZone object
-    */
-    Zone *createZone(std::string ZoneName);
-
-    ~LandZoneFactory();
+    public:
+        /**
+         * Provides functionality to construct a new LandZoneFactory object
+         */
+        LandZoneFactory();
+        /**
+         * Provides functionality to manufacture a new LandZone
+        */
+        Zone *createZone(std::string ZoneName);
+        /**
+         * Provides functionality to destroy a LandZoneFactory object
+         */
+        ~LandZoneFactory();
 };
 
 #endif

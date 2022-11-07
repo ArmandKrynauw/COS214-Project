@@ -9,7 +9,6 @@ std::string LandZone::getType() {
 }
 
 int LandZone::getDamageDivisor() {
-    // Ground forces tend to have unpredictable engagements just as often as expected engagements.
     return getUnitCount();
 }
 

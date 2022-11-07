@@ -10,13 +10,10 @@ std::string SeaZone::getType() {
 }
 
 int SeaZone::getDamageDivisor() {
-    // Ships tend to have very low engagement rates, while having much higher decisive battles
     int capacity = getUnitCount();
-
     if (capacity > 2) {
         return capacity / 2;
     }
-
     return capacity;
 }
 

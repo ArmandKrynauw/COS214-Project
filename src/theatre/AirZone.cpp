@@ -9,7 +9,6 @@ std::string AirZone::getType() {
 }
 
 int AirZone::getDamageDivisor() {
-    // Planes have much higher contact rates with the enemy, however lower losses per engagement generally.
     return getUnitCount() * 2;
 }
 

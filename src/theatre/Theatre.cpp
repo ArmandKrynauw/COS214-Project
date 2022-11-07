@@ -59,7 +59,6 @@ void Theatre::addEntity(std::string faction, Entity *entity) {
     float num = checkOpposition(faction);
 
     entity->takeDamage(entity->getHP()*0.1*num);
-    // std::cout <<name << ": "<< entity->getName()<< " "<< num << std::endl;
 
     std::vector<Zone *> factionZones = zones[faction];
 
@@ -95,14 +94,12 @@ Entity *Theatre::removeEntity(std::string faction, std::string type, std::string
 }
 
 void Theatre::battle() {
-
     std::unordered_map<std::string, WarStrategy *>::iterator it = strategies.begin();
     if (strategies.size() > 1) {
-        //std::cout<<getName()<<" has a battle."<<std::endl;
         while (it != strategies.end()) {
             if(it->second && strategies[it->second->getTarget()]){
-                std::string attacker = it->first;                   //America
-                std::string defendant = it->second->getTarget();    //Germany
+                std::string attacker = it->first;                   
+                std::string defendant = it->second->getTarget();    
                 WarStrategy *strategy = it->second;
                 float attackModifier = 1;
                 float defendModifier = 1;
@@ -118,22 +115,13 @@ void Theatre::battle() {
                     if (zones[attacker][i]->getUnitCount() > 0 && zones[defendant][i]->getUnitCount() > 0) {
                         int attackFinal = zones[attacker][i]->getTotalDamage() * attackModifier;
                         int defendFinal = zones[defendant][i]->getTotalDamage() * defendModifier;
-                        zones[attacker][i]->takeDamage(defendFinal);  // defender deals damage
-
-                        //zones[defendant][i]->takeDamage(attackFinal);  // attacker deals damage
+                        zones[attacker][i]->takeDamage(defendFinal);   
                     }
                 }
             }
             it++;
         }
-    } else if (strategies.size() == 1) {
-        //When Only one faction has a strategy
-    } else {
-        //Nobody in Theatre
-        //std::cout<<getName()<<" is neutral."<<std::endl;
-    }
-
-    //results?
+    } 
     return;
 
 }
@@ -158,14 +146,8 @@ void Theatre::printTheatre() {
     while (it != zones.end()) {
         std::cout << "\t" << it->first << ": " << std::endl;
         for (Zone *z: it->second) {
-            std::cout << "\t\t" << z->getName() << "[" << z->getTotalDamage() << "]" << std::endl;
-            // int sum = 0;
-            // for(Unit* u: z->getUnits()){
-            //     sum+=u->getHP();
-            // }
-            // std::cout<<sum<<std::endl;
+            std::cout << "\t\t" << z->getName() << "[" << z->getTotalDamage() << "]" << std::endl;   
         }
-
         it++;
     }
 }
@@ -192,7 +174,6 @@ void Theatre::printStrategies() {
     } else {
         std::cout << getName() << " is Empty." << std::endl;
     }
-    //std::cout<<std::endl;
 }
 
 int Theatre::getResource(std::string Faction) {
@@ -216,16 +197,11 @@ float Theatre::calculateControl(std::string Faction) {
             totalSum += it->second[i]->getTotalDamage();
             it++;
         }
-        //std::cout<<"Theatre: "<<name<<" "<<totalSum<<std::endl;
-        
         if(totalSum != 0){
             ourSum = ourSum / totalSum;
         }
-        final += ourSum;
-        
+        final += ourSum; 
     }
-
-    //std::cout<<"Theatre: "<<name<<" Faction: "<<Faction<<": "<<final/limit<<std::endl;
     return final / limit;
 }
 
@@ -241,25 +217,19 @@ float Theatre::checkOpposition(std::string faction) {
     for (int i = 0; i < limit; i++) {
         totalSum = 0;
         theirSum = 0;
-        
         ourSum = zones[faction][i]->getTotalDamage();
         std::unordered_map<std::string, std::vector<Zone *>>::iterator it = zones.begin();
-
         while (it != zones.end()) {
             totalSum += it->second[i]->getTotalDamage();
             it++;
         }
         theirSum = totalSum - ourSum;
-        // std::cout << "Theirsum "<<theirSum << std::endl;
-
-        
         if(totalSum != 0){
             theirSum = theirSum/totalSum;
         }
         final += theirSum;
-        
     }
-    //std::cout<<"Theatre: "<<name<<" Faction: "<<Faction<<": "<<final/limit<<std::endl;
+   
     return final / limit;
 }
 
@@ -285,7 +255,6 @@ json Theatre::toJSON(int row, int col){
             }
             it++;
         }
-    
     return json{{"name", getName()},
                 {"coordinates", coordinates},
                 {"data", data}};

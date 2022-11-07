@@ -49,11 +49,9 @@ void Zone::takeDamage(int damage) {
 
 int Zone::getUnitCount() const {
     int capacity = 0;
-
     for (int i = 0; i < entities.size(); i++) {
         capacity += entities[i]->getUnitCount();
     }
-
     return capacity;
 }
 

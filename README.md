@@ -44,6 +44,8 @@ For Web UI mode:
 ```
 make run
 ```
+* Go to src/GUI/splashPage/
+* Open splash.html
 
 For design mode:
 ```
@@ -130,7 +132,7 @@ make
 		</a>
 	  </td>
 	  <td>
-	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	  	A computer science student at the University of Pretoria. Interested in computer secutiry and mathematics. I enjoy solving problems and not sleeping.
 	  </td>
 	</tr>
     <tr>
@@ -160,7 +162,7 @@ make
 		</a>
 	  </td>
 	  <td>
-	  	I am a 2nd year student and am currently loving the BIS Multimedia degree at TUKS. I love working with people and seeing hard work pay off.l
+	  	I am a 2nd year student and am currently loving the BIS Multimedia degree at TUKS. I love working with people and seeing hard work pay off.
 	  </td>
 	</tr>
 </table>

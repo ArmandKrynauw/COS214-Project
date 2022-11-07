@@ -22,6 +22,7 @@ Generic War Simulator providing a well-defined interface for simulations to be w
 [API Documentation](https://demo.hedgedoc.org/enrh8j-uSU6jJ3V8m6NHWw?both)
 
 # Demo
+[Video](https://drive.google.com/file/d/1Ixjq8G2NmfpDN7dlwqV4i4Tf9jgXuKQH/view?usp=share_link)
 
 # Setup
 ## Prerequisites
@@ -30,7 +31,7 @@ Generic War Simulator providing a well-defined interface for simulations to be w
 
 ## Cloning
 ```
-git clone 
+git clone https://github.com/ArmandKrynauw/COS214-Project
 ```
 ## Building
 This project can be build using CMake:

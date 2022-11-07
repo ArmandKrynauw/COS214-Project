@@ -8,6 +8,7 @@
 - [Documentation](#documentation)
 - [Demo](#demo)
 - [Setup](#setup)
+- [Test](#test)
 - [Team](#team)
 
 # Description
@@ -47,6 +48,25 @@ make run
 For design mode:
 ```
 make dev
+```
+
+# Test
+## Prerequisites
+* CMake >= 3.2
+* libgtest
+
+## Building
+```
+cd Test
+mkdir build
+cd build
+cmake ..
+make
+```
+
+## Running
+```
+./runTests
 ```
 
 # Team 

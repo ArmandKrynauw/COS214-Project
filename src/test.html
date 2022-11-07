@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    <script>
+        var ws 
+        var data
+
+        function connectWarSocket() {
+            if (!ws) { ws = new WebSocket("ws://127.0.0.1:8000/websocket") }
+            ws.onopen = function() { console.log("Connection Opened") }
+            ws.onmessage = function(ev) { data = JSON.parse(ev.data); printData(); }
+            ws.onerror = function(ev) { console.log("Error: " + ev) }
+            ws.onclose = function() { console.log("Connection Closed"); ws = null; }
+        }
+
+        function handleData() {
+
+        }
+
+        function sendNothing() {
+            data = {
+                "command" : "selectSimulation",
+                "param" : "1"
+            }
+            ws.send(JSON.stringify(data));
+        }
+
+        function sendMessage(command, param) {
+            if (!ws) return;
+            data = {
+                "command" : command,
+                "param" : param
+            }
+            ws.send(JSON.stringify(data));
+        }
+
+        function printData() {
+            console.log(data)
+        }
+
+        connectWarSocket()
+    </script>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+@startuml
+
+participant WarSocket
+
+participant LoadNextDay
+
+participant WarEngine
+
+    activate WarSocket #add8e6
+    create LoadNextDay
+    WarSocket --> LoadNextDay : LoadNextDay()
+    activate LoadNextDay #add8e6
+    WarSocket -> LoadNextDay : execute()
+    LoadNextDay -> WarEngine : loadNextBattleDay()
+    activate WarEngine #add8e6
+    deactivate WarEngine #add8e6
+    LoadNextDay -> WarEngine : getStats() : json
+    activate WarEngine #add8e6
+    WarEngine --> LoadNextDay
+    deactivate LoadNextDay #add8e6
+    deactivate WarEngine #add8e6
+    WarSocket -> LoadNextDay : getResults() : json
+    activate LoadNextDay #add8e6
+    LoadNextDay --> WarSocket
+    deactivate LoadNextDay #add8e6
+    deactivate WarSocket #add8e6
+
+@enduml

@@ -1,0 +1,12 @@
+﻿BasedOnStyle: Google
+IndentWidth: 4
+TabWidth: 4
+DerivePointerAlignment: false
+PointerAlignment: Left
+BreakBeforeBraces: Attach
+SpaceBeforeParens: Never
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Empty
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterReturnType: None

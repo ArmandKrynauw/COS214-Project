@@ -1,0 +1,67 @@
+:root {
+  --medgray: #3c4042;
+  --darkgray: #202124;
+  --lightgray: #606368;
+  --pink: #ea80fc;
+  --white: #fff;
+}
+
+body {
+  height: 100vh;
+  background-image: url("images/background.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.header {
+  width: 100%;
+  background-color: var(--darkgray);
+  height: 100px;
+  color: var(--white);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-family: Arial;
+  font-size: 37px;
+  line-height: 35px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-weight: 700 !important;
+}
+
+.list-group {
+  margin-top: 12% !important;
+  opacity: 0.8;
+  background-color: var(--medgray);
+  padding: 0 !important;
+}
+
+.list-group-item {
+  color: var(--white) !important;
+  background-color: var(--medgray) !important;
+  width: 100%;
+  font-size: 150%;
+}
+
+.warInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flagImage {
+  width: 50px;
+  height: 50px;
+  margin: 0 10px;
+
+  border-radius: 5px;
+}
+
+.list-group-item-action:hover {
+  background-color: var(--darkgray) !important;
+}

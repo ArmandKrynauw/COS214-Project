@@ -2,53 +2,58 @@
 #define WARSTRATEGY_H
 
 #include <string>
-
+/**
+ * This class is the AbstractState for the State Design Pattern. This State pattern provides countries with
+ * different strategies to use in theatres where each strategy has its advantages and disadvantages.
+ */
 class WarStrategy {
-protected:
-    bool planned;
-    std::string target;
-    std::string type;
-
-public:
-    WarStrategy(std::string target);
-
-    /**
-     * Provides functionality to set whether this strategy is planned or not
-     * @param p The bool value used to set Planned
-    */
-
-    void setPlanned(bool p);
-
-    /**
-     * Provides functionality to check whether this strategy was planned or not
-     * @return bool : returns true if an attack was planned, else false
-    */
-
-    bool getPlanned();
-
-    /**
-     * Provides functionality to get the target of this strategy
-     * @return string : the target of this strategy
-    */
-
-    std::string getTarget() const;
-
-    /**
-     * Provides functionality to get type of strategy
-     * @return string : the type of strategy
-    */
-
-    std::string getType();
-
-    /**
-     * Executes  a strategy and generates modifiers based on opponents strategy
-     * @param strat Opponents strategy to compare with
-     * @return float : Modifier to be used in battles
-    */
-
-    virtual float executeStrategy(WarStrategy *strat) = 0;
-
-    virtual ~WarStrategy();
+    protected:
+        bool planned;
+        std::string target;
+        std::string type;
+    public:
+        /**
+         * Provides functionality to create a WarStrategy object.
+         * 
+         * @param target Target of the strategy
+         */
+        WarStrategy(std::string target);
+        /**
+         * Provides functionality to set planned variable
+         * 
+         * @param p Value to set planned
+        */
+        void setPlanned(bool p);
+        /**
+         * Provides functionality to check whether this strategy was planned.
+         * 
+         * @return true Return true if strategy was planned
+         * @return false Return false if strategy was not planned
+        */
+        bool getPlanned();
+        /**
+         * Provides functionality to get the target of this strategy
+         * 
+         * @return std::string Target of the strategy
+        */
+        std::string getTarget() const;
+        /**
+         * Provides functionality to get type of strategy
+         * 
+         * @return string The type of strategy
+        */
+        std::string getType();
+        /**
+         * Pure virtual function to be implemented in the child classes.
+         * 
+         * @param strat WarStrategy object
+         * @return float Modifier to be used in a battle
+        */
+        virtual float executeStrategy(WarStrategy *strat) = 0;
+        /**
+         * Provides functionality to destroy a WarStrategy object.
+         */
+        virtual ~WarStrategy();
 };
 
 #endif

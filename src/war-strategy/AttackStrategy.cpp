@@ -7,8 +7,7 @@ AttackStrategy::AttackStrategy(std::string target) : WarStrategy(target) {
 float AttackStrategy::executeStrategy(WarStrategy *strat) {
     if (getPlanned()) {
         return 1.5;
-    } 
-
+    }
     return 1.00;
 }
 

@@ -67,8 +67,8 @@
 			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
 		</a>
 	  </td>
-	  <td>
-	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Likes trains.
+	  <td>	  	
+		Francois is a computer science student who is passionate about learning new things and solving difficult problems. He is constantly striving to improve his skills and knowledge so that he can be the best computer science student he can be. I like trains.
 	  </td>
 	</tr>
     <tr>

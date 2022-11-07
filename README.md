@@ -89,7 +89,7 @@
     <tr>
       <td align="center">
 	  	Carl de Witt <br> u21444928
-		<img src="https://drive.google.com/uc?id=1eD81d04quhUwDW4XN1HWiiFwfYBZg24H">
+		<img src="https://drive.google.com/drive/folders/1kpOzvf1ndIH5vZztdLhETL_au4FzB41D">
 	  </td>
 	  <td align="center">
 	  	Front End <br> Diagrams <br> Owns War Thunder<br> retired F1 Driver<br><br>

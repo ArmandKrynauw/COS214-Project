@@ -113,7 +113,7 @@
 		</a>
 	  </td>
 	  <td>
-	  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	  	I am a 2nd year student and am currently loving the BIS Multimedia degree at TUKS. I love working with people and seeing hard work pay off.
 	  </td>
 	</tr>
 </table>

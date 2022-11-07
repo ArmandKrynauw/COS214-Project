@@ -3,7 +3,10 @@
 
 #include "ZoneFactory.h"
 #include "../theatre/LandZone.h"
-
+/**
+ * This class is a ConcreteCreator for the ZoneFactory Factory Method Design Pattern. This Creator
+ * creates LandZone objects to house entities of type "land".
+ */
 class LandZoneFactory : public ZoneFactory {
     public:
         /**
@@ -12,12 +15,12 @@ class LandZoneFactory : public ZoneFactory {
         LandZoneFactory();
         /**
          * Provides functionality to manufacture a new LandZone
+         * This function is an implementation of the FactoryMethod() of ZoneFactory.
         */
         Zone *createZone(std::string ZoneName);
         /**
          * Provides functionality to destroy a LandZoneFactory object
          */
-        ~LandZoneFactory();
+        virtual ~LandZoneFactory();
 };
-
 #endif

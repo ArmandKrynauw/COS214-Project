@@ -9,5 +9,4 @@ float PlanStrategy::executeStrategy(WarStrategy *strat) {
     return 1.0;
 }
 
-PlanStrategy::~PlanStrategy() {
-}
+PlanStrategy::~PlanStrategy() {}

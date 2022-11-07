@@ -1,26 +1,28 @@
-@startuml 
-skinparam ParticipantPadding 40
+@startuml
 
-actor Client
+participant WarSocket
+
+participant LoadNextDay
+
 participant WarEngine
-autonumber 1
-Client -> WarEngine : getStats() : json
-activate Client #add8e6
-activate WarEngine #add8e6
 
-	autonumber 1.1
-	WarEngine -> WarEngine : getEngineStats() : json
-	WarEngine -> WarEngine : clearCasualties() : json
-	WarEngine -> WarEngine : getCountryStats() : json
-	WarEngine -> WarEngine : getAllianceStats() : json
-	WarEngine -> WarEngine : getTheatreStats() : json
-	WarEngine -> WarEngine : getOverallUnits() : json
-	WarEngine -> WarEngine : getTheatreStats() : json
-	WarEngine -> WarEngine : getStrategies() : json
-	WarEngine -> WarEngine : getMobilization() : json
-	WarEngine -> WarEngine : getResearch() : json
-    WarEngine --> Client
+    activate WarSocket #add8e6
+    create LoadNextDay
+    WarSocket --> LoadNextDay : LoadNextDay()
+    activate LoadNextDay #add8e6
+    WarSocket -> LoadNextDay : execute()
+    LoadNextDay -> WarEngine : loadNextBattleDay()
+    activate WarEngine #add8e6
+    deactivate WarEngine #add8e6
+    LoadNextDay -> WarEngine : getStats() : json
+    activate WarEngine #add8e6
+    WarEngine --> LoadNextDay
+    deactivate LoadNextDay #add8e6
+    deactivate WarEngine #add8e6
+    WarSocket -> LoadNextDay : getResults() : json
+    activate LoadNextDay #add8e6
+    LoadNextDay --> WarSocket
+    deactivate LoadNextDay #add8e6
+    deactivate WarSocket #add8e6
 
-deactivate Client
-
-@enduml 
+@enduml

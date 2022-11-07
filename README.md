@@ -13,6 +13,8 @@
 
 # Description
 
+Generic War Simulator providing a well-defined interface for simulations to be written, loaded, and run.
+
 # Documentation
 
 [Project Report](https://docs.google.com/document/d/1SO2EWCa2MpqC4dWhszZaXsbHXWcP98rih0-Rxo4v2IA/)
@@ -81,7 +83,7 @@ make
 		<img src="https://drive.google.com/uc?id=10EWX9n-1mTHSHxJwbsVRJLh1zBj6u7sp">
 	  </td>
 	  <td align="center">
-	  	Team Lead <br> Backend <br> Documentation <br><br>
+	  	Team Lead <br> Backend <br> Documentation <br> Being sus<br><br>
 		<a href="https://github.com/ArmandKrynauw">
 			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
 		</a>
@@ -96,13 +98,13 @@ make
 		<img src="https://drive.google.com/uc?id=17ee1L1ThuAZWEaC8YheOAk2PrI3T8dg4">
 	  </td>
 	  <td align="center">
-	  	Backend <br> The Goat <br> Tik Tok Enjoyer <br><br>
+	  	Backend <br> The Goat <br> Tik Tok Enjoyer <br> A Plant UML<br><br>
 		<a href="https://github.com/SharkmanZA">
 			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
 		</a>
 	  </td>
 	  <td>
-	  	A 2nd year BsC Information and Knowledge Systems student at the University of Pretoria with a passion for Computational Intelligence and Geographic Information Systems.
+	  	A 2nd year BsC Information and Knowledge Systems student at the University of Pretoria with a passion for Computational Intelligence and Geographic Information Systems. A developer who wants gratitude.
 	  </td>
 	</tr>
     <tr>
@@ -141,7 +143,7 @@ make
 		<img src="https://drive.google.com/uc?id=1eD81d04quhUwDW4XN1HWiiFwfYBZg24H">
 	  </td>
 	  <td align="center">
-	  	Frontend <br> Diagrams<br> retired F1 Driver<br><br>
+	  	Frontend <br> Diagrams<br> Retired F1 Driver<br><br>
 		<a href="https://github.com/CarlDeWitt">
 			<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
 		</a>

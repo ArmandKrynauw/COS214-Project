@@ -308,6 +308,21 @@ namespace {
 
     }
 
+    //Testing getResearch
+    TEST(GetSimulation, TestGetResearch){
+        json data = WarEngine::instance()->getResearch();
+
+        if(data["data"][0]["industryCurrent"] != 50){
+            FAIL() << "America research";
+        }
+        if(data["data"][1]["industryCurrent"] != 50){
+            FAIL() << "Germany research";
+        }
+    }
+
+
+
+
     //Testing loadNextBattleDay
     //Testing loadNextBattleDay before battle day results 
     TEST(LoadNextBattleDay, TestLoadBeforeResult){
@@ -321,5 +336,17 @@ namespace {
         catch(...){
             FAIL();
         }
+    }
+
+    TEST(LoadNextBattleDay, TestLoadAfterResult){
+        try{
+            WarEngine::instance()->loadBattleDayResults();
+            WarEngine::instance()->loadNextBattleDay();
+            SUCCEED();
+        }
+        catch(...){
+            FAIL() << "NextBattleDay";
+        }
+
     }
 }

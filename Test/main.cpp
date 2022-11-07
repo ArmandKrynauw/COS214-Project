@@ -5,9 +5,9 @@ int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     Client::instance()->runTest();
 
-        //json data = WarEngine::instance()->getStrategies();
-        //std::cout << data["data"] << std::endl;
-        //std::cout << data["data"][0]["units"] <<std::endl;
+        json data = WarEngine::instance()->getResearch();
+        std::cout << data["data"] << std::endl;
+        //std::cout << data["data"] <<std::endl;
         //std::cout << data["data"][1]["units"] <<std::endl;
         //std::cout << data["day"] << std::endl;
         //std::cout << data["numberOfCountries"] << std::endl;

@@ -19,14 +19,15 @@ Generic War Simulator providing a well-defined interface for simulations to be w
 
 [Report](https://docs.google.com/document/d/1SO2EWCa2MpqC4dWhszZaXsbHXWcP98rih0-Rxo4v2IA/)
 
-[API Documentation](https://demo.hedgedoc.org/enrh8j-uSU6jJ3V8m6NHWw?both)
+[API Documentation](https://demo.hedgedoc.org/enrh8j-uSU6jJ3V8m6NHWw?view)
 
 [Doxygen Documentation](https://drive.google.com/file/d/1q-uM2htVxp-8KeQncFkuyCWmhxxETV5i/view?usp=sharing)
 
 [Class Diagram](https://drive.google.com/uc?id=16rv7moVTcIt_6ylzExouiVvLD-Clw-pR)
 
 # Demo
-[Video](https://drive.google.com/file/d/1Ixjq8G2NmfpDN7dlwqV4i4Tf9jgXuKQH/view?usp=share_link)
+
+[Video Demo](https://drive.google.com/uc?id=1HHqHpLHMNCIoQHRqPR1zv6Di4xcEjwVe)
 
 # Setup
 ### Prerequisites

@@ -23,6 +23,8 @@ Generic War Simulator providing a well-defined interface for simulations to be w
 
 [Doxygen Documentation](https://drive.google.com/file/d/1q-uM2htVxp-8KeQncFkuyCWmhxxETV5i/view?usp=sharing)
 
+[Class Diagram](https://drive.google.com/uc?id=16rv7moVTcIt_6ylzExouiVvLD-Clw-pR)
+
 # Demo
 [Video](https://drive.google.com/file/d/1Ixjq8G2NmfpDN7dlwqV4i4Tf9jgXuKQH/view?usp=share_link)
 
@@ -36,7 +38,7 @@ Generic War Simulator providing a well-defined interface for simulations to be w
 git clone https://github.com/ArmandKrynauw/COS214-Project
 ```
 ### Building
-This project can be build using CMake:
+This project can be built using CMake:
 ```
 mkdir build
 cd build
@@ -48,7 +50,6 @@ make
 For Web UI mode:
 1. Start the WarSocket
 ```
-cd build
 make run
 ```
 2. Launch the web interface
@@ -57,7 +58,6 @@ make run
 
 For design mode:
 ```
-cd build
 make dev
 ```
 
